@@ -13,7 +13,7 @@ test:
 	pytest
 
 run:
-	python src/your_project/main.py
+	python src/main.py
 
 clean:
 	rm -rf __pycache__ .pytest_cache
