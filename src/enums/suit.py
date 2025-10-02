@@ -3,3 +3,5 @@ class Suit(Enum):
     Hearts: str = "Hearts"
     Clubs: str = "Diamonds"
     Diamonds: str = "Diamonds"
+
+    asdf
