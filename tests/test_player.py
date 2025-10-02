@@ -1,4 +1,4 @@
-from src.models.player import Player
+from models.player import Player
 
 
 def test_name():
