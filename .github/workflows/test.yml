@@ -1,11 +1,12 @@
-name: Lint
+name: Test
 
 on:
   push:
   pull_request:
 
 jobs:
-  lint:
+  test:
+    needs: lint
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -27,7 +28,7 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run flake8
+      - name: Run Make Test
         run: |
           source .venv/bin/activate
-          flake8 src tests
+          make test
