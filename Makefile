@@ -16,4 +16,4 @@ run:
 	python src/main.py
 
 clean:
-	rm -rf /__pycache__ .pytest_cache
+	rm -rf __pycache__ .pytest_cache
