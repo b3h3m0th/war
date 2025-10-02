@@ -1,3 +1,5 @@
 class Player:
-    def __init__(self, name):
+    name: str
+
+    def __init__(self, name: str) -> None:
         self.name = name
