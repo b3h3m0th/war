@@ -1,4 +1,4 @@
-def main():
+def main() -> None:
     num = float(input("num: "))
 
     print(f"num: {num}")
