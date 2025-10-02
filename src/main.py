@@ -1,5 +1,5 @@
 def main():
-  num = float(input("num: "))
+    num = float(input("num: "))
 
   print(f"num: {num}")
 
