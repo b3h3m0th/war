@@ -10,4 +10,4 @@ def test_card_equality() -> None:
 
     card3 = Card(Suit.Clubs, Rank.Three)
     card4 = Card(Suit.Clubs, Rank.Three)
-    assert card1 == card2
+    assert card3 == card4
