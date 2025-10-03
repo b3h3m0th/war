@@ -1,5 +1,4 @@
 from models.shell import Shell
-from models.deck import Deck
 
 
 def main():
