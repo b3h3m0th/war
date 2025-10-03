@@ -11,3 +11,7 @@ class Deck:
 
     def get_new_deck():
         
+        for suit in Suit:
+            for rank in Rank:
+                self
+                
