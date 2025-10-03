@@ -12,7 +12,7 @@ class Shell(Cmd):
     def print_menu() -> None:
         print()
         print("┌──────────────────────────────────┐")
-        print("│               WAR - Menu         │")
+        print("│             WAR - Menu           │")
         print("├──────────────────────────────────┤")
         print("│                                  │")
         print("│  (new) Start new game            │")
