@@ -6,6 +6,7 @@ class Shell(Cmd):
     prompt = "(war) "
 
     def __init__(self) -> None:
+        super().__init__()
         self.intro = self.print_menu()
 
     def print_menu(self) -> None:
