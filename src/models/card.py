@@ -15,6 +15,7 @@ RANK_STRINGS = {
     Rank.Jack: "J",
 }
 
+
 class Card:
     suit: Suit
     rank: Rank
@@ -24,10 +25,10 @@ class Card:
         self.rank = rank
 
     def __str__(self) -> str:
-        suit_string = SUIT_STRINGS.get(self.suit);
-        .get(self.rank, str(self.rank.value))
+        suit_string = SUIT_STRINGS.get(self.suit)
+        rank_string = RANK_STRINGS.get(self.rank, str(self.rank.value))
 
-        return f"{rank_str}{ran[self.suit]}"
+        return f"{rank_string}{suit_string}"
 
     def __repr__(self) -> str:
         return f"Card({self.rank.name} of {self.suit.name})"
