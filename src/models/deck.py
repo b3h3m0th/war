@@ -42,3 +42,6 @@ class Deck:
             cards[i], cards[j] = cards[j], cards[i]
 
         return cards
+    
+    def deal() -> Card:
+        
