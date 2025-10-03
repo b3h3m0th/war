@@ -12,7 +12,7 @@ class Deck:
         self.cards = cards
 
     def get_new_deck() -> Deck:
-        cards = []
+        cards = [Card(suit, rank) for (suit, rank) in product()]
         for suit in Suit:
             for rank in Rank:
                 cards.append(Card(suit, rank))
