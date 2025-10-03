@@ -6,12 +6,11 @@ from enums.rank import Rank
 class Deck:
     cards: list[Card] = []
 
-    def __init__(self):
-        cards = []
+    def __init__(self, cards=[]):
+        self.cards = cards
 
-    def get_new_deck():
-        
+    def get_new_deck() -> Deck:
+        cars
         for suit in Suit:
             for rank in Rank:
                 self
-                
