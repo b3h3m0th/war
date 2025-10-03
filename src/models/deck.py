@@ -19,15 +19,11 @@ class Deck:
             (rank for rank in Rank if rank is not Rank.Ace),
         ]
         king_to_ace = [
-            (rank for rank in Rank if rank is not Rank.Ace),
+            (rank[::-1] for rank in Rank if rank is not Rank.Ace),
             Rank.Ace,
         ]
 
-        return [
-            Card(suit, rank)
-            for suit in new_deck_order_suits
-            for rank in new_deck_order_ranks
-        ]
+        return []
 
     def shuffle(self, cards: list[Card]) -> list[Card]:
         if not cards:
