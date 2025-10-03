@@ -6,10 +6,10 @@ class Shell(Cmd):
     prompt = "(war) "
     file = None
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.intro = self.print_menu()
 
-    def print_menu():
+    def print_menu() -> None:
         print()
         print("┌──────────────────────────────────┐")
         print("│               WAR - Menu         │")
@@ -25,15 +25,15 @@ class Shell(Cmd):
         print("│                                  │")
         print("└──────────────────────────────────┘")
 
-    def do_new(self, arg):
+    def do_new(self, arg) -> None:
         "Start a new game"
         print("New game starting")
 
-    def do_stats(self, arg):
+    def do_stats(self, arg) -> None:
         "Show statistics"
         print("Statistics")
 
-    def do_quit(self, arg):
+    def do_quit(self, arg) -> bool:
         "Quit"
         print("Thank you for using war")
         return True
