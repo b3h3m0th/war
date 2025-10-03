@@ -18,6 +18,7 @@ class Deck:
             Rank.Ace,
             (rank for rank in Rank if rank is not Rank.Ace),
         ]
+        print(ace_to_king)
         king_to_ace = [
             (rank[::-1] for rank in Rank if rank is not Rank.Ace),
             Rank.Ace,
@@ -25,7 +26,7 @@ class Deck:
 
         return [
             (
-                rank
+                Card(suit, rank)
                 for rank in (
                     ace_to_king if suit is Suit.Spades or Suit.Diamonds else king_to_ace
                 )
