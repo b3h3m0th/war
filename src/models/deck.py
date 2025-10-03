@@ -42,6 +42,6 @@ class Deck:
             cards[i], cards[j] = cards[j], cards[i]
 
         return cards
-    
-    def deal() -> Card:
-        
+
+    def deal(self) -> Card:
+        return self.cards.pop()
