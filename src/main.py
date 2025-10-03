@@ -1,8 +1,9 @@
-from models.shell import Menu
+from models.shell import Shell
 
 
 def main():
-    menu: Menu = Menu()
+    shell: Shell = Shell()
+    shell.cmdloop()
 
 
 if __name__ == "__main__":
