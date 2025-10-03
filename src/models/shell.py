@@ -12,7 +12,7 @@ class Shell(Cmd):
     def print_menu(self) -> None:
         print()
         print("┌──────────────────────────────────┐")
-        print("│             WAR - Menu           │")
+        print("│            WAR - Menu            │")
         print("├──────────────────────────────────┤")
         print("│                                  │")
         print("│  (new) Start new game            │")
@@ -34,7 +34,7 @@ class Shell(Cmd):
 
     def do_quit(self, arg) -> bool:
         "Quit"
-        print("Thank you for using war")
+        print("Thank you for playing war")
         return True
 
 
