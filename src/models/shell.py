@@ -71,7 +71,7 @@ class Shell(Cmd):
 
     def do_q(self, arg):
         "Stop recording, close the turtle window, and exit:  BYE"
-        print("Thank you for using Turtle")
+        print("Thank you for using")
         self.close()
         return True
 
@@ -89,11 +89,6 @@ class Shell(Cmd):
             print(a + b)
         except ValueError:
             print("Please provide two numbers.")
-
-    def do_exit(self, arg):
-        """Exit the CLI"""
-        print("Goodbye!")
-        return True  # Returning True exits the loop
 
     # Shortcut for exit
     def do_EOF(self, arg):
