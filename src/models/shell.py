@@ -16,12 +16,11 @@ class Shell(Cmd):
         print("├──────────────────────────────────┤")
         print("│                                  │")
         print("│  (new) Start new game            │")
-        print("│  (stats) Statistics              │")
         print("│  (quit) Quit                     │")
         print("│                                  │")
         print("├──────────[Danger zone]───────────┤")
         print("│                                  │")
-        print("│  (reset) points                  │")
+        print("│  (stats) Statistics              │")
         print("│                                  │")
         print("└──────────────────────────────────┘")
 
