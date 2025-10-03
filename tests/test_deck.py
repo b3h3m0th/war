@@ -8,4 +8,5 @@ def test_initial_deck_cards_count() -> None:
 
 def test_initial_deck_cards_order() -> None:
     deck = Deck()
-    assert  == 52
+    for card in deck.cards:
+        assert 
