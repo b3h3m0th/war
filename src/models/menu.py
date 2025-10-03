@@ -15,9 +15,9 @@ class Menu:
         print("│                                  │")
         print("└──────────────────────────────────┘")
 
-    def main():
+    def run(self):
         while True:
-            print_menu()
+            self.print_menu()
             option = input(">> ")
             if option == "R":
                 name = input("\nEnter name: ")
