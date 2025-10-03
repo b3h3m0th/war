@@ -13,7 +13,6 @@ def main():
 
     for suit in Suit:
         for rank in Rank:
-
             print(f"{suit} {rank}")
 
 
