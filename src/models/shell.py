@@ -1,7 +1,11 @@
 from cmd import Cmd
 
 
-class Menu:
+class Shell(Cmd):
+    intro = "Welcome to the war shell. Type help or ? to list commands.\n"
+    prompt = "(war) "
+    file = None
+
     def print_menu():
         print()
         print("┌──────────────────────────────────┐")
@@ -17,12 +21,6 @@ class Menu:
         print("│  (Reset) points                  │")
         print("│                                  │")
         print("└──────────────────────────────────┘")
-
-
-class Shell(Cmd):
-    intro = "Welcome to the war shell. Type help or ? to list commands.\n"
-    prompt = "(war) "
-    file = None
 
     def do_new(self, arg):
         "Start a new game"
