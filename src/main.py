@@ -1,7 +1,7 @@
 from models.shell import Shell
 
 
-def main():
+def main() -> None:
     shell: Shell = Shell()
     shell.cmdloop()
 
