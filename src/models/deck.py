@@ -14,9 +14,9 @@ class Deck:
 
     def get_new_sorted_cards(self) -> list[Card]:
         new_deck_order_suits = [Suit.Spades, Suit.Diamonds, Suit.Clubs, Suit.Hearts]
-        ace_to_king = [Rank.Ace, (rank for rank in Rank if rank is not Rank.Ace)]
+        ace_to_king = [Rank.Ace, [rank for rank in Rank if rank is not Rank.Ace]]
         king_to_ace = [
-            (rank[::-1] for rank in Rank if rank is not Rank.Ace),
+            [rank[::-1] for rank in Rank if rank is not Rank.Ace],
             Rank.Ace,
         ]
 
@@ -30,16 +30,6 @@ class Deck:
                 )
             )
             for suit in new_deck_order_suits
-        ]
-
-        return [
-            Card(suit, rank)
-            for suit in new_deck_order_suits
-            for rank in (
-                ace_to_king
-                if suit is Suit.Spades or suit is Suit.Diamonds
-                else king_to_2_then_ace
-            )
         ]
 
     def shuffle(self, cards: list[Card]) -> list[Card]:
