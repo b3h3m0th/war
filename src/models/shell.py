@@ -20,38 +20,14 @@ class Menu:
 
 
 class Shell(Cmd):
-    intro = "Welcome to the turtle shell. Type help or ? to list commands.\n"
+    intro = "Welcome to the war shell. Type help or ? to list commands.\n"
     prompt = "(war) "
     file = None
 
-    def do_circle(self, arg):
-        "Draw circle with given radius an options extent and steps:  CIRCLE 50"
-        circle(*parse(arg))
-
-    def do_position(self, arg):
-        "Print the current turtle position:  POSITION"
-        print("Current position is %d %d\n" % position())
-
-    def do_heading(self, arg):
-        "Print the current turtle heading in degrees:  HEADING"
-        print("Current heading is %d\n" % (heading(),))
-
-    def do_color(self, arg):
-        "Set the color:  COLOR BLUE"
-        color(arg.lower())
-
-    def do_undo(self, arg):
-        "Undo (repeatedly) the last turtle action(s):  UNDO"
-
-    def do_reset(self, arg):
-        "Clear the screen and return turtle to center:  RESET"
-        reset()
-
-    def do_bye(self, arg):
-        "Stop recording, close the turtle window, and exit:  BYE"
-        print("Thank you for using Turtle")
+    def do_exit(self, arg):
+        "Exit shell"
+        print("Thank you for using shell")
         self.close()
-        bye()
         return True
 
     # ----- record and playback -----
