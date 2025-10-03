@@ -92,7 +92,7 @@ class Shell(Cmd):
 
     # Shortcut for exit
     def do_EOF(self, arg):
-        "shortcut for exit"
+        "Shortcut for exit"
         return self.do_exit(arg)
 
     # ----- record and playback -----
