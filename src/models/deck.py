@@ -23,7 +23,15 @@ class Deck:
             Rank.Ace,
         ]
 
-        return [(rank for rank in (ace_to_king if suit is Suit.Spades or Suit.Diamonds)) for suit in Suit]
+        return [
+            (
+                rank
+                for rank in (
+                    ace_to_king if suit is Suit.Spades or Suit.Diamonds else king_to_ace
+                )
+            )
+            for suit in new_deck_order_suits
+        ]
 
     def shuffle(self, cards: list[Card]) -> list[Card]:
         if not cards:
