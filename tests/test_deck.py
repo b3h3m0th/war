@@ -6,11 +6,11 @@ from models.card import Card
 
 def test_initial_deck_cards_count() -> None:
     deck = Deck()
-    assert len(deck.cards) == 52
+    assert len(deck.cards) is 52
 
 
 def test_initial_deck_cards_order() -> None:
-    EXPECTED_DECK_ORDER = [
+    expected_deck_order = [
         Card(Suit.Spades, Rank.Ace),
         Card(Suit.Spades, Rank.Two),
         Card(Suit.Spades, Rank.Three),
@@ -66,6 +66,6 @@ def test_initial_deck_cards_order() -> None:
     ]
 
     deck = Deck()
-    for expected, actual in zip(EXPECTED_DECK_ORDER, deck.cards):
+    for expected, actual in zip(expected_deck_order, deck.cards):
         assert actual.suit == expected.suit
         assert actual.rank == expected.rank
