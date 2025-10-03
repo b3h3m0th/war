@@ -6,6 +6,9 @@ class Shell(Cmd):
     prompt = "(war) "
     file = None
 
+    def __init__(self):
+        self.intro = self.print_menu()
+
     def print_menu():
         print()
         print("┌──────────────────────────────────┐")
