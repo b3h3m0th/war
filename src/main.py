@@ -1,5 +1,5 @@
 from models.shell import Shell
-from models.card import Deck
+from models.deck import Deck
 
 
 def main():
