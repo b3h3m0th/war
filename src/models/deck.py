@@ -13,6 +13,9 @@ class Deck:
         self.cards = cards if cards else self.get_new_sorted_cards()
 
     def get_new_sorted_cards() -> list[Card]:
+        new_order_suits = [Suit.Spades, Suit.]
+        new_order_ranks = []
+
         return [Card(suit, rank) for suit in Suit for rank in Rank]
 
     def shuffle(self, cards: list[Card]) -> list[Card]:
