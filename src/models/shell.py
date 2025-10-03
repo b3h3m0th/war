@@ -5,12 +5,12 @@ class Menu:
     def print_menu():
         print()
         print("┌──────────────────────────────────┐")
-        print("│               Menu               │")
+        print("│               WAR - Menu         │")
         print("├──────────────────────────────────┤")
         print("│                                  │")
-        print("│  (R)egister points               │")
-        print("│  (S)how grades                   │")
-        print("│  (E)xit                          │")
+        print("│  (new) Start new game            │")
+        print("│  (stats) Statistics              │")
+        print("│  (quit) Quit                     │")
         print("│                                  │")
         print("├──────────[Danger zone]───────────┤")
         print("│                                  │")
@@ -24,16 +24,16 @@ class Shell(Cmd):
     prompt = "(war) "
     file = None
 
-    def do_new_game(self, arg):
+    def do_new(self, arg):
         "Start a new game"
         print("New game starting")
 
-    def do_statistics(self, arg):
+    def do_stats(self, arg):
         "Show statistics"
         print("Statistics")
 
-    def do_exit(self, arg):
-        "Exit"
+    def do_quit(self, arg):
+        "Quit"
         print("Thank you for using war")
         return True
 
