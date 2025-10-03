@@ -20,7 +20,7 @@ class Menu:
         print("└──────────────────────────────────┘")
 
 
-class Sheel(cmd.Cmd):
+class Shell(Cmd):
     intro = "Welcome to the turtle shell.   Type help or ? to list commands.\n"
     prompt = "(turtle) "
     file = None
@@ -105,4 +105,4 @@ def parse(arg):
 
 
 if __name__ == "__main__":
-    TurtleShell().cmdloop()
+    Shell().cmdloop()
