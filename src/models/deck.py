@@ -15,9 +15,9 @@ class Deck:
     ]
 
     def __init__(self, cards: list[Card] = []) -> None:
-        self.cards = cards if cards else self.get_new_sorted_cards()
+        self.cards = cards if cards else self.get_new_deck_order_cards()
 
-    def get_new_sorted_cards(self) -> list[Card]:
+    def get_new_deck_order_cards(self) -> list[Card]:
         ace_to_king = [Rank.Ace] + [
             rank for rank in Rank if rank is not Rank.Ace
         ]
