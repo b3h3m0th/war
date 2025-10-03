@@ -28,7 +28,7 @@ class Deck:
             for suit in self.new_deck_order_suits
             for rank in (
                 ace_to_king
-                if suit in (Suit.Spades, Suit.Diamonds)
+                if suit in self.new_deck_order_suits[:2]
                 else king_to_ace
             )
         ]
@@ -44,7 +44,4 @@ class Deck:
         return cards
 
     def deal(self) -> Card:
-        return self.cards.pop()
-
-    def discard(self) -> None:
         return self.cards.pop()
