@@ -11,7 +11,6 @@ def test_initial_deck_cards_count() -> None:
 
 def test_initial_deck_cards_order() -> None:
     EXPECTED_DECK_ORDER = [
-        # Spades Ace -> King
         Card(Suit.Spades, Rank.Ace),
         Card(Suit.Spades, Rank.Two),
         Card(Suit.Spades, Rank.Three),
@@ -25,7 +24,6 @@ def test_initial_deck_cards_order() -> None:
         Card(Suit.Spades, Rank.Jack),
         Card(Suit.Spades, Rank.Queen),
         Card(Suit.Spades, Rank.King),
-        # Diamonds Ace -> King
         Card(Suit.Diamonds, Rank.Ace),
         Card(Suit.Diamonds, Rank.Two),
         Card(Suit.Diamonds, Rank.Three),
@@ -39,7 +37,6 @@ def test_initial_deck_cards_order() -> None:
         Card(Suit.Diamonds, Rank.Jack),
         Card(Suit.Diamonds, Rank.Queen),
         Card(Suit.Diamonds, Rank.King),
-        # Clubs King -> Ace
         Card(Suit.Clubs, Rank.King),
         Card(Suit.Clubs, Rank.Queen),
         Card(Suit.Clubs, Rank.Jack),
@@ -53,7 +50,6 @@ def test_initial_deck_cards_order() -> None:
         Card(Suit.Clubs, Rank.Three),
         Card(Suit.Clubs, Rank.Two),
         Card(Suit.Clubs, Rank.Ace),
-        # Hearts King -> Ace
         Card(Suit.Hearts, Rank.King),
         Card(Suit.Hearts, Rank.Queen),
         Card(Suit.Hearts, Rank.Jack),
