@@ -24,7 +24,9 @@ class Deck:
             (
                 Card(suit, rank)
                 for rank in (
-                    ace_to_king if suit is Suit.Spades or Suit.Diamonds else king_to_ace
+                    ace_to_king
+                    if suit is Suit.Spades or ace_to_king is Suit.Hearts
+                    else king_to_ace
                 )
             )
             for suit in new_deck_order_suits
