@@ -12,7 +12,7 @@ def main():
     deck: Deck = Deck()
 
     for card in deck.cards:
-        print(f"{card.suit} {card.rank}")
+        print(card)
 
 
 if __name__ == "__main__":
