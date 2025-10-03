@@ -16,7 +16,7 @@ class Deck:
         new_deck_order_suits = [Suit.Spades, Suit.Diamonds, Suit.Clubs, Suit.Hearts]
         ace_to_king = [Rank.Ace, [rank for rank in Rank if rank is not Rank.Ace]]
         king_to_ace = [
-            [rank[::-1] for rank in Rank if rank is not Rank.Ace],
+            [rank for rank in Rank if rank is not Rank.Ace],
             Rank.Ace,
         ]
 
