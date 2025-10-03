@@ -8,10 +8,14 @@ from enums.rank import Rank
 class Deck:
     cards: list[Card] = []
 
-    def __init__(self, cards: list[Card]):
+    def __init__(self, cards: list[Card] = []) -> None:
+        if cards.count
         self.cards = cards
 
     def get_new_deck() -> Deck:
         cards = [Card(suit, rank) for suit in Suit for rank in Rank]
 
         return Deck(cards)
+    
+    def shuffle() -> None:
+
