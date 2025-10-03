@@ -1,6 +1,19 @@
 from enums.suit import Suit
 from enums.rank import Rank
 
+SUIT_STRINGS = {
+    Suit.Spades: "♠",
+    Suit.Hearts: "♥",
+    Suit.Clubs: "♣",
+    Suit.Diamonds: "♦",
+}
+
+RANK_STRINGS = {
+    Rank.Ace: "A",
+    Rank.King: "K",
+    Rank.Queen: "Q",
+    Rank.Jack: "J",
+}
 
 class Card:
     suit: Suit
@@ -11,20 +24,10 @@ class Card:
         self.rank = rank
 
     def __str__(self) -> str:
-        suit_str = {
-            Suit.Spades: "♠",
-            Suit.Hearts: "♥",
-            Suit.Clubs: "♣",
-            Suit.Diamonds: "♦",
-        }
-        rank_str = {
-            Rank.Ace: "A",
-            Rank.King: "K",
-            Rank.Queen: "Q",
-            Rank.Jack: "J",
-        }.get(self.rank, str(self.rank.value))
+        suit_string = SUIT_STRINGS.get(self.suit);
+        .get(self.rank, str(self.rank.value))
 
-        return f"{rank_str}{SUIT_EMOJIS[self.suit]}"
+        return f"{rank_str}{ran[self.suit]}"
 
     def __repr__(self) -> str:
         return f"Card({self.rank.name} of {self.suit.name})"
