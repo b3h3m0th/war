@@ -1,7 +1,9 @@
-def main() -> None:
-    num = float(input("num: "))
+from models.shell import Shell
 
-    print(f"num: {num}")
+
+def main():
+    shell: Shell = Shell()
+    shell.cmdloop()
 
 
 if __name__ == "__main__":
