@@ -66,8 +66,6 @@ def test_initial_deck_cards_order() -> None:
     ]
 
     deck = Deck()
-    for i, (expected, actual) in enumerate(
-        zip(EXPECTED_DECK_ORDER, deck.cards)
-    ):
+    for expected, actual in zip(EXPECTED_DECK_ORDER, deck.cards):
         assert actual.suit == expected.suit
         assert actual.rank == expected.rank
