@@ -1,18 +1,4 @@
-def print_menu():
-    print()
-    print("┌──────────────────────────────────┐")
-    print("│               Menu               │")
-    print("├──────────────────────────────────┤")
-    print("│                                  │")
-    print("│  (R)egister points               │")
-    print("│  (S)how grades                   │")
-    print("│  (E)xit                          │")
-    print("│                                  │")
-    print("├──────────[Danger zone]───────────┤")
-    print("│                                  │")
-    print("│  (Reset) points                  │")
-    print("│                                  │")
-    print("└──────────────────────────────────┘")
+from models.menu import Menu
 
 
 def main():
