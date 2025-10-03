@@ -1,9 +1,13 @@
 from models.shell import Shell
+from models.card import Deck
 
 
 def main():
-    shell: Shell = Shell()
-    shell.cmdloop()
+    # shell: Shell = Shell()
+    # shell.cmdloop()
+
+    for card in Deck().cards:
+        print(card)
 
 
 if __name__ == "__main__":
