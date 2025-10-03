@@ -18,7 +18,7 @@ class Shell(Cmd):
         print("│  (new) Start new game            │")
         print("│  (quit) Quit                     │")
         print("│                                  │")
-        print("├──────────[Danger zone]───────────┤")
+        print("├────────────[Options]─────────────┤")
         print("│                                  │")
         print("│  (stats) Statistics              │")
         print("│                                  │")
