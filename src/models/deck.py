@@ -15,7 +15,7 @@ class Deck:
     def get_new_sorted_cards() -> list[Card]:
         return [Card(suit, rank) for suit in Suit for rank in Rank]
 
-    def shuffle(self, cards: list[Card]) -> list[int]:
+    def shuffle(self, cards: list[Card]) -> list[Card]:
         if not cards:
             cards = self.cards
 
