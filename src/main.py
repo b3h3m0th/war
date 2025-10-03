@@ -3,13 +3,8 @@ from models.deck import Deck
 
 
 def main():
-    # shell: Shell = Shell()
-    # shell.cmdloop()
-
-    deck: Deck = Deck()
-
-    for card in deck.cards:
-        print(card)
+    shell: Shell = Shell()
+    shell.cmdloop()
 
 
 if __name__ == "__main__":

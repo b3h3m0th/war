@@ -25,7 +25,7 @@ class Shell(Cmd):
         print("└──────────────────────────────────┘")
 
     def do_new(self, arg) -> None:
-        "Start a new game"
+        """Start a new game"""
         print("New game starting")
 
     def do_stats(self, arg) -> None:
