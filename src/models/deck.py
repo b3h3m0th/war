@@ -13,14 +13,18 @@ class Deck:
         self.cards = cards if cards else self.get_new_sorted_cards()
 
     def get_new_sorted_cards(self) -> list[Card]:
-        ace_to_king = [Rank.Ace] + [rank for rank in Rank if rank is not Rank.Ace]
+        ace_to_king = [Rank.Ace] + [
+            rank for rank in Rank if rank is not Rank.Ace
+        ]
         king_to_ace = list(reversed(ace_to_king))
 
         return [
             Card(suit, rank)
             for suit in self.suit_order
             for rank in (
-                ace_to_king if suit in (Suit.Spades, Suit.Diamonds) else king_to_ace
+                ace_to_king
+                if suit in (Suit.Spades, Suit.Diamonds)
+                else king_to_ace
             )
         ]
 
