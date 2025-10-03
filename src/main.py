@@ -1,4 +1,4 @@
-from models.menu import Menu
+from models.shell import Menu
 
 
 def main():
