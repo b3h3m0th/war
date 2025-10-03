@@ -76,6 +76,30 @@ class Shell(Cmd):
         bye()
         return True
 
+    def do_greet(self, arg):
+        """Greet someone:  greet <name>"""
+        if arg:
+            print(f"Hello, {arg}!")
+        else:
+            print("Hello!")
+
+    def do_add(self, arg):
+        """Add two numbers:  add 4 5"""
+        try:
+            a, b = map(float, arg.split())
+            print(a + b)
+        except ValueError:
+            print("Please provide two numbers.")
+
+    def do_exit(self, arg):
+        """Exit the CLI"""
+        print("Goodbye!")
+        return True  # Returning True exits the loop
+
+    # Shortcut for exit
+    def do_EOF(self, arg):
+        return self.do_exit(arg)
+
     # ----- record and playback -----
     def do_record(self, arg):
         "Save future commands to filename:  RECORD rose.cmd"
