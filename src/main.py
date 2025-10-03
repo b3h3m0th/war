@@ -11,9 +11,8 @@ def main():
 
     deck: Deck = Deck()
 
-    for suit in Suit:
-        for rank in Rank:
-            print(f"{suit} {rank}")
+    for card in deck.cards:
+        print(f"{card.suit} {card.rank}")
 
 
 if __name__ == "__main__":
