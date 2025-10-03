@@ -4,7 +4,6 @@ from cmd import Cmd
 class Shell(Cmd):
     intro = "Welcome to the war shell. Type help or ? to list commands.\n"
     prompt = "(war) "
-    file = None
 
     def __init__(self) -> None:
         self.intro = self.print_menu()
