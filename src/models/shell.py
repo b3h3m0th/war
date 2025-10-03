@@ -9,7 +9,7 @@ class Shell(Cmd):
     def __init__(self) -> None:
         self.intro = self.print_menu()
 
-    def print_menu() -> None:
+    def print_menu(self) -> None:
         print()
         print("┌──────────────────────────────────┐")
         print("│             WAR - Menu           │")
@@ -21,7 +21,7 @@ class Shell(Cmd):
         print("│                                  │")
         print("├──────────[Danger zone]───────────┤")
         print("│                                  │")
-        print("│  (Reset) points                  │")
+        print("│  (reset) points                  │")
         print("│                                  │")
         print("└──────────────────────────────────┘")
 
