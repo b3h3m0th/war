@@ -9,8 +9,10 @@ class Deck:
     def __init__(self, cards=[]):
         self.cards = cards
 
-    def get_new_deck() -> Deck:
-        cars
+    def get_new_deck():
+        cards = []
         for suit in Suit:
             for rank in Rank:
-                self
+                cards.append(Card(suit, rank))
+
+        return Deck(cards)
