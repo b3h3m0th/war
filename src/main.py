@@ -2,7 +2,7 @@ from models.shell import Shell
 from models.deck import Deck
 
 
-def main():
+def main() -> None:
     # shell: Shell = Shell()
     # shell.cmdloop()
 
