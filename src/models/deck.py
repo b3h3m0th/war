@@ -7,7 +7,7 @@ from enums.rank import Rank
 
 class Deck:
     cards: list[Card] = []
-    suit_order = 
+    suit_order = [Suit.Spades, Suit.Diamonds, Suit.Clubs, Suit.Hearts]
 
     def __init__(self, cards: list[Card] = []) -> None:
         self.cards = cards if cards else self.get_new_sorted_cards()
