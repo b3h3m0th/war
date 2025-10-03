@@ -21,7 +21,7 @@ class Deck:
         ace_to_king = [Rank.Ace] + [
             rank for rank in Rank if rank is not Rank.Ace
         ]
-        king_to_ace = list(reversed(ace_to_king))
+        king_to_ace = ace_to_king[::-1]
 
         return [
             Card(suit, rank)
