@@ -41,4 +41,5 @@ class Deck:
             j = random.randint(0, i)
             cards[i], cards[j] = cards[j], cards[i]
 
+        random.shuffle
         return cards
