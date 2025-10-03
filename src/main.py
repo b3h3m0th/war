@@ -1,11 +1,7 @@
 from models.shell import Shell
+from models.deck import Deck
 
 
-<<<<<<< Updated upstream
-def main() -> None:
-    shell: Shell = Shell()
-    shell.cmdloop()
-=======
 def main():
     # shell: Shell = Shell()
     # shell.cmdloop()
@@ -14,7 +10,6 @@ def main():
 
     for card in deck.cards:
         print(f"{card.suit} {card.rank}")
->>>>>>> Stashed changes
 
 
 if __name__ == "__main__":
