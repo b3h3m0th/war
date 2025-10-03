@@ -10,4 +10,4 @@ class Deck:
         cards = []
 
     def get_new_deck():
-        pass
+        
