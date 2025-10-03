@@ -11,3 +11,7 @@ class Rank(Enum):
     Eight: int = 8
     Nine: int = 9
     Ten: int = 10
+    Jack: int = 11
+    Queen: int = 12
+    King: int = 13
+    Ace: int = 14
