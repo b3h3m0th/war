@@ -24,7 +24,7 @@ class Shell(Cmd):
     prompt = "(war) "
     file = None
 
-    def do_new_gamge(self, arg):
+    def do_new_game(self, arg):
         "Start a new game"
         print("New game starting")
 
@@ -35,7 +35,6 @@ class Shell(Cmd):
     def do_exit(self, arg):
         "Exit"
         print("Thank you for using war")
-        self.close()
         return True
 
 
