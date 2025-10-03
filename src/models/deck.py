@@ -9,12 +9,11 @@ class Deck:
     cards: list[Card] = []
 
     def __init__(self, cards: list[Card] = []) -> None:
-            self.cards = cards if cards else self.get_new_deck()
+            self.cards = cards if cards else self.get_new_sorted_cards()
 
-    def get_new_deck() -> Deck:
-        cards = [Card(suit, rank) for suit in Suit for rank in Rank]
-
-        return Deck(cards)
+    def get_new_sorted_cards() -> list[Card]:
+        return [Card(suit, rank) for suit in Suit for rank in Rank]
     
     def shuffle() -> None:
+         
 
