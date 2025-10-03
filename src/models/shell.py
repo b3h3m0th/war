@@ -69,11 +69,10 @@ class Shell(Cmd):
         "Clear the screen and return turtle to center:  RESET"
         reset()
 
-    def do_bye(self, arg):
+    def do_q(self, arg):
         "Stop recording, close the turtle window, and exit:  BYE"
         print("Thank you for using Turtle")
         self.close()
-        bye()
         return True
 
     def do_greet(self, arg):
