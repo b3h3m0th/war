@@ -1,6 +1,6 @@
-from models. import Player
+from models.deck import Deck
 
 
-def test_name() -> None:
-    player = Player("John")
-    assert player.name == "John"
+def test_initial_deck_order() -> None:
+    deck = Deck()
+    assert len(deck.cards) == 52
