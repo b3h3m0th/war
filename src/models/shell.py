@@ -25,11 +25,15 @@ class Shell(Cmd):
     file = None
 
     def do_new_gamge(self, arg):
-        "Print the current turtle heading in degrees:  HEADING"
-        print("Current heading")
+        "Start a new game"
+        print("New game starting")
+
+    def do_statistics(self, arg):
+        "Show statistics"
+        print("Statistics")
 
     def do_exit(self, arg):
-        "Stop recording, close the turtle window, and exit:  BYE"
+        "Exit"
         print("Thank you for using war")
         self.close()
         return True
