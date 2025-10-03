@@ -1,14 +1,20 @@
 from models.shell import Shell
 from models.deck import Deck
 
+from enums.rank import Rank
+from enums.suit import Suit
+
 
 def main():
     # shell: Shell = Shell()
     # shell.cmdloop()
 
     deck: Deck = Deck()
-    
-    print() for suit in new_deck_order_suits for rank in new_deck_order_ranks]
+
+    for suit in Suit:
+        for rank in Rank:
+
+            print(f"{suit} {rank}")
 
 
 if __name__ == "__main__":
