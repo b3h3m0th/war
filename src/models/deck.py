@@ -45,3 +45,6 @@ class Deck:
 
     def deal(self) -> Card:
         return self.cards.pop()
+
+    def discard(self) -> None:
+        return self.cards.pop()
