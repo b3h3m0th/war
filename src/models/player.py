@@ -1,5 +1,6 @@
 import json
-from annotations import __future__
+from __future__ import annotations
+
 
 class Player:
     name: str
@@ -13,5 +14,5 @@ class Player:
         }
 
     @classmethod
-    def from_dict(cls, data: ) -> Player:
-        return cls(data["name"], data["age"], address)
+    def from_dict(cls, data: dict) -> Player:
+        return cls(data["name"], data["age"])
