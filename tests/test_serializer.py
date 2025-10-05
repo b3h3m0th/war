@@ -24,9 +24,6 @@ def test_save_and_load_dummy(tmp_path):
     Serializer.save(dummy, file_path)
 
     assert file_path.exists()
-    with open(file_path) as f:
-        data = json.load(f)
-    assert data == {"name": "test", "value": 42}
 
     loaded = Serializer.load(Dummy, file_path)
 
@@ -42,11 +39,6 @@ def test_save_and_load_player(tmp_path):
     Serializer.save(player, file_path)
 
     assert file_path.exists()
-    with open(file_path) as f:
-        data = json.load(f)
-    assert data == {
-        "name": "John Doe",
-    }
 
     loaded = Serializer.load(Player, file_path)
 

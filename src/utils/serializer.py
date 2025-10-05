@@ -9,6 +9,6 @@ class Serializer:
             json.dump(obj.to_dict(), f, indent=4)
 
     @staticmethod
-    def load(cls, path: Path | str) -> None:
+    def load(cls, path: Path | str) -> object:
         with open(path, "r") as f:
             return cls.from_dict(json.load(f))
