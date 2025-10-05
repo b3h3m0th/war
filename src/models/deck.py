@@ -6,13 +6,13 @@ from enums.rank import Rank
 
 
 class Deck:
-    cards: list[Card] = []
-    new_deck_order_suits = [
+    NEW_DECK_ORDER_SUITS = [
         Suit.Spades,
         Suit.Diamonds,
         Suit.Clubs,
         Suit.Hearts,
     ]
+    cards: list[Card] = []
 
     def __init__(self, cards: list[Card] = []) -> None:
         self.cards = cards if cards else self.get_new_deck_order_cards()
@@ -25,10 +25,10 @@ class Deck:
 
         return [
             Card(suit, rank)
-            for suit in self.new_deck_order_suits
+            for suit in self.NEW_DECK_ORDER_SUITS
             for rank in (
                 ace_to_king
-                if suit in self.new_deck_order_suits[:2]
+                if suit in self.NEW_DECK_ORDER_SUITS[:2]
                 else king_to_ace
             )
         ]
@@ -48,9 +48,9 @@ class Deck:
 
     def to_dict(self) -> dict:
         return {
-            "deck": JSONSerializer.,
+            "deck": [card.to_dict() for card in self.cards],
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> Player:
+    def from_dict(cls, data: dict) -> Deck:
         return cls(data["name"], data["age"])

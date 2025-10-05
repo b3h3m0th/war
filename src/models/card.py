@@ -44,5 +44,5 @@ class Card:
         return hash((self.suit, self.rank))
 
     @classmethod
-    def to_dict():
+    def to_dict() -> dict:
         pass
