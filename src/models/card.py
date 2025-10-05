@@ -35,7 +35,7 @@ class Card:
 
     def __eq__(self, other) -> bool:
         if not isinstance(other, Card):
-            return NotImplemented
+            return False
         return self.suit == other.suit and self.rank == other.rank
 
     def __hash__(self) -> int:
