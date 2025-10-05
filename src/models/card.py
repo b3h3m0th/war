@@ -34,9 +34,13 @@ class Card:
         return f"Card({self.rank.name} of {self.suit.name})"
 
     def __eq__(self, other) -> bool:
-        if not isinstance(other, Card):
-            return False
-        return self.suit == other.suit and self.rank == other.rank
+        return (
+            isinstance(other, Card)
+            and self.suit == other.suit
+            and self.rank == other.rank
+        )
 
     def __hash__(self) -> int:
         return hash((self.suit, self.rank))
+
+    def @
