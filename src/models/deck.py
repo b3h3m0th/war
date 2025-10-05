@@ -53,4 +53,4 @@ class Deck:
 
     @classmethod
     def from_dict(cls, data: dict) -> Deck:
-        return cls(data["cards"])
+        return cls(Card.from_dict(card_data) for card_data in data["cards"])
