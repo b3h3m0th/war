@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 from utils.serializer import Serializer
+from models.player import Player
 
 
 class Dummy:
@@ -17,10 +18,10 @@ class Dummy:
 
 
 def test_save_and_load_dummy(tmp_path):
-    obj = Dummy("test", 42)
+    dummy = Dummy("test", 42)
     file_path = tmp_path / "data.json"
 
-    Serializer.save(obj, file_path)
+    Serializer.save(dummy, file_path)
 
     assert file_path.exists()
     with open(file_path) as f:
@@ -32,3 +33,22 @@ def test_save_and_load_dummy(tmp_path):
     assert isinstance(loaded, Dummy)
     assert loaded.name == "test"
     assert loaded.value == 42
+
+
+def test_save_and_load_player(tmp_path):
+    player = Player("John Doe")
+    file_path = tmp_path / "data.json"
+
+    Serializer.save(player, file_path)
+
+    assert file_path.exists()
+    with open(file_path) as f:
+        data = json.load(f)
+    assert data == {
+        "name": "John Doe",
+    }
+
+    loaded = Serializer.load(Dummy, file_path)
+
+    assert isinstance(loaded, Player)
+    assert loaded.name == "John Doe"
