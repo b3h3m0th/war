@@ -17,3 +17,7 @@ run:
 
 clean:
 	rm -rf __pycache__ .pytest_cache
+	rm -rf src/enums/__pycache__ 
+	rm -rf src/models/__pycache__ 
+	rm -rf src/utils/__pycache__ 
+	rm -rf tests/__pycache__ 
