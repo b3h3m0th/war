@@ -45,3 +45,12 @@ class Deck:
 
     def deal(self) -> Card:
         return self.cards.pop()
+
+    def to_dict(self) -> dict:
+        return {
+            "deck": JSONSerializer.,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict) -> Player:
+        return cls(data["name"], data["age"])
