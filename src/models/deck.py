@@ -48,9 +48,9 @@ class Deck:
 
     def to_dict(self) -> dict:
         return {
-            "deck": [card.to_dict() for card in self.cards],
+            "cards": [card.to_dict() for card in self.cards],
         }
 
     @classmethod
     def from_dict(cls, data: dict) -> Deck:
-        return cls(data["name"], data["age"])
+        return cls(data["cards"])

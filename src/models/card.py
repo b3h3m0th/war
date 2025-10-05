@@ -43,6 +43,10 @@ class Card:
     def __hash__(self) -> int:
         return hash((self.suit, self.rank))
 
+
+    def from_dict() -> :
+        return {}
+
     @classmethod
     def to_dict() -> dict:
-        pass
+        return {}
