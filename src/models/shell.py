@@ -39,7 +39,7 @@ class Shell(Cmd):
 
     def default(self, line):
         print(
-            f'Unknown option: "{line}". Use help or ? to get a list of all options.'
+            f"""Unknown option: "{line}". Use help or ? to get a list of all options."""
         )
 
 
