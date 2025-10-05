@@ -16,7 +16,7 @@ class Dummy:
         return cls(data["name"], data["value"])
 
 
-def test_save_and_load(tmp_path):
+def test_save_and_load_dummy(tmp_path):
     obj = Dummy("test", 42)
     file_path = tmp_path / "data.json"
 
