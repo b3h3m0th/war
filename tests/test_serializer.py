@@ -48,7 +48,7 @@ def test_save_and_load_player(tmp_path):
         "name": "John Doe",
     }
 
-    loaded = Serializer.load(Dummy, file_path)
+    loaded = Serializer.load(Player, file_path)
 
     assert isinstance(loaded, Player)
     assert loaded.name == "John Doe"
