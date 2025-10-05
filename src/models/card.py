@@ -1,3 +1,4 @@
+from __future__ import annotations
 from enums.suit import Suit
 from enums.rank import Rank
 
@@ -30,9 +31,6 @@ class Card:
 
         return f"{rank_string}{suit_string}"
 
-    def __repr__(self) -> str:
-        return f"Card({self.rank.name} of {self.suit.name})"
-
     def __eq__(self, other) -> bool:
         return (
             isinstance(other, Card)
@@ -43,10 +41,9 @@ class Card:
     def __hash__(self) -> int:
         return hash((self.suit, self.rank))
 
-
-    def from_dict() -> :
-        return {}
+    def to_dict(self) -> dict:
+        return {"suit": self.suit, "rank": self.rank}
 
     @classmethod
-    def to_dict() -> dict:
-        return {}
+    def from_dict(cls, data: dict) -> Card:
+        return cls(data["suit"], data["rank"])
