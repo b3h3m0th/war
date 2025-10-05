@@ -1,7 +1,6 @@
-# test_serializer.py
 import json
 from pathlib import Path
-from serializer import Serializer  # adjust import as needed
+from utils.serializer import Serializer
 
 
 class Dummy:
