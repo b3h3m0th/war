@@ -37,6 +37,9 @@ class Shell(Cmd):
         print("Thank you for playing war")
         return True
 
+    def default(self, line):
+        print(f"Unknown option: {line}. Use help or ?")
+
 
 if __name__ == "__main__":
     Shell().cmdloop()
