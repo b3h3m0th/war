@@ -14,4 +14,4 @@ class Player:
 
     @classmethod
     def from_dict(cls, data: dict) -> Player:
-        return cls(data["name"], data["age"])
+        return cls(data["name"])
