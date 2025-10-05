@@ -38,10 +38,10 @@ class Shell(Cmd):
         return True
 
     def default(self, line):
-print(
-        f'Unknown option: "{line}". '
-        "Use help or ? to get a list of all options."
-    )
+        print(
+            f'Unknown option: "{line}". '
+            "Use help or ? to get a list of all options."
+        )
 
 
 if __name__ == "__main__":
