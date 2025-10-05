@@ -1,5 +1,3 @@
-import json
-from pathlib import Path
 from utils.serializer import Serializer
 from models.player import Player
 
