@@ -1,7 +1,4 @@
 from models.shell import Shell
-from models.card import Card
-from enums.rank import Rank
-from enums.suit import Suit
 
 
 def main() -> None:
