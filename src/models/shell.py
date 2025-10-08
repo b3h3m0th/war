@@ -22,7 +22,7 @@ class Shell(Cmd):
         print("│                                  │")
         print("├────────────[Options]─────────────┤")
         print("│                                  │")
-        print("│  (quit)  Quit                    │")
+        print("│  TBA                             │")
         print("│                                  │")
         print("└──────────────────────────────────┘")
 
