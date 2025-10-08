@@ -11,5 +11,5 @@ class Game:
     def __init__(self, players: list[Player], variant: Variant) -> None:
         self.players = players
         self.variant = variant
-        self.deck = Deck()  # Is this correct?
+        self.deck = Deck() 
         self.deck.shuffle()
