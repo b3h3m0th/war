@@ -16,6 +16,7 @@ class Shell(Cmd):
         print("├──────────────────────────────────┤")
         print("│                                  │")
         print("│  (new) Start new game            │")
+        print("│  (help) List commands            │")
         print("│  (quit) Quit                     │")
         print("│                                  │")
         print("├────────────[Options]─────────────┤")
