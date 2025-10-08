@@ -44,7 +44,7 @@ class Deck:
         return cards
 
     def deal(self) -> Card:
-        return self.cards.pop()
+        return self.cards.pop(0)
 
     def to_dict(self) -> dict:
         return {
