@@ -9,7 +9,6 @@ def main() -> None:
     # shell.cmdloop()
 
     card1 = Card(Suit.Clubs, Rank.Ace)
-    card2 = Card(Suit.Clubs, Rank.King)
 
 
 if __name__ == "__main__":

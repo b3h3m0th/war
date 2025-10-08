@@ -47,3 +47,7 @@ class Card:
     @classmethod
     def from_dict(cls, data: dict) -> Card:
         return cls(data["suit"], data["rank"])
+
+
+if __name__ == "__main__":
+    print("hi from card module")
