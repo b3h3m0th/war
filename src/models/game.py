@@ -4,12 +4,9 @@ from enums.variant import Variant
 
 
 class Game:
-    players: list[Player]
-    deck: Deck
-    variant: Variant
-
-    def __init__(self, players: list[Player], variant: Variant) -> None:
+    def __init__(
+        self, players: list[Player] = [], variant: Variant = Variant.NoJoker
+    ) -> None:
         self.players = players
         self.variant = variant
         self.deck = Deck()
-        self.deck.shuffle()

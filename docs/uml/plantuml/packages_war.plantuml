@@ -1,0 +1,39 @@
+@startuml packages_war
+set namespaceSeparator none
+package "enums" as enums {
+}
+package "enums.rank" as enums.rank {
+}
+package "enums.suit" as enums.suit {
+}
+package "enums.variant" as enums.variant {
+}
+package "models" as models {
+}
+package "models.card" as models.card {
+}
+package "models.deck" as models.deck {
+}
+package "models.game" as models.game {
+}
+package "models.player" as models.player {
+}
+package "models.shell" as models.shell {
+}
+package "models.turn" as models.turn {
+}
+package "utils" as utils {
+}
+package "utils.serializer" as utils.serializer {
+}
+models.card --> enums.rank
+models.card --> enums.suit
+models.deck --> enums.rank
+models.deck --> enums.suit
+models.deck --> models.card
+models.game --> enums.variant
+models.game --> models.deck
+models.game --> models.player
+models.turn --> models.card
+models.turn --> models.player
+@enduml
