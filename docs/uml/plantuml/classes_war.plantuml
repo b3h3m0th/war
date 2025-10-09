@@ -9,7 +9,6 @@ class "Card" as models.card.Card {
 class "Deck" as models.deck.Deck {
   NEW_DECK_ORDER_SUITS : list
   cards
-  cards : list[Card]
   deal() -> Card
   from_dict(data: dict) -> Deck
   get_new_deck_order_cards() -> list[Card]
@@ -57,4 +56,6 @@ models.deck.Deck --* models.game.Game : deck
 enums.rank.Rank --o models.card.Card : rank
 enums.suit.Suit --o models.card.Card : suit
 enums.variant.Variant --o models.game.Game : variant
+models.card.Card --o models.turn.Turn : card
+models.player.Player --o models.turn.Turn : player
 @enduml

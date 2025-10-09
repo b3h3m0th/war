@@ -1,4 +1,4 @@
-.PHONY: install format lint test run clean uml docs
+.PHONY: install format lint test run clean uml-docs api-docs docs
 
 activate:
 	source .venv/bin/activate
@@ -15,14 +15,16 @@ lint:
 test:
 	pytest
 
-uml:
+uml-docs:
 	mkdir -p docs/uml/png
 	mkdir -p docs/uml/plantuml
 	pyreverse --output plantuml --output-directory docs/uml/plantuml --project war src/models src/enums src/utils 
 	python src/scripts/generate_uml_pngs.py
 
-docs:
-	make uml
+api-docs:
+	pdoc src/models src/enums src/utils --output-dir docs/api
+
+docs: uml-docs api-docs
 
 run:
 	python src/main.py
