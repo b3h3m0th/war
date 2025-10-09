@@ -40,7 +40,8 @@ class Game:
     def start(self) -> None:
         print("Starting the game...")
         print(
-            "Would you like to play Player vs Computer (pvc) or Player vs Player (pvp)?"
+            "Would you like to play Player vs "
+            "Computer (pvc) or Player vs Player (pvp)?"
         )
         player_choice = input().strip().lower()
         if player_choice == "pvc":
