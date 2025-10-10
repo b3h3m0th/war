@@ -1,4 +1,4 @@
-.PHONY: install format lint test run clean
+.PHONY: install format lint test run clean 
 
 install:
 	pip install -r requirements.txt

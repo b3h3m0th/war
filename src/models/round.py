@@ -1,5 +1,5 @@
 from models.turn import Turn
-from enums.suit import Suit
+
 
 class Round:
     turns: list[Turn]
@@ -12,4 +12,3 @@ class Round:
             return self.turns(0)
         elif self.turns[1].card > self.turns[0]:
             return self.turns(1)
-    
