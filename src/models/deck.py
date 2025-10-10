@@ -49,7 +49,7 @@ class Deck:
         return isinstance(other, Deck) and self.cards == other.cards
 
     def __hash__(self) -> int:
-        return hash((self.suit, self.rank))
+        return hash(card for card in self.cards)
 
     def to_dict(self) -> dict:
         return {

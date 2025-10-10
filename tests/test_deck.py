@@ -72,18 +72,38 @@ def test_initial_deck_cards_order() -> None:
         assert actual.rank == expected.rank
 
 
-def test_deck_equality() -> None:
+def test_initial_deck_are_equal() -> None:
     deck1 = Deck()
     deck2 = Deck()
 
     assert deck1 == deck2
 
-    deck3 = Deck()
-    deck4 = Deck()
 
-    deck3.cards = []
+def test_initial_deck_hashes_are_equal() -> None:
+    deck1 = Deck()
+    deck2 = Deck()
 
-    assert deck3 != deck4
+    assert deck1.__hash__() == deck2.__hash__()
+
+
+def test_different_decks_not_equal():
+    deck1 = Deck()
+    deck2 = Deck()
+    deck2.deal()
+    assert deck1 != deck2
+
+
+def test_equality_with_non_deck():
+    deck = Deck()
+    card = Card(Suit.Clubs, Rank.Ace)
+    assert deck != card
+
+
+def test_deck_custom_card_list_are_equal():
+    cards = [Card(Suit.Spades, Rank.Ace), Card(Suit.Hearts, Rank.King)]
+    deck1 = Deck(cards)
+    deck2 = Deck(cards.copy())
+    assert deck1 == deck2
 
 
 def test_deal() -> None:
