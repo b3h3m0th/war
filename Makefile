@@ -12,6 +12,9 @@ lint:
 test:
 	pytest
 
+coverage:
+	coverage run -m pytest
+
 run:
 	python src/main.py
 
