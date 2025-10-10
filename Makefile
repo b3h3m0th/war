@@ -1,4 +1,4 @@
-.PHONY: install format lint test run clean
+.PHONY: install format lint test run clean coverage
 
 install:
 	pip install -r requirements.txt
@@ -14,6 +14,7 @@ test:
 
 coverage:
 	coverage run -m pytest
+	coverage report
 
 run:
 	python src/main.py
