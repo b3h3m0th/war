@@ -2,12 +2,13 @@ from __future__ import annotations
 
 
 class Player:
-    def __init__(self, name: str) -> None:
+    def __init__(self, name: str, isNpc: bool) -> None:
         """
         Instantiates a new Card with a given name
         """
 
         self.name = name
+        self.isNPC = isNpc
 
     def to_dict(self) -> dict:
         """
@@ -16,6 +17,7 @@ class Player:
 
         return {
             "name": self.name,
+            "isNpc": self.isNPC,
         }
 
     @classmethod
@@ -24,4 +26,4 @@ class Player:
         Creates and returns a Player based on a json dictionary
         """
 
-        return cls(data["name"])
+        return cls(data["name"], data["isNpc"])
