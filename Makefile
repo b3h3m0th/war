@@ -1,4 +1,4 @@
-.PHONY: install format lint test run clean uml-docs api-docs docs
+.PHONY: install format lint test run clean coverage uml-docs api-docs docs
 
 activate:
 	source .venv/bin/activate
@@ -25,6 +25,10 @@ api-docs:
 	pdoc src/models src/enums src/utils --output-dir docs/api
 
 docs: uml-docs api-docs
+
+coverage:
+	coverage run -m pytest
+	coverage report
 
 run:
 	python src/main.py
