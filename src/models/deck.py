@@ -12,7 +12,6 @@ class Deck:
         Suit.Clubs,
         Suit.Hearts,
     ]
-    cards: list[Card] = []
 
     def __init__(self, cards: list[Card] = []) -> None:
         self.cards = cards if cards else self.get_new_deck_order_cards()
