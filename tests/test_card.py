@@ -1,6 +1,7 @@
 from enums.rank import Rank
 from enums.suit import Suit
 from models.card import Card
+from models.deck import Deck
 
 
 def test_card_equality() -> None:
@@ -11,6 +12,9 @@ def test_card_equality() -> None:
     card3 = Card(Suit.Clubs, Rank.Three)
     card4 = Card(Suit.Clubs, Rank.Three)
     assert card3 == card4
+
+    card5 = Card(Suit.Hearts, Rank.Five)
+    card5 != Deck()
 
 
 def test_equal_card_hashes_are_equal() -> None:
