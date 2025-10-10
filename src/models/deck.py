@@ -60,7 +60,8 @@ class Deck:
 
     def deal(self) -> Card:
         """
-        Returns the last card from the deck list or the first card assuming the cards are on a face down pile.
+        Returns the last card from the deck list
+        or the first card assuming the cards are on a face down pile.
         """
 
         return self.cards.pop()
