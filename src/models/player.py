@@ -2,13 +2,28 @@ from __future__ import annotations
 
 
 class Player:
-    def __init__(self, name: str, isNPC: bool) -> None:
+    def __init__(self, name: str, isNpc: bool) -> None:
+        """
+        Instantiates a new Card with a given name
+        """
+
         self.name = name
-        self.isNPC = isNPC
+        self.isNPC = isNpc
 
     def to_dict(self) -> dict:
-        return {"name": self.name, "isNPC": self.isNPC}
+        """
+        Converts a Player into a dictionary that can be stringified into json
+        """
+
+        return {
+            "name": self.name,
+            "isNpc": self.isNPC,
+        }
 
     @classmethod
     def from_dict(cls, data: dict) -> Player:
-        return cls(data["name"], data["isNPC"])
+        """
+        Creates and returns a Player based on a json dictionary
+        """
+
+        return cls(data["name"], data["isNpc"])
