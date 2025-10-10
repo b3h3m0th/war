@@ -2,8 +2,6 @@ from __future__ import annotations
 
 
 class Player:
-    name: str
-
     def __init__(self, name: str) -> None:
         self.name = name
 

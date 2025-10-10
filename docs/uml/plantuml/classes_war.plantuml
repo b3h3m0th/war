@@ -1,0 +1,61 @@
+@startuml classes_war
+set namespaceSeparator none
+class "Card" as models.card.Card {
+  rank
+  suit
+  from_dict(data: dict) -> Card
+  to_dict() -> dict
+}
+class "Deck" as models.deck.Deck {
+  NEW_DECK_ORDER_SUITS : list
+  cards
+  deal() -> Card
+  from_dict(data: dict) -> Deck
+  get_new_deck_order_cards() -> list[Card]
+  shuffle(cards: list[Card]) -> list[Card]
+  to_dict() -> dict
+}
+class "Game" as models.game.Game {
+  deck
+  players : list[Player]
+  variant
+}
+class "Player" as models.player.Player {
+  name : str
+  from_dict(data: dict) -> Player
+  to_dict() -> dict
+}
+class "Rank" as enums.rank.Rank {
+  name
+}
+class "Serializer" as utils.serializer.Serializer {
+  load(cls, path: Path | str) -> object
+  save(obj: object, path: Path | str) -> None
+}
+class "Shell" as models.shell.Shell {
+  intro : NoneType
+  intro : str
+  prompt : str
+  default(line)
+  do_new(arg) -> None
+  do_quit(arg) -> bool
+  do_stats(arg) -> None
+  print_menu() -> None
+}
+class "Suit" as enums.suit.Suit {
+  name
+}
+class "Turn" as models.turn.Turn {
+  card
+  player
+}
+class "Variant" as enums.variant.Variant {
+  name
+}
+models.deck.Deck --* models.game.Game : deck
+enums.rank.Rank --o models.card.Card : rank
+enums.suit.Suit --o models.card.Card : suit
+enums.variant.Variant --o models.game.Game : variant
+models.card.Card --o models.turn.Turn : card
+models.player.Player --o models.turn.Turn : player
+@enduml
