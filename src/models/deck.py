@@ -12,7 +12,6 @@ class Deck:
         Suit.Clubs,
         Suit.Hearts,
     ]
-    cards: list[Card] = []
 
     def __init__(self, cards: list[Card] = []) -> None:
         self.cards = cards if cards else self.get_new_deck_order_cards()
@@ -44,7 +43,7 @@ class Deck:
         return cards
 
     def deal(self) -> Card:
-        return self.cards.pop()
+        return self.cards.pop(0)
 
     def to_dict(self) -> dict:
         return {

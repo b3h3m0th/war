@@ -18,9 +18,6 @@ RANK_STRINGS = {
 
 
 class Card:
-    suit: Suit
-    rank: Rank
-
     def __init__(self, suit: Suit, rank: Rank) -> None:
         self.suit = suit
         self.rank = rank
@@ -47,3 +44,7 @@ class Card:
     @classmethod
     def from_dict(cls, data: dict) -> Card:
         return cls(data["suit"], data["rank"])
+
+
+if __name__ == "__main__":
+    print("hi from card module")
