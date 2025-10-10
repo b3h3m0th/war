@@ -42,4 +42,4 @@ def test_save_and_load_player(tmp_path):
 
     assert isinstance(loaded, Player)
     assert loaded.name == "John Doe"
-    assert loaded.isNPC == False
+    assert loaded.isNPC is False
