@@ -41,7 +41,7 @@ class Game:
             "Computer (pvc) or Player vs Player (pvp)?"
         )
         player_choice = input().strip().lower()
-        while (player_choice!= "pvc" or player_choice !="pvp"):
+        while player_choice != "pvc" or player_choice != "pvp":
             if player_choice == "pvc":
                 self.do_pvc(self)
                 break
@@ -49,9 +49,10 @@ class Game:
                 self.do_pvp(self)
                 break
             else:
-                print(f"Incorrect input try again.Would you like to play Player vs "
-            "Computer (pvc) or Player vs Player (pvp)?")
+                print(
+                    "Incorrect input try again.Would you like to play Playe"
+                    "r vs Computer (pvc) or Player vs Player (pvp)?"
+                )
                 player_choice = input().strip().lower()
-
 
         self.deck.shuffle(None)
