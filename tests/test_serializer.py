@@ -31,7 +31,7 @@ def test_save_and_load_dummy(tmp_path):
 
 
 def test_save_and_load_player(tmp_path):
-    player = Player("John Doe",False)
+    player = Player("John Doe", False)
     file_path = tmp_path / "data.json"
 
     Serializer.save(player, file_path)
