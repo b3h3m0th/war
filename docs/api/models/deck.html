@@ -97,45 +97,88 @@
 </span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="p">]</span>
 </span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>
 </span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cards</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">=</span> <span class="n">cards</span> <span class="k">if</span> <span class="n">cards</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_new_deck_order_cards</span><span class="p">()</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_new_deck_order_cards</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]:</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>        <span class="n">ace_to_king</span> <span class="o">=</span> <span class="p">[</span><span class="n">Rank</span><span class="o">.</span><span class="n">Ace</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>            <span class="n">rank</span> <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">Rank</span> <span class="k">if</span> <span class="n">rank</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Rank</span><span class="o">.</span><span class="n">Ace</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>        <span class="p">]</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>        <span class="n">king_to_ace</span> <span class="o">=</span> <span class="n">ace_to_king</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>        <span class="k">return</span> <span class="p">[</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>            <span class="n">Card</span><span class="p">(</span><span class="n">suit</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>            <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">NEW_DECK_ORDER_SUITS</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>            <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="p">(</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>                <span class="n">ace_to_king</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>                <span class="k">if</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">NEW_DECK_ORDER_SUITS</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>                <span class="k">else</span> <span class="n">king_to_ace</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>            <span class="p">)</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>        <span class="p">]</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cards</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]:</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">cards</span><span class="p">:</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>            <span class="n">cards</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>            <span class="n">j</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>            <span class="n">cards</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cards</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">cards</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">cards</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>        <span class="k">return</span> <span class="n">cards</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">deal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Card</span><span class="p">:</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>            <span class="s2">&quot;cards&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">card</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="p">],</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>        <span class="p">}</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Deck</span><span class="p">:</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">card_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">card_data</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cards&quot;</span><span class="p">])</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="sd">        Instantiates a new Deck and sets its cards</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">=</span> <span class="n">cards</span> <span class="k">if</span> <span class="n">cards</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_new_deck_order_cards</span><span class="p">()</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_new_deck_order_cards</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]:</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="sd">        Returns a list of cards in typical new deck order NDO.</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="sd">        Spades: Ace -&gt; King</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a><span class="sd">        Diamonds: Ace -&gt; King</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="sd">        Clubs: King -&gt; Ace</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="sd">        Hearts: King -&gt; Ace</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>        <span class="n">ace_to_king</span> <span class="o">=</span> <span class="p">[</span><span class="n">Rank</span><span class="o">.</span><span class="n">Ace</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>            <span class="n">rank</span> <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">Rank</span> <span class="k">if</span> <span class="n">rank</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Rank</span><span class="o">.</span><span class="n">Ace</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>        <span class="p">]</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>        <span class="n">king_to_ace</span> <span class="o">=</span> <span class="n">ace_to_king</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>        <span class="k">return</span> <span class="p">[</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>            <span class="n">Card</span><span class="p">(</span><span class="n">suit</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>            <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">NEW_DECK_ORDER_SUITS</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>            <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="p">(</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>                <span class="n">ace_to_king</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>                <span class="k">if</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">NEW_DECK_ORDER_SUITS</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>                <span class="k">else</span> <span class="n">king_to_ace</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>            <span class="p">)</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>        <span class="p">]</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cards</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]:</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a><span class="sd">        Shuffles the cards of a deck based on the Fisher Yates algorithm</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">cards</span><span class="p">:</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>            <span class="n">cards</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>            <span class="n">j</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>            <span class="n">cards</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cards</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">cards</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">cards</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>        <span class="k">return</span> <span class="n">cards</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">deal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Card</span><span class="p">:</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a><span class="sd">        Returns the last card from the deck list</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a><span class="sd">        or the first card assuming the cards are on a face down pile.</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>
+</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>
+</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a><span class="sd">        Checks whether a Deck is equal to another Deck</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a>
+</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a>        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Deck</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">cards</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a>
+</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a><span class="sd">        Computes a hash of a Deck based on its cards</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a>
+</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="n">card</span> <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="p">)</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a>
+</span><span id="L-83"><a href="#L-83"><span class="linenos">83</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos">84</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos">85</span></a><span class="sd">        Converts a Deck into a dictionary that can be stringified into json</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos">86</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos">87</span></a>
+</span><span id="L-88"><a href="#L-88"><span class="linenos">88</span></a>        <span class="k">return</span> <span class="p">{</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos">89</span></a>            <span class="s2">&quot;cards&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">card</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="p">],</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos">90</span></a>        <span class="p">}</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos">91</span></a>
+</span><span id="L-92"><a href="#L-92"><span class="linenos">92</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos">93</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Deck</span><span class="p">:</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos">94</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos">95</span></a><span class="sd">        Creates and returns a Deck based on a json dictionary</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos">96</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos">97</span></a>
+</span><span id="L-98"><a href="#L-98"><span class="linenos">98</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">card_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">card_data</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cards&quot;</span><span class="p">])</span>
 </span></pre></div>
 
 
@@ -160,45 +203,88 @@
 </span><span id="Deck-15"><a href="#Deck-15"><span class="linenos">15</span></a>    <span class="p">]</span>
 </span><span id="Deck-16"><a href="#Deck-16"><span class="linenos">16</span></a>
 </span><span id="Deck-17"><a href="#Deck-17"><span class="linenos">17</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cards</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Deck-18"><a href="#Deck-18"><span class="linenos">18</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">=</span> <span class="n">cards</span> <span class="k">if</span> <span class="n">cards</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_new_deck_order_cards</span><span class="p">()</span>
-</span><span id="Deck-19"><a href="#Deck-19"><span class="linenos">19</span></a>
-</span><span id="Deck-20"><a href="#Deck-20"><span class="linenos">20</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_new_deck_order_cards</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]:</span>
-</span><span id="Deck-21"><a href="#Deck-21"><span class="linenos">21</span></a>        <span class="n">ace_to_king</span> <span class="o">=</span> <span class="p">[</span><span class="n">Rank</span><span class="o">.</span><span class="n">Ace</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span>
-</span><span id="Deck-22"><a href="#Deck-22"><span class="linenos">22</span></a>            <span class="n">rank</span> <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">Rank</span> <span class="k">if</span> <span class="n">rank</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Rank</span><span class="o">.</span><span class="n">Ace</span>
-</span><span id="Deck-23"><a href="#Deck-23"><span class="linenos">23</span></a>        <span class="p">]</span>
-</span><span id="Deck-24"><a href="#Deck-24"><span class="linenos">24</span></a>        <span class="n">king_to_ace</span> <span class="o">=</span> <span class="n">ace_to_king</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</span><span id="Deck-25"><a href="#Deck-25"><span class="linenos">25</span></a>
-</span><span id="Deck-26"><a href="#Deck-26"><span class="linenos">26</span></a>        <span class="k">return</span> <span class="p">[</span>
-</span><span id="Deck-27"><a href="#Deck-27"><span class="linenos">27</span></a>            <span class="n">Card</span><span class="p">(</span><span class="n">suit</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span>
-</span><span id="Deck-28"><a href="#Deck-28"><span class="linenos">28</span></a>            <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">NEW_DECK_ORDER_SUITS</span>
-</span><span id="Deck-29"><a href="#Deck-29"><span class="linenos">29</span></a>            <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="p">(</span>
-</span><span id="Deck-30"><a href="#Deck-30"><span class="linenos">30</span></a>                <span class="n">ace_to_king</span>
-</span><span id="Deck-31"><a href="#Deck-31"><span class="linenos">31</span></a>                <span class="k">if</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">NEW_DECK_ORDER_SUITS</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
-</span><span id="Deck-32"><a href="#Deck-32"><span class="linenos">32</span></a>                <span class="k">else</span> <span class="n">king_to_ace</span>
-</span><span id="Deck-33"><a href="#Deck-33"><span class="linenos">33</span></a>            <span class="p">)</span>
-</span><span id="Deck-34"><a href="#Deck-34"><span class="linenos">34</span></a>        <span class="p">]</span>
-</span><span id="Deck-35"><a href="#Deck-35"><span class="linenos">35</span></a>
-</span><span id="Deck-36"><a href="#Deck-36"><span class="linenos">36</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cards</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]:</span>
-</span><span id="Deck-37"><a href="#Deck-37"><span class="linenos">37</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">cards</span><span class="p">:</span>
-</span><span id="Deck-38"><a href="#Deck-38"><span class="linenos">38</span></a>            <span class="n">cards</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span>
-</span><span id="Deck-39"><a href="#Deck-39"><span class="linenos">39</span></a>
-</span><span id="Deck-40"><a href="#Deck-40"><span class="linenos">40</span></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-</span><span id="Deck-41"><a href="#Deck-41"><span class="linenos">41</span></a>            <span class="n">j</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-</span><span id="Deck-42"><a href="#Deck-42"><span class="linenos">42</span></a>            <span class="n">cards</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cards</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">cards</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">cards</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="Deck-43"><a href="#Deck-43"><span class="linenos">43</span></a>
-</span><span id="Deck-44"><a href="#Deck-44"><span class="linenos">44</span></a>        <span class="k">return</span> <span class="n">cards</span>
-</span><span id="Deck-45"><a href="#Deck-45"><span class="linenos">45</span></a>
-</span><span id="Deck-46"><a href="#Deck-46"><span class="linenos">46</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">deal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Card</span><span class="p">:</span>
-</span><span id="Deck-47"><a href="#Deck-47"><span class="linenos">47</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-</span><span id="Deck-48"><a href="#Deck-48"><span class="linenos">48</span></a>
-</span><span id="Deck-49"><a href="#Deck-49"><span class="linenos">49</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="Deck-50"><a href="#Deck-50"><span class="linenos">50</span></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="Deck-51"><a href="#Deck-51"><span class="linenos">51</span></a>            <span class="s2">&quot;cards&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">card</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="p">],</span>
-</span><span id="Deck-52"><a href="#Deck-52"><span class="linenos">52</span></a>        <span class="p">}</span>
-</span><span id="Deck-53"><a href="#Deck-53"><span class="linenos">53</span></a>
-</span><span id="Deck-54"><a href="#Deck-54"><span class="linenos">54</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Deck-55"><a href="#Deck-55"><span class="linenos">55</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Deck</span><span class="p">:</span>
-</span><span id="Deck-56"><a href="#Deck-56"><span class="linenos">56</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">card_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">card_data</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cards&quot;</span><span class="p">])</span>
+</span><span id="Deck-18"><a href="#Deck-18"><span class="linenos">18</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Deck-19"><a href="#Deck-19"><span class="linenos">19</span></a><span class="sd">        Instantiates a new Deck and sets its cards</span>
+</span><span id="Deck-20"><a href="#Deck-20"><span class="linenos">20</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Deck-21"><a href="#Deck-21"><span class="linenos">21</span></a>
+</span><span id="Deck-22"><a href="#Deck-22"><span class="linenos">22</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">=</span> <span class="n">cards</span> <span class="k">if</span> <span class="n">cards</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_new_deck_order_cards</span><span class="p">()</span>
+</span><span id="Deck-23"><a href="#Deck-23"><span class="linenos">23</span></a>
+</span><span id="Deck-24"><a href="#Deck-24"><span class="linenos">24</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_new_deck_order_cards</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]:</span>
+</span><span id="Deck-25"><a href="#Deck-25"><span class="linenos">25</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Deck-26"><a href="#Deck-26"><span class="linenos">26</span></a><span class="sd">        Returns a list of cards in typical new deck order NDO.</span>
+</span><span id="Deck-27"><a href="#Deck-27"><span class="linenos">27</span></a><span class="sd">        Spades: Ace -&gt; King</span>
+</span><span id="Deck-28"><a href="#Deck-28"><span class="linenos">28</span></a><span class="sd">        Diamonds: Ace -&gt; King</span>
+</span><span id="Deck-29"><a href="#Deck-29"><span class="linenos">29</span></a><span class="sd">        Clubs: King -&gt; Ace</span>
+</span><span id="Deck-30"><a href="#Deck-30"><span class="linenos">30</span></a><span class="sd">        Hearts: King -&gt; Ace</span>
+</span><span id="Deck-31"><a href="#Deck-31"><span class="linenos">31</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Deck-32"><a href="#Deck-32"><span class="linenos">32</span></a>
+</span><span id="Deck-33"><a href="#Deck-33"><span class="linenos">33</span></a>        <span class="n">ace_to_king</span> <span class="o">=</span> <span class="p">[</span><span class="n">Rank</span><span class="o">.</span><span class="n">Ace</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span>
+</span><span id="Deck-34"><a href="#Deck-34"><span class="linenos">34</span></a>            <span class="n">rank</span> <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">Rank</span> <span class="k">if</span> <span class="n">rank</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Rank</span><span class="o">.</span><span class="n">Ace</span>
+</span><span id="Deck-35"><a href="#Deck-35"><span class="linenos">35</span></a>        <span class="p">]</span>
+</span><span id="Deck-36"><a href="#Deck-36"><span class="linenos">36</span></a>        <span class="n">king_to_ace</span> <span class="o">=</span> <span class="n">ace_to_king</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span><span id="Deck-37"><a href="#Deck-37"><span class="linenos">37</span></a>
+</span><span id="Deck-38"><a href="#Deck-38"><span class="linenos">38</span></a>        <span class="k">return</span> <span class="p">[</span>
+</span><span id="Deck-39"><a href="#Deck-39"><span class="linenos">39</span></a>            <span class="n">Card</span><span class="p">(</span><span class="n">suit</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span>
+</span><span id="Deck-40"><a href="#Deck-40"><span class="linenos">40</span></a>            <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">NEW_DECK_ORDER_SUITS</span>
+</span><span id="Deck-41"><a href="#Deck-41"><span class="linenos">41</span></a>            <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="p">(</span>
+</span><span id="Deck-42"><a href="#Deck-42"><span class="linenos">42</span></a>                <span class="n">ace_to_king</span>
+</span><span id="Deck-43"><a href="#Deck-43"><span class="linenos">43</span></a>                <span class="k">if</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">NEW_DECK_ORDER_SUITS</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+</span><span id="Deck-44"><a href="#Deck-44"><span class="linenos">44</span></a>                <span class="k">else</span> <span class="n">king_to_ace</span>
+</span><span id="Deck-45"><a href="#Deck-45"><span class="linenos">45</span></a>            <span class="p">)</span>
+</span><span id="Deck-46"><a href="#Deck-46"><span class="linenos">46</span></a>        <span class="p">]</span>
+</span><span id="Deck-47"><a href="#Deck-47"><span class="linenos">47</span></a>
+</span><span id="Deck-48"><a href="#Deck-48"><span class="linenos">48</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cards</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]:</span>
+</span><span id="Deck-49"><a href="#Deck-49"><span class="linenos">49</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Deck-50"><a href="#Deck-50"><span class="linenos">50</span></a><span class="sd">        Shuffles the cards of a deck based on the Fisher Yates algorithm</span>
+</span><span id="Deck-51"><a href="#Deck-51"><span class="linenos">51</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Deck-52"><a href="#Deck-52"><span class="linenos">52</span></a>
+</span><span id="Deck-53"><a href="#Deck-53"><span class="linenos">53</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">cards</span><span class="p">:</span>
+</span><span id="Deck-54"><a href="#Deck-54"><span class="linenos">54</span></a>            <span class="n">cards</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span>
+</span><span id="Deck-55"><a href="#Deck-55"><span class="linenos">55</span></a>
+</span><span id="Deck-56"><a href="#Deck-56"><span class="linenos">56</span></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="Deck-57"><a href="#Deck-57"><span class="linenos">57</span></a>            <span class="n">j</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</span><span id="Deck-58"><a href="#Deck-58"><span class="linenos">58</span></a>            <span class="n">cards</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cards</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">cards</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">cards</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="Deck-59"><a href="#Deck-59"><span class="linenos">59</span></a>
+</span><span id="Deck-60"><a href="#Deck-60"><span class="linenos">60</span></a>        <span class="k">return</span> <span class="n">cards</span>
+</span><span id="Deck-61"><a href="#Deck-61"><span class="linenos">61</span></a>
+</span><span id="Deck-62"><a href="#Deck-62"><span class="linenos">62</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">deal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Card</span><span class="p">:</span>
+</span><span id="Deck-63"><a href="#Deck-63"><span class="linenos">63</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Deck-64"><a href="#Deck-64"><span class="linenos">64</span></a><span class="sd">        Returns the last card from the deck list</span>
+</span><span id="Deck-65"><a href="#Deck-65"><span class="linenos">65</span></a><span class="sd">        or the first card assuming the cards are on a face down pile.</span>
+</span><span id="Deck-66"><a href="#Deck-66"><span class="linenos">66</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Deck-67"><a href="#Deck-67"><span class="linenos">67</span></a>
+</span><span id="Deck-68"><a href="#Deck-68"><span class="linenos">68</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span><span id="Deck-69"><a href="#Deck-69"><span class="linenos">69</span></a>
+</span><span id="Deck-70"><a href="#Deck-70"><span class="linenos">70</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="Deck-71"><a href="#Deck-71"><span class="linenos">71</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Deck-72"><a href="#Deck-72"><span class="linenos">72</span></a><span class="sd">        Checks whether a Deck is equal to another Deck</span>
+</span><span id="Deck-73"><a href="#Deck-73"><span class="linenos">73</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Deck-74"><a href="#Deck-74"><span class="linenos">74</span></a>
+</span><span id="Deck-75"><a href="#Deck-75"><span class="linenos">75</span></a>        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Deck</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">cards</span>
+</span><span id="Deck-76"><a href="#Deck-76"><span class="linenos">76</span></a>
+</span><span id="Deck-77"><a href="#Deck-77"><span class="linenos">77</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="Deck-78"><a href="#Deck-78"><span class="linenos">78</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Deck-79"><a href="#Deck-79"><span class="linenos">79</span></a><span class="sd">        Computes a hash of a Deck based on its cards</span>
+</span><span id="Deck-80"><a href="#Deck-80"><span class="linenos">80</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Deck-81"><a href="#Deck-81"><span class="linenos">81</span></a>
+</span><span id="Deck-82"><a href="#Deck-82"><span class="linenos">82</span></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="n">card</span> <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="p">)</span>
+</span><span id="Deck-83"><a href="#Deck-83"><span class="linenos">83</span></a>
+</span><span id="Deck-84"><a href="#Deck-84"><span class="linenos">84</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="Deck-85"><a href="#Deck-85"><span class="linenos">85</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Deck-86"><a href="#Deck-86"><span class="linenos">86</span></a><span class="sd">        Converts a Deck into a dictionary that can be stringified into json</span>
+</span><span id="Deck-87"><a href="#Deck-87"><span class="linenos">87</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Deck-88"><a href="#Deck-88"><span class="linenos">88</span></a>
+</span><span id="Deck-89"><a href="#Deck-89"><span class="linenos">89</span></a>        <span class="k">return</span> <span class="p">{</span>
+</span><span id="Deck-90"><a href="#Deck-90"><span class="linenos">90</span></a>            <span class="s2">&quot;cards&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">card</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="p">],</span>
+</span><span id="Deck-91"><a href="#Deck-91"><span class="linenos">91</span></a>        <span class="p">}</span>
+</span><span id="Deck-92"><a href="#Deck-92"><span class="linenos">92</span></a>
+</span><span id="Deck-93"><a href="#Deck-93"><span class="linenos">93</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Deck-94"><a href="#Deck-94"><span class="linenos">94</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Deck</span><span class="p">:</span>
+</span><span id="Deck-95"><a href="#Deck-95"><span class="linenos">95</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Deck-96"><a href="#Deck-96"><span class="linenos">96</span></a><span class="sd">        Creates and returns a Deck based on a json dictionary</span>
+</span><span id="Deck-97"><a href="#Deck-97"><span class="linenos">97</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Deck-98"><a href="#Deck-98"><span class="linenos">98</span></a>
+</span><span id="Deck-99"><a href="#Deck-99"><span class="linenos">99</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">card_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">card_data</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cards&quot;</span><span class="p">])</span>
 </span></pre></div>
 
 
@@ -215,11 +301,17 @@
     </div>
     <a class="headerlink" href="#Deck.__init__"></a>
             <div class="pdoc-code codehilite"><pre><span></span><span id="Deck.__init__-17"><a href="#Deck.__init__-17"><span class="linenos">17</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cards</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Deck.__init__-18"><a href="#Deck.__init__-18"><span class="linenos">18</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">=</span> <span class="n">cards</span> <span class="k">if</span> <span class="n">cards</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_new_deck_order_cards</span><span class="p">()</span>
+</span><span id="Deck.__init__-18"><a href="#Deck.__init__-18"><span class="linenos">18</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Deck.__init__-19"><a href="#Deck.__init__-19"><span class="linenos">19</span></a><span class="sd">        Instantiates a new Deck and sets its cards</span>
+</span><span id="Deck.__init__-20"><a href="#Deck.__init__-20"><span class="linenos">20</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Deck.__init__-21"><a href="#Deck.__init__-21"><span class="linenos">21</span></a>
+</span><span id="Deck.__init__-22"><a href="#Deck.__init__-22"><span class="linenos">22</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">=</span> <span class="n">cards</span> <span class="k">if</span> <span class="n">cards</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_new_deck_order_cards</span><span class="p">()</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Instantiates a new Deck and sets its cards</p>
+</div>
+
 
                             </div>
                             <div id="Deck.NEW_DECK_ORDER_SUITS" class="classattr">
@@ -257,25 +349,39 @@
 
     </div>
     <a class="headerlink" href="#Deck.get_new_deck_order_cards"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Deck.get_new_deck_order_cards-20"><a href="#Deck.get_new_deck_order_cards-20"><span class="linenos">20</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_new_deck_order_cards</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]:</span>
-</span><span id="Deck.get_new_deck_order_cards-21"><a href="#Deck.get_new_deck_order_cards-21"><span class="linenos">21</span></a>        <span class="n">ace_to_king</span> <span class="o">=</span> <span class="p">[</span><span class="n">Rank</span><span class="o">.</span><span class="n">Ace</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span>
-</span><span id="Deck.get_new_deck_order_cards-22"><a href="#Deck.get_new_deck_order_cards-22"><span class="linenos">22</span></a>            <span class="n">rank</span> <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">Rank</span> <span class="k">if</span> <span class="n">rank</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Rank</span><span class="o">.</span><span class="n">Ace</span>
-</span><span id="Deck.get_new_deck_order_cards-23"><a href="#Deck.get_new_deck_order_cards-23"><span class="linenos">23</span></a>        <span class="p">]</span>
-</span><span id="Deck.get_new_deck_order_cards-24"><a href="#Deck.get_new_deck_order_cards-24"><span class="linenos">24</span></a>        <span class="n">king_to_ace</span> <span class="o">=</span> <span class="n">ace_to_king</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</span><span id="Deck.get_new_deck_order_cards-25"><a href="#Deck.get_new_deck_order_cards-25"><span class="linenos">25</span></a>
-</span><span id="Deck.get_new_deck_order_cards-26"><a href="#Deck.get_new_deck_order_cards-26"><span class="linenos">26</span></a>        <span class="k">return</span> <span class="p">[</span>
-</span><span id="Deck.get_new_deck_order_cards-27"><a href="#Deck.get_new_deck_order_cards-27"><span class="linenos">27</span></a>            <span class="n">Card</span><span class="p">(</span><span class="n">suit</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span>
-</span><span id="Deck.get_new_deck_order_cards-28"><a href="#Deck.get_new_deck_order_cards-28"><span class="linenos">28</span></a>            <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">NEW_DECK_ORDER_SUITS</span>
-</span><span id="Deck.get_new_deck_order_cards-29"><a href="#Deck.get_new_deck_order_cards-29"><span class="linenos">29</span></a>            <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="p">(</span>
-</span><span id="Deck.get_new_deck_order_cards-30"><a href="#Deck.get_new_deck_order_cards-30"><span class="linenos">30</span></a>                <span class="n">ace_to_king</span>
-</span><span id="Deck.get_new_deck_order_cards-31"><a href="#Deck.get_new_deck_order_cards-31"><span class="linenos">31</span></a>                <span class="k">if</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">NEW_DECK_ORDER_SUITS</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
-</span><span id="Deck.get_new_deck_order_cards-32"><a href="#Deck.get_new_deck_order_cards-32"><span class="linenos">32</span></a>                <span class="k">else</span> <span class="n">king_to_ace</span>
-</span><span id="Deck.get_new_deck_order_cards-33"><a href="#Deck.get_new_deck_order_cards-33"><span class="linenos">33</span></a>            <span class="p">)</span>
-</span><span id="Deck.get_new_deck_order_cards-34"><a href="#Deck.get_new_deck_order_cards-34"><span class="linenos">34</span></a>        <span class="p">]</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Deck.get_new_deck_order_cards-24"><a href="#Deck.get_new_deck_order_cards-24"><span class="linenos">24</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_new_deck_order_cards</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]:</span>
+</span><span id="Deck.get_new_deck_order_cards-25"><a href="#Deck.get_new_deck_order_cards-25"><span class="linenos">25</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Deck.get_new_deck_order_cards-26"><a href="#Deck.get_new_deck_order_cards-26"><span class="linenos">26</span></a><span class="sd">        Returns a list of cards in typical new deck order NDO.</span>
+</span><span id="Deck.get_new_deck_order_cards-27"><a href="#Deck.get_new_deck_order_cards-27"><span class="linenos">27</span></a><span class="sd">        Spades: Ace -&gt; King</span>
+</span><span id="Deck.get_new_deck_order_cards-28"><a href="#Deck.get_new_deck_order_cards-28"><span class="linenos">28</span></a><span class="sd">        Diamonds: Ace -&gt; King</span>
+</span><span id="Deck.get_new_deck_order_cards-29"><a href="#Deck.get_new_deck_order_cards-29"><span class="linenos">29</span></a><span class="sd">        Clubs: King -&gt; Ace</span>
+</span><span id="Deck.get_new_deck_order_cards-30"><a href="#Deck.get_new_deck_order_cards-30"><span class="linenos">30</span></a><span class="sd">        Hearts: King -&gt; Ace</span>
+</span><span id="Deck.get_new_deck_order_cards-31"><a href="#Deck.get_new_deck_order_cards-31"><span class="linenos">31</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Deck.get_new_deck_order_cards-32"><a href="#Deck.get_new_deck_order_cards-32"><span class="linenos">32</span></a>
+</span><span id="Deck.get_new_deck_order_cards-33"><a href="#Deck.get_new_deck_order_cards-33"><span class="linenos">33</span></a>        <span class="n">ace_to_king</span> <span class="o">=</span> <span class="p">[</span><span class="n">Rank</span><span class="o">.</span><span class="n">Ace</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span>
+</span><span id="Deck.get_new_deck_order_cards-34"><a href="#Deck.get_new_deck_order_cards-34"><span class="linenos">34</span></a>            <span class="n">rank</span> <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">Rank</span> <span class="k">if</span> <span class="n">rank</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Rank</span><span class="o">.</span><span class="n">Ace</span>
+</span><span id="Deck.get_new_deck_order_cards-35"><a href="#Deck.get_new_deck_order_cards-35"><span class="linenos">35</span></a>        <span class="p">]</span>
+</span><span id="Deck.get_new_deck_order_cards-36"><a href="#Deck.get_new_deck_order_cards-36"><span class="linenos">36</span></a>        <span class="n">king_to_ace</span> <span class="o">=</span> <span class="n">ace_to_king</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span><span id="Deck.get_new_deck_order_cards-37"><a href="#Deck.get_new_deck_order_cards-37"><span class="linenos">37</span></a>
+</span><span id="Deck.get_new_deck_order_cards-38"><a href="#Deck.get_new_deck_order_cards-38"><span class="linenos">38</span></a>        <span class="k">return</span> <span class="p">[</span>
+</span><span id="Deck.get_new_deck_order_cards-39"><a href="#Deck.get_new_deck_order_cards-39"><span class="linenos">39</span></a>            <span class="n">Card</span><span class="p">(</span><span class="n">suit</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span>
+</span><span id="Deck.get_new_deck_order_cards-40"><a href="#Deck.get_new_deck_order_cards-40"><span class="linenos">40</span></a>            <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">NEW_DECK_ORDER_SUITS</span>
+</span><span id="Deck.get_new_deck_order_cards-41"><a href="#Deck.get_new_deck_order_cards-41"><span class="linenos">41</span></a>            <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="p">(</span>
+</span><span id="Deck.get_new_deck_order_cards-42"><a href="#Deck.get_new_deck_order_cards-42"><span class="linenos">42</span></a>                <span class="n">ace_to_king</span>
+</span><span id="Deck.get_new_deck_order_cards-43"><a href="#Deck.get_new_deck_order_cards-43"><span class="linenos">43</span></a>                <span class="k">if</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">NEW_DECK_ORDER_SUITS</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+</span><span id="Deck.get_new_deck_order_cards-44"><a href="#Deck.get_new_deck_order_cards-44"><span class="linenos">44</span></a>                <span class="k">else</span> <span class="n">king_to_ace</span>
+</span><span id="Deck.get_new_deck_order_cards-45"><a href="#Deck.get_new_deck_order_cards-45"><span class="linenos">45</span></a>            <span class="p">)</span>
+</span><span id="Deck.get_new_deck_order_cards-46"><a href="#Deck.get_new_deck_order_cards-46"><span class="linenos">46</span></a>        <span class="p">]</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Returns a list of cards in typical new deck order NDO.
+Spades: Ace -> King
+Diamonds: Ace -> King
+Clubs: King -> Ace
+Hearts: King -> Ace</p>
+</div>
+
 
                             </div>
                             <div id="Deck.shuffle" class="classattr">
@@ -289,19 +395,25 @@
 
     </div>
     <a class="headerlink" href="#Deck.shuffle"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Deck.shuffle-36"><a href="#Deck.shuffle-36"><span class="linenos">36</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cards</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]:</span>
-</span><span id="Deck.shuffle-37"><a href="#Deck.shuffle-37"><span class="linenos">37</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">cards</span><span class="p">:</span>
-</span><span id="Deck.shuffle-38"><a href="#Deck.shuffle-38"><span class="linenos">38</span></a>            <span class="n">cards</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span>
-</span><span id="Deck.shuffle-39"><a href="#Deck.shuffle-39"><span class="linenos">39</span></a>
-</span><span id="Deck.shuffle-40"><a href="#Deck.shuffle-40"><span class="linenos">40</span></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-</span><span id="Deck.shuffle-41"><a href="#Deck.shuffle-41"><span class="linenos">41</span></a>            <span class="n">j</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-</span><span id="Deck.shuffle-42"><a href="#Deck.shuffle-42"><span class="linenos">42</span></a>            <span class="n">cards</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cards</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">cards</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">cards</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="Deck.shuffle-43"><a href="#Deck.shuffle-43"><span class="linenos">43</span></a>
-</span><span id="Deck.shuffle-44"><a href="#Deck.shuffle-44"><span class="linenos">44</span></a>        <span class="k">return</span> <span class="n">cards</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Deck.shuffle-48"><a href="#Deck.shuffle-48"><span class="linenos">48</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cards</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Card</span><span class="p">]:</span>
+</span><span id="Deck.shuffle-49"><a href="#Deck.shuffle-49"><span class="linenos">49</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Deck.shuffle-50"><a href="#Deck.shuffle-50"><span class="linenos">50</span></a><span class="sd">        Shuffles the cards of a deck based on the Fisher Yates algorithm</span>
+</span><span id="Deck.shuffle-51"><a href="#Deck.shuffle-51"><span class="linenos">51</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Deck.shuffle-52"><a href="#Deck.shuffle-52"><span class="linenos">52</span></a>
+</span><span id="Deck.shuffle-53"><a href="#Deck.shuffle-53"><span class="linenos">53</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">cards</span><span class="p">:</span>
+</span><span id="Deck.shuffle-54"><a href="#Deck.shuffle-54"><span class="linenos">54</span></a>            <span class="n">cards</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span>
+</span><span id="Deck.shuffle-55"><a href="#Deck.shuffle-55"><span class="linenos">55</span></a>
+</span><span id="Deck.shuffle-56"><a href="#Deck.shuffle-56"><span class="linenos">56</span></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="Deck.shuffle-57"><a href="#Deck.shuffle-57"><span class="linenos">57</span></a>            <span class="n">j</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</span><span id="Deck.shuffle-58"><a href="#Deck.shuffle-58"><span class="linenos">58</span></a>            <span class="n">cards</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cards</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">cards</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">cards</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="Deck.shuffle-59"><a href="#Deck.shuffle-59"><span class="linenos">59</span></a>
+</span><span id="Deck.shuffle-60"><a href="#Deck.shuffle-60"><span class="linenos">60</span></a>        <span class="k">return</span> <span class="n">cards</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Shuffles the cards of a deck based on the Fisher Yates algorithm</p>
+</div>
+
 
                             </div>
                             <div id="Deck.deal" class="classattr">
@@ -315,12 +427,20 @@
 
     </div>
     <a class="headerlink" href="#Deck.deal"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Deck.deal-46"><a href="#Deck.deal-46"><span class="linenos">46</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">deal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Card</span><span class="p">:</span>
-</span><span id="Deck.deal-47"><a href="#Deck.deal-47"><span class="linenos">47</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Deck.deal-62"><a href="#Deck.deal-62"><span class="linenos">62</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">deal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Card</span><span class="p">:</span>
+</span><span id="Deck.deal-63"><a href="#Deck.deal-63"><span class="linenos">63</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Deck.deal-64"><a href="#Deck.deal-64"><span class="linenos">64</span></a><span class="sd">        Returns the last card from the deck list</span>
+</span><span id="Deck.deal-65"><a href="#Deck.deal-65"><span class="linenos">65</span></a><span class="sd">        or the first card assuming the cards are on a face down pile.</span>
+</span><span id="Deck.deal-66"><a href="#Deck.deal-66"><span class="linenos">66</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Deck.deal-67"><a href="#Deck.deal-67"><span class="linenos">67</span></a>
+</span><span id="Deck.deal-68"><a href="#Deck.deal-68"><span class="linenos">68</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Returns the last card from the deck list
+or the first card assuming the cards are on a face down pile.</p>
+</div>
+
 
                             </div>
                             <div id="Deck.to_dict" class="classattr">
@@ -334,14 +454,20 @@
 
     </div>
     <a class="headerlink" href="#Deck.to_dict"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Deck.to_dict-49"><a href="#Deck.to_dict-49"><span class="linenos">49</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="Deck.to_dict-50"><a href="#Deck.to_dict-50"><span class="linenos">50</span></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="Deck.to_dict-51"><a href="#Deck.to_dict-51"><span class="linenos">51</span></a>            <span class="s2">&quot;cards&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">card</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="p">],</span>
-</span><span id="Deck.to_dict-52"><a href="#Deck.to_dict-52"><span class="linenos">52</span></a>        <span class="p">}</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Deck.to_dict-84"><a href="#Deck.to_dict-84"><span class="linenos">84</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="Deck.to_dict-85"><a href="#Deck.to_dict-85"><span class="linenos">85</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Deck.to_dict-86"><a href="#Deck.to_dict-86"><span class="linenos">86</span></a><span class="sd">        Converts a Deck into a dictionary that can be stringified into json</span>
+</span><span id="Deck.to_dict-87"><a href="#Deck.to_dict-87"><span class="linenos">87</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Deck.to_dict-88"><a href="#Deck.to_dict-88"><span class="linenos">88</span></a>
+</span><span id="Deck.to_dict-89"><a href="#Deck.to_dict-89"><span class="linenos">89</span></a>        <span class="k">return</span> <span class="p">{</span>
+</span><span id="Deck.to_dict-90"><a href="#Deck.to_dict-90"><span class="linenos">90</span></a>            <span class="s2">&quot;cards&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">card</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="p">],</span>
+</span><span id="Deck.to_dict-91"><a href="#Deck.to_dict-91"><span class="linenos">91</span></a>        <span class="p">}</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Converts a Deck into a dictionary that can be stringified into json</p>
+</div>
+
 
                             </div>
                             <div id="Deck.from_dict" class="classattr">
@@ -356,13 +482,19 @@
 
     </div>
     <a class="headerlink" href="#Deck.from_dict"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Deck.from_dict-54"><a href="#Deck.from_dict-54"><span class="linenos">54</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Deck.from_dict-55"><a href="#Deck.from_dict-55"><span class="linenos">55</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Deck</span><span class="p">:</span>
-</span><span id="Deck.from_dict-56"><a href="#Deck.from_dict-56"><span class="linenos">56</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">card_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">card_data</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cards&quot;</span><span class="p">])</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Deck.from_dict-93"><a href="#Deck.from_dict-93"><span class="linenos">93</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Deck.from_dict-94"><a href="#Deck.from_dict-94"><span class="linenos">94</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Deck</span><span class="p">:</span>
+</span><span id="Deck.from_dict-95"><a href="#Deck.from_dict-95"><span class="linenos">95</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Deck.from_dict-96"><a href="#Deck.from_dict-96"><span class="linenos">96</span></a><span class="sd">        Creates and returns a Deck based on a json dictionary</span>
+</span><span id="Deck.from_dict-97"><a href="#Deck.from_dict-97"><span class="linenos">97</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Deck.from_dict-98"><a href="#Deck.from_dict-98"><span class="linenos">98</span></a>
+</span><span id="Deck.from_dict-99"><a href="#Deck.from_dict-99"><span class="linenos">99</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">card_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">card_data</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cards&quot;</span><span class="p">])</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Creates and returns a Deck based on a json dictionary</p>
+</div>
+
 
                             </div>
                 </section>
