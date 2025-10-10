@@ -14,9 +14,21 @@ class Deck:
     ]
 
     def __init__(self, cards: list[Card] = []) -> None:
+        """
+        Instantiates a new Deck and sets its cards
+        """
+
         self.cards = cards if cards else self.get_new_deck_order_cards()
 
     def get_new_deck_order_cards(self) -> list[Card]:
+        """
+        Returns a list of cards in typical new deck order NDO.
+        Spades: Ace -> King
+        Diamonds: Ace -> King
+        Clubs: King -> Ace
+        Hearts: King -> Ace
+        """
+
         ace_to_king = [Rank.Ace] + [
             rank for rank in Rank if rank is not Rank.Ace
         ]
@@ -33,6 +45,10 @@ class Deck:
         ]
 
     def shuffle(self, cards: list[Card]) -> list[Card]:
+        """
+        Shuffles the cards of a deck based on the Fisher Yates algorithm
+        """
+
         if not cards:
             cards = self.cards
 
@@ -43,19 +59,39 @@ class Deck:
         return cards
 
     def deal(self) -> Card:
+        """
+        Returns the last card from the deck list or the first card assuming the cards are on a face down pile.
+        """
+
         return self.cards.pop()
 
     def __eq__(self, other) -> bool:
+        """
+        Checks whether a Deck is equal to another Deck
+        """
+
         return isinstance(other, Deck) and self.cards == other.cards
 
     def __hash__(self) -> int:
+        """
+        Computes a hash of a Deck based on its cards
+        """
+
         return hash(card for card in self.cards)
 
     def to_dict(self) -> dict:
+        """
+        Converts a Deck into a dictionary that can be stringified into json
+        """
+
         return {
             "cards": [card.to_dict() for card in self.cards],
         }
 
     @classmethod
     def from_dict(cls, data: dict) -> Deck:
+        """
+        Creates and returns a Deck based on a json dictionary
+        """
+
         return cls(Card.from_dict(card_data) for card_data in data["cards"])
