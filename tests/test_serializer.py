@@ -31,7 +31,7 @@ def test_save_and_load_dummy(tmp_path):
 
 
 def test_save_and_load_player(tmp_path):
-    player = Player("John Doe")
+    player = Player("John Doe",False)
     file_path = tmp_path / "data.json"
 
     Serializer.save(player, file_path)
@@ -42,3 +42,4 @@ def test_save_and_load_player(tmp_path):
 
     assert isinstance(loaded, Player)
     assert loaded.name == "John Doe"
+    assert loaded.isNPC == False
