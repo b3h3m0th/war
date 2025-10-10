@@ -43,7 +43,16 @@ class Deck:
         return cards
 
     def deal(self) -> Card:
-        return self.cards.pop(0)
+        return self.cards.pop()
+
+    def __eq__(self, other) -> bool:
+        return isinstance(other, Deck) and all(
+            self_card == other_card
+            for self_card, other_card in zip(self.cards, other.cards)
+        )
+
+    def __hash__(self) -> int:
+        return hash((self.suit, self.rank))
 
     def to_dict(self) -> dict:
         return {
