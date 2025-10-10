@@ -33,7 +33,6 @@ class "Serializer" as utils.serializer.Serializer {
   save(obj: object, path: Path | str) -> None
 }
 class "Shell" as models.shell.Shell {
-  intro : NoneType
   intro : str
   prompt : str
   default(line)
