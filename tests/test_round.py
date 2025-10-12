@@ -48,3 +48,24 @@ def test_get_winning_turns_returns_no_turns_correctly() -> None:
     turns: list[Turn] = round.get_winning_turns()
 
     assert len(turns) == 0
+
+
+def test_initial_rounds_are_equal() -> None:
+    round1 = Round()
+    round2 = Round()
+
+    assert round1 == round2
+
+
+def test_initial_round_hashes_are_equal() -> None:
+    round1 = Round()
+    round2 = Round()
+
+    assert round1.__hash__() == round2.__hash__()
+
+
+def test_different_rounds_not_equal():
+    round1 = Round()
+    round2 = Round([Turn(Player("John", False), Card(Suit.Clubs, Rank.Two))])
+
+    assert round1 != round2

@@ -20,6 +20,16 @@ class Player:
             "isNpc": self.isNPC,
         }
 
+    def __eq__(self, other) -> bool:
+        return (
+            isinstance(other, Player)
+            and self.name == other.name
+            and self.isNPC == other.isNPC
+        )
+
+    def __hash__(self) -> int:
+        return hash((self.name, self.isNPC))
+
     @classmethod
     def from_dict(cls, data: dict) -> Player:
         """
