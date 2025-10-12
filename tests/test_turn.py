@@ -23,14 +23,14 @@ def test_initial_turns_are_equal() -> None:
     assert turn1 == turn2
 
 
-def test_initial_round_hashes_are_equal() -> None:
+def test_initial_turn_hashes_are_equal() -> None:
     turn1 = Turn(Player("John", False), Card(Suit.Clubs, Rank.Two))
     turn2 = Turn(Player("John", False), Card(Suit.Clubs, Rank.Two))
 
     assert turn1.__hash__() == turn2.__hash__()
 
 
-def test_different_rounds_not_equal():
+def test_different_turns_not_equal():
     turn1 = Turn(Player("John", False), Card(Suit.Clubs, Rank.Two))
     turn2 = Turn(Player("Lisa", False), Card(Suit.Clubs, Rank.Three))
 
