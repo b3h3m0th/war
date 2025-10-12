@@ -9,8 +9,8 @@ class Turn:
         Instantiates a new Turn with a given Player and a given Card
         """
 
-        self.player = player
-        self.card = card
+        self.player: Player = player
+        self.card: Card = card
 
     def __str__(self) -> str:
         """

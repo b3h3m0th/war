@@ -8,7 +8,7 @@ class "Card" as models.card.Card {
 }
 class "Deck" as models.deck.Deck {
   NEW_DECK_ORDER_SUITS : list
-  cards
+  cards : list[Card]
   deal() -> Card
   from_dict(data: dict) -> Deck
   get_new_deck_order_cards() -> list[Card]

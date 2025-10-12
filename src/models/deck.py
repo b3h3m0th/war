@@ -18,7 +18,9 @@ class Deck:
         Instantiates a new Deck and sets its cards
         """
 
-        self.cards = cards if cards else self.get_new_deck_order_cards()
+        self.cards: list[Card] = (
+            cards if cards else self.get_new_deck_order_cards()
+        )
 
     def get_new_deck_order_cards(self) -> list[Card]:
         """
