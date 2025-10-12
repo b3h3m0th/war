@@ -5,6 +5,10 @@ class Round:
     turns: list[Turn]
 
     def __init__(self, turns=[]):
+        """
+        Instantiates a new Round
+        """
+
         self.turns = turns
 
     def get_winning_turns(self) -> list[Turn]:
