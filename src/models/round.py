@@ -6,7 +6,7 @@ class Round:
 
     def __init__(self, turns=[]):
         """
-        Instantiates a new Round
+        Instantiates a new Round with a given list of turns.
         """
 
         self.turns = turns
