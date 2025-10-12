@@ -19,8 +19,12 @@ class "Game" as models.game.Game {
   deck
   players : list[Player]
   variant
+  do_pvc(arg) -> None
+  do_pvp(arg) -> None
+  start() -> None
 }
 class "Player" as models.player.Player {
+  isNPC : bool
   name : str
   from_dict(data: dict) -> Player
   to_dict() -> dict
@@ -33,12 +37,12 @@ class "Serializer" as utils.serializer.Serializer {
   save(obj: object, path: Path | str) -> None
 }
 class "Shell" as models.shell.Shell {
+  game
   intro : str
   prompt : str
   default(line)
   do_new(arg) -> None
   do_quit(arg) -> bool
-  do_stats(arg) -> None
   print_menu() -> None
 }
 class "Suit" as enums.suit.Suit {
@@ -52,6 +56,7 @@ class "Variant" as enums.variant.Variant {
   name
 }
 models.deck.Deck --* models.game.Game : deck
+models.game.Game --* models.shell.Shell : game
 enums.rank.Rank --o models.card.Card : rank
 enums.suit.Suit --o models.card.Card : suit
 enums.variant.Variant --o models.game.Game : variant

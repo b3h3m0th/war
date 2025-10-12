@@ -1,9 +1,11 @@
 from cmd import Cmd
+from models.game import Game
 
 
 class Shell(Cmd):
     intro: str = "Welcome to the war shell. Type help or ? to list commands.\n"
     prompt: str = "(war) "
+    game: Game
 
     def __init__(self) -> None:
         super().__init__()
@@ -28,11 +30,8 @@ class Shell(Cmd):
 
     def do_new(self, arg) -> None:
         """Start a new game"""
-        print("New game starting")
-
-    def do_stats(self, arg) -> None:
-        "Show statistics"
-        print("Statistics")
+        self.game = Game(players=[], variant=None)
+        self.game.start()
 
     def do_quit(self, arg) -> bool:
         "Quit"

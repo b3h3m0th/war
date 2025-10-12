@@ -2,6 +2,7 @@ from models.deck import Deck
 from enums.suit import Suit
 from enums.rank import Rank
 from models.card import Card
+import random
 
 
 def test_initial_deck_cards_count() -> None:
@@ -69,3 +70,62 @@ def test_initial_deck_cards_order() -> None:
     for expected, actual in zip(expected_deck_order, deck.cards):
         assert actual.suit == expected.suit
         assert actual.rank == expected.rank
+
+
+def test_initial_deck_are_equal() -> None:
+    deck1 = Deck()
+    deck2 = Deck()
+
+    assert deck1 == deck2
+
+
+def test_initial_deck_hashes_are_equal() -> None:
+    deck1 = Deck()
+    deck2 = Deck()
+
+    assert deck1.__hash__() == deck2.__hash__()
+
+
+def test_different_decks_not_equal():
+    deck1 = Deck()
+    deck2 = Deck()
+    deck2.deal()
+    assert deck1 != deck2
+
+
+def test_equality_with_non_deck():
+    deck = Deck()
+    card = Card(Suit.Clubs, Rank.Ace)
+    assert deck != card
+
+
+def test_deck_custom_card_list_are_equal():
+    cards = [Card(Suit.Spades, Rank.Ace), Card(Suit.Hearts, Rank.King)]
+    deck1 = Deck(cards)
+    deck2 = Deck(cards.copy())
+    assert deck1 == deck2
+
+
+def test_deal() -> None:
+    deck = Deck()
+    assert len(deck.cards) == 52
+
+    dealt = deck.deal()
+
+    assert len(deck.cards) == 51
+    assert dealt == Card(Suit.Hearts, Rank.Ace)
+
+
+def test_shuffle():
+    deck = Deck()
+    cards_before = deck.cards.copy()
+
+    random.seed(42)
+    shuffled = deck.shuffle(deck.cards.copy())
+
+    # deterministic shuffle with seed
+    random.seed(42)
+    expected = Deck().shuffle(cards_before.copy())
+
+    assert shuffled == expected
+    assert shuffled != cards_before
