@@ -7,18 +7,17 @@ class Round:
     def __init__(self, turns=[]):
         self.turns = turns
 
-    def get_winning_turn(self) -> Turn | None:
+    def get_winning_turns(self) -> list[Turn]:
         """
-        Returns the turn of the round with the highest played card by rank.
-        Returns None if the round has no turns or there is a tie.
+        Returns a list of turns with the highest cards by rank.
+        Returns a a list of mulitple turns in case ofa tie.
+        Returns an empty list if there are no turns.
         """
 
-        winning_turn: Turn | None = None
+        if not self.turns:
+            return []
 
-        for turn in self.turns:
-            if not winning_turn or turn.card.rank > winning_turn.card.rank:
-                winning_turn = turn
-            elif turn.card.rank == winning_turn.rank:
-                winning_turn = None
-
-        return winning_turn
+        max_rank = max(t.card.rank.value for t in self.turns)
+        return [
+            turn for turn in self.turns if turn.card.rank.value == max_rank
+        ]
