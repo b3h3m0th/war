@@ -32,6 +32,12 @@ class "Player" as models.player.Player {
 class "Rank" as enums.rank.Rank {
   name
 }
+class "Round" as models.round.Round {
+  turns : list[Turn]
+  from_dict(data: dict) -> Turn
+  get_winning_turns() -> list[Turn]
+  to_dict() -> dict
+}
 class "Serializer" as utils.serializer.Serializer {
   load(cls, path: Path | str) -> object
   save(obj: object, path: Path | str) -> None
@@ -51,6 +57,8 @@ class "Suit" as enums.suit.Suit {
 class "Turn" as models.turn.Turn {
   card
   player
+  from_dict(data: dict) -> Turn
+  to_dict() -> dict
 }
 class "Variant" as enums.variant.Variant {
   name
