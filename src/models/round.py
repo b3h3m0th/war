@@ -17,7 +17,7 @@ class Round:
         if not self.turns:
             return []
 
-        max_rank = max(t.card.rank.value for t in self.turns)
+        max_rank = max(turn.card.rank.value for turn in self.turns)
         return [
             turn for turn in self.turns if turn.card.rank.value == max_rank
         ]
