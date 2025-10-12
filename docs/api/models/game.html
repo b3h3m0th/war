@@ -45,6 +45,15 @@
                         <li>
                                 <a class="variable" href="#Game.deck">deck</a>
                         </li>
+                        <li>
+                                <a class="function" href="#Game.do_pvc">do_pvc</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Game.do_pvp">do_pvp</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Game.start">start</a>
+                        </li>
                 </ul>
 
             </li>
@@ -81,6 +90,46 @@
 </span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">=</span> <span class="n">players</span>
 </span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">variant</span> <span class="o">=</span> <span class="n">variant</span>
 </span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span> <span class="o">=</span> <span class="n">Deck</span><span class="p">()</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">cards</span><span class="o">=</span><span class="p">[])</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_pvc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>        <span class="s2">&quot;Player vs Computer&quot;</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Player vs Computer mode&quot;</span><span class="p">)</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>        <span class="n">player</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter your name: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>        <span class="n">computer</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Computer&quot;</span><span class="p">)</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">=</span> <span class="p">[</span><span class="n">player</span><span class="p">,</span> <span class="n">computer</span><span class="p">]</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Players: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_pvp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>        <span class="s2">&quot;Player vs Player&quot;</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Player vs Player mode&quot;</span><span class="p">)</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>        <span class="n">player1</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter name for Player 1: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>        <span class="n">player2</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter name for Player 2: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">=</span> <span class="p">[</span><span class="n">player1</span><span class="p">,</span> <span class="n">player2</span><span class="p">]</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Players: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting the game...&quot;</span><span class="p">)</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>        <span class="nb">print</span><span class="p">(</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>            <span class="s2">&quot;Would you like to play Player vs &quot;</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>            <span class="s2">&quot;Computer (pvc) or Player vs Player (pvp)?&quot;</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>        <span class="p">)</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>        <span class="n">player_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>        <span class="k">while</span> <span class="n">player_choice</span> <span class="o">!=</span> <span class="s2">&quot;pvc&quot;</span> <span class="ow">or</span> <span class="n">player_choice</span> <span class="o">!=</span> <span class="s2">&quot;pvp&quot;</span><span class="p">:</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>            <span class="k">if</span> <span class="n">player_choice</span> <span class="o">==</span> <span class="s2">&quot;pvc&quot;</span><span class="p">:</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">do_pvc</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>                <span class="k">break</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>            <span class="k">elif</span> <span class="n">player_choice</span> <span class="o">==</span> <span class="s2">&quot;pvp&quot;</span><span class="p">:</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">do_pvp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>                <span class="k">break</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>                <span class="nb">print</span><span class="p">(</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>                    <span class="s2">&quot;Incorrect input try again.Would you like to play Playe&quot;</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>                    <span class="s2">&quot;r vs Computer (pvc) or Player vs Player (pvp)?&quot;</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>                <span class="p">)</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>                <span class="n">player_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -103,6 +152,46 @@
 </span><span id="Game-11"><a href="#Game-11"><span class="linenos">11</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">=</span> <span class="n">players</span>
 </span><span id="Game-12"><a href="#Game-12"><span class="linenos">12</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">variant</span> <span class="o">=</span> <span class="n">variant</span>
 </span><span id="Game-13"><a href="#Game-13"><span class="linenos">13</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span> <span class="o">=</span> <span class="n">Deck</span><span class="p">()</span>
+</span><span id="Game-14"><a href="#Game-14"><span class="linenos">14</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">cards</span><span class="o">=</span><span class="p">[])</span>
+</span><span id="Game-15"><a href="#Game-15"><span class="linenos">15</span></a>
+</span><span id="Game-16"><a href="#Game-16"><span class="linenos">16</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_pvc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Game-17"><a href="#Game-17"><span class="linenos">17</span></a>        <span class="s2">&quot;Player vs Computer&quot;</span>
+</span><span id="Game-18"><a href="#Game-18"><span class="linenos">18</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Player vs Computer mode&quot;</span><span class="p">)</span>
+</span><span id="Game-19"><a href="#Game-19"><span class="linenos">19</span></a>        <span class="n">player</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter your name: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span><span id="Game-20"><a href="#Game-20"><span class="linenos">20</span></a>        <span class="n">computer</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Computer&quot;</span><span class="p">)</span>
+</span><span id="Game-21"><a href="#Game-21"><span class="linenos">21</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">=</span> <span class="p">[</span><span class="n">player</span><span class="p">,</span> <span class="n">computer</span><span class="p">]</span>
+</span><span id="Game-22"><a href="#Game-22"><span class="linenos">22</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Players: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="Game-23"><a href="#Game-23"><span class="linenos">23</span></a>
+</span><span id="Game-24"><a href="#Game-24"><span class="linenos">24</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_pvp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Game-25"><a href="#Game-25"><span class="linenos">25</span></a>        <span class="s2">&quot;Player vs Player&quot;</span>
+</span><span id="Game-26"><a href="#Game-26"><span class="linenos">26</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Player vs Player mode&quot;</span><span class="p">)</span>
+</span><span id="Game-27"><a href="#Game-27"><span class="linenos">27</span></a>        <span class="n">player1</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter name for Player 1: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span><span id="Game-28"><a href="#Game-28"><span class="linenos">28</span></a>        <span class="n">player2</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter name for Player 2: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span><span id="Game-29"><a href="#Game-29"><span class="linenos">29</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">=</span> <span class="p">[</span><span class="n">player1</span><span class="p">,</span> <span class="n">player2</span><span class="p">]</span>
+</span><span id="Game-30"><a href="#Game-30"><span class="linenos">30</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Players: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="Game-31"><a href="#Game-31"><span class="linenos">31</span></a>
+</span><span id="Game-32"><a href="#Game-32"><span class="linenos">32</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Game-33"><a href="#Game-33"><span class="linenos">33</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting the game...&quot;</span><span class="p">)</span>
+</span><span id="Game-34"><a href="#Game-34"><span class="linenos">34</span></a>        <span class="nb">print</span><span class="p">(</span>
+</span><span id="Game-35"><a href="#Game-35"><span class="linenos">35</span></a>            <span class="s2">&quot;Would you like to play Player vs &quot;</span>
+</span><span id="Game-36"><a href="#Game-36"><span class="linenos">36</span></a>            <span class="s2">&quot;Computer (pvc) or Player vs Player (pvp)?&quot;</span>
+</span><span id="Game-37"><a href="#Game-37"><span class="linenos">37</span></a>        <span class="p">)</span>
+</span><span id="Game-38"><a href="#Game-38"><span class="linenos">38</span></a>        <span class="n">player_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span><span id="Game-39"><a href="#Game-39"><span class="linenos">39</span></a>        <span class="k">while</span> <span class="n">player_choice</span> <span class="o">!=</span> <span class="s2">&quot;pvc&quot;</span> <span class="ow">or</span> <span class="n">player_choice</span> <span class="o">!=</span> <span class="s2">&quot;pvp&quot;</span><span class="p">:</span>
+</span><span id="Game-40"><a href="#Game-40"><span class="linenos">40</span></a>            <span class="k">if</span> <span class="n">player_choice</span> <span class="o">==</span> <span class="s2">&quot;pvc&quot;</span><span class="p">:</span>
+</span><span id="Game-41"><a href="#Game-41"><span class="linenos">41</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">do_pvc</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="Game-42"><a href="#Game-42"><span class="linenos">42</span></a>                <span class="k">break</span>
+</span><span id="Game-43"><a href="#Game-43"><span class="linenos">43</span></a>            <span class="k">elif</span> <span class="n">player_choice</span> <span class="o">==</span> <span class="s2">&quot;pvp&quot;</span><span class="p">:</span>
+</span><span id="Game-44"><a href="#Game-44"><span class="linenos">44</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">do_pvp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="Game-45"><a href="#Game-45"><span class="linenos">45</span></a>                <span class="k">break</span>
+</span><span id="Game-46"><a href="#Game-46"><span class="linenos">46</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="Game-47"><a href="#Game-47"><span class="linenos">47</span></a>                <span class="nb">print</span><span class="p">(</span>
+</span><span id="Game-48"><a href="#Game-48"><span class="linenos">48</span></a>                    <span class="s2">&quot;Incorrect input try again.Would you like to play Playe&quot;</span>
+</span><span id="Game-49"><a href="#Game-49"><span class="linenos">49</span></a>                    <span class="s2">&quot;r vs Computer (pvc) or Player vs Player (pvp)?&quot;</span>
+</span><span id="Game-50"><a href="#Game-50"><span class="linenos">50</span></a>                <span class="p">)</span>
+</span><span id="Game-51"><a href="#Game-51"><span class="linenos">51</span></a>                <span class="n">player_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span><span id="Game-52"><a href="#Game-52"><span class="linenos">52</span></a>
+</span><span id="Game-53"><a href="#Game-53"><span class="linenos">53</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -124,6 +213,7 @@
 </span><span id="Game.__init__-11"><a href="#Game.__init__-11"><span class="linenos">11</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">=</span> <span class="n">players</span>
 </span><span id="Game.__init__-12"><a href="#Game.__init__-12"><span class="linenos">12</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">variant</span> <span class="o">=</span> <span class="n">variant</span>
 </span><span id="Game.__init__-13"><a href="#Game.__init__-13"><span class="linenos">13</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span> <span class="o">=</span> <span class="n">Deck</span><span class="p">()</span>
+</span><span id="Game.__init__-14"><a href="#Game.__init__-14"><span class="linenos">14</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">cards</span><span class="o">=</span><span class="p">[])</span>
 </span></pre></div>
 
 
@@ -160,6 +250,97 @@
     </div>
     <a class="headerlink" href="#Game.deck"></a>
     
+    
+
+                            </div>
+                            <div id="Game.do_pvc" class="classattr">
+                                        <input id="Game.do_pvc-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_pvc</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">arg</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+
+                <label class="view-source-button" for="Game.do_pvc-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#Game.do_pvc"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Game.do_pvc-16"><a href="#Game.do_pvc-16"><span class="linenos">16</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_pvc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Game.do_pvc-17"><a href="#Game.do_pvc-17"><span class="linenos">17</span></a>        <span class="s2">&quot;Player vs Computer&quot;</span>
+</span><span id="Game.do_pvc-18"><a href="#Game.do_pvc-18"><span class="linenos">18</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Player vs Computer mode&quot;</span><span class="p">)</span>
+</span><span id="Game.do_pvc-19"><a href="#Game.do_pvc-19"><span class="linenos">19</span></a>        <span class="n">player</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter your name: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span><span id="Game.do_pvc-20"><a href="#Game.do_pvc-20"><span class="linenos">20</span></a>        <span class="n">computer</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Computer&quot;</span><span class="p">)</span>
+</span><span id="Game.do_pvc-21"><a href="#Game.do_pvc-21"><span class="linenos">21</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">=</span> <span class="p">[</span><span class="n">player</span><span class="p">,</span> <span class="n">computer</span><span class="p">]</span>
+</span><span id="Game.do_pvc-22"><a href="#Game.do_pvc-22"><span class="linenos">22</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Players: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Player vs Computer</p>
+</div>
+
+
+                            </div>
+                            <div id="Game.do_pvp" class="classattr">
+                                        <input id="Game.do_pvp-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_pvp</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">arg</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+
+                <label class="view-source-button" for="Game.do_pvp-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#Game.do_pvp"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Game.do_pvp-24"><a href="#Game.do_pvp-24"><span class="linenos">24</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_pvp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Game.do_pvp-25"><a href="#Game.do_pvp-25"><span class="linenos">25</span></a>        <span class="s2">&quot;Player vs Player&quot;</span>
+</span><span id="Game.do_pvp-26"><a href="#Game.do_pvp-26"><span class="linenos">26</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Player vs Player mode&quot;</span><span class="p">)</span>
+</span><span id="Game.do_pvp-27"><a href="#Game.do_pvp-27"><span class="linenos">27</span></a>        <span class="n">player1</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter name for Player 1: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span><span id="Game.do_pvp-28"><a href="#Game.do_pvp-28"><span class="linenos">28</span></a>        <span class="n">player2</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter name for Player 2: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span><span id="Game.do_pvp-29"><a href="#Game.do_pvp-29"><span class="linenos">29</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">=</span> <span class="p">[</span><span class="n">player1</span><span class="p">,</span> <span class="n">player2</span><span class="p">]</span>
+</span><span id="Game.do_pvp-30"><a href="#Game.do_pvp-30"><span class="linenos">30</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Players: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Player vs Player</p>
+</div>
+
+
+                            </div>
+                            <div id="Game.start" class="classattr">
+                                        <input id="Game.start-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">start</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+
+                <label class="view-source-button" for="Game.start-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#Game.start"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Game.start-32"><a href="#Game.start-32"><span class="linenos">32</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Game.start-33"><a href="#Game.start-33"><span class="linenos">33</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting the game...&quot;</span><span class="p">)</span>
+</span><span id="Game.start-34"><a href="#Game.start-34"><span class="linenos">34</span></a>        <span class="nb">print</span><span class="p">(</span>
+</span><span id="Game.start-35"><a href="#Game.start-35"><span class="linenos">35</span></a>            <span class="s2">&quot;Would you like to play Player vs &quot;</span>
+</span><span id="Game.start-36"><a href="#Game.start-36"><span class="linenos">36</span></a>            <span class="s2">&quot;Computer (pvc) or Player vs Player (pvp)?&quot;</span>
+</span><span id="Game.start-37"><a href="#Game.start-37"><span class="linenos">37</span></a>        <span class="p">)</span>
+</span><span id="Game.start-38"><a href="#Game.start-38"><span class="linenos">38</span></a>        <span class="n">player_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span><span id="Game.start-39"><a href="#Game.start-39"><span class="linenos">39</span></a>        <span class="k">while</span> <span class="n">player_choice</span> <span class="o">!=</span> <span class="s2">&quot;pvc&quot;</span> <span class="ow">or</span> <span class="n">player_choice</span> <span class="o">!=</span> <span class="s2">&quot;pvp&quot;</span><span class="p">:</span>
+</span><span id="Game.start-40"><a href="#Game.start-40"><span class="linenos">40</span></a>            <span class="k">if</span> <span class="n">player_choice</span> <span class="o">==</span> <span class="s2">&quot;pvc&quot;</span><span class="p">:</span>
+</span><span id="Game.start-41"><a href="#Game.start-41"><span class="linenos">41</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">do_pvc</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="Game.start-42"><a href="#Game.start-42"><span class="linenos">42</span></a>                <span class="k">break</span>
+</span><span id="Game.start-43"><a href="#Game.start-43"><span class="linenos">43</span></a>            <span class="k">elif</span> <span class="n">player_choice</span> <span class="o">==</span> <span class="s2">&quot;pvp&quot;</span><span class="p">:</span>
+</span><span id="Game.start-44"><a href="#Game.start-44"><span class="linenos">44</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">do_pvp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="Game.start-45"><a href="#Game.start-45"><span class="linenos">45</span></a>                <span class="k">break</span>
+</span><span id="Game.start-46"><a href="#Game.start-46"><span class="linenos">46</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="Game.start-47"><a href="#Game.start-47"><span class="linenos">47</span></a>                <span class="nb">print</span><span class="p">(</span>
+</span><span id="Game.start-48"><a href="#Game.start-48"><span class="linenos">48</span></a>                    <span class="s2">&quot;Incorrect input try again.Would you like to play Playe&quot;</span>
+</span><span id="Game.start-49"><a href="#Game.start-49"><span class="linenos">49</span></a>                    <span class="s2">&quot;r vs Computer (pvc) or Player vs Player (pvp)?&quot;</span>
+</span><span id="Game.start-50"><a href="#Game.start-50"><span class="linenos">50</span></a>                <span class="p">)</span>
+</span><span id="Game.start-51"><a href="#Game.start-51"><span class="linenos">51</span></a>                <span class="n">player_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span><span id="Game.start-52"><a href="#Game.start-52"><span class="linenos">52</span></a>
+</span><span id="Game.start-53"><a href="#Game.start-53"><span class="linenos">53</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">deck</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</span></pre></div>
+
+
     
 
                             </div>

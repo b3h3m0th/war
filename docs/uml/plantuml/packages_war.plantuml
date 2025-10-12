@@ -34,6 +34,7 @@ models.deck --> models.card
 models.game --> enums.variant
 models.game --> models.deck
 models.game --> models.player
+models.shell --> models.game
 models.turn --> models.card
 models.turn --> models.player
 @enduml
