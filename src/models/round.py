@@ -8,7 +8,24 @@ class Round:
         self.turns = turns
 
     def get_winning_round(self) -> Turn:
-        if self.turns[0].card > self.turns[1]:
-            return self.turns(0)
-        elif self.turns[1].card > self.turns[0]:
-            return self.turns(1)
+        if not self.turns:
+            return None
+        
+        counter = 0
+        winning_card = self.turns[counter].card
+        
+        while True:
+            if self.turns[counter + 1].card == winning_card:
+                counter += 2
+                if counter >= len(self.turns) - 1:
+                    return None
+                continue
+            if self.turns[counter + 1].card > winning_card:
+                winning_card = self.turns[counter + 1].card
+                break
+            
+        return winning_card
+
+
+        
+
