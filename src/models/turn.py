@@ -10,3 +10,10 @@ class Turn:
 
         self.player = player
         self.card = card
+
+    def __eq__(self, other) -> bool:
+        return (
+            isinstance(other, Turn)
+            and self.player == other.player
+            and self.card == other.card
+        )
