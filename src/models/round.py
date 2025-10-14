@@ -10,9 +10,9 @@ class Round:
     def get_winning_turn(self) -> Turn:
         if not self.turns:
             return None
-        
+
         counter = 0
-        
+
         while True:
             winner = self.turns[counter]
             if self.turns[counter + 1].card == winner.card:
@@ -25,14 +25,8 @@ class Round:
                 break
             else:
                 break
-            
+
         return winner
 
     def __eq__(self, other) -> bool:
-        return (
-            isinstance(other, Round)
-            and self.turns == other.turns
-        )
-
-        
-
+        return isinstance(other, Round) and self.turns == other.turns
