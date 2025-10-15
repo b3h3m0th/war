@@ -19,6 +19,7 @@ class Shell(Cmd):
         print("│                                  │")
         print("│  (new)   Start new game          │")
         print("│  (help)  List commands           │")
+        print("│  (rules) Rules                   │")
         print("│  (stats) Statistics              │")
         print("│  (quit)  Quit                    │")
         print("│                                  │")
@@ -47,37 +48,33 @@ class Shell(Cmd):
         )
 
     def do_rules(self, arg) -> None:
-        """Shows the rules of the game"""
+        """Shows the rules of the game."""
         print(
-            "This is our implementation of the casino "
-            "war game.The rules are slightly different"
-            " to the casino war game as we are not "
-            "including betting for this game. You start"
-            " the game by choosing which game variant you"
-            " want (to be implemented). You then choose if"
-            " you will start a new game or load a previous"
-            " one. You then choose if you want to play vs"
-            " a real player or a computer. If you chose"
-            " the basic war game each player will get"
-            " handed a card by a dealer(a method). If"
-            " your card is higher ranked than the other "
-            "player you get awarded a point, if it a "
-            "draw you go to war and a card is drawn "
-            "again for each player. Whoever has the "
-            "highest card gets a point or if it is a "
-            "draw again the process is repeated until "
-            "a player can get a awarded a point. This"
-            " counts as 1 round. After each round you"
-            " will get asked if you want to a card to"
-            " be drawn. If you choose not to then you"
-            " will have a choice to save the game and"
-            " quit(to be implemented) or just quit"
-            " without saving. Once you quit the current"
-            " game you will have a choice from the menu"
-            " options. (Currently just show stats(not "
-            "implemented), show rules, start a new game,"
-            " load game, quit, choose variant or game "
-            "rules(not implemented))"
+            "Welcome to our version of Casino War!\n\n"
+            "The rules are slightly different from the "
+            "casino version, as this game does not include "
+            "betting.\n\n"
+            "At the start, you choose which game variant you "
+            "want to play (to be implemented). You then choose "
+            "whether to start a new game or load a previous one, "
+            "and whether to play against another player or the "
+            "computer.\n\n"
+            "In the basic War game, each player is dealt a card "
+            "by the dealer (a method). If your card ranks higher "
+            "than your opponent's, you earn one point. If the cards "
+            "tie, you go to war and both players draw again until "
+            "one player wins the round.\n\n"
+            "After each round, you will be asked if you want to draw "
+            "another card. If you choose not to, you can save the game "
+            "and quit (to be implemented) or quit without saving.\n\n"
+            "Once you exit the current game, you will return to the "
+            "main menu, where you can choose from the following options:\n"
+            " - Show stats (not yet implemented)\n"
+            " - Show rules\n"
+            " - Start a new game\n"
+            " - Load a saved game\n"
+            " - Quit\n"
+            " - Choose variant or game rules (not yet implemented)\n"
         )
 
 
