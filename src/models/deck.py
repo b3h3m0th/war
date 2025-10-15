@@ -13,12 +13,14 @@ class Deck:
         Suit.Hearts,
     ]
 
-    def __init__(self, cards: list[Card] = []) -> None:
+    def __init__(self, cards: list[Card] = None) -> None:
         """
         Instantiates a new Deck and sets its cards
         """
 
-        self.cards = cards if cards else self.get_new_deck_order_cards()
+        self.cards: list[Card] = (
+            cards if cards is not None else self.get_new_deck_order_cards()
+        )
 
     def get_new_deck_order_cards(self) -> list[Card]:
         """
@@ -58,13 +60,16 @@ class Deck:
 
         return cards
 
-    def deal(self) -> Card:
+    def deal(self, amount: int = 1) -> list[Card]:
         """
         Returns the last card from the deck list
         or the first card assuming the cards are on a face down pile.
         """
 
-        return self.cards.pop()
+        dealt: list[Card] = self.cards[-amount:]
+        self.cards = self.cards[:-amount]
+
+        return dealt
 
     def __eq__(self, other) -> bool:
         """
@@ -78,7 +83,7 @@ class Deck:
         Computes a hash of a Deck based on its cards
         """
 
-        return hash(card for card in self.cards)
+        return hash(tuple(self.cards))
 
     def to_dict(self) -> dict:
         """

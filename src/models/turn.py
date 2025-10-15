@@ -1,3 +1,4 @@
+from __future__ import annotations
 from models.player import Player
 from models.card import Card
 
@@ -11,12 +12,17 @@ class Turn:
         self.player = player
         self.card = card
 
+    def __str__(self) -> str:
+        """
+        Displays a Turn as a string with Card and Player
+        """
+
+        return f"{self.player}: {self.card}"
+
     def __eq__(self, other) -> bool:
         """
-        Return True if this Turn is equal to another Turn
-
-        Turn objects are considered equal if they have the same
-        values for player and card
+        Checks whether a Turn is equal to another Turn
+        Turns are considered equal if their player and card are equal
         """
 
         return (
@@ -27,8 +33,24 @@ class Turn:
 
     def __hash__(self):
         """
-        Returns a hash value for Turn based on the player
-        and card
+        Returns a hash based on the Player and Card
         """
 
         return hash((self.player, self.card))
+
+    def to_dict(self) -> dict:
+        """
+        Converts a Turn into a dictionary that can be stringified into json
+        """
+
+        return {"player": self.player.to_dict(), "card": self.card.to_dict()}
+
+    @classmethod
+    def from_dict(cls, data: dict) -> Turn:
+        """
+        Creates and returns a Turn based on a json dictionary
+        """
+
+        return cls(
+            Player.from_dict(data["player"]), Card.from_dict(data["card"])
+        )

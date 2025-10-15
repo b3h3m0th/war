@@ -21,7 +21,7 @@ def test_equal_card_hashes_are_equal() -> None:
     card1 = Card(Suit.Clubs, Rank.Five)
     card2 = Card(Suit.Clubs, Rank.Five)
 
-    assert card1.__hash__() == card2.__hash__()
+    assert hash(card1) == hash(card2)
 
 
 def test_picture_cards_have_correct_str() -> None:
@@ -30,10 +30,10 @@ def test_picture_cards_have_correct_str() -> None:
     king = Card(Suit.Clubs, Rank.King)
     ace = Card(Suit.Clubs, Rank.Ace)
 
-    assert jack.__str__() == "J♣"
-    assert queen.__str__() == "Q♣"
-    assert king.__str__() == "K♣"
-    assert ace.__str__() == "A♣"
+    assert str(jack) == "J♣"
+    assert str(queen) == "Q♣"
+    assert str(king) == "K♣"
+    assert str(ace) == "A♣"
 
 
 def test_card_suites_have_correct_str() -> None:
@@ -42,7 +42,7 @@ def test_card_suites_have_correct_str() -> None:
     clubs = Card(Suit.Clubs, Rank.Five)
     diamonds = Card(Suit.Diamonds, Rank.Five)
 
-    assert spades.__str__() == "5♠"
-    assert hearts.__str__() == "5♥"
-    assert clubs.__str__() == "5♣"
-    assert diamonds.__str__() == "5♦"
+    assert str(spades) == "5♠"
+    assert str(hearts) == "5♥"
+    assert str(clubs) == "5♣"
+    assert str(diamonds) == "5♦"
