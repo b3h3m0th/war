@@ -2,13 +2,20 @@ from __future__ import annotations
 
 
 class Player:
-    def __init__(self, name: str, isNpc: bool) -> None:
+    def __init__(self, name: str, isNpc: bool = False) -> None:
         """
         Instantiates a new Card with a given name
         """
 
         self.name = name
         self.isNpc = isNpc
+
+    def __str__(self) -> str:
+        """
+        Displays a Plaer as a string
+        """
+
+        return f"{self.name}"
 
     def to_dict(self) -> dict:
         """
