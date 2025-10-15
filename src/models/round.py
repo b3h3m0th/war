@@ -15,12 +15,12 @@ class Round:
 
         while True:
             winner = self.turns[counter]
-            if self.turns[counter + 1].card == winner.card:
+            if self.turns[counter + 1].card.rank == winner.card.rank:
                 counter += 2
                 if counter >= len(self.turns) - 1:
                     return None
                 continue
-            if self.turns[counter + 1].card > winner.card:
+            if self.turns[counter + 1].card.rank > winner.card.rank:
                 winner = self.turns[counter + 1]
                 break
             else:
