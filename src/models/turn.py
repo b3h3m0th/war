@@ -22,6 +22,7 @@ class Turn:
     def __eq__(self, other) -> bool:
         """
         Checks whether a Turn is equal to another Turn
+        Turns are considered equal if their player and card are equal
         """
 
         return (
