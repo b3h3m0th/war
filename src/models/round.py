@@ -5,9 +5,18 @@ class Round:
     turns: list[Turn]
 
     def __init__(self, turns):
+        """
+        Instantiates a new Round object which consists of a list of Turns
+        """
+
         self.turns = turns
 
     def get_winning_turn(self) -> Turn:
+        """
+        Compares turns and returns the winner. If there are no turns or
+        the turns are equal it returns None
+        """
+
         if not self.turns:
             return None
 
@@ -29,4 +38,8 @@ class Round:
         return winner
 
     def __eq__(self, other) -> bool:
+        """
+        A Round object is equal if the compared turns have equal values
+        """
+
         return isinstance(other, Round) and self.turns == other.turns
