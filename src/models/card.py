@@ -23,8 +23,8 @@ class Card:
         Instantiates a new Card with a given suite and rank
         """
 
-        self.suit = suit
-        self.rank = rank
+        self.suit: Suit = suit
+        self.rank: Rank = rank
 
     def __str__(self) -> str:
         """

@@ -1,49 +1,71 @@
 from models.round import Round
 from models.turn import Turn
+from models.player import Player
+from models.card import Card
+
+from enums.suit import Suit
+from enums.rank import Rank
 
 
-def test_equal_values() -> None:
-    round_1 = Round([Turn("Bob", 1), Turn("Bill", 1)])
-    round_2 = Round([Turn("Bob", 1), Turn("Bill", 1)])
-    assert round_1 == round_2
+def test_get_winning_turns_returns_single_turn() -> None:
+    player1: Player = Player("John", False)
+    player2: Player = Player("Lisa", False)
+
+    card1: Card = Card(Suit.Clubs, Rank.Five)
+    card2: Card = Card(Suit.Hearts, Rank.Ten)
+
+    round: Round = Round([Turn(player1, card1), Turn(player2, card2)])
+    turns: list[Turn] = round.get_winning_turns()
+
+    assert len(turns) == 1
+    assert turns[0].player == player2
+    assert turns[0].card == card2
 
 
-def test_empty_list() -> None:
-    round = Round([])
-    assert round.get_winning_turn() is None
+def test_get_winning_turns_returns_tie_correctly() -> None:
+    player1: Player = Player("John", False)
+    player2: Player = Player("Lisa", False)
+    player3: Player = Player("Michael", False)
 
+    card1: Card = Card(Suit.Clubs, Rank.King)
+    card2: Card = Card(Suit.Hearts, Rank.King)
+    card3: Card = Card(Suit.Spades, Rank.Eight)
 
-def test_equal_cards() -> None:
-    round = Round([Turn("Bob", 1), Turn("Bill", 1)])
-    assert round.get_winning_turn() is None
-
-
-def test_winner_first() -> None:
-    round = Round([Turn("Bob", 2), Turn("Bill", 1)])
-    assert round.get_winning_turn() == round.turns[0]
-
-
-def test_winner_second() -> None:
-    round = Round([Turn("Bob", 1), Turn("Bill", 2)])
-    assert round.get_winning_turn() == round.turns[1]
-
-
-def test_winner_third() -> None:
-    round = Round(
-        [Turn("Bob", 1), Turn("Bill", 1), Turn("Bob", 2), Turn("Bill", 1)]
+    round: Round = Round(
+        [Turn(player1, card1), Turn(player2, card2), Turn(player3, card3)]
     )
-    assert round.get_winning_turn() == round.turns[2]
+    turns: list[Turn] = round.get_winning_turns()
+
+    assert len(turns) == 2
+    assert turns[0].player == player1
+    assert turns[0].card == card1
+    assert turns[1].player == player2
+    assert turns[1].card == card2
 
 
-def test_winner_fourth() -> None:
-    round = Round(
-        [Turn("Bob", 1), Turn("Bill", 1), Turn("Bob", 1), Turn("Bill", 2)]
-    )
-    assert round.get_winning_turn() == round.turns[3]
+def test_get_winning_turns_returns_no_turns_correctly() -> None:
+    round: Round = Round()
+    turns: list[Turn] = round.get_winning_turns()
+
+    assert len(turns) == 0
 
 
-def test_4_equal_cards() -> None:
-    round = Round(
-        [Turn("Bob", 1), Turn("Bill", 1), Turn("Bob", 1), Turn("Bill", 1)]
-    )
-    assert round.get_winning_turn() is None
+def test_initial_rounds_are_equal() -> None:
+    round1 = Round()
+    round2 = Round()
+
+    assert round1 == round2
+
+
+def test_initial_round_hashes_are_equal() -> None:
+    round1 = Round()
+    round2 = Round()
+
+    assert hash(round1) == hash(round2)
+
+
+def test_different_rounds_not_equal():
+    round1 = Round()
+    round2 = Round([Turn(Player("John", False), Card(Suit.Clubs, Rank.Two))])
+
+    assert round1 != round2

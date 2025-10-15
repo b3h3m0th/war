@@ -110,10 +110,24 @@ def test_deal() -> None:
     deck = Deck()
     assert len(deck.cards) == 52
 
-    dealt = deck.deal()
+    dealt: list[Card] = deck.deal()
 
     assert len(deck.cards) == 51
-    assert dealt == Card(Suit.Hearts, Rank.Ace)
+    assert len(dealt) == 1
+    assert dealt[0] == Card(Suit.Hearts, Rank.Ace)
+
+
+def test_deal_multiple() -> None:
+    deck = Deck()
+    assert len(deck.cards) == 52
+
+    dealt: list[Card] = deck.deal(3)
+
+    assert len(deck.cards) == 49
+    assert len(dealt) == 3
+    assert dealt[0] == Card(Suit.Hearts, Rank.Three)
+    assert dealt[1] == Card(Suit.Hearts, Rank.Two)
+    assert dealt[2] == Card(Suit.Hearts, Rank.Ace)
 
 
 def test_shuffle():
@@ -123,7 +137,6 @@ def test_shuffle():
     random.seed(42)
     shuffled = deck.shuffle(deck.cards.copy())
 
-    # deterministic shuffle with seed
     random.seed(42)
     expected = Deck().shuffle(cards_before.copy())
 

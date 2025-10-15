@@ -8,7 +8,7 @@ class Player:
         """
 
         self.name = name
-        self.isNPC = isNpc
+        self.isNpc = isNpc
 
     def to_dict(self) -> dict:
         """
@@ -17,8 +17,18 @@ class Player:
 
         return {
             "name": self.name,
-            "isNpc": self.isNPC,
+            "isNpc": self.isNpc,
         }
+
+    def __eq__(self, other) -> bool:
+        return (
+            isinstance(other, Player)
+            and self.name == other.name
+            and self.isNpc == other.isNpc
+        )
+
+    def __hash__(self) -> int:
+        return hash((self.name, self.isNpc))
 
     @classmethod
     def from_dict(cls, data: dict) -> Player:

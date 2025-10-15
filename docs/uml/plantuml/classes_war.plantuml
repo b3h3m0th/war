@@ -8,8 +8,8 @@ class "Card" as models.card.Card {
 }
 class "Deck" as models.deck.Deck {
   NEW_DECK_ORDER_SUITS : list
-  cards
-  deal() -> Card
+  cards : list[Card]
+  deal(amount: int) -> list[Card]
   from_dict(data: dict) -> Deck
   get_new_deck_order_cards() -> list[Card]
   shuffle(cards: list[Card]) -> list[Card]
@@ -24,13 +24,20 @@ class "Game" as models.game.Game {
   start() -> None
 }
 class "Player" as models.player.Player {
-  isNPC : bool
+  isNpc : bool
   name : str
   from_dict(data: dict) -> Player
   to_dict() -> dict
 }
 class "Rank" as enums.rank.Rank {
   name
+}
+class "Round" as models.round.Round {
+  turns : list[Turn]
+  from_dict(data: dict) -> Turn
+  get_winning_turns() -> list[Turn]
+  get_winning_turns2() -> list[Turn]
+  to_dict() -> dict
 }
 class "Serializer" as utils.serializer.Serializer {
   load(cls, path: Path | str) -> object
@@ -51,6 +58,8 @@ class "Suit" as enums.suit.Suit {
 class "Turn" as models.turn.Turn {
   card
   player
+  from_dict(data: dict) -> Turn
+  to_dict() -> dict
 }
 class "Variant" as enums.variant.Variant {
   name
