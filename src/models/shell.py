@@ -30,7 +30,10 @@ class Shell(Cmd):
         print("└──────────────────────────────────┘")
 
     def do_new(self, arg) -> None:
-        """Start a new game"""
+        """
+        Start a new game
+        """
+
         self.game = Game(players=[], variant=None)
         self.game.start()
 
