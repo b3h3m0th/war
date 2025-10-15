@@ -39,6 +39,7 @@ class Round:
     def __eq__(self, other) -> bool:
         """
         Checks whether a Round is equal to another Round
+        Two rounds are equal if the compared turns have equal values
         """
 
         return isinstance(other, Round) and self.turns == other.turns
