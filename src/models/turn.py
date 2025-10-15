@@ -31,9 +31,9 @@ class Turn:
             and self.card == other.card
         )
 
-    def __hash__(self) -> int:
+    def __hash__(self):
         """
-        Computes a hash of a Turn based on its Player and Card
+        Returns a hash based on the Player and Card
         """
 
         return hash((self.player, self.card))

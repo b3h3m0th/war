@@ -46,7 +46,7 @@ class Round:
 
     def __hash__(self) -> int:
         """
-        Computes a hash of a Round based on its turns
+        Returns a hash based on turns
         """
 
         return hash(tuple(self.turns))
