@@ -30,3 +30,10 @@ class Round:
 
     def __eq__(self, other) -> bool:
         return isinstance(other, Round) and self.turns == other.turns
+    
+    def __hash__(self) -> int:
+        """
+        Returns a hash value based on turns
+        """
+        
+        return hash((self.turns))
