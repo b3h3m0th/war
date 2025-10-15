@@ -12,6 +12,13 @@ class Turn:
         self.card = card
 
     def __eq__(self, other) -> bool:
+        """
+        Return True if this Turn is equal to another Turn
+
+        Turn objects are considered equal if they have the same
+        values for player and card
+        """
+
         return (
             isinstance(other, Turn)
             and self.player == other.player
