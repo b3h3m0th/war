@@ -24,7 +24,7 @@ class Game:
         self.players = [player, computer]
         print(f"Players: {self.players[0].name} vs {self.players[1].name}")
 
-    def pvp(self, arg) -> None:
+    def pvp(self) -> None:
         """
         Runs the game in Player vs Player mode
         """
@@ -41,7 +41,7 @@ class Game:
         """
 
         player_choice = choice(
-            message="Choose a gamemode",
+            message="Choose a gamemode:",
             options=[
                 ("pvc", "Player vs Computer"),
                 ("pvp", "Player vs Player"),
@@ -50,8 +50,8 @@ class Game:
         )
 
         if player_choice == "pvc":
-            self.pvc(self)
+            self.pvc()
         elif player_choice == "pvp":
-            self.pvp(self)
+            self.pvp()
 
         self.deck.shuffle()
