@@ -71,8 +71,12 @@ class Game:
 
             # input("Press any key to continue to the next round")
 
+            self.print_results()
+
+    def print_results(self):
         wins_per_player: dict[Player, int] = {}
         ties: int = 0
+
         for played_round in self.rounds:
             turn_wins = played_round.get_winning_turns()
             if len(turn_wins) == 1:
