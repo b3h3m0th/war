@@ -13,13 +13,13 @@ class Deck:
         Suit.Hearts,
     ]
 
-    def __init__(self, cards: list[Card] = []) -> None:
+    def __init__(self, cards: list[Card] = None) -> None:
         """
         Instantiates a new Deck and sets its cards
         """
 
         self.cards: list[Card] = (
-            cards if cards else self.get_new_deck_order_cards()
+            cards if cards is not None else self.get_new_deck_order_cards()
         )
 
     def get_new_deck_order_cards(self) -> list[Card]:
