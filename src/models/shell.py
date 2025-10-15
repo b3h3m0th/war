@@ -17,6 +17,7 @@ class Shell(Cmd):
         print("│            WAR - Menu            │")
         print("├──────────────────────────────────┤")
         print("│                                  │")
+        print("│  (rules) Shows game rules        │")
         print("│  (new)   Start new game          │")
         print("│  (help)  List commands           │")
         print("│  (stats) Statistics              │")
