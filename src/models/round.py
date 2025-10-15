@@ -7,8 +7,26 @@ class Round:
     def __init__(self, turns):
         self.turns = turns
 
-    def get_winning_round(self) -> Turn:
-        if self.turns[0].card > self.turns[1]:
-            return self.turns(0)
-        elif self.turns[1].card > self.turns[0]:
-            return self.turns(1)
+    def get_winning_turn(self) -> Turn:
+        if not self.turns:
+            return None
+
+        counter = 0
+
+        while True:
+            winner = self.turns[counter]
+            if self.turns[counter + 1].card == winner.card:
+                counter += 2
+                if counter >= len(self.turns) - 1:
+                    return None
+                continue
+            if self.turns[counter + 1].card > winner.card:
+                winner = self.turns[counter + 1]
+                break
+            else:
+                break
+
+        return winner
+
+    def __eq__(self, other) -> bool:
+        return isinstance(other, Round) and self.turns == other.turns
