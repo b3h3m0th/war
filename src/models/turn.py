@@ -17,3 +17,11 @@ class Turn:
             and self.player == other.player
             and self.card == other.card
         )
+
+    def __hash__(self):
+        """
+        Returns a hash value for Turn based on the player
+        and card
+        """
+
+        return hash((self.player, self.card))
