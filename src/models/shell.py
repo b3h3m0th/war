@@ -34,7 +34,7 @@ class Shell(Cmd):
         Start a new game
         """
 
-        self.game = Game(players=[], variant=None)
+        self.game = Game()
         self.game.start()
 
     def do_quit(self, arg) -> bool:

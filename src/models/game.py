@@ -9,12 +9,12 @@ from prompt_toolkit.shortcuts import choice
 
 class Game:
     def __init__(
-        self, players: list[Player] = [], variant: Variant = Variant.NoJoker
+        self, players: list[Player] = None, variant: Variant = Variant.NoJoker
     ) -> None:
         self.variant = variant
         self.deck = Deck()
         self.players = players
-        self.rounds = []
+        self.rounds = players or []
 
     def start(self) -> None:
         """
@@ -41,11 +41,13 @@ class Game:
 
         self.deck.shuffle()
 
+        round_counter: int = 0
         while len(self.deck.cards) >= len(self.players):
+            round_counter += 1
+            print(f"\nRound {round_counter}" + "-" * 20)
+
             current_round = Round()
             self.rounds.append(current_round)
-
-            print("Dealing cards")
 
             for player in self.players:
                 dealt_card = self.deck.deal()[0]
