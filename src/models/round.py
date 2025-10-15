@@ -49,7 +49,7 @@ class Round:
         Computes a hash of a Round based on its turns
         """
 
-        return hash(turn for turn in self.turns)
+        return hash(tuple(self.turns))
 
     def to_dict(self) -> dict:
         """

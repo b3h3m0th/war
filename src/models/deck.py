@@ -83,7 +83,7 @@ class Deck:
         Computes a hash of a Deck based on its cards
         """
 
-        return hash(card for card in self.cards)
+        return hash(tuple(self.cards))
 
     def to_dict(self) -> dict:
         """
