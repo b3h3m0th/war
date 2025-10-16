@@ -38,20 +38,28 @@ class Shell(Cmd):
         self.game.start()
 
     def do_quit(self, arg) -> bool:
-        """Quit the game"""
-        "Quit"
+        """
+        Quit the game
+        """
+
         print("Thank you for playing war")
         return True
 
     def default(self, line):
-        """Default case for unknown command"""
+        """
+        Default case for unknown command
+        """
+
         print(
             f'Unknown option: "{line}". '
             "Use help or ? to get a list of all options."
         )
 
     def do_rules(self, arg) -> None:
-        """Shows the rules of the game."""
+        """
+        Shows the rules of the game.
+        """
+
         print(
             "Welcome to our version of Casino War!\n\n"
             "The rules are slightly different from the "
