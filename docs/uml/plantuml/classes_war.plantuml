@@ -17,10 +17,16 @@ class "Deck" as models.deck.Deck {
 }
 class "Game" as models.game.Game {
   deck
+<<<<<<< HEAD
   players : list
   rounds : list
   variant
   from_dict(data: dict) -> Turn
+=======
+  players : Optional[list[Player]]
+  rounds : list
+  variant
+>>>>>>> ecc7ffd18113998b8930acc8bae83e3ef4b82144
   print_results()
   start() -> None
   to_dict() -> dict
