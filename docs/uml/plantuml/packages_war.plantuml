@@ -36,6 +36,8 @@ models.deck --> models.card
 models.game --> enums.variant
 models.game --> models.deck
 models.game --> models.player
+models.game --> models.round
+models.game --> models.turn
 models.round --> models.turn
 models.shell --> models.game
 models.turn --> models.card

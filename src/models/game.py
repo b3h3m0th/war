@@ -53,7 +53,10 @@ class Game:
         while len(self.deck.cards) >= len(self.players):
             round_counter += 1
             print(f"\nRound {round_counter}:")
+<<<<<<< HEAD
 
+=======
+>>>>>>> ffcd1f0ba80cbcb6857c529429c4978998629286
 
             current_round = Round()
             self.rounds.append(current_round)
@@ -79,7 +82,10 @@ class Game:
             elif len(winning_turns) == 1:
                 winner = winning_turns[0]
                 print(f"{winner.player} has the highest card ({winner.card})")
+<<<<<<< HEAD
 
+=======
+>>>>>>> ffcd1f0ba80cbcb6857c529429c4978998629286
 
             # input("Press any key to continue to the next round")
             keep_going = choice(
@@ -99,6 +105,11 @@ class Game:
         print()
         self.print_results()
 
+<<<<<<< HEAD
+=======
+        print()
+        self.print_results()
+>>>>>>> ffcd1f0ba80cbcb6857c529429c4978998629286
 
     def print_results(self):
         wins_per_player: dict[Player, int] = {}
@@ -115,11 +126,17 @@ class Game:
             else:
                 ties += 1
 
+<<<<<<< HEAD
 
         print("Results:")
         for key, value in wins_per_player.items():
             print(f"{key} wins: {value}")
 
+=======
+        print("Results:")
+        for key, value in wins_per_player.items():
+            print(f"{key} wins: {value}")
+>>>>>>> ffcd1f0ba80cbcb6857c529429c4978998629286
 
         print(f"Ties: {ties}")
        
