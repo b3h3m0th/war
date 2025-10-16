@@ -183,7 +183,7 @@
 </span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a><span class="sd">        Creates and returns a Deck based on a json dictionary</span>
 </span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">card_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">card_data</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cards&quot;</span><span class="p">])</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">([</span><span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">card_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">card_data</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cards&quot;</span><span class="p">]])</span>
 </span></pre></div>
 
 
@@ -294,7 +294,7 @@
 </span><span id="Deck-101"><a href="#Deck-101"><span class="linenos">101</span></a><span class="sd">        Creates and returns a Deck based on a json dictionary</span>
 </span><span id="Deck-102"><a href="#Deck-102"><span class="linenos">102</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="Deck-103"><a href="#Deck-103"><span class="linenos">103</span></a>
-</span><span id="Deck-104"><a href="#Deck-104"><span class="linenos">104</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">card_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">card_data</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cards&quot;</span><span class="p">])</span>
+</span><span id="Deck-104"><a href="#Deck-104"><span class="linenos">104</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">([</span><span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">card_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">card_data</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cards&quot;</span><span class="p">]])</span>
 </span></pre></div>
 
 
@@ -503,7 +503,7 @@ or the first card assuming the cards are on a face down pile.</p>
 </span><span id="Deck.from_dict-101"><a href="#Deck.from_dict-101"><span class="linenos">101</span></a><span class="sd">        Creates and returns a Deck based on a json dictionary</span>
 </span><span id="Deck.from_dict-102"><a href="#Deck.from_dict-102"><span class="linenos">102</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="Deck.from_dict-103"><a href="#Deck.from_dict-103"><span class="linenos">103</span></a>
-</span><span id="Deck.from_dict-104"><a href="#Deck.from_dict-104"><span class="linenos">104</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">card_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">card_data</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cards&quot;</span><span class="p">])</span>
+</span><span id="Deck.from_dict-104"><a href="#Deck.from_dict-104"><span class="linenos">104</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">([</span><span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">card_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">card_data</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cards&quot;</span><span class="p">]])</span>
 </span></pre></div>
 
 

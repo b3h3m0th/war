@@ -17,11 +17,13 @@ class "Deck" as models.deck.Deck {
 }
 class "Game" as models.game.Game {
   deck
-  players : Optional[list[Player]]
+  players : list
   rounds : list
   variant
+  from_dict(data: dict) -> Turn
   print_results()
   start() -> None
+  to_dict() -> dict
 }
 class "Player" as models.player.Player {
   isNpc : bool
@@ -31,6 +33,8 @@ class "Player" as models.player.Player {
 }
 class "Rank" as enums.rank.Rank {
   name
+  from_dict(data: dict) -> Rank
+  to_dict() -> dict
 }
 class "Round" as models.round.Round {
   turns : list[Turn]
@@ -43,10 +47,12 @@ class "Serializer" as utils.serializer.Serializer {
   save(obj: object, path: Path | str) -> None
 }
 class "Shell" as models.shell.Shell {
+  data_path : str
   game
   intro : str
   prompt : str
   default(line)
+  {abstract}do_load() -> None
   do_new(arg) -> None
   do_quit(arg) -> bool
   do_rules(arg) -> None
@@ -54,6 +60,8 @@ class "Shell" as models.shell.Shell {
 }
 class "Suit" as enums.suit.Suit {
   name
+  from_dict(data: dict) -> Suit
+  to_dict() -> dict
 }
 class "Turn" as models.turn.Turn {
   card

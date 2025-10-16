@@ -147,7 +147,7 @@
 </span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a><span class="sd">        Creates and returns a card based on a json dictionary</span>
 </span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>
-</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;suit&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;rank&quot;</span><span class="p">])</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">Suit</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;suit&quot;</span><span class="p">]),</span> <span class="n">Rank</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;rank&quot;</span><span class="p">]))</span>
 </span></pre></div>
 
 
@@ -238,7 +238,7 @@
 </span><span id="Card-68"><a href="#Card-68"><span class="linenos">68</span></a><span class="sd">        Creates and returns a card based on a json dictionary</span>
 </span><span id="Card-69"><a href="#Card-69"><span class="linenos">69</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="Card-70"><a href="#Card-70"><span class="linenos">70</span></a>
-</span><span id="Card-71"><a href="#Card-71"><span class="linenos">71</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;suit&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;rank&quot;</span><span class="p">])</span>
+</span><span id="Card-71"><a href="#Card-71"><span class="linenos">71</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">Suit</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;suit&quot;</span><span class="p">]),</span> <span class="n">Rank</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;rank&quot;</span><span class="p">]))</span>
 </span></pre></div>
 
 
@@ -334,7 +334,7 @@
 </span><span id="Card.from_dict-68"><a href="#Card.from_dict-68"><span class="linenos">68</span></a><span class="sd">        Creates and returns a card based on a json dictionary</span>
 </span><span id="Card.from_dict-69"><a href="#Card.from_dict-69"><span class="linenos">69</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="Card.from_dict-70"><a href="#Card.from_dict-70"><span class="linenos">70</span></a>
-</span><span id="Card.from_dict-71"><a href="#Card.from_dict-71"><span class="linenos">71</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;suit&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;rank&quot;</span><span class="p">])</span>
+</span><span id="Card.from_dict-71"><a href="#Card.from_dict-71"><span class="linenos">71</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">Suit</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;suit&quot;</span><span class="p">]),</span> <span class="n">Rank</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;rank&quot;</span><span class="p">]))</span>
 </span></pre></div>
 
 
