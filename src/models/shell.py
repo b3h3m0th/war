@@ -10,7 +10,7 @@ class Shell(Cmd):
     prompt: str = "(war) "
 
     game: Game
-    data_path: str = "./data"
+    data_path: str = "./data/data.json"
 
     def __init__(self) -> None:
         super().__init__()
@@ -49,7 +49,7 @@ class Shell(Cmd):
         )
 
         if save_game:
-            Serializer.save(self.game)
+            Serializer.save(self.game, self.data_path)
 
     def do_load() -> None:
         pass

@@ -59,7 +59,7 @@ class Card:
         Converts a card into a dictionary that can be stringified into json
         """
 
-        return {"suit": self.suit, "rank": self.rank}
+        return {"suit": self.suit.to_dict(), "rank": self.rank.to_dict()}
 
     @classmethod
     def from_dict(cls, data: dict) -> Card:

@@ -6,7 +6,7 @@ class Serializer:
     @staticmethod
     def save(obj: object, path: Path | str) -> None:
         with open(path, "w") as f:
-            json.dump(obj.to_dict(), f, indent=4)
+            json.dump(obj.to_dict(), f, indent=2)
 
     @staticmethod
     def load(cls, path: Path | str) -> object:

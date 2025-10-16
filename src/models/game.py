@@ -129,7 +129,7 @@ class Game:
             "players": [p.to_dict() for p in self.players],
             "rounds": [r.to_dict() for r in self.rounds],
             "deck": self.deck.to_dict(),
-            "variant": self.variant,
+            "variant": self.variant.to_dict(),
         }
 
     @classmethod
