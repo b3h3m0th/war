@@ -4,7 +4,10 @@ from models.round import Round
 from models.turn import Turn
 from enums.variant import Variant
 
+
 from prompt_toolkit.shortcuts import choice
+
+
 
 
 class Game:
@@ -16,11 +19,12 @@ class Game:
         self.players = players
         self.rounds = players or []
 
+
     def start(self) -> None:
         """
         Starts the game
         """
-
+        #Handling player count
         player_choice = choice(
             message="Choose a gamemode:",
             options=[
@@ -29,6 +33,7 @@ class Game:
             ],
             default="pvc",
         )
+
 
         if player_choice == "pvc":
             player = Player(input("Enter your name: ").strip())
@@ -39,24 +44,32 @@ class Game:
             player2 = Player(input("Enter name for Player 2: ").strip())
             self.players = [player1, player2]
 
+
         self.deck.shuffle()
 
+
+        #Beginning of the game
         round_counter: int = 0
         while len(self.deck.cards) >= len(self.players):
             round_counter += 1
-            print(f"\nRound {round_counter}" + "-" * 20)
+            print(f"\nRound {round_counter}:")
+
 
             current_round = Round()
             self.rounds.append(current_round)
+
 
             for player in self.players:
                 dealt_card = self.deck.deal()[0]
                 current_turn = Turn(player, dealt_card)
                 current_round.turns.append(current_turn)
 
+
                 print(f"{player.name}: {dealt_card}")
 
+
             winning_turns = current_round.get_winning_turns()
+
 
             if len(winning_turns) > 1:
                 tie_names = ", ".join(
@@ -65,17 +78,32 @@ class Game:
                 print(f"Tie between: {tie_names}")
             elif len(winning_turns) == 1:
                 winner = winning_turns[0]
-                print(
-                    f"{winner.player} has the highest card " f"({winner.card})"
-                )
+                print(f"{winner.player} has the highest card ({winner.card})")
+
 
             # input("Press any key to continue to the next round")
+            keep_going = choice(
+            message="Do you want to keep playing?",
+            options=[
+                ("yes", "Yes"),
+                ("quit", "No, Quit"),
+            ],
+            default="yes",
+            )
+            if keep_going == "yes":
+                continue
+            if keep_going == "quit":
+                break
 
-            self.print_results()
+
+        print()
+        self.print_results()
+
 
     def print_results(self):
         wins_per_player: dict[Player, int] = {}
         ties: int = 0
+
 
         for played_round in self.rounds:
             turn_wins = played_round.get_winning_turns()
@@ -87,8 +115,38 @@ class Game:
             else:
                 ties += 1
 
-        print("Result:")
+
+        print("Results:")
         for key, value in wins_per_player.items():
-            print(f"{key}: {value}")
+            print(f"{key} wins: {value}")
+
 
         print(f"Ties: {ties}")
+       
+        #Checking highest points
+        winning_score = 0
+        for player, wins in wins_per_player.items():
+            if wins > winning_score:
+                winning_score = wins
+
+
+        winning_player = []
+        for player, wins in wins_per_player.items():
+            if wins == winning_score:
+                winning_player.append(player)
+
+
+        #Checking for a tie and printing
+        if len(winning_player) > 1:
+            draw = "🟰" * 36
+            print(draw)
+            print(f"It's a draw between: {', '.join(str(player) for player in winning_player)} with {winning_score} wins each! 🟰")
+            print(draw)
+        elif winning_player:
+            winner = winning_player[0]
+            confetti = "🎊🎉" * 18
+            print(confetti)
+            print(f"🎊🎉🎊 {f"{winner} wins this game with a score of {winning_score}".center(len(confetti))} 🎊🎉🎊")
+            print(confetti)
+
+
