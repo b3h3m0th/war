@@ -4,12 +4,12 @@ from models.turn import Turn
 class Round:
     turns: list[Turn]
 
-    def __init__(self, turns=[]):
+    def __init__(self, turns=None):
         """
         Instantiates a new Round with a given list of turns.
         """
 
-        self.turns = turns
+        self.turns = turns or []
 
     def get_winning_turns(self) -> list[Turn]:
         """
@@ -20,7 +20,7 @@ class Round:
 
         counter: int = 0
         max_rank: int = None
-        winners: list[Turn] = []
+        winning_turns: list[Turn] = []
 
         while counter < len(self.turns):
             current_turn = self.turns[counter]
@@ -28,13 +28,13 @@ class Round:
 
             if max_rank is None or current_rank > max_rank:
                 max_rank = current_rank
-                winners = [current_turn]
+                winning_turns = [current_turn]
             elif current_rank == max_rank:
-                winners.append(current_turn)
+                winning_turns.append(current_turn)
 
             counter += 1
 
-        return winners
+        return winning_turns
 
     def __eq__(self, other) -> bool:
         """

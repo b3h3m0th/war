@@ -37,6 +37,7 @@ plantumlcli==0.2.0
 platformdirs==4.4.0
 pluggy==1.6.0
 prettytable==3.16.0
+prompt_toolkit==3.0.52
 pycodestyle==2.14.0
 pycparser==2.23
 pyflakes==3.4.0

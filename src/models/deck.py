@@ -46,12 +46,12 @@ class Deck:
             )
         ]
 
-    def shuffle(self, cards: list[Card]) -> list[Card]:
+    def shuffle(self, cards: list[Card] = None) -> list[Card]:
         """
         Shuffles the cards of a deck based on the Fisher Yates algorithm
         """
 
-        if not cards:
+        if cards is None:
             cards = self.cards
 
         for i in range(len(cards) - 1, 0, -1):

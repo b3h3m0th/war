@@ -20,7 +20,6 @@ class Shell(Cmd):
         print("│  (rules) Shows game rules        │")
         print("│  (new)   Start new game          │")
         print("│  (help)  List commands           │")
-        print("│  (rules) Rules                   │")
         print("│  (stats) Statistics              │")
         print("│  (quit)  Quit                    │")
         print("│                                  │")
@@ -31,8 +30,11 @@ class Shell(Cmd):
         print("└──────────────────────────────────┘")
 
     def do_new(self, arg) -> None:
-        """Start a new game"""
-        self.game = Game(players=[], variant=None)
+        """
+        Start a new game
+        """
+
+        self.game = Game()
         self.game.start()
 
     def do_quit(self, arg) -> bool:
