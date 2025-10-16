@@ -44,7 +44,7 @@ class Game:
         round_counter: int = 0
         while len(self.deck.cards) >= len(self.players):
             round_counter += 1
-            print(f"\nRound {round_counter}" + "-" * 20)
+            print(f"\nRound {round_counter}:")
 
             current_round = Round()
             self.rounds.append(current_round)
@@ -65,13 +65,12 @@ class Game:
                 print(f"Tie between: {tie_names}")
             elif len(winning_turns) == 1:
                 winner = winning_turns[0]
-                print(
-                    f"{winner.player} has the highest card " f"({winner.card})"
-                )
+                print(f"{winner.player} has the highest card ({winner.card})")
 
             # input("Press any key to continue to the next round")
 
-            self.print_results()
+        print()
+        self.print_results()
 
     def print_results(self):
         wins_per_player: dict[Player, int] = {}
@@ -87,8 +86,8 @@ class Game:
             else:
                 ties += 1
 
-        print("Result:")
+        print("Results:")
         for key, value in wins_per_player.items():
-            print(f"{key}: {value}")
+            print(f"{key} wins: {value}")
 
         print(f"Ties: {ties}")
