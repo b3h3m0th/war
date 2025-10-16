@@ -22,7 +22,7 @@ class Shell(Cmd):
         print("├──────────────────────────────────┤")
         print("│                                  │")
         print("│  (rules) Shows game rules        │")
-        print("│  (menu) Shows the menu           │")
+        print("│  (menu)  Shows the menu          │")
         print("│  (new)   Start new game          │")
         print("│  (help)  List commands           │")
         print("│  (stats) Statistics              │")
@@ -94,11 +94,12 @@ class Shell(Cmd):
             " - Choose variant or game rules (not yet implemented)\n"
         )
 
-    def do_menu(self,arg) -> None:
+    def do_menu(self, arg) -> None:
         """
         Shows the menu if the user wants the menu again
         """
         self.print_menu()
+
 
 if __name__ == "__main__":
     Shell().cmdloop()
