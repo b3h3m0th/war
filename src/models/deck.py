@@ -100,4 +100,4 @@ class Deck:
         Creates and returns a Deck based on a json dictionary
         """
 
-        return cls(Card.from_dict(card_data) for card_data in data["cards"])
+        return cls([Card.from_dict(card_data) for card_data in data["cards"]])

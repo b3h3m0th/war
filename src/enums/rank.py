@@ -1,3 +1,4 @@
+from __future__ import annotations
 from enum import Enum
 
 
@@ -15,3 +16,20 @@ class Rank(Enum):
     Queen: int = 12
     King: int = 13
     Ace: int = 14
+
+    def to_dict(self) -> dict:
+        """
+        Converts a Rank into a dictionary that can be stringified into json
+        """
+
+        return {
+            "value": self.value,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict) -> Rank:
+        """
+        Returns a Rank based on a json dictionary
+        """
+
+        return cls(data["value"])

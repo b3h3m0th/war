@@ -52,5 +52,6 @@ class Turn:
         """
 
         return cls(
-            Player.from_dict(data["player"]), Card.from_dict(data["card"])
+            Player.from_dict(Player.from_dict(data["player"])),
+            Card.from_dict(data["card"]),
         )

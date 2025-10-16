@@ -67,4 +67,4 @@ class Card:
         Creates and returns a card based on a json dictionary
         """
 
-        return cls(data["suit"], data["rank"])
+        return cls(Suit.from_dict(data["suit"]), Rank.from_dict(data["rank"]))

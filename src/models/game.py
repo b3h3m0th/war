@@ -1,4 +1,5 @@
 from models.deck import Deck
+from models.deck import Card
 from models.player import Player
 from models.round import Round
 from models.turn import Turn
@@ -9,12 +10,16 @@ from prompt_toolkit.shortcuts import choice
 
 class Game:
     def __init__(
-        self, players: list[Player] = None, variant: Variant = Variant.NoJoker
+        self,
+        players: list[Player] = None,
+        variant: Variant = Variant.NoJoker,
+        deck: Deck = None,
+        rounds: list[Round] = None,
     ) -> None:
         self.variant = variant
-        self.deck = Deck()
-        self.players = players
-        self.rounds = players or []
+        self.deck = deck or Deck()
+        self.players = players or []
+        self.rounds = rounds or []
 
     def start(self) -> None:
         """
@@ -94,32 +99,48 @@ class Game:
 
     def __eq__(self, other) -> bool:
         """
-        Checks whether a Round is equal to another Round
-        Two rounds are equal if the compared turns have equal values
+        Checks whether a Game is equal to another Game
+        Games are considered equal if their players, rounds, deck and variant are equal
         """
 
-        return isinstance(other, Round) and self.turns == other.turns
+        return (
+            isinstance(other, Game)
+            and self.players == other
+            and self.rounds == other.rounds
+            and self.deck == other.deck
+            and self.variant == other.variant
+        )
 
-    def __hash__(self) -> int:
+    def __hash__(self):
         """
-        Returns a hash based on turns
+        Returns a hash based on the game its players, rounds, deck and variant
         """
 
-        return hash(tuple(self.turns))
+        return hash(
+            (tuple(self.players), tuple(self.rounds), self.deck, self.variant)
+        )
 
     def to_dict(self) -> dict:
         """
-        Converts a Round into a dictionary that can be stringified into json
+        Converts a Game into a dictionary that can be stringified into json
         """
 
         return {
-            "turns": [turn.to_dict() for turn in self.turns],
+            "players": [p.to_dict() for p in self.players],
+            "rounds": [r.to_dict() for r in self.rounds],
+            "deck": self.deck.to_dict(),
+            "variant": self.variant,
         }
 
     @classmethod
     def from_dict(cls, data: dict) -> Turn:
         """
-        Creates and returns a Round based on a json dictionary
+        Returns a Game based on a json dictionary
         """
 
-        return cls([Turn.from_dict(turn) for turn in data["turns"]])
+        return cls(
+            [Player.from_dict(p) for p in data["players"]],
+            Variant(data["variant"]),
+            Deck(data["deck"]),
+            [Round.from_dict(r) for r in data["rounds"]],
+        )
