@@ -1,11 +1,16 @@
 from cmd import Cmd
 from models.game import Game
+from utils.serializer import Serializer
+
+from prompt_toolkit.shortcuts import choice
 
 
 class Shell(Cmd):
     intro: str = "Welcome to the war shell. Type help or ? to list commands.\n"
     prompt: str = "(war) "
+
     game: Game
+    data_path: str = "./data"
 
     def __init__(self) -> None:
         super().__init__()
@@ -19,13 +24,10 @@ class Shell(Cmd):
         print("│                                  │")
         print("│  (rules) Shows game rules        │")
         print("│  (new)   Start new game          │")
-        print("│  (help)  List commands           │")
+        print("│  (load)  Load previous game      │")
         print("│  (stats) Statistics              │")
+        print("│  (help)  List commands           │")
         print("│  (quit)  Quit                    │")
-        print("│                                  │")
-        print("├────────────[Options]─────────────┤")
-        print("│                                  │")
-        print("│  TBA                             │")
         print("│                                  │")
         print("└──────────────────────────────────┘")
 
@@ -37,21 +39,26 @@ class Shell(Cmd):
         self.game = Game()
         self.game.start()
 
-    def do_quit(self, arg) -> bool:
-        """Quit the game"""
-        "Quit"
-        print("Thank you for playing war")
-        return True
-
-    def default(self, line):
-        """Default case for unknown command"""
-        print(
-            f'Unknown option: "{line}". '
-            "Use help or ? to get a list of all options."
+        save_game = choice(
+            message="Do you want to save this game",
+            options=[
+                (True, "Yes"),
+                (False, "No"),
+            ],
+            default=False,
         )
 
+        if save_game:
+            Serializer.save(self.game)
+
+    def do_load() -> None:
+        pass
+
     def do_rules(self, arg) -> None:
-        """Shows the rules of the game."""
+        """
+        Shows the rules of the game.
+        """
+
         print(
             "Welcome to our version of Casino War!\n\n"
             "The rules are slightly different from the "
@@ -78,6 +85,24 @@ class Shell(Cmd):
             " - Load a saved game\n"
             " - Quit\n"
             " - Choose variant or game rules (not yet implemented)\n"
+        )
+
+    def do_quit(self, arg) -> bool:
+        """
+        Quit the game
+        """
+
+        print("Thank you for playing war")
+        return True
+
+    def default(self, line):
+        """
+        Default case for unknown command
+        """
+
+        print(
+            f'Unknown option: "{line}". '
+            "Use help or ? to get a list of all options."
         )
 
 
