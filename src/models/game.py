@@ -76,9 +76,9 @@ class Game:
                 ],
                 default=True,
             )
-            if keep_going :
+            if keep_going:
                 continue
-            if not keep_going :
+            if not keep_going:
                 break
 
         print()
