@@ -12,7 +12,7 @@ class Player:
 
     def __str__(self) -> str:
         """
-        Displays a Plaer as a string
+        Displays a Player as a string
         """
 
         return f"{self.name}"
