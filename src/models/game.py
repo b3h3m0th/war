@@ -1,5 +1,4 @@
 from models.deck import Deck
-from models.deck import Card
 from models.player import Player
 from models.round import Round
 from models.turn import Turn
@@ -99,8 +98,9 @@ class Game:
 
     def __eq__(self, other) -> bool:
         """
-        Checks whether a Game is equal to another Game
-        Games are considered equal if their players, rounds, deck and variant are equal
+        Checks whether a Game is equal to another Game.
+        Games are considered equal if their
+        players, rounds, deck and variant are equal
         """
 
         return (
