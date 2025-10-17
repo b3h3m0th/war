@@ -107,8 +107,8 @@ class Game:
         """
 
         return f"{prefix}_{(datetime.datetime
-                          .now(datetime.timezone.utc)
-                          .strftime("%Y-%m-%d-%H-%M-%S-%f"))}"
+                            .now(datetime.timezone.utc)
+                            .strftime("%Y-%m-%d-%H-%M-%S-%f"))}"
 
     def __eq__(self, other) -> bool:
         """

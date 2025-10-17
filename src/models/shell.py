@@ -3,7 +3,6 @@ from models.game import Game
 from utils.serializer import Serializer
 
 
-import json
 from pathlib import Path
 from prompt_toolkit.shortcuts import choice
 
