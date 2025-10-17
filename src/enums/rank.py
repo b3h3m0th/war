@@ -22,9 +22,7 @@ class Rank(Enum):
         Converts a Rank into a dictionary that can be stringified into json
         """
 
-        return {
-            "value": self.value,
-        }
+        return {"value": self.value}
 
     @classmethod
     def from_dict(cls, data: dict) -> Rank:

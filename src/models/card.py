@@ -9,12 +9,7 @@ SUIT_STRINGS = {
     Suit.Diamonds: "♦",
 }
 
-RANK_STRINGS = {
-    Rank.Ace: "A",
-    Rank.King: "K",
-    Rank.Queen: "Q",
-    Rank.Jack: "J",
-}
+RANK_STRINGS = {Rank.Ace: "A", Rank.King: "K", Rank.Queen: "Q", Rank.Jack: "J"}
 
 
 class Card:

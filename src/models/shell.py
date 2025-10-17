@@ -2,6 +2,9 @@ from cmd import Cmd
 from models.game import Game
 from utils.serializer import Serializer
 
+
+from pathlib import Path
+import datetime
 from prompt_toolkit.shortcuts import choice
 
 
@@ -10,7 +13,7 @@ class Shell(Cmd):
     prompt: str = "(war) "
 
     game: Game
-    data_path: str = "./data/data.json"
+    data_path: Path = Path("./data")
 
     def __init__(self) -> None:
         super().__init__()
@@ -41,15 +44,17 @@ class Shell(Cmd):
 
         save_game = choice(
             message="Do you want to save this game",
-            options=[
-                (True, "Yes"),
-                (False, "No"),
-            ],
+            options=[(True, "Yes"), (False, "No")],
             default=False,
         )
 
         if save_game:
-            Serializer.save(self.game, self.data_path)
+            Serializer.save(
+                self.game,
+                self.data_path
+                / "games"
+                / f"{self.game.get_timestamp_name()}.json",
+            )
 
     def do_load() -> None:
         pass

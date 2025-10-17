@@ -56,9 +56,7 @@ class Round:
         Converts a Round into a dictionary that can be stringified into json
         """
 
-        return {
-            "turns": [turn.to_dict() for turn in self.turns],
-        }
+        return {"turns": [turn.to_dict() for turn in self.turns]}
 
     @classmethod
     def from_dict(cls, data: dict) -> Turn:

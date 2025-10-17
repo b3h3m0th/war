@@ -22,10 +22,7 @@ class Player:
         Converts a Player into a dictionary that can be stringified into json
         """
 
-        return {
-            "name": self.name,
-            "isNpc": self.isNpc,
-        }
+        return {"name": self.name, "isNpc": self.isNpc}
 
     def __eq__(self, other) -> bool:
         return (

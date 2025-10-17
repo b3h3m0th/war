@@ -4,6 +4,7 @@ from models.round import Round
 from models.turn import Turn
 from enums.variant import Variant
 
+import datetime
 from prompt_toolkit.shortcuts import choice
 
 
@@ -95,6 +96,16 @@ class Game:
             print(f"{key} wins: {value}")
 
         print(f"Ties: {ties}")
+
+    def get_timestamp_name(self, prefix: str = "game") -> str:
+        """
+        Returns a name for a Game based on the current time.
+        Format: <prefix>_YYYY-MM-DD-hh-mm-ss-ms
+        """
+
+        return f"{prefix}_{(datetime.datetime
+                          .now(datetime.timezone.utc)
+                          .strftime("%Y-%m-%d-%H-%M-%S-%f"))}"
 
     def __eq__(self, other) -> bool:
         """

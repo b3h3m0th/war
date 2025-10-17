@@ -90,9 +90,7 @@ class Deck:
         Converts a Deck into a dictionary that can be stringified into json
         """
 
-        return {
-            "cards": [card.to_dict() for card in self.cards],
-        }
+        return {"cards": [card.to_dict() for card in self.cards]}
 
     @classmethod
     def from_dict(cls, data: dict) -> Deck:

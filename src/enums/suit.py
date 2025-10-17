@@ -13,9 +13,7 @@ class Suit(Enum):
         Converts a Suit into a dictionary that can be stringified into json
         """
 
-        return {
-            "value": self.value,
-        }
+        return {"value": self.value}
 
     @classmethod
     def from_dict(cls, data: dict) -> Suit:
