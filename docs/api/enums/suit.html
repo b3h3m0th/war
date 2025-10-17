@@ -90,17 +90,15 @@
 </span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="sd">        Converts a Suit into a dictionary that can be stringified into json</span>
 </span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>        <span class="p">}</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Suit</span><span class="p">:</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="sd">        Returns a Suit based on a json dictionary</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Suit</span><span class="p">:</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="sd">        Returns a Suit based on a json dictionary</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
 </span></pre></div>
 
 
@@ -127,17 +125,15 @@
 </span><span id="Suit-14"><a href="#Suit-14"><span class="linenos">14</span></a><span class="sd">        Converts a Suit into a dictionary that can be stringified into json</span>
 </span><span id="Suit-15"><a href="#Suit-15"><span class="linenos">15</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="Suit-16"><a href="#Suit-16"><span class="linenos">16</span></a>
-</span><span id="Suit-17"><a href="#Suit-17"><span class="linenos">17</span></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="Suit-18"><a href="#Suit-18"><span class="linenos">18</span></a>            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-</span><span id="Suit-19"><a href="#Suit-19"><span class="linenos">19</span></a>        <span class="p">}</span>
-</span><span id="Suit-20"><a href="#Suit-20"><span class="linenos">20</span></a>
-</span><span id="Suit-21"><a href="#Suit-21"><span class="linenos">21</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Suit-22"><a href="#Suit-22"><span class="linenos">22</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Suit</span><span class="p">:</span>
-</span><span id="Suit-23"><a href="#Suit-23"><span class="linenos">23</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Suit-24"><a href="#Suit-24"><span class="linenos">24</span></a><span class="sd">        Returns a Suit based on a json dictionary</span>
-</span><span id="Suit-25"><a href="#Suit-25"><span class="linenos">25</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Suit-26"><a href="#Suit-26"><span class="linenos">26</span></a>
-</span><span id="Suit-27"><a href="#Suit-27"><span class="linenos">27</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+</span><span id="Suit-17"><a href="#Suit-17"><span class="linenos">17</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
+</span><span id="Suit-18"><a href="#Suit-18"><span class="linenos">18</span></a>
+</span><span id="Suit-19"><a href="#Suit-19"><span class="linenos">19</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Suit-20"><a href="#Suit-20"><span class="linenos">20</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Suit</span><span class="p">:</span>
+</span><span id="Suit-21"><a href="#Suit-21"><span class="linenos">21</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Suit-22"><a href="#Suit-22"><span class="linenos">22</span></a><span class="sd">        Returns a Suit based on a json dictionary</span>
+</span><span id="Suit-23"><a href="#Suit-23"><span class="linenos">23</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Suit-24"><a href="#Suit-24"><span class="linenos">24</span></a>
+</span><span id="Suit-25"><a href="#Suit-25"><span class="linenos">25</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
 </span></pre></div>
 
 
@@ -207,9 +203,7 @@
 </span><span id="Suit.to_dict-14"><a href="#Suit.to_dict-14"><span class="linenos">14</span></a><span class="sd">        Converts a Suit into a dictionary that can be stringified into json</span>
 </span><span id="Suit.to_dict-15"><a href="#Suit.to_dict-15"><span class="linenos">15</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="Suit.to_dict-16"><a href="#Suit.to_dict-16"><span class="linenos">16</span></a>
-</span><span id="Suit.to_dict-17"><a href="#Suit.to_dict-17"><span class="linenos">17</span></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="Suit.to_dict-18"><a href="#Suit.to_dict-18"><span class="linenos">18</span></a>            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-</span><span id="Suit.to_dict-19"><a href="#Suit.to_dict-19"><span class="linenos">19</span></a>        <span class="p">}</span>
+</span><span id="Suit.to_dict-17"><a href="#Suit.to_dict-17"><span class="linenos">17</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
 </span></pre></div>
 
 
@@ -230,13 +224,13 @@
 
     </div>
     <a class="headerlink" href="#Suit.from_dict"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Suit.from_dict-21"><a href="#Suit.from_dict-21"><span class="linenos">21</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Suit.from_dict-22"><a href="#Suit.from_dict-22"><span class="linenos">22</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Suit</span><span class="p">:</span>
-</span><span id="Suit.from_dict-23"><a href="#Suit.from_dict-23"><span class="linenos">23</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Suit.from_dict-24"><a href="#Suit.from_dict-24"><span class="linenos">24</span></a><span class="sd">        Returns a Suit based on a json dictionary</span>
-</span><span id="Suit.from_dict-25"><a href="#Suit.from_dict-25"><span class="linenos">25</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Suit.from_dict-26"><a href="#Suit.from_dict-26"><span class="linenos">26</span></a>
-</span><span id="Suit.from_dict-27"><a href="#Suit.from_dict-27"><span class="linenos">27</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Suit.from_dict-19"><a href="#Suit.from_dict-19"><span class="linenos">19</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Suit.from_dict-20"><a href="#Suit.from_dict-20"><span class="linenos">20</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Suit</span><span class="p">:</span>
+</span><span id="Suit.from_dict-21"><a href="#Suit.from_dict-21"><span class="linenos">21</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Suit.from_dict-22"><a href="#Suit.from_dict-22"><span class="linenos">22</span></a><span class="sd">        Returns a Suit based on a json dictionary</span>
+</span><span id="Suit.from_dict-23"><a href="#Suit.from_dict-23"><span class="linenos">23</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Suit.from_dict-24"><a href="#Suit.from_dict-24"><span class="linenos">24</span></a>
+</span><span id="Suit.from_dict-25"><a href="#Suit.from_dict-25"><span class="linenos">25</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
 </span></pre></div>
 
 

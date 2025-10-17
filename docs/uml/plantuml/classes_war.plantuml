@@ -17,16 +17,11 @@ class "Deck" as models.deck.Deck {
 }
 class "Game" as models.game.Game {
   deck
-<<<<<<< HEAD
+  name
   players : list
   rounds : list
   variant
   from_dict(data: dict) -> Turn
-=======
-  players : Optional[list[Player]]
-  rounds : list
-  variant
->>>>>>> ecc7ffd18113998b8930acc8bae83e3ef4b82144
   print_results()
   start() -> None
   to_dict() -> dict
@@ -49,16 +44,16 @@ class "Round" as models.round.Round {
   to_dict() -> dict
 }
 class "Serializer" as utils.serializer.Serializer {
-  load(cls, path: Path | str) -> object
-  save(obj: object, path: Path | str) -> None
+  load(cls, path: Path) -> object
+  save(obj: object, path: Path) -> None
 }
 class "Shell" as models.shell.Shell {
-  data_path : str
   game
+  games_path : Path
   intro : str
   prompt : str
   default(line)
-  {abstract}do_load() -> None
+  do_log(arg) -> None
   do_new(arg) -> None
   do_quit(arg) -> bool
   do_rules(arg) -> None
@@ -77,6 +72,8 @@ class "Turn" as models.turn.Turn {
 }
 class "Variant" as enums.variant.Variant {
   name
+  from_dict(data: dict) -> Variant
+  to_dict() -> dict
 }
 models.deck.Deck --* models.game.Game : deck
 models.game.Game --* models.shell.Shell : game

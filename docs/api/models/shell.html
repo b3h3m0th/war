@@ -46,7 +46,7 @@
                                 <a class="variable" href="#Shell.game">game</a>
                         </li>
                         <li>
-                                <a class="variable" href="#Shell.data_path">data_path</a>
+                                <a class="variable" href="#Shell.games_path">games_path</a>
                         </li>
                         <li>
                                 <a class="function" href="#Shell.print_menu">print_menu</a>
@@ -55,7 +55,7 @@
                                 <a class="function" href="#Shell.do_new">do_new</a>
                         </li>
                         <li>
-                                <a class="function" href="#Shell.do_load">do_load</a>
+                                <a class="function" href="#Shell.do_log">do_log</a>
                         </li>
                         <li>
                                 <a class="function" href="#Shell.do_rules">do_rules</a>
@@ -65,9 +65,6 @@
                         </li>
                         <li>
                                 <a class="function" href="#Shell.default">default</a>
-                        </li>
-                        <li>
-                                <a class="function" href="#Shell.do_rules">do_rules</a>
                         </li>
                 </ul>
 
@@ -93,212 +90,125 @@
 
                         <label class="view-source-button" for="mod-shell-view-source"><span>View Source</span></label>
 
-<<<<<<< HEAD
                         <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">cmd</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cmd</span>
 </span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">models.game</span><span class="w"> </span><span class="kn">import</span> <span class="n">Game</span>
 </span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">utils.serializer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Serializer</span>
 </span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a>
-</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">prompt_toolkit.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">choice</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a>
-</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a>
-</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Shell</span><span class="p">(</span><span class="n">Cmd</span><span class="p">):</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a>    <span class="n">intro</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Welcome to the war shell. Type help or ? to list commands.</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a>    <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;(war) &quot;</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a>
-</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a>    <span class="n">game</span><span class="p">:</span> <span class="n">Game</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a>    <span class="n">data_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;./data&quot;</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">prompt_toolkit.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">choice</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a>
+</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a>
+</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Shell</span><span class="p">(</span><span class="n">Cmd</span><span class="p">):</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a>    <span class="n">intro</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Welcome to the war shell. Type help or ? to list commands.</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a>    <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;(war) &quot;</span>
 </span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a>
-</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">intro</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_menu</span><span class="p">()</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>
-</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a>        <span class="nb">print</span><span class="p">()</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;┌──────────────────────────────────┐&quot;</span><span class="p">)</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│            WAR - Menu            │&quot;</span><span class="p">)</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;├──────────────────────────────────┤&quot;</span><span class="p">)</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (rules) Shows game rules        │&quot;</span><span class="p">)</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (new)   Start new game          │&quot;</span><span class="p">)</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (load)  Load previous game      │&quot;</span><span class="p">)</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (stats) Statistics              │&quot;</span><span class="p">)</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (help)  List commands           │&quot;</span><span class="p">)</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (quit)  Quit                    │&quot;</span><span class="p">)</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;└──────────────────────────────────┘&quot;</span><span class="p">)</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>
-</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="sd">        Start a new game</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>
-</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">()</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>    <span class="n">game</span><span class="p">:</span> <span class="n">Game</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a>    <span class="n">games_path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./data/games&quot;</span><span class="p">)</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>
+</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">intro</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_menu</span><span class="p">()</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>
+</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>        <span class="nb">print</span><span class="p">()</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;┌──────────────────────────────────┐&quot;</span><span class="p">)</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│            WAR - Menu            │&quot;</span><span class="p">)</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;├──────────────────────────────────┤&quot;</span><span class="p">)</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (rules) Shows game rules        │&quot;</span><span class="p">)</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (new)   Start new game          │&quot;</span><span class="p">)</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (log)   Game history            │&quot;</span><span class="p">)</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (stats) Statistics              │&quot;</span><span class="p">)</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (help)  List commands           │&quot;</span><span class="p">)</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (quit)  Quit                    │&quot;</span><span class="p">)</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;└──────────────────────────────────┘&quot;</span><span class="p">)</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">        Start a new game</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>
-</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>        <span class="n">save_game</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>            <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Do you want to save this game&quot;</span><span class="p">,</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>            <span class="n">options</span><span class="o">=</span><span class="p">[</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>                <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span><span class="p">),</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>                <span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span><span class="p">),</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>            <span class="p">],</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">()</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>        <span class="n">save_game</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>            <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Do you want to save this game&quot;</span><span class="p">,</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>            <span class="n">options</span><span class="o">=</span><span class="p">[(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span><span class="p">),</span> <span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span><span class="p">)],</span>
 </span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>            <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 </span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>        <span class="p">)</span>
 </span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>
 </span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>        <span class="k">if</span> <span class="n">save_game</span><span class="p">:</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>            <span class="n">Serializer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="p">)</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>
-</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_load</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>        <span class="k">pass</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="sd">        Shows the rules of the game.</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>            <span class="n">Serializer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">games_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.json&quot;</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>            <span class="p">)</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>        <span class="n">games_log</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Game</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>        <span class="k">for</span> <span class="n">json_file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">games_path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.json&quot;</span><span class="p">):</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>            <span class="n">games_log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Serializer</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">Game</span><span class="p">,</span> <span class="n">json_file</span><span class="p">))</span>
 </span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>
-</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>        <span class="nb">print</span><span class="p">(</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>            <span class="s2">&quot;Welcome to our version of Casino War!</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>            <span class="s2">&quot;The rules are slightly different from the &quot;</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>            <span class="s2">&quot;casino version, as this game does not include &quot;</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>            <span class="s2">&quot;betting.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>            <span class="s2">&quot;At the start, you choose which game variant you &quot;</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>            <span class="s2">&quot;want to play (to be implemented). You then choose &quot;</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>            <span class="s2">&quot;whether to start a new game or load a previous one, &quot;</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>            <span class="s2">&quot;and whether to play against </span><span class="se">\n</span><span class="s2"> another player or the &quot;</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>            <span class="s2">&quot;computer.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>            <span class="s2">&quot;In the basic War game, each player is dealt a card &quot;</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>            <span class="s2">&quot;by the dealer (a method). If your card ranks higher &quot;</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>            <span class="s2">&quot;than your opponent&#39;s, you earn one point. If the cards &quot;</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>            <span class="s2">&quot;tie, you go to war and both players </span><span class="se">\n</span><span class="s2"> draw again until &quot;</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>            <span class="s2">&quot;one player wins the round.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>            <span class="s2">&quot;After each round, you will be asked if you want to draw &quot;</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>            <span class="s2">&quot;another card. If you choose not to, you can save the game &quot;</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>            <span class="s2">&quot;and quit (to be implemented) or quit without saving.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>            <span class="s2">&quot;Once you exit the current game, you will return to the &quot;</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>            <span class="s2">&quot;main menu, where you can choose from the following options:</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>            <span class="s2">&quot; - Show stats (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>            <span class="s2">&quot; - Show rules</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>            <span class="s2">&quot; - Start a new game</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>            <span class="s2">&quot; - Load a saved game</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>            <span class="s2">&quot; - Quit</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>            <span class="s2">&quot; - Choose variant or game rules (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>        <span class="p">)</span>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_quit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="sd">        Quit the game</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing war&quot;</span><span class="p">)</span>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>        <span class="k">return</span> <span class="kc">True</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a><span class="sd">        Default case for unknown command</span>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>        <span class="nb">print</span><span class="p">(</span>
-</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>            <span class="sa">f</span><span class="s1">&#39;Unknown option: &quot;</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s1">&quot;. &#39;</span>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>            <span class="s2">&quot;Use help or ? to get a list of all options.&quot;</span>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>        <span class="p">)</span>
-</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>
-</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>
-</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>    <span class="n">Shell</span><span class="p">()</span><span class="o">.</span><span class="n">cmdloop</span><span class="p">()</span>
-=======
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">cmd</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cmd</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">models.game</span><span class="w"> </span><span class="kn">import</span> <span class="n">Game</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Shell</span><span class="p">(</span><span class="n">Cmd</span><span class="p">):</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>    <span class="n">intro</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Welcome to the war shell. Type help or ? to list commands.</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>    <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;(war) &quot;</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>    <span class="n">game</span><span class="p">:</span> <span class="n">Game</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">intro</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_menu</span><span class="p">()</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>        <span class="nb">print</span><span class="p">()</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;┌──────────────────────────────────┐&quot;</span><span class="p">)</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│            WAR - Menu            │&quot;</span><span class="p">)</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;├──────────────────────────────────┤&quot;</span><span class="p">)</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (rules) Shows game rules        │&quot;</span><span class="p">)</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (new)   Start new game          │&quot;</span><span class="p">)</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (help)  List commands           │&quot;</span><span class="p">)</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (stats) Statistics              │&quot;</span><span class="p">)</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (quit)  Quit                    │&quot;</span><span class="p">)</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;├────────────[Options]─────────────┤&quot;</span><span class="p">)</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  TBA                             │&quot;</span><span class="p">)</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;└──────────────────────────────────┘&quot;</span><span class="p">)</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a><span class="sd">        Start a new game</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">()</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_quit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="sd">        Quit the game</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing war&quot;</span><span class="p">)</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>        <span class="k">return</span> <span class="kc">True</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a><span class="sd">        Default case for unknown command</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>        <span class="nb">print</span><span class="p">(</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>            <span class="sa">f</span><span class="s1">&#39;Unknown option: &quot;</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s1">&quot;. &#39;</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>            <span class="s2">&quot;Use help or ? to get a list of all options.&quot;</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>        <span class="p">)</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a><span class="sd">        Shows the rules of the game.</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>
-</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>        <span class="nb">print</span><span class="p">(</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>            <span class="s2">&quot;Welcome to our version of Casino War!</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>            <span class="s2">&quot;The rules are slightly different from the &quot;</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>            <span class="s2">&quot;casino version, as this game does not include &quot;</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>            <span class="s2">&quot;betting.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>            <span class="s2">&quot;At the start, you choose which game variant you &quot;</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>            <span class="s2">&quot;want to play (to be implemented). You then choose &quot;</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>            <span class="s2">&quot;whether to start a new game or load a previous one, &quot;</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a>            <span class="s2">&quot;and whether to play against </span><span class="se">\n</span><span class="s2"> another player or the &quot;</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a>            <span class="s2">&quot;computer.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a>            <span class="s2">&quot;In the basic War game, each player is dealt a card &quot;</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a>            <span class="s2">&quot;by the dealer (a method). If your card ranks higher &quot;</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a>            <span class="s2">&quot;than your opponent&#39;s, you earn one point. If the cards &quot;</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a>            <span class="s2">&quot;tie, you go to war and both players </span><span class="se">\n</span><span class="s2"> draw again until &quot;</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a>            <span class="s2">&quot;one player wins the round.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a>            <span class="s2">&quot;After each round, you will be asked if you want to draw &quot;</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a>            <span class="s2">&quot;another card. If you choose not to, you can save the game &quot;</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a>            <span class="s2">&quot;and quit (to be implemented) or quit without saving.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a>            <span class="s2">&quot;Once you exit the current game, you will return to the &quot;</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a>            <span class="s2">&quot;main menu, where you can choose from the following options:</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos">83</span></a>            <span class="s2">&quot; - Show stats (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos">84</span></a>            <span class="s2">&quot; - Show rules</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos">85</span></a>            <span class="s2">&quot; - Start a new game</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-86"><a href="#L-86"><span class="linenos">86</span></a>            <span class="s2">&quot; - Load a saved game</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos">87</span></a>            <span class="s2">&quot; - Quit</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-88"><a href="#L-88"><span class="linenos">88</span></a>            <span class="s2">&quot; - Choose variant or game rules (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-89"><a href="#L-89"><span class="linenos">89</span></a>        <span class="p">)</span>
-</span><span id="L-90"><a href="#L-90"><span class="linenos">90</span></a>
-</span><span id="L-91"><a href="#L-91"><span class="linenos">91</span></a>
-</span><span id="L-92"><a href="#L-92"><span class="linenos">92</span></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos">93</span></a>    <span class="n">Shell</span><span class="p">()</span><span class="o">.</span><span class="n">cmdloop</span><span class="p">()</span>
->>>>>>> ecc7ffd18113998b8930acc8bae83e3ef4b82144
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>        <span class="k">for</span> <span class="n">game</span> <span class="ow">in</span> <span class="n">games_log</span><span class="p">:</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>            <span class="n">game</span><span class="o">.</span><span class="n">print_results</span><span class="p">()</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>            <span class="nb">print</span><span class="p">()</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a><span class="sd">        Shows the rules of the game.</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>        <span class="nb">print</span><span class="p">(</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>            <span class="s2">&quot;Welcome to our version of Casino War!</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>            <span class="s2">&quot;The rules are slightly different from the &quot;</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>            <span class="s2">&quot;casino version, as this game does not include &quot;</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>            <span class="s2">&quot;betting.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>            <span class="s2">&quot;At the start, you choose which game variant you &quot;</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>            <span class="s2">&quot;want to play (to be implemented). You then choose &quot;</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>            <span class="s2">&quot;whether to start a new game or load a previous one, &quot;</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>            <span class="s2">&quot;and whether to play against </span><span class="se">\n</span><span class="s2"> another player or the &quot;</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>            <span class="s2">&quot;computer.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>            <span class="s2">&quot;In the basic War game, each player is dealt a card &quot;</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>            <span class="s2">&quot;by the dealer (a method). If your card ranks higher &quot;</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>            <span class="s2">&quot;than your opponent&#39;s, you earn one point. If the cards &quot;</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>            <span class="s2">&quot;tie, you go to war and both players </span><span class="se">\n</span><span class="s2"> draw again until &quot;</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>            <span class="s2">&quot;one player wins the round.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>            <span class="s2">&quot;After each round, you will be asked if you want to draw &quot;</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>            <span class="s2">&quot;another card. If you choose not to, you can save the game &quot;</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>            <span class="s2">&quot;and quit (to be implemented) or quit without saving.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>            <span class="s2">&quot;Once you exit the current game, you will return to the &quot;</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>            <span class="s2">&quot;main menu, where you can choose from the following options:</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>            <span class="s2">&quot; - Show stats (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>            <span class="s2">&quot; - Show rules</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>            <span class="s2">&quot; - Start a new game</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>            <span class="s2">&quot; - Load a saved game</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>            <span class="s2">&quot; - Quit</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>            <span class="s2">&quot; - Choose variant or game rules (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>        <span class="p">)</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_quit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a><span class="sd">        Quit the game</span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing war&quot;</span><span class="p">)</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>        <span class="k">return</span> <span class="kc">True</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a><span class="sd">        Default case for unknown command</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>        <span class="nb">print</span><span class="p">(</span>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>            <span class="sa">f</span><span class="s1">&#39;Unknown option: &quot;</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s1">&quot;. &#39;</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>            <span class="s2">&quot;Use help or ? to get a list of all options.&quot;</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>        <span class="p">)</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>    <span class="n">Shell</span><span class="p">()</span><span class="o">.</span><span class="n">cmdloop</span><span class="p">()</span>
 </span></pre></div>
 
 
@@ -314,193 +224,111 @@
 
     </div>
     <a class="headerlink" href="#Shell"></a>
-<<<<<<< HEAD
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell-9"><a href="#Shell-9"><span class="linenos">  9</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Shell</span><span class="p">(</span><span class="n">Cmd</span><span class="p">):</span>
-</span><span id="Shell-10"><a href="#Shell-10"><span class="linenos"> 10</span></a>    <span class="n">intro</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Welcome to the war shell. Type help or ? to list commands.</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-11"><a href="#Shell-11"><span class="linenos"> 11</span></a>    <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;(war) &quot;</span>
-</span><span id="Shell-12"><a href="#Shell-12"><span class="linenos"> 12</span></a>
-</span><span id="Shell-13"><a href="#Shell-13"><span class="linenos"> 13</span></a>    <span class="n">game</span><span class="p">:</span> <span class="n">Game</span>
-</span><span id="Shell-14"><a href="#Shell-14"><span class="linenos"> 14</span></a>    <span class="n">data_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;./data&quot;</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell-12"><a href="#Shell-12"><span class="linenos"> 12</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Shell</span><span class="p">(</span><span class="n">Cmd</span><span class="p">):</span>
+</span><span id="Shell-13"><a href="#Shell-13"><span class="linenos"> 13</span></a>    <span class="n">intro</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Welcome to the war shell. Type help or ? to list commands.</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell-14"><a href="#Shell-14"><span class="linenos"> 14</span></a>    <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;(war) &quot;</span>
 </span><span id="Shell-15"><a href="#Shell-15"><span class="linenos"> 15</span></a>
-</span><span id="Shell-16"><a href="#Shell-16"><span class="linenos"> 16</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell-17"><a href="#Shell-17"><span class="linenos"> 17</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="Shell-18"><a href="#Shell-18"><span class="linenos"> 18</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">intro</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_menu</span><span class="p">()</span>
-</span><span id="Shell-19"><a href="#Shell-19"><span class="linenos"> 19</span></a>
-</span><span id="Shell-20"><a href="#Shell-20"><span class="linenos"> 20</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell-21"><a href="#Shell-21"><span class="linenos"> 21</span></a>        <span class="nb">print</span><span class="p">()</span>
-</span><span id="Shell-22"><a href="#Shell-22"><span class="linenos"> 22</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;┌──────────────────────────────────┐&quot;</span><span class="p">)</span>
-</span><span id="Shell-23"><a href="#Shell-23"><span class="linenos"> 23</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│            WAR - Menu            │&quot;</span><span class="p">)</span>
-</span><span id="Shell-24"><a href="#Shell-24"><span class="linenos"> 24</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;├──────────────────────────────────┤&quot;</span><span class="p">)</span>
-</span><span id="Shell-25"><a href="#Shell-25"><span class="linenos"> 25</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="Shell-26"><a href="#Shell-26"><span class="linenos"> 26</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (rules) Shows game rules        │&quot;</span><span class="p">)</span>
-</span><span id="Shell-27"><a href="#Shell-27"><span class="linenos"> 27</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (new)   Start new game          │&quot;</span><span class="p">)</span>
-</span><span id="Shell-28"><a href="#Shell-28"><span class="linenos"> 28</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (load)  Load previous game      │&quot;</span><span class="p">)</span>
-</span><span id="Shell-29"><a href="#Shell-29"><span class="linenos"> 29</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (stats) Statistics              │&quot;</span><span class="p">)</span>
-</span><span id="Shell-30"><a href="#Shell-30"><span class="linenos"> 30</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (help)  List commands           │&quot;</span><span class="p">)</span>
-</span><span id="Shell-31"><a href="#Shell-31"><span class="linenos"> 31</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (quit)  Quit                    │&quot;</span><span class="p">)</span>
-</span><span id="Shell-32"><a href="#Shell-32"><span class="linenos"> 32</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="Shell-33"><a href="#Shell-33"><span class="linenos"> 33</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;└──────────────────────────────────┘&quot;</span><span class="p">)</span>
-</span><span id="Shell-34"><a href="#Shell-34"><span class="linenos"> 34</span></a>
-</span><span id="Shell-35"><a href="#Shell-35"><span class="linenos"> 35</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell-36"><a href="#Shell-36"><span class="linenos"> 36</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell-37"><a href="#Shell-37"><span class="linenos"> 37</span></a><span class="sd">        Start a new game</span>
-</span><span id="Shell-38"><a href="#Shell-38"><span class="linenos"> 38</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell-39"><a href="#Shell-39"><span class="linenos"> 39</span></a>
-</span><span id="Shell-40"><a href="#Shell-40"><span class="linenos"> 40</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">()</span>
-</span><span id="Shell-41"><a href="#Shell-41"><span class="linenos"> 41</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span id="Shell-16"><a href="#Shell-16"><span class="linenos"> 16</span></a>    <span class="n">game</span><span class="p">:</span> <span class="n">Game</span>
+</span><span id="Shell-17"><a href="#Shell-17"><span class="linenos"> 17</span></a>    <span class="n">games_path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./data/games&quot;</span><span class="p">)</span>
+</span><span id="Shell-18"><a href="#Shell-18"><span class="linenos"> 18</span></a>
+</span><span id="Shell-19"><a href="#Shell-19"><span class="linenos"> 19</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Shell-20"><a href="#Shell-20"><span class="linenos"> 20</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="Shell-21"><a href="#Shell-21"><span class="linenos"> 21</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">intro</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_menu</span><span class="p">()</span>
+</span><span id="Shell-22"><a href="#Shell-22"><span class="linenos"> 22</span></a>
+</span><span id="Shell-23"><a href="#Shell-23"><span class="linenos"> 23</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Shell-24"><a href="#Shell-24"><span class="linenos"> 24</span></a>        <span class="nb">print</span><span class="p">()</span>
+</span><span id="Shell-25"><a href="#Shell-25"><span class="linenos"> 25</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;┌──────────────────────────────────┐&quot;</span><span class="p">)</span>
+</span><span id="Shell-26"><a href="#Shell-26"><span class="linenos"> 26</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│            WAR - Menu            │&quot;</span><span class="p">)</span>
+</span><span id="Shell-27"><a href="#Shell-27"><span class="linenos"> 27</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;├──────────────────────────────────┤&quot;</span><span class="p">)</span>
+</span><span id="Shell-28"><a href="#Shell-28"><span class="linenos"> 28</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
+</span><span id="Shell-29"><a href="#Shell-29"><span class="linenos"> 29</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (rules) Shows game rules        │&quot;</span><span class="p">)</span>
+</span><span id="Shell-30"><a href="#Shell-30"><span class="linenos"> 30</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (new)   Start new game          │&quot;</span><span class="p">)</span>
+</span><span id="Shell-31"><a href="#Shell-31"><span class="linenos"> 31</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (log)   Game history            │&quot;</span><span class="p">)</span>
+</span><span id="Shell-32"><a href="#Shell-32"><span class="linenos"> 32</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (stats) Statistics              │&quot;</span><span class="p">)</span>
+</span><span id="Shell-33"><a href="#Shell-33"><span class="linenos"> 33</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (help)  List commands           │&quot;</span><span class="p">)</span>
+</span><span id="Shell-34"><a href="#Shell-34"><span class="linenos"> 34</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (quit)  Quit                    │&quot;</span><span class="p">)</span>
+</span><span id="Shell-35"><a href="#Shell-35"><span class="linenos"> 35</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
+</span><span id="Shell-36"><a href="#Shell-36"><span class="linenos"> 36</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;└──────────────────────────────────┘&quot;</span><span class="p">)</span>
+</span><span id="Shell-37"><a href="#Shell-37"><span class="linenos"> 37</span></a>
+</span><span id="Shell-38"><a href="#Shell-38"><span class="linenos"> 38</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Shell-39"><a href="#Shell-39"><span class="linenos"> 39</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Shell-40"><a href="#Shell-40"><span class="linenos"> 40</span></a><span class="sd">        Start a new game</span>
+</span><span id="Shell-41"><a href="#Shell-41"><span class="linenos"> 41</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="Shell-42"><a href="#Shell-42"><span class="linenos"> 42</span></a>
-</span><span id="Shell-43"><a href="#Shell-43"><span class="linenos"> 43</span></a>        <span class="n">save_game</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span>
-</span><span id="Shell-44"><a href="#Shell-44"><span class="linenos"> 44</span></a>            <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Do you want to save this game&quot;</span><span class="p">,</span>
-</span><span id="Shell-45"><a href="#Shell-45"><span class="linenos"> 45</span></a>            <span class="n">options</span><span class="o">=</span><span class="p">[</span>
-</span><span id="Shell-46"><a href="#Shell-46"><span class="linenos"> 46</span></a>                <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span><span class="p">),</span>
-</span><span id="Shell-47"><a href="#Shell-47"><span class="linenos"> 47</span></a>                <span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span><span class="p">),</span>
-</span><span id="Shell-48"><a href="#Shell-48"><span class="linenos"> 48</span></a>            <span class="p">],</span>
+</span><span id="Shell-43"><a href="#Shell-43"><span class="linenos"> 43</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">()</span>
+</span><span id="Shell-44"><a href="#Shell-44"><span class="linenos"> 44</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span id="Shell-45"><a href="#Shell-45"><span class="linenos"> 45</span></a>
+</span><span id="Shell-46"><a href="#Shell-46"><span class="linenos"> 46</span></a>        <span class="n">save_game</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span>
+</span><span id="Shell-47"><a href="#Shell-47"><span class="linenos"> 47</span></a>            <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Do you want to save this game&quot;</span><span class="p">,</span>
+</span><span id="Shell-48"><a href="#Shell-48"><span class="linenos"> 48</span></a>            <span class="n">options</span><span class="o">=</span><span class="p">[(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span><span class="p">),</span> <span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span><span class="p">)],</span>
 </span><span id="Shell-49"><a href="#Shell-49"><span class="linenos"> 49</span></a>            <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 </span><span id="Shell-50"><a href="#Shell-50"><span class="linenos"> 50</span></a>        <span class="p">)</span>
 </span><span id="Shell-51"><a href="#Shell-51"><span class="linenos"> 51</span></a>
 </span><span id="Shell-52"><a href="#Shell-52"><span class="linenos"> 52</span></a>        <span class="k">if</span> <span class="n">save_game</span><span class="p">:</span>
-</span><span id="Shell-53"><a href="#Shell-53"><span class="linenos"> 53</span></a>            <span class="n">Serializer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="p">)</span>
-</span><span id="Shell-54"><a href="#Shell-54"><span class="linenos"> 54</span></a>
-</span><span id="Shell-55"><a href="#Shell-55"><span class="linenos"> 55</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_load</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell-56"><a href="#Shell-56"><span class="linenos"> 56</span></a>        <span class="k">pass</span>
-</span><span id="Shell-57"><a href="#Shell-57"><span class="linenos"> 57</span></a>
-</span><span id="Shell-58"><a href="#Shell-58"><span class="linenos"> 58</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell-59"><a href="#Shell-59"><span class="linenos"> 59</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell-60"><a href="#Shell-60"><span class="linenos"> 60</span></a><span class="sd">        Shows the rules of the game.</span>
-</span><span id="Shell-61"><a href="#Shell-61"><span class="linenos"> 61</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Shell-53"><a href="#Shell-53"><span class="linenos"> 53</span></a>            <span class="n">Serializer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+</span><span id="Shell-54"><a href="#Shell-54"><span class="linenos"> 54</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">games_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.json&quot;</span>
+</span><span id="Shell-55"><a href="#Shell-55"><span class="linenos"> 55</span></a>            <span class="p">)</span>
+</span><span id="Shell-56"><a href="#Shell-56"><span class="linenos"> 56</span></a>
+</span><span id="Shell-57"><a href="#Shell-57"><span class="linenos"> 57</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Shell-58"><a href="#Shell-58"><span class="linenos"> 58</span></a>        <span class="n">games_log</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Game</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="Shell-59"><a href="#Shell-59"><span class="linenos"> 59</span></a>
+</span><span id="Shell-60"><a href="#Shell-60"><span class="linenos"> 60</span></a>        <span class="k">for</span> <span class="n">json_file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">games_path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.json&quot;</span><span class="p">):</span>
+</span><span id="Shell-61"><a href="#Shell-61"><span class="linenos"> 61</span></a>            <span class="n">games_log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Serializer</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">Game</span><span class="p">,</span> <span class="n">json_file</span><span class="p">))</span>
 </span><span id="Shell-62"><a href="#Shell-62"><span class="linenos"> 62</span></a>
-</span><span id="Shell-63"><a href="#Shell-63"><span class="linenos"> 63</span></a>        <span class="nb">print</span><span class="p">(</span>
-</span><span id="Shell-64"><a href="#Shell-64"><span class="linenos"> 64</span></a>            <span class="s2">&quot;Welcome to our version of Casino War!</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-65"><a href="#Shell-65"><span class="linenos"> 65</span></a>            <span class="s2">&quot;The rules are slightly different from the &quot;</span>
-</span><span id="Shell-66"><a href="#Shell-66"><span class="linenos"> 66</span></a>            <span class="s2">&quot;casino version, as this game does not include &quot;</span>
-</span><span id="Shell-67"><a href="#Shell-67"><span class="linenos"> 67</span></a>            <span class="s2">&quot;betting.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-68"><a href="#Shell-68"><span class="linenos"> 68</span></a>            <span class="s2">&quot;At the start, you choose which game variant you &quot;</span>
-</span><span id="Shell-69"><a href="#Shell-69"><span class="linenos"> 69</span></a>            <span class="s2">&quot;want to play (to be implemented). You then choose &quot;</span>
-</span><span id="Shell-70"><a href="#Shell-70"><span class="linenos"> 70</span></a>            <span class="s2">&quot;whether to start a new game or load a previous one, &quot;</span>
-</span><span id="Shell-71"><a href="#Shell-71"><span class="linenos"> 71</span></a>            <span class="s2">&quot;and whether to play against </span><span class="se">\n</span><span class="s2"> another player or the &quot;</span>
-</span><span id="Shell-72"><a href="#Shell-72"><span class="linenos"> 72</span></a>            <span class="s2">&quot;computer.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-73"><a href="#Shell-73"><span class="linenos"> 73</span></a>            <span class="s2">&quot;In the basic War game, each player is dealt a card &quot;</span>
-</span><span id="Shell-74"><a href="#Shell-74"><span class="linenos"> 74</span></a>            <span class="s2">&quot;by the dealer (a method). If your card ranks higher &quot;</span>
-</span><span id="Shell-75"><a href="#Shell-75"><span class="linenos"> 75</span></a>            <span class="s2">&quot;than your opponent&#39;s, you earn one point. If the cards &quot;</span>
-</span><span id="Shell-76"><a href="#Shell-76"><span class="linenos"> 76</span></a>            <span class="s2">&quot;tie, you go to war and both players </span><span class="se">\n</span><span class="s2"> draw again until &quot;</span>
-</span><span id="Shell-77"><a href="#Shell-77"><span class="linenos"> 77</span></a>            <span class="s2">&quot;one player wins the round.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-78"><a href="#Shell-78"><span class="linenos"> 78</span></a>            <span class="s2">&quot;After each round, you will be asked if you want to draw &quot;</span>
-</span><span id="Shell-79"><a href="#Shell-79"><span class="linenos"> 79</span></a>            <span class="s2">&quot;another card. If you choose not to, you can save the game &quot;</span>
-</span><span id="Shell-80"><a href="#Shell-80"><span class="linenos"> 80</span></a>            <span class="s2">&quot;and quit (to be implemented) or quit without saving.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-81"><a href="#Shell-81"><span class="linenos"> 81</span></a>            <span class="s2">&quot;Once you exit the current game, you will return to the &quot;</span>
-</span><span id="Shell-82"><a href="#Shell-82"><span class="linenos"> 82</span></a>            <span class="s2">&quot;main menu, where you can choose from the following options:</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-83"><a href="#Shell-83"><span class="linenos"> 83</span></a>            <span class="s2">&quot; - Show stats (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-84"><a href="#Shell-84"><span class="linenos"> 84</span></a>            <span class="s2">&quot; - Show rules</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-85"><a href="#Shell-85"><span class="linenos"> 85</span></a>            <span class="s2">&quot; - Start a new game</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-86"><a href="#Shell-86"><span class="linenos"> 86</span></a>            <span class="s2">&quot; - Load a saved game</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-87"><a href="#Shell-87"><span class="linenos"> 87</span></a>            <span class="s2">&quot; - Quit</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-88"><a href="#Shell-88"><span class="linenos"> 88</span></a>            <span class="s2">&quot; - Choose variant or game rules (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-89"><a href="#Shell-89"><span class="linenos"> 89</span></a>        <span class="p">)</span>
-</span><span id="Shell-90"><a href="#Shell-90"><span class="linenos"> 90</span></a>
-</span><span id="Shell-91"><a href="#Shell-91"><span class="linenos"> 91</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_quit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="Shell-92"><a href="#Shell-92"><span class="linenos"> 92</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell-93"><a href="#Shell-93"><span class="linenos"> 93</span></a><span class="sd">        Quit the game</span>
-</span><span id="Shell-94"><a href="#Shell-94"><span class="linenos"> 94</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell-95"><a href="#Shell-95"><span class="linenos"> 95</span></a>
-</span><span id="Shell-96"><a href="#Shell-96"><span class="linenos"> 96</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing war&quot;</span><span class="p">)</span>
-</span><span id="Shell-97"><a href="#Shell-97"><span class="linenos"> 97</span></a>        <span class="k">return</span> <span class="kc">True</span>
-</span><span id="Shell-98"><a href="#Shell-98"><span class="linenos"> 98</span></a>
-</span><span id="Shell-99"><a href="#Shell-99"><span class="linenos"> 99</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
-</span><span id="Shell-100"><a href="#Shell-100"><span class="linenos">100</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell-101"><a href="#Shell-101"><span class="linenos">101</span></a><span class="sd">        Default case for unknown command</span>
-</span><span id="Shell-102"><a href="#Shell-102"><span class="linenos">102</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell-103"><a href="#Shell-103"><span class="linenos">103</span></a>
-</span><span id="Shell-104"><a href="#Shell-104"><span class="linenos">104</span></a>        <span class="nb">print</span><span class="p">(</span>
-</span><span id="Shell-105"><a href="#Shell-105"><span class="linenos">105</span></a>            <span class="sa">f</span><span class="s1">&#39;Unknown option: &quot;</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s1">&quot;. &#39;</span>
-</span><span id="Shell-106"><a href="#Shell-106"><span class="linenos">106</span></a>            <span class="s2">&quot;Use help or ? to get a list of all options.&quot;</span>
-</span><span id="Shell-107"><a href="#Shell-107"><span class="linenos">107</span></a>        <span class="p">)</span>
-=======
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell-6"><a href="#Shell-6"><span class="linenos"> 6</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Shell</span><span class="p">(</span><span class="n">Cmd</span><span class="p">):</span>
-</span><span id="Shell-7"><a href="#Shell-7"><span class="linenos"> 7</span></a>    <span class="n">intro</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Welcome to the war shell. Type help or ? to list commands.</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-8"><a href="#Shell-8"><span class="linenos"> 8</span></a>    <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;(war) &quot;</span>
-</span><span id="Shell-9"><a href="#Shell-9"><span class="linenos"> 9</span></a>    <span class="n">game</span><span class="p">:</span> <span class="n">Game</span>
-</span><span id="Shell-10"><a href="#Shell-10"><span class="linenos">10</span></a>
-</span><span id="Shell-11"><a href="#Shell-11"><span class="linenos">11</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell-12"><a href="#Shell-12"><span class="linenos">12</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="Shell-13"><a href="#Shell-13"><span class="linenos">13</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">intro</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_menu</span><span class="p">()</span>
-</span><span id="Shell-14"><a href="#Shell-14"><span class="linenos">14</span></a>
-</span><span id="Shell-15"><a href="#Shell-15"><span class="linenos">15</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell-16"><a href="#Shell-16"><span class="linenos">16</span></a>        <span class="nb">print</span><span class="p">()</span>
-</span><span id="Shell-17"><a href="#Shell-17"><span class="linenos">17</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;┌──────────────────────────────────┐&quot;</span><span class="p">)</span>
-</span><span id="Shell-18"><a href="#Shell-18"><span class="linenos">18</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│            WAR - Menu            │&quot;</span><span class="p">)</span>
-</span><span id="Shell-19"><a href="#Shell-19"><span class="linenos">19</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;├──────────────────────────────────┤&quot;</span><span class="p">)</span>
-</span><span id="Shell-20"><a href="#Shell-20"><span class="linenos">20</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="Shell-21"><a href="#Shell-21"><span class="linenos">21</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (rules) Shows game rules        │&quot;</span><span class="p">)</span>
-</span><span id="Shell-22"><a href="#Shell-22"><span class="linenos">22</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (new)   Start new game          │&quot;</span><span class="p">)</span>
-</span><span id="Shell-23"><a href="#Shell-23"><span class="linenos">23</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (help)  List commands           │&quot;</span><span class="p">)</span>
-</span><span id="Shell-24"><a href="#Shell-24"><span class="linenos">24</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (stats) Statistics              │&quot;</span><span class="p">)</span>
-</span><span id="Shell-25"><a href="#Shell-25"><span class="linenos">25</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (quit)  Quit                    │&quot;</span><span class="p">)</span>
-</span><span id="Shell-26"><a href="#Shell-26"><span class="linenos">26</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="Shell-27"><a href="#Shell-27"><span class="linenos">27</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;├────────────[Options]─────────────┤&quot;</span><span class="p">)</span>
-</span><span id="Shell-28"><a href="#Shell-28"><span class="linenos">28</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="Shell-29"><a href="#Shell-29"><span class="linenos">29</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  TBA                             │&quot;</span><span class="p">)</span>
-</span><span id="Shell-30"><a href="#Shell-30"><span class="linenos">30</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="Shell-31"><a href="#Shell-31"><span class="linenos">31</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;└──────────────────────────────────┘&quot;</span><span class="p">)</span>
-</span><span id="Shell-32"><a href="#Shell-32"><span class="linenos">32</span></a>
-</span><span id="Shell-33"><a href="#Shell-33"><span class="linenos">33</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell-34"><a href="#Shell-34"><span class="linenos">34</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell-35"><a href="#Shell-35"><span class="linenos">35</span></a><span class="sd">        Start a new game</span>
-</span><span id="Shell-36"><a href="#Shell-36"><span class="linenos">36</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell-37"><a href="#Shell-37"><span class="linenos">37</span></a>
-</span><span id="Shell-38"><a href="#Shell-38"><span class="linenos">38</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">()</span>
-</span><span id="Shell-39"><a href="#Shell-39"><span class="linenos">39</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</span><span id="Shell-40"><a href="#Shell-40"><span class="linenos">40</span></a>
-</span><span id="Shell-41"><a href="#Shell-41"><span class="linenos">41</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_quit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="Shell-42"><a href="#Shell-42"><span class="linenos">42</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell-43"><a href="#Shell-43"><span class="linenos">43</span></a><span class="sd">        Quit the game</span>
-</span><span id="Shell-44"><a href="#Shell-44"><span class="linenos">44</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell-45"><a href="#Shell-45"><span class="linenos">45</span></a>
-</span><span id="Shell-46"><a href="#Shell-46"><span class="linenos">46</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing war&quot;</span><span class="p">)</span>
-</span><span id="Shell-47"><a href="#Shell-47"><span class="linenos">47</span></a>        <span class="k">return</span> <span class="kc">True</span>
-</span><span id="Shell-48"><a href="#Shell-48"><span class="linenos">48</span></a>
-</span><span id="Shell-49"><a href="#Shell-49"><span class="linenos">49</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
-</span><span id="Shell-50"><a href="#Shell-50"><span class="linenos">50</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell-51"><a href="#Shell-51"><span class="linenos">51</span></a><span class="sd">        Default case for unknown command</span>
-</span><span id="Shell-52"><a href="#Shell-52"><span class="linenos">52</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell-53"><a href="#Shell-53"><span class="linenos">53</span></a>
-</span><span id="Shell-54"><a href="#Shell-54"><span class="linenos">54</span></a>        <span class="nb">print</span><span class="p">(</span>
-</span><span id="Shell-55"><a href="#Shell-55"><span class="linenos">55</span></a>            <span class="sa">f</span><span class="s1">&#39;Unknown option: &quot;</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s1">&quot;. &#39;</span>
-</span><span id="Shell-56"><a href="#Shell-56"><span class="linenos">56</span></a>            <span class="s2">&quot;Use help or ? to get a list of all options.&quot;</span>
-</span><span id="Shell-57"><a href="#Shell-57"><span class="linenos">57</span></a>        <span class="p">)</span>
-</span><span id="Shell-58"><a href="#Shell-58"><span class="linenos">58</span></a>
-</span><span id="Shell-59"><a href="#Shell-59"><span class="linenos">59</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell-60"><a href="#Shell-60"><span class="linenos">60</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell-61"><a href="#Shell-61"><span class="linenos">61</span></a><span class="sd">        Shows the rules of the game.</span>
-</span><span id="Shell-62"><a href="#Shell-62"><span class="linenos">62</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell-63"><a href="#Shell-63"><span class="linenos">63</span></a>
-</span><span id="Shell-64"><a href="#Shell-64"><span class="linenos">64</span></a>        <span class="nb">print</span><span class="p">(</span>
-</span><span id="Shell-65"><a href="#Shell-65"><span class="linenos">65</span></a>            <span class="s2">&quot;Welcome to our version of Casino War!</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-66"><a href="#Shell-66"><span class="linenos">66</span></a>            <span class="s2">&quot;The rules are slightly different from the &quot;</span>
-</span><span id="Shell-67"><a href="#Shell-67"><span class="linenos">67</span></a>            <span class="s2">&quot;casino version, as this game does not include &quot;</span>
-</span><span id="Shell-68"><a href="#Shell-68"><span class="linenos">68</span></a>            <span class="s2">&quot;betting.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-69"><a href="#Shell-69"><span class="linenos">69</span></a>            <span class="s2">&quot;At the start, you choose which game variant you &quot;</span>
-</span><span id="Shell-70"><a href="#Shell-70"><span class="linenos">70</span></a>            <span class="s2">&quot;want to play (to be implemented). You then choose &quot;</span>
-</span><span id="Shell-71"><a href="#Shell-71"><span class="linenos">71</span></a>            <span class="s2">&quot;whether to start a new game or load a previous one, &quot;</span>
-</span><span id="Shell-72"><a href="#Shell-72"><span class="linenos">72</span></a>            <span class="s2">&quot;and whether to play against </span><span class="se">\n</span><span class="s2"> another player or the &quot;</span>
-</span><span id="Shell-73"><a href="#Shell-73"><span class="linenos">73</span></a>            <span class="s2">&quot;computer.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-74"><a href="#Shell-74"><span class="linenos">74</span></a>            <span class="s2">&quot;In the basic War game, each player is dealt a card &quot;</span>
-</span><span id="Shell-75"><a href="#Shell-75"><span class="linenos">75</span></a>            <span class="s2">&quot;by the dealer (a method). If your card ranks higher &quot;</span>
-</span><span id="Shell-76"><a href="#Shell-76"><span class="linenos">76</span></a>            <span class="s2">&quot;than your opponent&#39;s, you earn one point. If the cards &quot;</span>
-</span><span id="Shell-77"><a href="#Shell-77"><span class="linenos">77</span></a>            <span class="s2">&quot;tie, you go to war and both players </span><span class="se">\n</span><span class="s2"> draw again until &quot;</span>
-</span><span id="Shell-78"><a href="#Shell-78"><span class="linenos">78</span></a>            <span class="s2">&quot;one player wins the round.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-79"><a href="#Shell-79"><span class="linenos">79</span></a>            <span class="s2">&quot;After each round, you will be asked if you want to draw &quot;</span>
-</span><span id="Shell-80"><a href="#Shell-80"><span class="linenos">80</span></a>            <span class="s2">&quot;another card. If you choose not to, you can save the game &quot;</span>
-</span><span id="Shell-81"><a href="#Shell-81"><span class="linenos">81</span></a>            <span class="s2">&quot;and quit (to be implemented) or quit without saving.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-82"><a href="#Shell-82"><span class="linenos">82</span></a>            <span class="s2">&quot;Once you exit the current game, you will return to the &quot;</span>
-</span><span id="Shell-83"><a href="#Shell-83"><span class="linenos">83</span></a>            <span class="s2">&quot;main menu, where you can choose from the following options:</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-84"><a href="#Shell-84"><span class="linenos">84</span></a>            <span class="s2">&quot; - Show stats (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-85"><a href="#Shell-85"><span class="linenos">85</span></a>            <span class="s2">&quot; - Show rules</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-86"><a href="#Shell-86"><span class="linenos">86</span></a>            <span class="s2">&quot; - Start a new game</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-87"><a href="#Shell-87"><span class="linenos">87</span></a>            <span class="s2">&quot; - Load a saved game</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-88"><a href="#Shell-88"><span class="linenos">88</span></a>            <span class="s2">&quot; - Quit</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-89"><a href="#Shell-89"><span class="linenos">89</span></a>            <span class="s2">&quot; - Choose variant or game rules (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell-90"><a href="#Shell-90"><span class="linenos">90</span></a>        <span class="p">)</span>
->>>>>>> ecc7ffd18113998b8930acc8bae83e3ef4b82144
+</span><span id="Shell-63"><a href="#Shell-63"><span class="linenos"> 63</span></a>        <span class="k">for</span> <span class="n">game</span> <span class="ow">in</span> <span class="n">games_log</span><span class="p">:</span>
+</span><span id="Shell-64"><a href="#Shell-64"><span class="linenos"> 64</span></a>            <span class="n">game</span><span class="o">.</span><span class="n">print_results</span><span class="p">()</span>
+</span><span id="Shell-65"><a href="#Shell-65"><span class="linenos"> 65</span></a>            <span class="nb">print</span><span class="p">()</span>
+</span><span id="Shell-66"><a href="#Shell-66"><span class="linenos"> 66</span></a>
+</span><span id="Shell-67"><a href="#Shell-67"><span class="linenos"> 67</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Shell-68"><a href="#Shell-68"><span class="linenos"> 68</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Shell-69"><a href="#Shell-69"><span class="linenos"> 69</span></a><span class="sd">        Shows the rules of the game.</span>
+</span><span id="Shell-70"><a href="#Shell-70"><span class="linenos"> 70</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Shell-71"><a href="#Shell-71"><span class="linenos"> 71</span></a>
+</span><span id="Shell-72"><a href="#Shell-72"><span class="linenos"> 72</span></a>        <span class="nb">print</span><span class="p">(</span>
+</span><span id="Shell-73"><a href="#Shell-73"><span class="linenos"> 73</span></a>            <span class="s2">&quot;Welcome to our version of Casino War!</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="Shell-74"><a href="#Shell-74"><span class="linenos"> 74</span></a>            <span class="s2">&quot;The rules are slightly different from the &quot;</span>
+</span><span id="Shell-75"><a href="#Shell-75"><span class="linenos"> 75</span></a>            <span class="s2">&quot;casino version, as this game does not include &quot;</span>
+</span><span id="Shell-76"><a href="#Shell-76"><span class="linenos"> 76</span></a>            <span class="s2">&quot;betting.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="Shell-77"><a href="#Shell-77"><span class="linenos"> 77</span></a>            <span class="s2">&quot;At the start, you choose which game variant you &quot;</span>
+</span><span id="Shell-78"><a href="#Shell-78"><span class="linenos"> 78</span></a>            <span class="s2">&quot;want to play (to be implemented). You then choose &quot;</span>
+</span><span id="Shell-79"><a href="#Shell-79"><span class="linenos"> 79</span></a>            <span class="s2">&quot;whether to start a new game or load a previous one, &quot;</span>
+</span><span id="Shell-80"><a href="#Shell-80"><span class="linenos"> 80</span></a>            <span class="s2">&quot;and whether to play against </span><span class="se">\n</span><span class="s2"> another player or the &quot;</span>
+</span><span id="Shell-81"><a href="#Shell-81"><span class="linenos"> 81</span></a>            <span class="s2">&quot;computer.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="Shell-82"><a href="#Shell-82"><span class="linenos"> 82</span></a>            <span class="s2">&quot;In the basic War game, each player is dealt a card &quot;</span>
+</span><span id="Shell-83"><a href="#Shell-83"><span class="linenos"> 83</span></a>            <span class="s2">&quot;by the dealer (a method). If your card ranks higher &quot;</span>
+</span><span id="Shell-84"><a href="#Shell-84"><span class="linenos"> 84</span></a>            <span class="s2">&quot;than your opponent&#39;s, you earn one point. If the cards &quot;</span>
+</span><span id="Shell-85"><a href="#Shell-85"><span class="linenos"> 85</span></a>            <span class="s2">&quot;tie, you go to war and both players </span><span class="se">\n</span><span class="s2"> draw again until &quot;</span>
+</span><span id="Shell-86"><a href="#Shell-86"><span class="linenos"> 86</span></a>            <span class="s2">&quot;one player wins the round.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="Shell-87"><a href="#Shell-87"><span class="linenos"> 87</span></a>            <span class="s2">&quot;After each round, you will be asked if you want to draw &quot;</span>
+</span><span id="Shell-88"><a href="#Shell-88"><span class="linenos"> 88</span></a>            <span class="s2">&quot;another card. If you choose not to, you can save the game &quot;</span>
+</span><span id="Shell-89"><a href="#Shell-89"><span class="linenos"> 89</span></a>            <span class="s2">&quot;and quit (to be implemented) or quit without saving.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="Shell-90"><a href="#Shell-90"><span class="linenos"> 90</span></a>            <span class="s2">&quot;Once you exit the current game, you will return to the &quot;</span>
+</span><span id="Shell-91"><a href="#Shell-91"><span class="linenos"> 91</span></a>            <span class="s2">&quot;main menu, where you can choose from the following options:</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell-92"><a href="#Shell-92"><span class="linenos"> 92</span></a>            <span class="s2">&quot; - Show stats (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell-93"><a href="#Shell-93"><span class="linenos"> 93</span></a>            <span class="s2">&quot; - Show rules</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell-94"><a href="#Shell-94"><span class="linenos"> 94</span></a>            <span class="s2">&quot; - Start a new game</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell-95"><a href="#Shell-95"><span class="linenos"> 95</span></a>            <span class="s2">&quot; - Load a saved game</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell-96"><a href="#Shell-96"><span class="linenos"> 96</span></a>            <span class="s2">&quot; - Quit</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell-97"><a href="#Shell-97"><span class="linenos"> 97</span></a>            <span class="s2">&quot; - Choose variant or game rules (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell-98"><a href="#Shell-98"><span class="linenos"> 98</span></a>        <span class="p">)</span>
+</span><span id="Shell-99"><a href="#Shell-99"><span class="linenos"> 99</span></a>
+</span><span id="Shell-100"><a href="#Shell-100"><span class="linenos">100</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_quit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="Shell-101"><a href="#Shell-101"><span class="linenos">101</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Shell-102"><a href="#Shell-102"><span class="linenos">102</span></a><span class="sd">        Quit the game</span>
+</span><span id="Shell-103"><a href="#Shell-103"><span class="linenos">103</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Shell-104"><a href="#Shell-104"><span class="linenos">104</span></a>
+</span><span id="Shell-105"><a href="#Shell-105"><span class="linenos">105</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing war&quot;</span><span class="p">)</span>
+</span><span id="Shell-106"><a href="#Shell-106"><span class="linenos">106</span></a>        <span class="k">return</span> <span class="kc">True</span>
+</span><span id="Shell-107"><a href="#Shell-107"><span class="linenos">107</span></a>
+</span><span id="Shell-108"><a href="#Shell-108"><span class="linenos">108</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+</span><span id="Shell-109"><a href="#Shell-109"><span class="linenos">109</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Shell-110"><a href="#Shell-110"><span class="linenos">110</span></a><span class="sd">        Default case for unknown command</span>
+</span><span id="Shell-111"><a href="#Shell-111"><span class="linenos">111</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Shell-112"><a href="#Shell-112"><span class="linenos">112</span></a>
+</span><span id="Shell-113"><a href="#Shell-113"><span class="linenos">113</span></a>        <span class="nb">print</span><span class="p">(</span>
+</span><span id="Shell-114"><a href="#Shell-114"><span class="linenos">114</span></a>            <span class="sa">f</span><span class="s1">&#39;Unknown option: &quot;</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s1">&quot;. &#39;</span>
+</span><span id="Shell-115"><a href="#Shell-115"><span class="linenos">115</span></a>            <span class="s2">&quot;Use help or ? to get a list of all options.&quot;</span>
+</span><span id="Shell-116"><a href="#Shell-116"><span class="linenos">116</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
@@ -526,9 +354,9 @@ in order to inherit Cmd's methods and encapsulate action methods.</p>
 
     </div>
     <a class="headerlink" href="#Shell.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.__init__-16"><a href="#Shell.__init__-16"><span class="linenos">16</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell.__init__-17"><a href="#Shell.__init__-17"><span class="linenos">17</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="Shell.__init__-18"><a href="#Shell.__init__-18"><span class="linenos">18</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">intro</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_menu</span><span class="p">()</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.__init__-19"><a href="#Shell.__init__-19"><span class="linenos">19</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Shell.__init__-20"><a href="#Shell.__init__-20"><span class="linenos">20</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="Shell.__init__-21"><a href="#Shell.__init__-21"><span class="linenos">21</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">intro</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_menu</span><span class="p">()</span>
 </span></pre></div>
 
 
@@ -579,14 +407,14 @@ sys.stdin and sys.stdout are used.</p>
     
 
                             </div>
-                            <div id="Shell.data_path" class="classattr">
+                            <div id="Shell.games_path" class="classattr">
                                 <div class="attr variable">
-            <span class="name">data_path</span><span class="annotation">: str</span>        =
-<span class="default_value">&#39;./data&#39;</span>
+            <span class="name">games_path</span><span class="annotation">: pathlib.Path</span>        =
+<span class="default_value">WindowsPath(&#39;data/games&#39;)</span>
 
         
     </div>
-    <a class="headerlink" href="#Shell.data_path"></a>
+    <a class="headerlink" href="#Shell.games_path"></a>
     
     
 
@@ -602,40 +430,20 @@ sys.stdin and sys.stdout are used.</p>
 
     </div>
     <a class="headerlink" href="#Shell.print_menu"></a>
-<<<<<<< HEAD
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.print_menu-20"><a href="#Shell.print_menu-20"><span class="linenos">20</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell.print_menu-21"><a href="#Shell.print_menu-21"><span class="linenos">21</span></a>        <span class="nb">print</span><span class="p">()</span>
-</span><span id="Shell.print_menu-22"><a href="#Shell.print_menu-22"><span class="linenos">22</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;┌──────────────────────────────────┐&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-23"><a href="#Shell.print_menu-23"><span class="linenos">23</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│            WAR - Menu            │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-24"><a href="#Shell.print_menu-24"><span class="linenos">24</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;├──────────────────────────────────┤&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-25"><a href="#Shell.print_menu-25"><span class="linenos">25</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-26"><a href="#Shell.print_menu-26"><span class="linenos">26</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (rules) Shows game rules        │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-27"><a href="#Shell.print_menu-27"><span class="linenos">27</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (new)   Start new game          │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-28"><a href="#Shell.print_menu-28"><span class="linenos">28</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (load)  Load previous game      │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-29"><a href="#Shell.print_menu-29"><span class="linenos">29</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (stats) Statistics              │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-30"><a href="#Shell.print_menu-30"><span class="linenos">30</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (help)  List commands           │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-31"><a href="#Shell.print_menu-31"><span class="linenos">31</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (quit)  Quit                    │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-32"><a href="#Shell.print_menu-32"><span class="linenos">32</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-33"><a href="#Shell.print_menu-33"><span class="linenos">33</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;└──────────────────────────────────┘&quot;</span><span class="p">)</span>
-=======
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.print_menu-15"><a href="#Shell.print_menu-15"><span class="linenos">15</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell.print_menu-16"><a href="#Shell.print_menu-16"><span class="linenos">16</span></a>        <span class="nb">print</span><span class="p">()</span>
-</span><span id="Shell.print_menu-17"><a href="#Shell.print_menu-17"><span class="linenos">17</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;┌──────────────────────────────────┐&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-18"><a href="#Shell.print_menu-18"><span class="linenos">18</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│            WAR - Menu            │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-19"><a href="#Shell.print_menu-19"><span class="linenos">19</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;├──────────────────────────────────┤&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-20"><a href="#Shell.print_menu-20"><span class="linenos">20</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-21"><a href="#Shell.print_menu-21"><span class="linenos">21</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (rules) Shows game rules        │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-22"><a href="#Shell.print_menu-22"><span class="linenos">22</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (new)   Start new game          │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-23"><a href="#Shell.print_menu-23"><span class="linenos">23</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (help)  List commands           │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-24"><a href="#Shell.print_menu-24"><span class="linenos">24</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (stats) Statistics              │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-25"><a href="#Shell.print_menu-25"><span class="linenos">25</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (quit)  Quit                    │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-26"><a href="#Shell.print_menu-26"><span class="linenos">26</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-27"><a href="#Shell.print_menu-27"><span class="linenos">27</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;├────────────[Options]─────────────┤&quot;</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.print_menu-23"><a href="#Shell.print_menu-23"><span class="linenos">23</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Shell.print_menu-24"><a href="#Shell.print_menu-24"><span class="linenos">24</span></a>        <span class="nb">print</span><span class="p">()</span>
+</span><span id="Shell.print_menu-25"><a href="#Shell.print_menu-25"><span class="linenos">25</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;┌──────────────────────────────────┐&quot;</span><span class="p">)</span>
+</span><span id="Shell.print_menu-26"><a href="#Shell.print_menu-26"><span class="linenos">26</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│            WAR - Menu            │&quot;</span><span class="p">)</span>
+</span><span id="Shell.print_menu-27"><a href="#Shell.print_menu-27"><span class="linenos">27</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;├──────────────────────────────────┤&quot;</span><span class="p">)</span>
 </span><span id="Shell.print_menu-28"><a href="#Shell.print_menu-28"><span class="linenos">28</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-29"><a href="#Shell.print_menu-29"><span class="linenos">29</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  TBA                             │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-30"><a href="#Shell.print_menu-30"><span class="linenos">30</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
-</span><span id="Shell.print_menu-31"><a href="#Shell.print_menu-31"><span class="linenos">31</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;└──────────────────────────────────┘&quot;</span><span class="p">)</span>
->>>>>>> ecc7ffd18113998b8930acc8bae83e3ef4b82144
+</span><span id="Shell.print_menu-29"><a href="#Shell.print_menu-29"><span class="linenos">29</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (rules) Shows game rules        │&quot;</span><span class="p">)</span>
+</span><span id="Shell.print_menu-30"><a href="#Shell.print_menu-30"><span class="linenos">30</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (new)   Start new game          │&quot;</span><span class="p">)</span>
+</span><span id="Shell.print_menu-31"><a href="#Shell.print_menu-31"><span class="linenos">31</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (log)   Game history            │&quot;</span><span class="p">)</span>
+</span><span id="Shell.print_menu-32"><a href="#Shell.print_menu-32"><span class="linenos">32</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (stats) Statistics              │&quot;</span><span class="p">)</span>
+</span><span id="Shell.print_menu-33"><a href="#Shell.print_menu-33"><span class="linenos">33</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (help)  List commands           │&quot;</span><span class="p">)</span>
+</span><span id="Shell.print_menu-34"><a href="#Shell.print_menu-34"><span class="linenos">34</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│  (quit)  Quit                    │&quot;</span><span class="p">)</span>
+</span><span id="Shell.print_menu-35"><a href="#Shell.print_menu-35"><span class="linenos">35</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;│                                  │&quot;</span><span class="p">)</span>
+</span><span id="Shell.print_menu-36"><a href="#Shell.print_menu-36"><span class="linenos">36</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;└──────────────────────────────────┘&quot;</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -653,35 +461,24 @@ sys.stdin and sys.stdout are used.</p>
 
     </div>
     <a class="headerlink" href="#Shell.do_new"></a>
-<<<<<<< HEAD
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.do_new-35"><a href="#Shell.do_new-35"><span class="linenos">35</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell.do_new-36"><a href="#Shell.do_new-36"><span class="linenos">36</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell.do_new-37"><a href="#Shell.do_new-37"><span class="linenos">37</span></a><span class="sd">        Start a new game</span>
-</span><span id="Shell.do_new-38"><a href="#Shell.do_new-38"><span class="linenos">38</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell.do_new-39"><a href="#Shell.do_new-39"><span class="linenos">39</span></a>
-</span><span id="Shell.do_new-40"><a href="#Shell.do_new-40"><span class="linenos">40</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">()</span>
-</span><span id="Shell.do_new-41"><a href="#Shell.do_new-41"><span class="linenos">41</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.do_new-38"><a href="#Shell.do_new-38"><span class="linenos">38</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Shell.do_new-39"><a href="#Shell.do_new-39"><span class="linenos">39</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Shell.do_new-40"><a href="#Shell.do_new-40"><span class="linenos">40</span></a><span class="sd">        Start a new game</span>
+</span><span id="Shell.do_new-41"><a href="#Shell.do_new-41"><span class="linenos">41</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="Shell.do_new-42"><a href="#Shell.do_new-42"><span class="linenos">42</span></a>
-</span><span id="Shell.do_new-43"><a href="#Shell.do_new-43"><span class="linenos">43</span></a>        <span class="n">save_game</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span>
-</span><span id="Shell.do_new-44"><a href="#Shell.do_new-44"><span class="linenos">44</span></a>            <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Do you want to save this game&quot;</span><span class="p">,</span>
-</span><span id="Shell.do_new-45"><a href="#Shell.do_new-45"><span class="linenos">45</span></a>            <span class="n">options</span><span class="o">=</span><span class="p">[</span>
-</span><span id="Shell.do_new-46"><a href="#Shell.do_new-46"><span class="linenos">46</span></a>                <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span><span class="p">),</span>
-</span><span id="Shell.do_new-47"><a href="#Shell.do_new-47"><span class="linenos">47</span></a>                <span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span><span class="p">),</span>
-</span><span id="Shell.do_new-48"><a href="#Shell.do_new-48"><span class="linenos">48</span></a>            <span class="p">],</span>
+</span><span id="Shell.do_new-43"><a href="#Shell.do_new-43"><span class="linenos">43</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">()</span>
+</span><span id="Shell.do_new-44"><a href="#Shell.do_new-44"><span class="linenos">44</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span id="Shell.do_new-45"><a href="#Shell.do_new-45"><span class="linenos">45</span></a>
+</span><span id="Shell.do_new-46"><a href="#Shell.do_new-46"><span class="linenos">46</span></a>        <span class="n">save_game</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span>
+</span><span id="Shell.do_new-47"><a href="#Shell.do_new-47"><span class="linenos">47</span></a>            <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Do you want to save this game&quot;</span><span class="p">,</span>
+</span><span id="Shell.do_new-48"><a href="#Shell.do_new-48"><span class="linenos">48</span></a>            <span class="n">options</span><span class="o">=</span><span class="p">[(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span><span class="p">),</span> <span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span><span class="p">)],</span>
 </span><span id="Shell.do_new-49"><a href="#Shell.do_new-49"><span class="linenos">49</span></a>            <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 </span><span id="Shell.do_new-50"><a href="#Shell.do_new-50"><span class="linenos">50</span></a>        <span class="p">)</span>
 </span><span id="Shell.do_new-51"><a href="#Shell.do_new-51"><span class="linenos">51</span></a>
 </span><span id="Shell.do_new-52"><a href="#Shell.do_new-52"><span class="linenos">52</span></a>        <span class="k">if</span> <span class="n">save_game</span><span class="p">:</span>
-</span><span id="Shell.do_new-53"><a href="#Shell.do_new-53"><span class="linenos">53</span></a>            <span class="n">Serializer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="p">)</span>
-=======
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.do_new-33"><a href="#Shell.do_new-33"><span class="linenos">33</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell.do_new-34"><a href="#Shell.do_new-34"><span class="linenos">34</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell.do_new-35"><a href="#Shell.do_new-35"><span class="linenos">35</span></a><span class="sd">        Start a new game</span>
-</span><span id="Shell.do_new-36"><a href="#Shell.do_new-36"><span class="linenos">36</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell.do_new-37"><a href="#Shell.do_new-37"><span class="linenos">37</span></a>
-</span><span id="Shell.do_new-38"><a href="#Shell.do_new-38"><span class="linenos">38</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">()</span>
-</span><span id="Shell.do_new-39"><a href="#Shell.do_new-39"><span class="linenos">39</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
->>>>>>> ecc7ffd18113998b8930acc8bae83e3ef4b82144
+</span><span id="Shell.do_new-53"><a href="#Shell.do_new-53"><span class="linenos">53</span></a>            <span class="n">Serializer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+</span><span id="Shell.do_new-54"><a href="#Shell.do_new-54"><span class="linenos">54</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">games_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.json&quot;</span>
+</span><span id="Shell.do_new-55"><a href="#Shell.do_new-55"><span class="linenos">55</span></a>            <span class="p">)</span>
 </span></pre></div>
 
 
@@ -690,19 +487,26 @@ sys.stdin and sys.stdout are used.</p>
 
 
                             </div>
-                            <div id="Shell.do_load" class="classattr">
-                                        <input id="Shell.do_load-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            <div id="Shell.do_log" class="classattr">
+                                        <input id="Shell.do_log-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">do_load</span><span class="signature pdoc-code condensed">(<span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+        <span class="name">do_log</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">arg</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
 
-                <label class="view-source-button" for="Shell.do_load-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="Shell.do_log-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#Shell.do_load"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.do_load-55"><a href="#Shell.do_load-55"><span class="linenos">55</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_load</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell.do_load-56"><a href="#Shell.do_load-56"><span class="linenos">56</span></a>        <span class="k">pass</span>
+    <a class="headerlink" href="#Shell.do_log"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.do_log-57"><a href="#Shell.do_log-57"><span class="linenos">57</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Shell.do_log-58"><a href="#Shell.do_log-58"><span class="linenos">58</span></a>        <span class="n">games_log</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Game</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="Shell.do_log-59"><a href="#Shell.do_log-59"><span class="linenos">59</span></a>
+</span><span id="Shell.do_log-60"><a href="#Shell.do_log-60"><span class="linenos">60</span></a>        <span class="k">for</span> <span class="n">json_file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">games_path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.json&quot;</span><span class="p">):</span>
+</span><span id="Shell.do_log-61"><a href="#Shell.do_log-61"><span class="linenos">61</span></a>            <span class="n">games_log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Serializer</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">Game</span><span class="p">,</span> <span class="n">json_file</span><span class="p">))</span>
+</span><span id="Shell.do_log-62"><a href="#Shell.do_log-62"><span class="linenos">62</span></a>
+</span><span id="Shell.do_log-63"><a href="#Shell.do_log-63"><span class="linenos">63</span></a>        <span class="k">for</span> <span class="n">game</span> <span class="ow">in</span> <span class="n">games_log</span><span class="p">:</span>
+</span><span id="Shell.do_log-64"><a href="#Shell.do_log-64"><span class="linenos">64</span></a>            <span class="n">game</span><span class="o">.</span><span class="n">print_results</span><span class="p">()</span>
+</span><span id="Shell.do_log-65"><a href="#Shell.do_log-65"><span class="linenos">65</span></a>            <span class="nb">print</span><span class="p">()</span>
 </span></pre></div>
 
 
@@ -720,38 +524,38 @@ sys.stdin and sys.stdout are used.</p>
 
     </div>
     <a class="headerlink" href="#Shell.do_rules"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.do_rules-58"><a href="#Shell.do_rules-58"><span class="linenos">58</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell.do_rules-59"><a href="#Shell.do_rules-59"><span class="linenos">59</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell.do_rules-60"><a href="#Shell.do_rules-60"><span class="linenos">60</span></a><span class="sd">        Shows the rules of the game.</span>
-</span><span id="Shell.do_rules-61"><a href="#Shell.do_rules-61"><span class="linenos">61</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell.do_rules-62"><a href="#Shell.do_rules-62"><span class="linenos">62</span></a>
-</span><span id="Shell.do_rules-63"><a href="#Shell.do_rules-63"><span class="linenos">63</span></a>        <span class="nb">print</span><span class="p">(</span>
-</span><span id="Shell.do_rules-64"><a href="#Shell.do_rules-64"><span class="linenos">64</span></a>            <span class="s2">&quot;Welcome to our version of Casino War!</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-65"><a href="#Shell.do_rules-65"><span class="linenos">65</span></a>            <span class="s2">&quot;The rules are slightly different from the &quot;</span>
-</span><span id="Shell.do_rules-66"><a href="#Shell.do_rules-66"><span class="linenos">66</span></a>            <span class="s2">&quot;casino version, as this game does not include &quot;</span>
-</span><span id="Shell.do_rules-67"><a href="#Shell.do_rules-67"><span class="linenos">67</span></a>            <span class="s2">&quot;betting.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-68"><a href="#Shell.do_rules-68"><span class="linenos">68</span></a>            <span class="s2">&quot;At the start, you choose which game variant you &quot;</span>
-</span><span id="Shell.do_rules-69"><a href="#Shell.do_rules-69"><span class="linenos">69</span></a>            <span class="s2">&quot;want to play (to be implemented). You then choose &quot;</span>
-</span><span id="Shell.do_rules-70"><a href="#Shell.do_rules-70"><span class="linenos">70</span></a>            <span class="s2">&quot;whether to start a new game or load a previous one, &quot;</span>
-</span><span id="Shell.do_rules-71"><a href="#Shell.do_rules-71"><span class="linenos">71</span></a>            <span class="s2">&quot;and whether to play against </span><span class="se">\n</span><span class="s2"> another player or the &quot;</span>
-</span><span id="Shell.do_rules-72"><a href="#Shell.do_rules-72"><span class="linenos">72</span></a>            <span class="s2">&quot;computer.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-73"><a href="#Shell.do_rules-73"><span class="linenos">73</span></a>            <span class="s2">&quot;In the basic War game, each player is dealt a card &quot;</span>
-</span><span id="Shell.do_rules-74"><a href="#Shell.do_rules-74"><span class="linenos">74</span></a>            <span class="s2">&quot;by the dealer (a method). If your card ranks higher &quot;</span>
-</span><span id="Shell.do_rules-75"><a href="#Shell.do_rules-75"><span class="linenos">75</span></a>            <span class="s2">&quot;than your opponent&#39;s, you earn one point. If the cards &quot;</span>
-</span><span id="Shell.do_rules-76"><a href="#Shell.do_rules-76"><span class="linenos">76</span></a>            <span class="s2">&quot;tie, you go to war and both players </span><span class="se">\n</span><span class="s2"> draw again until &quot;</span>
-</span><span id="Shell.do_rules-77"><a href="#Shell.do_rules-77"><span class="linenos">77</span></a>            <span class="s2">&quot;one player wins the round.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-78"><a href="#Shell.do_rules-78"><span class="linenos">78</span></a>            <span class="s2">&quot;After each round, you will be asked if you want to draw &quot;</span>
-</span><span id="Shell.do_rules-79"><a href="#Shell.do_rules-79"><span class="linenos">79</span></a>            <span class="s2">&quot;another card. If you choose not to, you can save the game &quot;</span>
-</span><span id="Shell.do_rules-80"><a href="#Shell.do_rules-80"><span class="linenos">80</span></a>            <span class="s2">&quot;and quit (to be implemented) or quit without saving.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-81"><a href="#Shell.do_rules-81"><span class="linenos">81</span></a>            <span class="s2">&quot;Once you exit the current game, you will return to the &quot;</span>
-</span><span id="Shell.do_rules-82"><a href="#Shell.do_rules-82"><span class="linenos">82</span></a>            <span class="s2">&quot;main menu, where you can choose from the following options:</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-83"><a href="#Shell.do_rules-83"><span class="linenos">83</span></a>            <span class="s2">&quot; - Show stats (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-84"><a href="#Shell.do_rules-84"><span class="linenos">84</span></a>            <span class="s2">&quot; - Show rules</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-85"><a href="#Shell.do_rules-85"><span class="linenos">85</span></a>            <span class="s2">&quot; - Start a new game</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-86"><a href="#Shell.do_rules-86"><span class="linenos">86</span></a>            <span class="s2">&quot; - Load a saved game</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-87"><a href="#Shell.do_rules-87"><span class="linenos">87</span></a>            <span class="s2">&quot; - Quit</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-88"><a href="#Shell.do_rules-88"><span class="linenos">88</span></a>            <span class="s2">&quot; - Choose variant or game rules (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-89"><a href="#Shell.do_rules-89"><span class="linenos">89</span></a>        <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.do_rules-67"><a href="#Shell.do_rules-67"><span class="linenos">67</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Shell.do_rules-68"><a href="#Shell.do_rules-68"><span class="linenos">68</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Shell.do_rules-69"><a href="#Shell.do_rules-69"><span class="linenos">69</span></a><span class="sd">        Shows the rules of the game.</span>
+</span><span id="Shell.do_rules-70"><a href="#Shell.do_rules-70"><span class="linenos">70</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Shell.do_rules-71"><a href="#Shell.do_rules-71"><span class="linenos">71</span></a>
+</span><span id="Shell.do_rules-72"><a href="#Shell.do_rules-72"><span class="linenos">72</span></a>        <span class="nb">print</span><span class="p">(</span>
+</span><span id="Shell.do_rules-73"><a href="#Shell.do_rules-73"><span class="linenos">73</span></a>            <span class="s2">&quot;Welcome to our version of Casino War!</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="Shell.do_rules-74"><a href="#Shell.do_rules-74"><span class="linenos">74</span></a>            <span class="s2">&quot;The rules are slightly different from the &quot;</span>
+</span><span id="Shell.do_rules-75"><a href="#Shell.do_rules-75"><span class="linenos">75</span></a>            <span class="s2">&quot;casino version, as this game does not include &quot;</span>
+</span><span id="Shell.do_rules-76"><a href="#Shell.do_rules-76"><span class="linenos">76</span></a>            <span class="s2">&quot;betting.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="Shell.do_rules-77"><a href="#Shell.do_rules-77"><span class="linenos">77</span></a>            <span class="s2">&quot;At the start, you choose which game variant you &quot;</span>
+</span><span id="Shell.do_rules-78"><a href="#Shell.do_rules-78"><span class="linenos">78</span></a>            <span class="s2">&quot;want to play (to be implemented). You then choose &quot;</span>
+</span><span id="Shell.do_rules-79"><a href="#Shell.do_rules-79"><span class="linenos">79</span></a>            <span class="s2">&quot;whether to start a new game or load a previous one, &quot;</span>
+</span><span id="Shell.do_rules-80"><a href="#Shell.do_rules-80"><span class="linenos">80</span></a>            <span class="s2">&quot;and whether to play against </span><span class="se">\n</span><span class="s2"> another player or the &quot;</span>
+</span><span id="Shell.do_rules-81"><a href="#Shell.do_rules-81"><span class="linenos">81</span></a>            <span class="s2">&quot;computer.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="Shell.do_rules-82"><a href="#Shell.do_rules-82"><span class="linenos">82</span></a>            <span class="s2">&quot;In the basic War game, each player is dealt a card &quot;</span>
+</span><span id="Shell.do_rules-83"><a href="#Shell.do_rules-83"><span class="linenos">83</span></a>            <span class="s2">&quot;by the dealer (a method). If your card ranks higher &quot;</span>
+</span><span id="Shell.do_rules-84"><a href="#Shell.do_rules-84"><span class="linenos">84</span></a>            <span class="s2">&quot;than your opponent&#39;s, you earn one point. If the cards &quot;</span>
+</span><span id="Shell.do_rules-85"><a href="#Shell.do_rules-85"><span class="linenos">85</span></a>            <span class="s2">&quot;tie, you go to war and both players </span><span class="se">\n</span><span class="s2"> draw again until &quot;</span>
+</span><span id="Shell.do_rules-86"><a href="#Shell.do_rules-86"><span class="linenos">86</span></a>            <span class="s2">&quot;one player wins the round.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="Shell.do_rules-87"><a href="#Shell.do_rules-87"><span class="linenos">87</span></a>            <span class="s2">&quot;After each round, you will be asked if you want to draw &quot;</span>
+</span><span id="Shell.do_rules-88"><a href="#Shell.do_rules-88"><span class="linenos">88</span></a>            <span class="s2">&quot;another card. If you choose not to, you can save the game &quot;</span>
+</span><span id="Shell.do_rules-89"><a href="#Shell.do_rules-89"><span class="linenos">89</span></a>            <span class="s2">&quot;and quit (to be implemented) or quit without saving.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span id="Shell.do_rules-90"><a href="#Shell.do_rules-90"><span class="linenos">90</span></a>            <span class="s2">&quot;Once you exit the current game, you will return to the &quot;</span>
+</span><span id="Shell.do_rules-91"><a href="#Shell.do_rules-91"><span class="linenos">91</span></a>            <span class="s2">&quot;main menu, where you can choose from the following options:</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell.do_rules-92"><a href="#Shell.do_rules-92"><span class="linenos">92</span></a>            <span class="s2">&quot; - Show stats (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell.do_rules-93"><a href="#Shell.do_rules-93"><span class="linenos">93</span></a>            <span class="s2">&quot; - Show rules</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell.do_rules-94"><a href="#Shell.do_rules-94"><span class="linenos">94</span></a>            <span class="s2">&quot; - Start a new game</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell.do_rules-95"><a href="#Shell.do_rules-95"><span class="linenos">95</span></a>            <span class="s2">&quot; - Load a saved game</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell.do_rules-96"><a href="#Shell.do_rules-96"><span class="linenos">96</span></a>            <span class="s2">&quot; - Quit</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell.do_rules-97"><a href="#Shell.do_rules-97"><span class="linenos">97</span></a>            <span class="s2">&quot; - Choose variant or game rules (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="Shell.do_rules-98"><a href="#Shell.do_rules-98"><span class="linenos">98</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
@@ -771,23 +575,13 @@ sys.stdin and sys.stdout are used.</p>
 
     </div>
     <a class="headerlink" href="#Shell.do_quit"></a>
-<<<<<<< HEAD
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.do_quit-91"><a href="#Shell.do_quit-91"><span class="linenos">91</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_quit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="Shell.do_quit-92"><a href="#Shell.do_quit-92"><span class="linenos">92</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell.do_quit-93"><a href="#Shell.do_quit-93"><span class="linenos">93</span></a><span class="sd">        Quit the game</span>
-</span><span id="Shell.do_quit-94"><a href="#Shell.do_quit-94"><span class="linenos">94</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell.do_quit-95"><a href="#Shell.do_quit-95"><span class="linenos">95</span></a>
-</span><span id="Shell.do_quit-96"><a href="#Shell.do_quit-96"><span class="linenos">96</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing war&quot;</span><span class="p">)</span>
-</span><span id="Shell.do_quit-97"><a href="#Shell.do_quit-97"><span class="linenos">97</span></a>        <span class="k">return</span> <span class="kc">True</span>
-=======
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.do_quit-41"><a href="#Shell.do_quit-41"><span class="linenos">41</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_quit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="Shell.do_quit-42"><a href="#Shell.do_quit-42"><span class="linenos">42</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell.do_quit-43"><a href="#Shell.do_quit-43"><span class="linenos">43</span></a><span class="sd">        Quit the game</span>
-</span><span id="Shell.do_quit-44"><a href="#Shell.do_quit-44"><span class="linenos">44</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell.do_quit-45"><a href="#Shell.do_quit-45"><span class="linenos">45</span></a>
-</span><span id="Shell.do_quit-46"><a href="#Shell.do_quit-46"><span class="linenos">46</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing war&quot;</span><span class="p">)</span>
-</span><span id="Shell.do_quit-47"><a href="#Shell.do_quit-47"><span class="linenos">47</span></a>        <span class="k">return</span> <span class="kc">True</span>
->>>>>>> ecc7ffd18113998b8930acc8bae83e3ef4b82144
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.do_quit-100"><a href="#Shell.do_quit-100"><span class="linenos">100</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_quit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="Shell.do_quit-101"><a href="#Shell.do_quit-101"><span class="linenos">101</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Shell.do_quit-102"><a href="#Shell.do_quit-102"><span class="linenos">102</span></a><span class="sd">        Quit the game</span>
+</span><span id="Shell.do_quit-103"><a href="#Shell.do_quit-103"><span class="linenos">103</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Shell.do_quit-104"><a href="#Shell.do_quit-104"><span class="linenos">104</span></a>
+</span><span id="Shell.do_quit-105"><a href="#Shell.do_quit-105"><span class="linenos">105</span></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing war&quot;</span><span class="p">)</span>
+</span><span id="Shell.do_quit-106"><a href="#Shell.do_quit-106"><span class="linenos">106</span></a>        <span class="k">return</span> <span class="kc">True</span>
 </span></pre></div>
 
 
@@ -807,85 +601,19 @@ sys.stdin and sys.stdout are used.</p>
 
     </div>
     <a class="headerlink" href="#Shell.default"></a>
-<<<<<<< HEAD
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.default-99"><a href="#Shell.default-99"><span class="linenos"> 99</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
-</span><span id="Shell.default-100"><a href="#Shell.default-100"><span class="linenos">100</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell.default-101"><a href="#Shell.default-101"><span class="linenos">101</span></a><span class="sd">        Default case for unknown command</span>
-</span><span id="Shell.default-102"><a href="#Shell.default-102"><span class="linenos">102</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell.default-103"><a href="#Shell.default-103"><span class="linenos">103</span></a>
-</span><span id="Shell.default-104"><a href="#Shell.default-104"><span class="linenos">104</span></a>        <span class="nb">print</span><span class="p">(</span>
-</span><span id="Shell.default-105"><a href="#Shell.default-105"><span class="linenos">105</span></a>            <span class="sa">f</span><span class="s1">&#39;Unknown option: &quot;</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s1">&quot;. &#39;</span>
-</span><span id="Shell.default-106"><a href="#Shell.default-106"><span class="linenos">106</span></a>            <span class="s2">&quot;Use help or ? to get a list of all options.&quot;</span>
-</span><span id="Shell.default-107"><a href="#Shell.default-107"><span class="linenos">107</span></a>        <span class="p">)</span>
-=======
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.default-49"><a href="#Shell.default-49"><span class="linenos">49</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
-</span><span id="Shell.default-50"><a href="#Shell.default-50"><span class="linenos">50</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell.default-51"><a href="#Shell.default-51"><span class="linenos">51</span></a><span class="sd">        Default case for unknown command</span>
-</span><span id="Shell.default-52"><a href="#Shell.default-52"><span class="linenos">52</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell.default-53"><a href="#Shell.default-53"><span class="linenos">53</span></a>
-</span><span id="Shell.default-54"><a href="#Shell.default-54"><span class="linenos">54</span></a>        <span class="nb">print</span><span class="p">(</span>
-</span><span id="Shell.default-55"><a href="#Shell.default-55"><span class="linenos">55</span></a>            <span class="sa">f</span><span class="s1">&#39;Unknown option: &quot;</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s1">&quot;. &#39;</span>
-</span><span id="Shell.default-56"><a href="#Shell.default-56"><span class="linenos">56</span></a>            <span class="s2">&quot;Use help or ? to get a list of all options.&quot;</span>
-</span><span id="Shell.default-57"><a href="#Shell.default-57"><span class="linenos">57</span></a>        <span class="p">)</span>
->>>>>>> ecc7ffd18113998b8930acc8bae83e3ef4b82144
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.default-108"><a href="#Shell.default-108"><span class="linenos">108</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+</span><span id="Shell.default-109"><a href="#Shell.default-109"><span class="linenos">109</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Shell.default-110"><a href="#Shell.default-110"><span class="linenos">110</span></a><span class="sd">        Default case for unknown command</span>
+</span><span id="Shell.default-111"><a href="#Shell.default-111"><span class="linenos">111</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Shell.default-112"><a href="#Shell.default-112"><span class="linenos">112</span></a>
+</span><span id="Shell.default-113"><a href="#Shell.default-113"><span class="linenos">113</span></a>        <span class="nb">print</span><span class="p">(</span>
+</span><span id="Shell.default-114"><a href="#Shell.default-114"><span class="linenos">114</span></a>            <span class="sa">f</span><span class="s1">&#39;Unknown option: &quot;</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s1">&quot;. &#39;</span>
+</span><span id="Shell.default-115"><a href="#Shell.default-115"><span class="linenos">115</span></a>            <span class="s2">&quot;Use help or ? to get a list of all options.&quot;</span>
+</span><span id="Shell.default-116"><a href="#Shell.default-116"><span class="linenos">116</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Default case for unknown command</p>
-<<<<<<< HEAD
-=======
-</div>
-
-
-                            </div>
-                            <div id="Shell.do_rules" class="classattr">
-                                        <input id="Shell.do_rules-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">do_rules</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">arg</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
-
-                <label class="view-source-button" for="Shell.do_rules-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#Shell.do_rules"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Shell.do_rules-59"><a href="#Shell.do_rules-59"><span class="linenos">59</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">do_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Shell.do_rules-60"><a href="#Shell.do_rules-60"><span class="linenos">60</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Shell.do_rules-61"><a href="#Shell.do_rules-61"><span class="linenos">61</span></a><span class="sd">        Shows the rules of the game.</span>
-</span><span id="Shell.do_rules-62"><a href="#Shell.do_rules-62"><span class="linenos">62</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Shell.do_rules-63"><a href="#Shell.do_rules-63"><span class="linenos">63</span></a>
-</span><span id="Shell.do_rules-64"><a href="#Shell.do_rules-64"><span class="linenos">64</span></a>        <span class="nb">print</span><span class="p">(</span>
-</span><span id="Shell.do_rules-65"><a href="#Shell.do_rules-65"><span class="linenos">65</span></a>            <span class="s2">&quot;Welcome to our version of Casino War!</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-66"><a href="#Shell.do_rules-66"><span class="linenos">66</span></a>            <span class="s2">&quot;The rules are slightly different from the &quot;</span>
-</span><span id="Shell.do_rules-67"><a href="#Shell.do_rules-67"><span class="linenos">67</span></a>            <span class="s2">&quot;casino version, as this game does not include &quot;</span>
-</span><span id="Shell.do_rules-68"><a href="#Shell.do_rules-68"><span class="linenos">68</span></a>            <span class="s2">&quot;betting.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-69"><a href="#Shell.do_rules-69"><span class="linenos">69</span></a>            <span class="s2">&quot;At the start, you choose which game variant you &quot;</span>
-</span><span id="Shell.do_rules-70"><a href="#Shell.do_rules-70"><span class="linenos">70</span></a>            <span class="s2">&quot;want to play (to be implemented). You then choose &quot;</span>
-</span><span id="Shell.do_rules-71"><a href="#Shell.do_rules-71"><span class="linenos">71</span></a>            <span class="s2">&quot;whether to start a new game or load a previous one, &quot;</span>
-</span><span id="Shell.do_rules-72"><a href="#Shell.do_rules-72"><span class="linenos">72</span></a>            <span class="s2">&quot;and whether to play against </span><span class="se">\n</span><span class="s2"> another player or the &quot;</span>
-</span><span id="Shell.do_rules-73"><a href="#Shell.do_rules-73"><span class="linenos">73</span></a>            <span class="s2">&quot;computer.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-74"><a href="#Shell.do_rules-74"><span class="linenos">74</span></a>            <span class="s2">&quot;In the basic War game, each player is dealt a card &quot;</span>
-</span><span id="Shell.do_rules-75"><a href="#Shell.do_rules-75"><span class="linenos">75</span></a>            <span class="s2">&quot;by the dealer (a method). If your card ranks higher &quot;</span>
-</span><span id="Shell.do_rules-76"><a href="#Shell.do_rules-76"><span class="linenos">76</span></a>            <span class="s2">&quot;than your opponent&#39;s, you earn one point. If the cards &quot;</span>
-</span><span id="Shell.do_rules-77"><a href="#Shell.do_rules-77"><span class="linenos">77</span></a>            <span class="s2">&quot;tie, you go to war and both players </span><span class="se">\n</span><span class="s2"> draw again until &quot;</span>
-</span><span id="Shell.do_rules-78"><a href="#Shell.do_rules-78"><span class="linenos">78</span></a>            <span class="s2">&quot;one player wins the round.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-79"><a href="#Shell.do_rules-79"><span class="linenos">79</span></a>            <span class="s2">&quot;After each round, you will be asked if you want to draw &quot;</span>
-</span><span id="Shell.do_rules-80"><a href="#Shell.do_rules-80"><span class="linenos">80</span></a>            <span class="s2">&quot;another card. If you choose not to, you can save the game &quot;</span>
-</span><span id="Shell.do_rules-81"><a href="#Shell.do_rules-81"><span class="linenos">81</span></a>            <span class="s2">&quot;and quit (to be implemented) or quit without saving.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-82"><a href="#Shell.do_rules-82"><span class="linenos">82</span></a>            <span class="s2">&quot;Once you exit the current game, you will return to the &quot;</span>
-</span><span id="Shell.do_rules-83"><a href="#Shell.do_rules-83"><span class="linenos">83</span></a>            <span class="s2">&quot;main menu, where you can choose from the following options:</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-84"><a href="#Shell.do_rules-84"><span class="linenos">84</span></a>            <span class="s2">&quot; - Show stats (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-85"><a href="#Shell.do_rules-85"><span class="linenos">85</span></a>            <span class="s2">&quot; - Show rules</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-86"><a href="#Shell.do_rules-86"><span class="linenos">86</span></a>            <span class="s2">&quot; - Start a new game</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-87"><a href="#Shell.do_rules-87"><span class="linenos">87</span></a>            <span class="s2">&quot; - Load a saved game</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-88"><a href="#Shell.do_rules-88"><span class="linenos">88</span></a>            <span class="s2">&quot; - Quit</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-89"><a href="#Shell.do_rules-89"><span class="linenos">89</span></a>            <span class="s2">&quot; - Choose variant or game rules (not yet implemented)</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="Shell.do_rules-90"><a href="#Shell.do_rules-90"><span class="linenos">90</span></a>        <span class="p">)</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>Shows the rules of the game.</p>
->>>>>>> ecc7ffd18113998b8930acc8bae83e3ef4b82144
 </div>
 
 
