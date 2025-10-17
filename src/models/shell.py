@@ -68,8 +68,6 @@ class Shell(Cmd):
             game = Serializer.load(Game, json_file)
             game.print_results()
 
-        print()
-
     def do_rules(self, arg) -> None:
         """
         Shows the rules of the game.
