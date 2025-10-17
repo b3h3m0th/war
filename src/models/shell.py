@@ -85,7 +85,16 @@ class Shell(Cmd):
         """
 
         self.game = Game()
-        self.game.start()
+
+        previous_games: list[Game] = self.get_previous_games()
+        taken_player_names: list[str] = [
+            player.name
+            for game in previous_games
+            for player in game.players
+            if not player.isNpc
+        ]
+
+        self.game.start(taken_player_names)
 
         save_game = choice(
             message="Do you want to save this game",

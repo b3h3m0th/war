@@ -24,10 +24,13 @@ class Game:
         self.rounds = rounds or []
         self.name = name or Game._get_timestamp_name()
 
-    def start(self) -> None:
+    def start(self, taken_player_names: list[str]) -> None:
         """
         Starts the game
         """
+
+        for name in taken_player_names:
+            print(name)
 
         player_choice = choice(
             message="Choose a gamemode:",
@@ -39,12 +42,14 @@ class Game:
         )
 
         if player_choice == "pvc":
-            player = Player(input("Enter your name: ").strip())
+            player = Player(Game._input_name(taken_player_names))
             computer = Player("Computer", True)
             self.players = [player, computer]
         elif player_choice == "pvp":
-            player1 = Player(input("Enter name for Player 1: ").strip())
-            player2 = Player(input("Enter name for Player 2: ").strip())
+            player1 = Player(Game._input_name(taken_player_names))
+            player2 = Player(
+                Game._input_name(taken_player_names + [player1.name])
+            )
             self.players = [player1, player2]
 
         self.deck.shuffle()
@@ -135,7 +140,18 @@ class Game:
         print()
 
     @classmethod
-    def _get_timestamp_name(self, prefix: str = "game") -> str:
+    def _input_name(cls, taken_names: list[str]) -> Player:
+        while True:
+            name = input("Enter your name: ").strip()
+            if not name:
+                print("Name cannot be empty")
+            elif name in taken_names:
+                print("Name already in use")
+            else:
+                return name
+
+    @classmethod
+    def _get_timestamp_name(cls, prefix: str = "game") -> str:
         """
         Returns a name for a Game based on the current time.
         Format: <prefix>_YYYY-MM-DD-hh-mm-ss-ms
