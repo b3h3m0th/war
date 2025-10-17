@@ -122,7 +122,10 @@ class Shell(Cmd):
 
         selected_player: Player = choice(
             message="Which player name do you want to change?",
-            options=[(player, player.name) for player in distinct_players],
+            options=[
+                (Player(player.name, player.isNpc), player.name)
+                for player in distinct_players
+            ],
         )
         new_name: str = input(f"Select a new name for {selected_player}: ")
 
