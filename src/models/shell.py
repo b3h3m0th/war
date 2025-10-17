@@ -54,7 +54,8 @@ class Shell(Cmd):
 
     def do_log(self, arg) -> None:
         for json_file in self.games_path.glob("*.json"):
-            Serializer.load(Game, json_file).print_results()
+            game = Serializer.load(Game, json_file)
+            game.print_results()
 
         print()
 
