@@ -24,11 +24,13 @@ class Deck:
 
     def get_new_deck_order_cards(self) -> list[Card]:
         """
-        Returns a list of cards in typical new deck order NDO.
+        Returns a list of cards in typical new deck order (NDO).
         Spades: Ace -> King
         Diamonds: Ace -> King
         Clubs: King -> Ace
         Hearts: King -> Ace
+        # noqa: E501
+        See https://en.wikipedia.org/wiki/Standard_52-card_deck#New-deck_order_(NDO)
         """
 
         ace_to_king = [Rank.Ace] + [
