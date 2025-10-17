@@ -29,9 +29,6 @@ class Game:
         Starts the game
         """
 
-        for name in taken_player_names:
-            print(name)
-
         player_choice = choice(
             message="Choose a gamemode:",
             options=[
