@@ -32,43 +32,11 @@ class Shell(Cmd):
         print("│  (menu)  Shows the menu          │")
         print("│  (new)   Start new game          │")
         print("│  (log)   Game history            │")
+        print("│  (chng)  Change player name      │")
         print("│  (help)  List commands           │")
         print("│  (quit)  Quit                    │")
         print("│                                  │")
         print("└──────────────────────────────────┘")
-
-    def do_menu(self, arg) -> None:
-        """
-        Shows the menu if the user wants the menu again
-        """
-
-        self.print_menu()
-
-    def do_new(self, arg) -> None:
-        """
-        Start a new game
-        """
-
-        self.game = Game()
-        self.game.start()
-
-        save_game = choice(
-            message="Do you want to save this game",
-            options=[(True, "Yes"), (False, "No")],
-            default=False,
-        )
-
-        if save_game:
-            Serializer.save(
-                self.game, self.games_path / f"{self.game.name}.json"
-            )
-
-    def do_log(self, arg) -> None:
-        for json_file in self.games_path.glob("*.json"):
-            game = Serializer.load(Game, json_file)
-            game.print_results()
-
-        print()
 
     def do_rules(self, arg) -> None:
         """
@@ -101,6 +69,59 @@ class Shell(Cmd):
             " - Load a saved game\n"
             " - Quit\n"
             " - Choose variant or game rules (not yet implemented)\n"
+        )
+
+    def do_menu(self, arg) -> None:
+        """
+        Shows the menu if the user wants the menu again
+        """
+
+        self.print_menu()
+
+    def do_new(self, arg) -> None:
+        """
+        Start a new game
+        """
+
+        self.game = Game()
+        self.game.start()
+
+        save_game = choice(
+            message="Do you want to save this game",
+            options=[(True, "Yes"), (False, "No")],
+            default=False,
+        )
+
+        if save_game:
+            Serializer.save(
+                self.game, self.games_path / f"{self.game.name}.json"
+            )
+
+    def do_log(self, arg) -> None:
+        for json_file in self.games_path.glob("*.json"):
+            game = Serializer.load(Game, json_file)
+            game.print_results()
+
+    def do_chng(self, arg) -> None:
+        """
+        Change a players name
+        """
+
+        games_log: list[Game] = []
+
+        for json_file in self.games_path.glob("*.json"):
+            game = Serializer.load(Game, json_file)
+            games_log.append(game)
+
+        distinct_players = []
+        for game in games_log:
+            for player in game.players:
+                if player not in distinct_players and not player.isNpc:
+                    distinct_players.append(player)
+
+        selected_player = choice(
+            message="Which player name do you want to change?",
+            options=[(player, player.name) for player in distinct_players],
         )
 
     def do_quit(self, arg) -> bool:
