@@ -80,63 +80,56 @@ class Game:
                 options=[(True, "Yes"), (False, "No, Quit")],
                 default=True,
             )
+
             if not keep_going:
                 break
 
         print()
         self.print_results()
 
-    def print_results(self):
+    def get_results(self) -> dict[Player, int]:
         """
-        Shows the result of the current game
+        Returns a dictionary of all players
+        and their amount of won rounds
         """
 
         wins_per_player: dict[Player, int] = {}
-        ties: int = 0
 
-        for played_round in self.rounds:
-            turn_wins = played_round.get_winning_turns()
-            if len(turn_wins) == 1:
-                win = turn_wins[0]
+        for round in self.rounds:
+            winning_turns = round.get_winning_turns()
+            if len(winning_turns) == 1:
+                win = winning_turns[0]
                 wins_per_player[win.player] = (
                     wins_per_player.get(win.player, 0) + 1
                 )
-            else:
-                ties += 1
-        print("Results:")
-        for key, value in wins_per_player.items():
-            print(f"{key} wins: {value}")
 
-        print(f"Ties: {ties}")
+        return wins_per_player
 
-        winning_score = 0
-        for player, wins in wins_per_player.items():
-            if wins > winning_score:
-                winning_score = wins
+    def print_results(self, results: dict[Player, int] = None) -> None:
+        """
+        Prints the result of the current game
+        """
 
-        winning_player = []
-        for player, wins in wins_per_player.items():
-            if wins == winning_score:
-                winning_player.append(player)
+        results = results or self.get_results()
+        max_score = max(results.values())
+        winning_results = {k: v for k, v in results.items() if v == max_score}
 
-        if len(winning_player) > 1:
-            equlas_emoji = "🟰" * 36
-            print(equlas_emoji)
-            players_str = ", ".join(str(player) for player in winning_player)
-            print(
-                f"It's a draw between: {players_str} with "
-                f"{winning_score} wins each! 🟰"
+        if len(winning_results) > 1:
+            players_str = ", ".join(
+                str(player) for player in winning_results.keys()
             )
-            print(equlas_emoji)
-        elif winning_player:
-            winner = winning_player[0]
-            confetti = "🎊🎉" * 18
-            print(confetti)
-            centered_msg = (
-                f"{winner} wins this game with a score of {winning_score}"
-            ).center(len(confetti))
-            print(f"🎊🎉🎊 {centered_msg} 🎊🎉🎊")
-            print(confetti)
+            print(
+                f"👔 It's a draw between: {players_str} with "
+                f"{max_score} wins each🟰"
+            )
+        else:
+            winner_str = f"{list(winning_results.items())[0][0]} won {self.name} with a score of {max_score}"
+            print(f"🎉 {winner_str}")
+
+        for player, wins in results.items():
+            print(f"{player} wins: {wins}")
+
+        print()
 
     @classmethod
     def _get_timestamp_name(self, prefix: str = "game") -> str:
