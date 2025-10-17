@@ -86,6 +86,7 @@ class Game:
         """
         Shows the result of the current game
         """
+
         wins_per_player: dict[Player, int] = {}
         ties: int = 0
 
