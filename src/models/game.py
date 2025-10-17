@@ -1,3 +1,4 @@
+from __future__ import annotations
 from models.deck import Deck
 from models.player import Player
 from models.round import Round
@@ -15,7 +16,7 @@ class Game:
         variant: Variant = Variant.NoJoker,
         deck: Deck = None,
         rounds: list[Round] = None,
-        name=None,
+        name: str = None,
     ) -> None:
         self.variant = variant
         self.deck = deck or Deck()
@@ -125,7 +126,7 @@ class Game:
             and self.variant == other.variant
         )
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """
         Returns a hash based on the game its players, rounds, deck and variant
         """
@@ -148,7 +149,7 @@ class Game:
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> Turn:
+    def from_dict(cls, data: dict) -> Game:
         """
         Returns a Game based on a json dictionary
         """
