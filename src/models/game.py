@@ -115,7 +115,7 @@ class Game:
         """
         Checks whether a Game is equal to another Game.
         Games are considered equal if their
-        players, rounds, deck and variant are equal
+        players, rounds, deck and variant are equal.
         """
 
         return (

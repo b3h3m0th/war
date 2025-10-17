@@ -53,14 +53,10 @@ class Shell(Cmd):
             )
 
     def do_log(self, arg) -> None:
-        games_log: list[Game] = []
-
         for json_file in self.games_path.glob("*.json"):
-            games_log.append(Serializer.load(Game, json_file))
+            Serializer.load(Game, json_file).print_results()
 
-        for game in games_log:
-            game.print_results()
-            print()
+        print()
 
     def do_rules(self, arg) -> None:
         """
