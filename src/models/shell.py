@@ -50,8 +50,7 @@ class Shell(Cmd):
 
         if save_game:
             Serializer.save(
-                self.game,
-                self.games_path / f"{self.game.get_timestamp_name()}.json",
+                self.game, self.games_path / f"{self.game.name}.json"
             )
 
     def do_log(self, arg) -> None:
@@ -61,7 +60,8 @@ class Shell(Cmd):
             games_log.append(Serializer.load(Game, json_file))
 
         for game in games_log:
-            print(game.print_results())
+            game.print_results()
+            print()
 
     def do_rules(self, arg) -> None:
         """

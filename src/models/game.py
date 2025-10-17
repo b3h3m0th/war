@@ -15,11 +15,13 @@ class Game:
         variant: Variant = Variant.NoJoker,
         deck: Deck = None,
         rounds: list[Round] = None,
+        name=None,
     ) -> None:
         self.variant = variant
         self.deck = deck or Deck()
         self.players = players or []
         self.rounds = rounds or []
+        self.name = name or Game._get_timestamp_name()
 
     def start(self) -> None:
         """
@@ -91,13 +93,14 @@ class Game:
             else:
                 ties += 1
 
-        print(f"Results for {self.get_timestamp_name()}:")
+        print(f"Results for {self.name}:")
         for key, value in wins_per_player.items():
             print(f"{key} wins: {value}")
 
         print(f"Ties: {ties}")
 
-    def get_timestamp_name(self, prefix: str = "game") -> str:
+    @classmethod
+    def _get_timestamp_name(self, prefix: str = "game") -> str:
         """
         Returns a name for a Game based on the current time.
         Format: <prefix>_YYYY-MM-DD-hh-mm-ss-ms
@@ -141,6 +144,7 @@ class Game:
             "rounds": [r.to_dict() for r in self.rounds],
             "deck": self.deck.to_dict(),
             "variant": self.variant.to_dict(),
+            "name": self.name,
         }
 
     @classmethod
@@ -154,4 +158,5 @@ class Game:
             Variant.from_dict(data["variant"]),
             Deck.from_dict(data["deck"]),
             [Round.from_dict(r) for r in data["rounds"]],
+            data["name"],
         )
