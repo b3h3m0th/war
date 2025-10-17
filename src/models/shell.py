@@ -97,7 +97,7 @@ class Shell(Cmd):
         """
         Shows the menu if the user wants the menu again
         """
-            
+
         self.print_menu()
 
 
