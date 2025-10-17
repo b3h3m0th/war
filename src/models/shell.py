@@ -47,7 +47,6 @@ class Shell(Cmd):
         Quit the game
         """
 
-        "Quit"
         print("Thank you for playing war")
         return True
 
@@ -98,6 +97,7 @@ class Shell(Cmd):
         """
         Shows the menu if the user wants the menu again
         """
+            
         self.print_menu()
 
 
