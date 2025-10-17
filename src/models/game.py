@@ -122,12 +122,12 @@ class Game:
             )
             print(
                 f"👔 It's a draw between: {players_str} with "
-                f"{max_score} wins each🟰"
+                f"{max_score} wins each."
             )
         else:
             winner_str = (
                 f"{list(winning_results.items())[0][0]} won {self.name} "
-                f"with a score of {max_score}"
+                f"with a score of {max_score}."
             )
             print(f"🎉 {winner_str}")
 
