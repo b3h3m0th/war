@@ -75,12 +75,22 @@ class Game:
                 winner = winning_turns[0]
                 print(f"{winner.player} has the highest card ({winner.card})")
 
-            # input("Press any key to continue to the next round")
+            keep_going = choice(
+                message="Do you want to keep playing?",
+                options=[(True, "Yes"), (False, "No, Quit")],
+                default=True,
+            )
+            if not keep_going:
+                break
 
         print()
         self.print_results()
 
-    def print_results(self) -> None:
+    def print_results(self):
+        """
+        Shows the result of the current game
+        """
+
         wins_per_player: dict[Player, int] = {}
         ties: int = 0
 
@@ -93,12 +103,40 @@ class Game:
                 )
             else:
                 ties += 1
-
-        print(f"Results for {self.name}:")
+        print("Results:")
         for key, value in wins_per_player.items():
             print(f"{key} wins: {value}")
 
         print(f"Ties: {ties}")
+
+        winning_score = 0
+        for player, wins in wins_per_player.items():
+            if wins > winning_score:
+                winning_score = wins
+
+        winning_player = []
+        for player, wins in wins_per_player.items():
+            if wins == winning_score:
+                winning_player.append(player)
+
+        if len(winning_player) > 1:
+            equlas_emoji = "🟰" * 36
+            print(equlas_emoji)
+            players_str = ", ".join(str(player) for player in winning_player)
+            print(
+                f"It's a draw between: {players_str} with "
+                f"{winning_score} wins each! 🟰"
+            )
+            print(equlas_emoji)
+        elif winning_player:
+            winner = winning_player[0]
+            confetti = "🎊🎉" * 18
+            print(confetti)
+            centered_msg = (
+                f"{winner} wins this game with a score of {winning_score}"
+            ).center(len(confetti))
+            print(f"🎊🎉🎊 {centered_msg} 🎊🎉🎊")
+            print(confetti)
 
     @classmethod
     def _get_timestamp_name(self, prefix: str = "game") -> str:

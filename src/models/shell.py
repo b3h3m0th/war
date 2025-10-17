@@ -19,12 +19,17 @@ class Shell(Cmd):
         self.intro = self.print_menu()
 
     def print_menu(self) -> None:
+        """
+        Prints the menu on game launch
+        """
+
         print()
         print("┌──────────────────────────────────┐")
         print("│            WAR - Menu            │")
         print("├──────────────────────────────────┤")
         print("│                                  │")
         print("│  (rules) Shows game rules        │")
+        print("│  (menu)  Shows the menu          │")
         print("│  (new)   Start new game          │")
         print("│  (log)   Game history            │")
         print("│  (stats) Statistics              │")
@@ -32,6 +37,13 @@ class Shell(Cmd):
         print("│  (quit)  Quit                    │")
         print("│                                  │")
         print("└──────────────────────────────────┘")
+
+    def do_menu(self, arg) -> None:
+        """
+        Shows the menu if the user wants the menu again
+        """
+
+        self.print_menu()
 
     def do_new(self, arg) -> None:
         """
@@ -107,7 +119,8 @@ class Shell(Cmd):
 
         print(
             f'Unknown option: "{line}". '
-            "Use help or ? to get a list of all options."
+            'Use "help" or "?"" to get a list of all options '
+            'or use "menu" to get the initial start screen menu.'
         )
 
 
