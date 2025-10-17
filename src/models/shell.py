@@ -116,8 +116,13 @@ class Shell(Cmd):
         distinct_players = []
         for game in games_log:
             for player in game.players:
-                if player not in distinct_players:
+                if player not in distinct_players and not player.isNpc:
                     distinct_players.append(player)
+
+        selected_player = choice(
+            message="Which player name do you want to change?",
+            options=[(player, player.name) for player in distinct_players],
+        )
 
     def do_quit(self, arg) -> bool:
         """
