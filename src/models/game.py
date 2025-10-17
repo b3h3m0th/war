@@ -67,6 +67,8 @@ class Game:
             winning_turns = current_round.get_winning_turns()
 
             if len(winning_turns) > 1:
+                print("Tie detected you are going to WAR⚔️")
+                print("⚔️WAR⚔️")
                 tie_names = ", ".join(
                     f"{turn.player} ({turn.card})" for turn in winning_turns
                 )
