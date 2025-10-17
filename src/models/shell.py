@@ -136,11 +136,9 @@ class Shell(Cmd):
             for round in game.rounds:
                 for turn in round.turns:
                     if turn.player == selected_player:
-                        player.name == new_name
+                        turn.player.name == new_name
 
-            Serializer.save(
-                self.game, self.games_path / f"{self.game.name}.json"
-            )
+            Serializer.save(game, self.games_path / f"{game.name}.json")
 
     def do_quit(self, arg) -> bool:
         """
