@@ -3,8 +3,8 @@ from models.game import Game
 from utils.serializer import Serializer
 
 
+import json
 from pathlib import Path
-import datetime
 from prompt_toolkit.shortcuts import choice
 
 
@@ -13,7 +13,7 @@ class Shell(Cmd):
     prompt: str = "(war) "
 
     game: Game
-    data_path: Path = Path("./data")
+    games_path: Path = Path("./data/games")
 
     def __init__(self) -> None:
         super().__init__()
@@ -27,7 +27,7 @@ class Shell(Cmd):
         print("│                                  │")
         print("│  (rules) Shows game rules        │")
         print("│  (new)   Start new game          │")
-        print("│  (load)  Load previous game      │")
+        print("│  (log)   Game history            │")
         print("│  (stats) Statistics              │")
         print("│  (help)  List commands           │")
         print("│  (quit)  Quit                    │")
@@ -51,13 +51,17 @@ class Shell(Cmd):
         if save_game:
             Serializer.save(
                 self.game,
-                self.data_path
-                / "games"
-                / f"{self.game.get_timestamp_name()}.json",
+                self.games_path / f"{self.game.get_timestamp_name()}.json",
             )
 
-    def do_load() -> None:
-        pass
+    def do_log(self, arg) -> None:
+        games_log: list[Game] = []
+
+        for json_file in self.games_path.glob("*.json"):
+            games_log.append(Serializer.load(Game, json_file))
+
+        for game in games_log:
+            print(game.print_results())
 
     def do_rules(self, arg) -> None:
         """

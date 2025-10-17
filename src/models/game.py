@@ -91,7 +91,7 @@ class Game:
             else:
                 ties += 1
 
-        print("Results:")
+        print(f"Results for {self.get_timestamp_name()}:")
         for key, value in wins_per_player.items():
             print(f"{key} wins: {value}")
 
@@ -151,7 +151,7 @@ class Game:
 
         return cls(
             [Player.from_dict(p) for p in data["players"]],
-            Variant(data["variant"]),
-            Deck(data["deck"]),
+            Variant.from_dict(data["variant"]),
+            Deck.from_dict(data["deck"]),
             [Round.from_dict(r) for r in data["rounds"]],
         )
