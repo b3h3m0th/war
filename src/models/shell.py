@@ -32,7 +32,6 @@ class Shell(Cmd):
         print("│  (menu)  Shows the menu          │")
         print("│  (new)   Start new game          │")
         print("│  (log)   Game history            │")
-        print("│  (stats) Statistics              │")
         print("│  (help)  List commands           │")
         print("│  (quit)  Quit                    │")
         print("│                                  │")
