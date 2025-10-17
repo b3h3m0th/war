@@ -21,7 +21,7 @@ class "Game" as models.game.Game {
   players : list
   rounds : list
   variant
-  from_dict(data: dict) -> Turn
+  from_dict(data: dict) -> Game
   print_results()
   start() -> None
   to_dict() -> dict
@@ -54,6 +54,7 @@ class "Shell" as models.shell.Shell {
   prompt : str
   default(line)
   do_log(arg) -> None
+  do_menu(arg) -> None
   do_new(arg) -> None
   do_quit(arg) -> bool
   do_rules(arg) -> None
