@@ -99,8 +99,7 @@ class Shell(Cmd):
             )
 
     def do_log(self, arg) -> None:
-        for json_file in self.games_path.glob("*.json"):
-            game = Serializer.load(Game, json_file)
+        for game in self.get_previous_games():
             game.print_results()
 
     def do_chng(self, arg) -> None:
@@ -108,14 +107,10 @@ class Shell(Cmd):
         Change a players name
         """
 
-        games_log: list[Game] = []
-
-        for json_file in self.games_path.glob("*.json"):
-            game = Serializer.load(Game, json_file)
-            games_log.append(game)
-
+        games: list[Game] = self.get_previous_games()
         distinct_players: list[Player] = []
-        for game in games_log:
+
+        for game in games:
             for player in game.players:
                 if player not in distinct_players and not player.isNpc:
                     distinct_players.append(player)
@@ -129,7 +124,7 @@ class Shell(Cmd):
         )
         new_name: str = input(f"Select a new name for {selected_player}: ")
 
-        for game in games_log:
+        for game in games:
             for player in game.players:
                 if player == selected_player:
                     player.name = new_name
@@ -140,6 +135,8 @@ class Shell(Cmd):
                         turn.player.name = new_name
 
             Serializer.save(game, self.games_path / f"{game.name}.json")
+
+        print(f'Updated player "{selected_player.name}" to "{new_name}" ')
 
     def do_quit(self, arg) -> bool:
         """
@@ -159,6 +156,12 @@ class Shell(Cmd):
             'Use "help" or "?"" to get a list of all options '
             'or use "menu" to get the initial start screen menu.'
         )
+
+    def get_previous_games(self) -> list[Game]:
+        return [
+            Serializer.load(Game, file)
+            for file in self.games_path.glob("*.json")
+        ]
 
 
 if __name__ == "__main__":
