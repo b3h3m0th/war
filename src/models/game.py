@@ -80,7 +80,7 @@ class Game:
         print()
         self.print_results()
 
-    def print_results(self):
+    def print_results(self) -> None:
         wins_per_player: dict[Player, int] = {}
         ties: int = 0
 
