@@ -1,5 +1,6 @@
 from cmd import Cmd
 from models.game import Game
+from models.player import Player
 from utils.serializer import Serializer
 
 
@@ -113,16 +114,33 @@ class Shell(Cmd):
             game = Serializer.load(Game, json_file)
             games_log.append(game)
 
-        distinct_players = []
+        distinct_players: list[Player] = []
         for game in games_log:
             for player in game.players:
                 if player not in distinct_players and not player.isNpc:
                     distinct_players.append(player)
 
-        selected_player = choice(
+        selected_player: Player = choice(
             message="Which player name do you want to change?",
             options=[(player, player.name) for player in distinct_players],
         )
+        new_name: str = input(
+            f"Select a new name for {selected_player.name}: "
+        )
+
+        for game in games_log:
+            for player in game.players:
+                if player == selected_player:
+                    player.name = new_name
+
+            for round in game.rounds:
+                for turn in round.turns:
+                    if turn.player == selected_player:
+                        player.name == new_name
+
+            Serializer.save(
+                self.game, self.games_path / f"{self.game.name}.json"
+            )
 
     def do_quit(self, arg) -> bool:
         """
