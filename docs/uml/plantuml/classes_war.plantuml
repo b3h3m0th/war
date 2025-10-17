@@ -47,6 +47,7 @@ class "Shell" as models.shell.Shell {
   intro : str
   prompt : str
   default(line)
+  do_menu(arg) -> None
   do_new(arg) -> None
   do_quit(arg) -> bool
   do_rules(arg) -> None
