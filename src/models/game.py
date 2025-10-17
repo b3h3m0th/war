@@ -29,20 +29,40 @@ class Game:
         Starts the game
         """
 
+        variant_choice = choice(
+            message="Choose gamemode:",
+            options=[
+                (Variant.NoJoker, "Default game with no Joker"),
+                (
+                    Variant.JokerPenalty,
+                    "Getting a Joker instantly loses you the round",
+                ),
+                (Variant.JokerInstantWar, "Getting a Joker grants war(draw)"),
+                (
+                    Variant.JokerHighest,
+                    "Getting a Joker instantly wins you the round",
+                ),
+            ],
+            default=Variant.NoJoker,
+        )
+        variant = variant_choice
+
         player_choice = choice(
-            message="Choose a gamemode:",
+            message="Choose a player count:",
             options=[
                 ("pvc", "Player vs Computer"),
                 ("pvp", "Player vs Player"),
+                ("pvcc", "Player vs Computer with instant result(cheat mode)"),
+                ("pvpc", "Player vs Player with instant result(cheat mode)"),
             ],
             default="pvc",
         )
 
-        if player_choice == "pvc":
+        if player_choice == "pvc" or player_choice == "pvcc":
             player = Player(input("Enter your name: ").strip())
             computer = Player("Computer", True)
             self.players = [player, computer]
-        elif player_choice == "pvp":
+        elif player_choice == "pvp" or player_choice == "pvpc":
             player1 = Player(input("Enter name for Player 1: ").strip())
             player2 = Player(input("Enter name for Player 2: ").strip())
             self.players = [player1, player2]
@@ -75,13 +95,14 @@ class Game:
                 winner = winning_turns[0]
                 print(f"{winner.player} has the highest card ({winner.card})")
 
-            keep_going = choice(
-                message="Do you want to keep playing?",
-                options=[(True, "Yes"), (False, "No, Quit")],
-                default=True,
-            )
-            if not keep_going:
-                break
+            if player_choice == "pvc" or player_choice == "pvp":
+                keep_going = choice(
+                    message="Do you want to keep playing?",
+                    options=[(True, "Yes"), (False, "No, Quit")],
+                    default=True,
+                )
+                if not keep_going:
+                    break
 
         print()
         self.print_results()
