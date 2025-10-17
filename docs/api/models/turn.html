@@ -96,37 +96,38 @@
 </span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="sd">        Checks whether a Turn is equal to another Turn</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>        <span class="k">return</span> <span class="p">(</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>            <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Turn</span><span class="p">)</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">player</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">player</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">card</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">card</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>        <span class="p">)</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="sd">        Computes a hash of a Turn based on its Player and Card</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">card</span><span class="p">))</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="sd">        Converts a Turn into a dictionary that can be stringified into json</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;player&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="s2">&quot;card&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">card</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()}</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Turn</span><span class="p">:</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a><span class="sd">        Creates and returns a Turn based on a json dictionary</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>            <span class="n">Player</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]),</span> <span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;card&quot;</span><span class="p">])</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>        <span class="p">)</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="sd">        Turns are considered equal if their player and card are equal</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>        <span class="k">return</span> <span class="p">(</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>            <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Turn</span><span class="p">)</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">player</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">player</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">card</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">card</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>        <span class="p">)</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="sd">        Returns a hash based on the Player and Card</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">card</span><span class="p">))</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="sd">        Converts a Turn into a dictionary that can be stringified into json</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;player&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="s2">&quot;card&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">card</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()}</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Turn</span><span class="p">:</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a><span class="sd">        Creates and returns a Turn based on a json dictionary</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>            <span class="n">Player</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]),</span> <span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;card&quot;</span><span class="p">])</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
@@ -161,37 +162,38 @@
 </span><span id="Turn-23"><a href="#Turn-23"><span class="linenos">23</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="Turn-24"><a href="#Turn-24"><span class="linenos">24</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Turn-25"><a href="#Turn-25"><span class="linenos">25</span></a><span class="sd">        Checks whether a Turn is equal to another Turn</span>
-</span><span id="Turn-26"><a href="#Turn-26"><span class="linenos">26</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Turn-27"><a href="#Turn-27"><span class="linenos">27</span></a>
-</span><span id="Turn-28"><a href="#Turn-28"><span class="linenos">28</span></a>        <span class="k">return</span> <span class="p">(</span>
-</span><span id="Turn-29"><a href="#Turn-29"><span class="linenos">29</span></a>            <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Turn</span><span class="p">)</span>
-</span><span id="Turn-30"><a href="#Turn-30"><span class="linenos">30</span></a>            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">player</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">player</span>
-</span><span id="Turn-31"><a href="#Turn-31"><span class="linenos">31</span></a>            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">card</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">card</span>
-</span><span id="Turn-32"><a href="#Turn-32"><span class="linenos">32</span></a>        <span class="p">)</span>
-</span><span id="Turn-33"><a href="#Turn-33"><span class="linenos">33</span></a>
-</span><span id="Turn-34"><a href="#Turn-34"><span class="linenos">34</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="Turn-35"><a href="#Turn-35"><span class="linenos">35</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Turn-36"><a href="#Turn-36"><span class="linenos">36</span></a><span class="sd">        Computes a hash of a Turn based on its Player and Card</span>
-</span><span id="Turn-37"><a href="#Turn-37"><span class="linenos">37</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Turn-38"><a href="#Turn-38"><span class="linenos">38</span></a>
-</span><span id="Turn-39"><a href="#Turn-39"><span class="linenos">39</span></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">card</span><span class="p">))</span>
-</span><span id="Turn-40"><a href="#Turn-40"><span class="linenos">40</span></a>
-</span><span id="Turn-41"><a href="#Turn-41"><span class="linenos">41</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="Turn-42"><a href="#Turn-42"><span class="linenos">42</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Turn-43"><a href="#Turn-43"><span class="linenos">43</span></a><span class="sd">        Converts a Turn into a dictionary that can be stringified into json</span>
-</span><span id="Turn-44"><a href="#Turn-44"><span class="linenos">44</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Turn-45"><a href="#Turn-45"><span class="linenos">45</span></a>
-</span><span id="Turn-46"><a href="#Turn-46"><span class="linenos">46</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;player&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="s2">&quot;card&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">card</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()}</span>
-</span><span id="Turn-47"><a href="#Turn-47"><span class="linenos">47</span></a>
-</span><span id="Turn-48"><a href="#Turn-48"><span class="linenos">48</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Turn-49"><a href="#Turn-49"><span class="linenos">49</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Turn</span><span class="p">:</span>
-</span><span id="Turn-50"><a href="#Turn-50"><span class="linenos">50</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Turn-51"><a href="#Turn-51"><span class="linenos">51</span></a><span class="sd">        Creates and returns a Turn based on a json dictionary</span>
-</span><span id="Turn-52"><a href="#Turn-52"><span class="linenos">52</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Turn-53"><a href="#Turn-53"><span class="linenos">53</span></a>
-</span><span id="Turn-54"><a href="#Turn-54"><span class="linenos">54</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-</span><span id="Turn-55"><a href="#Turn-55"><span class="linenos">55</span></a>            <span class="n">Player</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]),</span> <span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;card&quot;</span><span class="p">])</span>
-</span><span id="Turn-56"><a href="#Turn-56"><span class="linenos">56</span></a>        <span class="p">)</span>
+</span><span id="Turn-26"><a href="#Turn-26"><span class="linenos">26</span></a><span class="sd">        Turns are considered equal if their player and card are equal</span>
+</span><span id="Turn-27"><a href="#Turn-27"><span class="linenos">27</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Turn-28"><a href="#Turn-28"><span class="linenos">28</span></a>
+</span><span id="Turn-29"><a href="#Turn-29"><span class="linenos">29</span></a>        <span class="k">return</span> <span class="p">(</span>
+</span><span id="Turn-30"><a href="#Turn-30"><span class="linenos">30</span></a>            <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Turn</span><span class="p">)</span>
+</span><span id="Turn-31"><a href="#Turn-31"><span class="linenos">31</span></a>            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">player</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">player</span>
+</span><span id="Turn-32"><a href="#Turn-32"><span class="linenos">32</span></a>            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">card</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">card</span>
+</span><span id="Turn-33"><a href="#Turn-33"><span class="linenos">33</span></a>        <span class="p">)</span>
+</span><span id="Turn-34"><a href="#Turn-34"><span class="linenos">34</span></a>
+</span><span id="Turn-35"><a href="#Turn-35"><span class="linenos">35</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Turn-36"><a href="#Turn-36"><span class="linenos">36</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Turn-37"><a href="#Turn-37"><span class="linenos">37</span></a><span class="sd">        Returns a hash based on the Player and Card</span>
+</span><span id="Turn-38"><a href="#Turn-38"><span class="linenos">38</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Turn-39"><a href="#Turn-39"><span class="linenos">39</span></a>
+</span><span id="Turn-40"><a href="#Turn-40"><span class="linenos">40</span></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">card</span><span class="p">))</span>
+</span><span id="Turn-41"><a href="#Turn-41"><span class="linenos">41</span></a>
+</span><span id="Turn-42"><a href="#Turn-42"><span class="linenos">42</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="Turn-43"><a href="#Turn-43"><span class="linenos">43</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Turn-44"><a href="#Turn-44"><span class="linenos">44</span></a><span class="sd">        Converts a Turn into a dictionary that can be stringified into json</span>
+</span><span id="Turn-45"><a href="#Turn-45"><span class="linenos">45</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Turn-46"><a href="#Turn-46"><span class="linenos">46</span></a>
+</span><span id="Turn-47"><a href="#Turn-47"><span class="linenos">47</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;player&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="s2">&quot;card&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">card</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()}</span>
+</span><span id="Turn-48"><a href="#Turn-48"><span class="linenos">48</span></a>
+</span><span id="Turn-49"><a href="#Turn-49"><span class="linenos">49</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Turn-50"><a href="#Turn-50"><span class="linenos">50</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Turn</span><span class="p">:</span>
+</span><span id="Turn-51"><a href="#Turn-51"><span class="linenos">51</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Turn-52"><a href="#Turn-52"><span class="linenos">52</span></a><span class="sd">        Creates and returns a Turn based on a json dictionary</span>
+</span><span id="Turn-53"><a href="#Turn-53"><span class="linenos">53</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Turn-54"><a href="#Turn-54"><span class="linenos">54</span></a>
+</span><span id="Turn-55"><a href="#Turn-55"><span class="linenos">55</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+</span><span id="Turn-56"><a href="#Turn-56"><span class="linenos">56</span></a>            <span class="n">Player</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]),</span> <span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;card&quot;</span><span class="p">])</span>
+</span><span id="Turn-57"><a href="#Turn-57"><span class="linenos">57</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
@@ -255,12 +257,12 @@
 
     </div>
     <a class="headerlink" href="#Turn.to_dict"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Turn.to_dict-41"><a href="#Turn.to_dict-41"><span class="linenos">41</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="Turn.to_dict-42"><a href="#Turn.to_dict-42"><span class="linenos">42</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Turn.to_dict-43"><a href="#Turn.to_dict-43"><span class="linenos">43</span></a><span class="sd">        Converts a Turn into a dictionary that can be stringified into json</span>
-</span><span id="Turn.to_dict-44"><a href="#Turn.to_dict-44"><span class="linenos">44</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Turn.to_dict-45"><a href="#Turn.to_dict-45"><span class="linenos">45</span></a>
-</span><span id="Turn.to_dict-46"><a href="#Turn.to_dict-46"><span class="linenos">46</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;player&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="s2">&quot;card&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">card</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()}</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Turn.to_dict-42"><a href="#Turn.to_dict-42"><span class="linenos">42</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="Turn.to_dict-43"><a href="#Turn.to_dict-43"><span class="linenos">43</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Turn.to_dict-44"><a href="#Turn.to_dict-44"><span class="linenos">44</span></a><span class="sd">        Converts a Turn into a dictionary that can be stringified into json</span>
+</span><span id="Turn.to_dict-45"><a href="#Turn.to_dict-45"><span class="linenos">45</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Turn.to_dict-46"><a href="#Turn.to_dict-46"><span class="linenos">46</span></a>
+</span><span id="Turn.to_dict-47"><a href="#Turn.to_dict-47"><span class="linenos">47</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;player&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="s2">&quot;card&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">card</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()}</span>
 </span></pre></div>
 
 
@@ -281,15 +283,15 @@
 
     </div>
     <a class="headerlink" href="#Turn.from_dict"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Turn.from_dict-48"><a href="#Turn.from_dict-48"><span class="linenos">48</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Turn.from_dict-49"><a href="#Turn.from_dict-49"><span class="linenos">49</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Turn</span><span class="p">:</span>
-</span><span id="Turn.from_dict-50"><a href="#Turn.from_dict-50"><span class="linenos">50</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Turn.from_dict-51"><a href="#Turn.from_dict-51"><span class="linenos">51</span></a><span class="sd">        Creates and returns a Turn based on a json dictionary</span>
-</span><span id="Turn.from_dict-52"><a href="#Turn.from_dict-52"><span class="linenos">52</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Turn.from_dict-53"><a href="#Turn.from_dict-53"><span class="linenos">53</span></a>
-</span><span id="Turn.from_dict-54"><a href="#Turn.from_dict-54"><span class="linenos">54</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-</span><span id="Turn.from_dict-55"><a href="#Turn.from_dict-55"><span class="linenos">55</span></a>            <span class="n">Player</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]),</span> <span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;card&quot;</span><span class="p">])</span>
-</span><span id="Turn.from_dict-56"><a href="#Turn.from_dict-56"><span class="linenos">56</span></a>        <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Turn.from_dict-49"><a href="#Turn.from_dict-49"><span class="linenos">49</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Turn.from_dict-50"><a href="#Turn.from_dict-50"><span class="linenos">50</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Turn</span><span class="p">:</span>
+</span><span id="Turn.from_dict-51"><a href="#Turn.from_dict-51"><span class="linenos">51</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Turn.from_dict-52"><a href="#Turn.from_dict-52"><span class="linenos">52</span></a><span class="sd">        Creates and returns a Turn based on a json dictionary</span>
+</span><span id="Turn.from_dict-53"><a href="#Turn.from_dict-53"><span class="linenos">53</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Turn.from_dict-54"><a href="#Turn.from_dict-54"><span class="linenos">54</span></a>
+</span><span id="Turn.from_dict-55"><a href="#Turn.from_dict-55"><span class="linenos">55</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+</span><span id="Turn.from_dict-56"><a href="#Turn.from_dict-56"><span class="linenos">56</span></a>            <span class="n">Player</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;player&quot;</span><span class="p">]),</span> <span class="n">Card</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;card&quot;</span><span class="p">])</span>
+</span><span id="Turn.from_dict-57"><a href="#Turn.from_dict-57"><span class="linenos">57</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
