@@ -129,7 +129,7 @@ class Game:
         for player, wins in results.items():
             print(f"{player} wins: {wins}")
 
-        print() a
+        print()
 
     @classmethod
     def _get_timestamp_name(self, prefix: str = "game") -> str:
