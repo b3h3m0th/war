@@ -9,12 +9,7 @@ SUIT_STRINGS = {
     Suit.Diamonds: "♦",
 }
 
-RANK_STRINGS = {
-    Rank.Ace: "A",
-    Rank.King: "K",
-    Rank.Queen: "Q",
-    Rank.Jack: "J",
-}
+RANK_STRINGS = {Rank.Ace: "A", Rank.King: "K", Rank.Queen: "Q", Rank.Jack: "J"}
 
 
 class Card:
@@ -59,7 +54,7 @@ class Card:
         Converts a card into a dictionary that can be stringified into json
         """
 
-        return {"suit": self.suit, "rank": self.rank}
+        return {"suit": self.suit.to_dict(), "rank": self.rank.to_dict()}
 
     @classmethod
     def from_dict(cls, data: dict) -> Card:
@@ -67,4 +62,4 @@ class Card:
         Creates and returns a card based on a json dictionary
         """
 
-        return cls(data["suit"], data["rank"])
+        return cls(Suit.from_dict(data["suit"]), Rank.from_dict(data["rank"]))

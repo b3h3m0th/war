@@ -1,21 +1,28 @@
+from __future__ import annotations
 from models.deck import Deck
 from models.player import Player
 from models.round import Round
 from models.turn import Turn
 from enums.variant import Variant
 
-
+import datetime
 from prompt_toolkit.shortcuts import choice
 
 
 class Game:
     def __init__(
-        self, players: list[Player] = None, variant: Variant = Variant.NoJoker
+        self,
+        players: list[Player] = None,
+        variant: Variant = Variant.NoJoker,
+        deck: Deck = None,
+        rounds: list[Round] = None,
+        name: str = None,
     ) -> None:
         self.variant = variant
-        self.deck = Deck()
-        self.players = players
-        self.rounds = players or []
+        self.deck = deck or Deck()
+        self.players = players or []
+        self.rounds = rounds or []
+        self.name = name or Game._get_timestamp_name()
 
     def start(self) -> None:
         """
@@ -70,10 +77,7 @@ class Game:
 
             keep_going = choice(
                 message="Do you want to keep playing?",
-                options=[
-                    (True, "Yes"),
-                    (False, "No, Quit"),
-                ],
+                options=[(True, "Yes"), (False, "No, Quit")],
                 default=True,
             )
             if not keep_going:
@@ -99,7 +103,6 @@ class Game:
                 )
             else:
                 ties += 1
-
         print("Results:")
         for key, value in wins_per_player.items():
             print(f"{key} wins: {value}")
@@ -134,3 +137,65 @@ class Game:
             ).center(len(confetti))
             print(f"🎊🎉🎊 {centered_msg} 🎊🎉🎊")
             print(confetti)
+
+    @classmethod
+    def _get_timestamp_name(self, prefix: str = "game") -> str:
+        """
+        Returns a name for a Game based on the current time.
+        Format: <prefix>_YYYY-MM-DD-hh-mm-ss-ms
+        """
+
+        return f"{prefix}_{(datetime.datetime
+                            .now(datetime.timezone.utc)
+                            .strftime("%Y-%m-%d-%H-%M-%S-%f"))}"
+
+    def __eq__(self, other) -> bool:
+        """
+        Checks whether a Game is equal to another Game.
+        Games are considered equal if their
+        players, rounds, deck and variant are equal.
+        """
+
+        return (
+            isinstance(other, Game)
+            and self.players == other
+            and self.rounds == other.rounds
+            and self.deck == other.deck
+            and self.variant == other.variant
+        )
+
+    def __hash__(self) -> int:
+        """
+        Returns a hash based on the game its players, rounds, deck and variant
+        """
+
+        return hash(
+            (tuple(self.players), tuple(self.rounds), self.deck, self.variant)
+        )
+
+    def to_dict(self) -> dict:
+        """
+        Converts a Game into a dictionary that can be stringified into json
+        """
+
+        return {
+            "players": [p.to_dict() for p in self.players],
+            "rounds": [r.to_dict() for r in self.rounds],
+            "deck": self.deck.to_dict(),
+            "variant": self.variant.to_dict(),
+            "name": self.name,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict) -> Game:
+        """
+        Returns a Game based on a json dictionary
+        """
+
+        return cls(
+            [Player.from_dict(p) for p in data["players"]],
+            Variant.from_dict(data["variant"]),
+            Deck.from_dict(data["deck"]),
+            [Round.from_dict(r) for r in data["rounds"]],
+            data["name"],
+        )

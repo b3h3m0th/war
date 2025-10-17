@@ -17,11 +17,14 @@ class "Deck" as models.deck.Deck {
 }
 class "Game" as models.game.Game {
   deck
-  players : Optional[list[Player]]
+  name
+  players : list
   rounds : list
   variant
+  from_dict(data: dict) -> Game
   print_results()
   start() -> None
+  to_dict() -> dict
 }
 class "Player" as models.player.Player {
   isNpc : bool
@@ -31,6 +34,8 @@ class "Player" as models.player.Player {
 }
 class "Rank" as enums.rank.Rank {
   name
+  from_dict(data: dict) -> Rank
+  to_dict() -> dict
 }
 class "Round" as models.round.Round {
   turns : list[Turn]
@@ -39,14 +44,16 @@ class "Round" as models.round.Round {
   to_dict() -> dict
 }
 class "Serializer" as utils.serializer.Serializer {
-  load(cls, path: Path | str) -> object
-  save(obj: object, path: Path | str) -> None
+  load(cls, path: Path) -> object
+  save(obj: object, path: Path) -> None
 }
 class "Shell" as models.shell.Shell {
   game
+  games_path : Path
   intro : str
   prompt : str
   default(line)
+  do_log(arg) -> None
   do_menu(arg) -> None
   do_new(arg) -> None
   do_quit(arg) -> bool
@@ -55,6 +62,8 @@ class "Shell" as models.shell.Shell {
 }
 class "Suit" as enums.suit.Suit {
   name
+  from_dict(data: dict) -> Suit
+  to_dict() -> dict
 }
 class "Turn" as models.turn.Turn {
   card
@@ -64,6 +73,8 @@ class "Turn" as models.turn.Turn {
 }
 class "Variant" as enums.variant.Variant {
   name
+  from_dict(data: dict) -> Variant
+  to_dict() -> dict
 }
 models.deck.Deck --* models.game.Game : deck
 models.game.Game --* models.shell.Shell : game

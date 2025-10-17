@@ -24,11 +24,13 @@ class Deck:
 
     def get_new_deck_order_cards(self) -> list[Card]:
         """
-        Returns a list of cards in typical new deck order NDO.
+        Returns a list of cards in typical new deck order (NDO).
         Spades: Ace -> King
         Diamonds: Ace -> King
         Clubs: King -> Ace
         Hearts: King -> Ace
+        # noqa: E501
+        See https://en.wikipedia.org/wiki/Standard_52-card_deck#New-deck_order_(NDO)
         """
 
         ace_to_king = [Rank.Ace] + [
@@ -90,9 +92,7 @@ class Deck:
         Converts a Deck into a dictionary that can be stringified into json
         """
 
-        return {
-            "cards": [card.to_dict() for card in self.cards],
-        }
+        return {"cards": [card.to_dict() for card in self.cards]}
 
     @classmethod
     def from_dict(cls, data: dict) -> Deck:
@@ -100,4 +100,4 @@ class Deck:
         Creates and returns a Deck based on a json dictionary
         """
 
-        return cls(Card.from_dict(card_data) for card_data in data["cards"])
+        return cls([Card.from_dict(card_data) for card_data in data["cards"]])

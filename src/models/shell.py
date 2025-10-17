@@ -1,11 +1,18 @@
 from cmd import Cmd
 from models.game import Game
+from utils.serializer import Serializer
+
+
+from pathlib import Path
+from prompt_toolkit.shortcuts import choice
 
 
 class Shell(Cmd):
     intro: str = "Welcome to the war shell. Type help or ? to list commands.\n"
     prompt: str = "(war) "
+
     game: Game
+    games_path: Path = Path("./data/games")
 
     def __init__(self) -> None:
         super().__init__()
@@ -24,15 +31,18 @@ class Shell(Cmd):
         print("│  (rules) Shows game rules        │")
         print("│  (menu)  Shows the menu          │")
         print("│  (new)   Start new game          │")
+        print("│  (log)   Game history            │")
         print("│  (help)  List commands           │")
-        print("│  (stats) Statistics              │")
         print("│  (quit)  Quit                    │")
         print("│                                  │")
-        print("├────────────[Options]─────────────┤")
-        print("│                                  │")
-        print("│  TBA                             │")
-        print("│                                  │")
         print("└──────────────────────────────────┘")
+
+    def do_menu(self, arg) -> None:
+        """
+        Shows the menu if the user wants the menu again
+        """
+
+        self.print_menu()
 
     def do_new(self, arg) -> None:
         """
@@ -42,23 +52,23 @@ class Shell(Cmd):
         self.game = Game()
         self.game.start()
 
-    def do_quit(self, arg) -> bool:
-        """
-        Quit the game
-        """
-
-        print("Thank you for playing war")
-        return True
-
-    def default(self, line):
-        """
-        Default case for unknown command
-        """
-
-        print(
-            f'Unknown option: "{line}". '
-            "Use help or ? to get a list of all options."
+        save_game = choice(
+            message="Do you want to save this game",
+            options=[(True, "Yes"), (False, "No")],
+            default=False,
         )
+
+        if save_game:
+            Serializer.save(
+                self.game, self.games_path / f"{self.game.name}.json"
+            )
+
+    def do_log(self, arg) -> None:
+        for json_file in self.games_path.glob("*.json"):
+            game = Serializer.load(Game, json_file)
+            game.print_results()
+
+        print()
 
     def do_rules(self, arg) -> None:
         """
@@ -93,12 +103,24 @@ class Shell(Cmd):
             " - Choose variant or game rules (not yet implemented)\n"
         )
 
-    def do_menu(self, arg) -> None:
+    def do_quit(self, arg) -> bool:
         """
-        Shows the menu if the user wants the menu again
+        Quit the game
         """
 
-        self.print_menu()
+        print("Thank you for playing war")
+        return True
+
+    def default(self, line):
+        """
+        Default case for unknown command
+        """
+
+        print(
+            f'Unknown option: "{line}". '
+            'Use "help" or "?"" to get a list of all options '
+            'or use "menu" to get the initial start screen menu.'
+        )
 
 
 if __name__ == "__main__":
