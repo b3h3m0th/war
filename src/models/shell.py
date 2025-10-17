@@ -88,10 +88,7 @@ class Shell(Cmd):
 
         previous_games: list[Game] = self.get_previous_games()
         taken_player_names: list[str] = [
-            player.name
-            for game in previous_games
-            for player in game.players
-            if not player.isNpc
+            player.name for game in previous_games for player in game.players
         ]
 
         self.game.start(taken_player_names)
