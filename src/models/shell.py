@@ -124,9 +124,7 @@ class Shell(Cmd):
             message="Which player name do you want to change?",
             options=[(player, player.name) for player in distinct_players],
         )
-        new_name: str = input(
-            f"Select a new name for {selected_player.name}: "
-        )
+        new_name: str = input(f"Select a new name for {selected_player}: ")
 
         for game in games_log:
             for player in game.players:
@@ -136,7 +134,7 @@ class Shell(Cmd):
             for round in game.rounds:
                 for turn in round.turns:
                     if turn.player == selected_player:
-                        turn.player.name == new_name
+                        turn.player.name = new_name
 
             Serializer.save(game, self.games_path / f"{game.name}.json")
 

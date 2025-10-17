@@ -31,7 +31,7 @@ class Turn:
             and self.card == other.card
         )
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """
         Returns a hash based on the Player and Card
         """
