@@ -71,18 +71,17 @@ class Game:
             winning_turns = current_round.get_winning_turns()
 
             if len(winning_turns) > 1:
-                print("Tie detected you are going to WAR⚔️")
-                print("⚔️WAR⚔️")
-                if len(self.deck.cards) >= 3 + len(self.players):
-                    self.deck.deal(3)
-                    print("Three cards have been discarded")
-                else:
-                    print("Three cards cant be discarded as "
-                    "there wont be enough cards to play the last round")
                 tie_names = ", ".join(
                     f"{turn.player} ({turn.card})" for turn in winning_turns
                 )
                 print(f"Tie between: {tie_names}")
+
+                if len(self.deck.cards) >= 3 + len(self.players):
+                    self.deck.deal(3)
+                    print("⚔️ You are going to WAR (burned three cards)")
+                else:
+                    print("️⚔️ Not enough cards left to go to WAR")
+
             elif len(winning_turns) == 1:
                 winner = winning_turns[0]
                 print(f"{winner.player} has the highest card ({winner.card})")
