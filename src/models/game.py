@@ -72,8 +72,12 @@ class Game:
             winning_turns = current_round.get_winning_turns()
 
             if len(winning_turns) > 1:
+                self.deck.deal()
+                self.deck.deal()
+                self.deck.deal()
                 print("Tie detected you are going to WAR⚔️")
                 print("⚔️WAR⚔️")
+                print("Three cards have been discarded")
                 tie_names = ", ".join(
                     f"{turn.player} ({turn.card})" for turn in winning_turns
                 )

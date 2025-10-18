@@ -30,7 +30,7 @@ coverage:
 	coverage run -m pytest
 	coverage report
 
-run:
+war:
 	python src/main.py
 
 clean:
