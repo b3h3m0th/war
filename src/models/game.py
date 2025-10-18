@@ -111,6 +111,11 @@ class Game:
         """
 
         results = results or self.get_results()
+
+        if not results:
+            print("No results to display")
+            return
+
         max_score = max(results.values())
         winning_results = {k: v for k, v in results.items() if v == max_score}
 
@@ -123,7 +128,8 @@ class Game:
                 f"{max_score} wins each🟰"
             )
         else:
-            winner_str = f"{list(winning_results.items())[0][0]} won {self.name} with a score of {max_score}"
+            winner_str = f"""{list(winning_results.items())[0][0]}
+            won {self.name} with a score of {max_score}"""
             print(f"🎉 {winner_str}")
 
         for player, wins in results.items():
