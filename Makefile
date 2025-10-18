@@ -1,4 +1,4 @@
-.PHONY: install format lint test run clean coverage uml-docs api-docs docs
+.PHONY: install format lint test war clean coverage uml-docs api-docs docs
 
 activate:
 	source .venv/bin/activate
