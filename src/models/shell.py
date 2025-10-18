@@ -16,6 +16,11 @@ class Shell(Cmd):
     games_path: Path = Path("./data/games")
 
     def __init__(self) -> None:
+        """
+        When instantiated calls the constructor of
+        super class Cmd. Prints the menu for the current game.
+        """
+
         super().__init__()
         self.intro = self.print_menu()
 
@@ -85,7 +90,13 @@ class Shell(Cmd):
         """
 
         self.game = Game()
-        self.game.start()
+
+        previous_games: list[Game] = self.get_previous_games()
+        taken_player_names: list[str] = [
+            player.name for game in previous_games for player in game.players
+        ]
+
+        self.game.start(taken_player_names)
 
         save_game = choice(
             message="Do you want to save this game",
@@ -99,8 +110,7 @@ class Shell(Cmd):
             )
 
     def do_log(self, arg) -> None:
-        for json_file in self.games_path.glob("*.json"):
-            game = Serializer.load(Game, json_file)
+        for game in self.get_previous_games():
             game.print_results()
 
     def do_chng(self, arg) -> None:
@@ -108,27 +118,24 @@ class Shell(Cmd):
         Change a players name
         """
 
-        games_log: list[Game] = []
-
-        for json_file in self.games_path.glob("*.json"):
-            game = Serializer.load(Game, json_file)
-            games_log.append(game)
-
+        games: list[Game] = self.get_previous_games()
         distinct_players: list[Player] = []
-        for game in games_log:
+
+        for game in games:
             for player in game.players:
                 if player not in distinct_players and not player.isNpc:
                     distinct_players.append(player)
 
         selected_player: Player = choice(
             message="Which player name do you want to change?",
-            options=[(player, player.name) for player in distinct_players],
+            options=[
+                (Player(player.name, player.isNpc), player.name)
+                for player in distinct_players
+            ],
         )
-        new_name: str = input(
-            f"Select a new name for {selected_player.name}: "
-        )
+        new_name: str = input(f"Select a new name for {selected_player}: ")
 
-        for game in games_log:
+        for game in games:
             for player in game.players:
                 if player == selected_player:
                     player.name = new_name
@@ -136,9 +143,11 @@ class Shell(Cmd):
             for round in game.rounds:
                 for turn in round.turns:
                     if turn.player == selected_player:
-                        turn.player.name == new_name
+                        turn.player.name = new_name
 
             Serializer.save(game, self.games_path / f"{game.name}.json")
+
+        print(f'Updated player "{selected_player.name}" to "{new_name}" ')
 
     def do_quit(self, arg) -> bool:
         """
@@ -148,7 +157,7 @@ class Shell(Cmd):
         print("Thank you for playing war")
         return True
 
-    def default(self, line):
+    def default(self, line) -> None:
         """
         Default case for unknown command
         """
@@ -158,6 +167,12 @@ class Shell(Cmd):
             'Use "help" or "?"" to get a list of all options '
             'or use "menu" to get the initial start screen menu.'
         )
+
+    def get_previous_games(self) -> list[Game]:
+        return [
+            Serializer.load(Game, file)
+            for file in self.games_path.glob("*.json")
+        ]
 
 
 if __name__ == "__main__":

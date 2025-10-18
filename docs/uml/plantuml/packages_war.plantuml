@@ -40,6 +40,7 @@ models.game --> models.round
 models.game --> models.turn
 models.round --> models.turn
 models.shell --> models.game
+models.shell --> models.player
 models.shell --> utils.serializer
 models.turn --> models.card
 models.turn --> models.player
