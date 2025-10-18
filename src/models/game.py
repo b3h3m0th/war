@@ -45,7 +45,6 @@ class Game:
             computer = Player("Computer", True)
             self.players = [player, computer]
         elif player_choice == "pvp" or player_choice == "pvpc":
-
             player1 = Player(Game._input_name(taken_player_names))
             player2 = Player(
                 Game._input_name(taken_player_names + [player1.name])
