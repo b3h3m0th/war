@@ -128,10 +128,8 @@ class Game:
                 f"{max_score} wins each."
             )
         else:
-            winner_str = (
-                f"{list(winning_results.items())[0][0]} won {self.name} "
-                f"with a score of {max_score}."
-            )
+            winner_str = f"{list(winning_results.items())[0][0]} \
+                won {self.name} with a score of {max_score}"
             print(f"🎉 {winner_str}")
 
         for player, wins in results.items():

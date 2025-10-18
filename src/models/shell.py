@@ -16,6 +16,11 @@ class Shell(Cmd):
     games_path: Path = Path("./data/games")
 
     def __init__(self) -> None:
+        """
+        When instantiated calls the constructor of
+        super class Cmd. Prints the menu for the current game.
+        """
+
         super().__init__()
         self.intro = self.print_menu()
 
