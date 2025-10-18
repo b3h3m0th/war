@@ -16,7 +16,7 @@ class Shell(Cmd):
 
     def __init__(self) -> None:
         """
-        Constructor: When instantiated calls the constructor of
+        When instantiated calls the constructor of
         super class Cmd. Prints the menu for the current game.
         """
 
@@ -72,6 +72,7 @@ class Shell(Cmd):
         """
         Loads a game and prints the results of that game
         """
+
         for json_file in self.games_path.glob("*.json"):
             game = Serializer.load(Game, json_file)
             game.print_results()
