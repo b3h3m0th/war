@@ -75,6 +75,13 @@ class Game:
                     f"{turn.player} ({turn.card})" for turn in winning_turns
                 )
                 print(f"Tie between: {tie_names}")
+
+                if len(self.deck.cards) >= 3 + len(self.players):
+                    self.deck.deal(3)
+                    print("⚔️ You are going to WAR (burned three cards)")
+                else:
+                    print("️⚔️ Not enough cards left to go to WAR")
+
             elif len(winning_turns) == 1:
                 winner = winning_turns[0]
                 print(f"{winner.player} has the highest card ({winner.card})")
