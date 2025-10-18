@@ -29,8 +29,26 @@ class Game:
         Starts the game
         """
 
+        variant_choice = choice(
+            message="Choose gamemode:",
+            options=[
+                (Variant.NoJoker, "Default game with no Joker"),
+                (
+                    Variant.JokerPenalty,
+                    "Getting a Joker instantly loses you the round",
+                ),
+                (Variant.JokerInstantWar, "Getting a Joker grants war(draw)"),
+                (
+                    Variant.JokerHighest,
+                    "Getting a Joker instantly wins you the round",
+                ),
+            ],
+            default=Variant.NoJoker,
+        )
+        variant = variant_choice
+
         player_choice = choice(
-            message="Choose a gamemode:",
+            message="Choose a player count:",
             options=[
                 ("pvc", "Player vs Computer"),
                 ("pvp", "Player vs Player"),
