@@ -78,8 +78,8 @@ class Game:
                     self.deck.deal(3)
                     print("Three cards have been discarded")
                 else:
-                    print("Three cards cannot be discarded as there wont be " \
-                    "enough cards to play the last round")
+                    print("Three cards cant be discarded as "
+                    "there wont be enough cards to play the last round")
                 tie_names = ", ".join(
                     f"{turn.player} ({turn.card})" for turn in winning_turns
                 )
