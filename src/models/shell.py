@@ -152,7 +152,7 @@ class Shell(Cmd):
         print("Thank you for playing war")
         return True
 
-    def default(self, line):
+    def default(self, line) -> None:
         """
         Default case for unknown command
         """
