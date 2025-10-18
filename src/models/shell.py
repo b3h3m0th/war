@@ -15,6 +15,11 @@ class Shell(Cmd):
     games_path: Path = Path("./data/games")
 
     def __init__(self) -> None:
+        """
+        Constructor: When instantiated calls the constructor of super class Cmd.
+        Prints the menu for the current game.
+        """
+        
         super().__init__()
         self.intro = self.print_menu()
 
@@ -64,6 +69,9 @@ class Shell(Cmd):
             )
 
     def do_log(self, arg) -> None:
+        """
+        Loads a game and prints the results of that game
+        """
         for json_file in self.games_path.glob("*.json"):
             game = Serializer.load(Game, json_file)
             game.print_results()
