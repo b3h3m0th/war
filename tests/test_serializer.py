@@ -1,21 +1,22 @@
+from __future__ import annotations
 from utils.serializer import Serializer
 from models.player import Player
 
 
 class Dummy:
-    def __init__(self, name, value):
+    def __init__(self: Dummy, name: str, value: int):
         self.name = name
         self.value = value
 
-    def to_dict(self):
+    def to_dict(self: Dummy) -> dict:
         return {"name": self.name, "value": self.value}
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls: Dummy, data) -> Dummy:
         return cls(data["name"], data["value"])
 
 
-def test_save_and_load_dummy(tmp_path):
+def test_save_and_load_dummy(tmp_path) -> None:
     dummy = Dummy("test", 42)
     file_path = tmp_path / "data.json"
 
@@ -30,7 +31,7 @@ def test_save_and_load_dummy(tmp_path):
     assert loaded.value == 42
 
 
-def test_save_and_load_player(tmp_path):
+def test_save_and_load_player(tmp_path: str) -> None:
     player = Player("John Doe", False)
     file_path = tmp_path / "data.json"
 

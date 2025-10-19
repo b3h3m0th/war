@@ -31,7 +31,7 @@ class Card:
 
         return f"{rank_string}{suit_string}"
 
-    def __eq__(self: Card, other) -> bool:
+    def __eq__(self: Card, other: Card) -> bool:
         """
         Checks whether a card is equal to another card
         """

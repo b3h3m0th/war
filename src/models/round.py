@@ -1,17 +1,18 @@
+from __future__ import annotations
 from models.turn import Turn
 
 
 class Round:
     turns: list[Turn]
 
-    def __init__(self, turns=None):
+    def __init__(self: Turn, turns: list[Turn] = None):
         """
         Instantiates a new Round with a given list of turns.
         """
 
         self.turns = turns or []
 
-    def get_winning_turns(self) -> list[Turn]:
+    def get_winning_turns(self: Round) -> list[Turn]:
         """
         Returns a list of turns with the highest cards by rank.
         Returns a list of multiple turns in case of a tie.
@@ -36,7 +37,7 @@ class Round:
 
         return winning_turns
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self: Round, other) -> bool:
         """
         Checks whether a Round is equal to another Round
         Two rounds are equal if the compared turns have equal values
@@ -44,14 +45,14 @@ class Round:
 
         return isinstance(other, Round) and self.turns == other.turns
 
-    def __hash__(self) -> int:
+    def __hash__(self: Round) -> int:
         """
         Returns a hash based on turns
         """
 
         return hash(tuple(self.turns))
 
-    def to_dict(self) -> dict:
+    def to_dict(self: Round) -> dict:
         """
         Converts a Round into a dictionary that can be stringified into json
         """
@@ -59,7 +60,7 @@ class Round:
         return {"turns": [turn.to_dict() for turn in self.turns]}
 
     @classmethod
-    def from_dict(cls, data: dict) -> Turn:
+    def from_dict(cls: Round, data: dict) -> Turn:
         """
         Creates and returns a Round based on a json dictionary
         """

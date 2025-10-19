@@ -30,7 +30,7 @@ def test_initial_turn_hashes_are_equal() -> None:
     assert hash(turn1) == hash(turn2)
 
 
-def test_different_turns_not_equal():
+def test_different_turns_not_equal() -> None:
     turn1 = Turn(Player("John", False), Card(Suit.Clubs, Rank.Two))
     turn2 = Turn(Player("Lisa", False), Card(Suit.Clubs, Rank.Three))
 

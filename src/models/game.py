@@ -165,7 +165,7 @@ class Game:
                             .now(datetime.timezone.utc)
                             .strftime("%Y-%m-%d-%H-%M-%S-%f"))}"
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self: Game, other: Game) -> bool:
         """
         Checks whether a Game is equal to another Game.
         Games are considered equal if their
@@ -180,7 +180,7 @@ class Game:
             and self.variant == other.variant
         )
 
-    def __hash__(self) -> int:
+    def __hash__(self: Game) -> int:
         """
         Returns a hash based on the game its players, rounds, deck and variant
         """
@@ -189,7 +189,7 @@ class Game:
             (tuple(self.players), tuple(self.rounds), self.deck, self.variant)
         )
 
-    def to_dict(self) -> dict:
+    def to_dict(self: Game) -> dict:
         """
         Converts a Game into a dictionary that can be stringified into json
         """
@@ -203,7 +203,7 @@ class Game:
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> Game:
+    def from_dict(cls: Game, data: dict) -> Game:
         """
         Returns a Game based on a json dictionary
         """
