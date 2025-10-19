@@ -17,7 +17,7 @@ class Rank(Enum):
     King: int = 13
     Ace: int = 14
 
-    def to_dict(self) -> dict:
+    def to_dict(self: Rank) -> dict:
         """
         Converts a Rank into a dictionary that can be stringified into json
         """
@@ -25,7 +25,7 @@ class Rank(Enum):
         return {"value": self.value}
 
     @classmethod
-    def from_dict(cls, data: dict) -> Rank:
+    def from_dict(cls: Rank, data: dict) -> Rank:
         """
         Returns a Rank based on a json dictionary
         """

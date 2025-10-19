@@ -21,7 +21,7 @@ class Card:
         self.suit: Suit = suit
         self.rank: Rank = rank
 
-    def __str__(self) -> str:
+    def __str__(self: Card) -> str:
         """
         Displays a card as a string with the according symbol of its suit
         """
@@ -31,7 +31,7 @@ class Card:
 
         return f"{rank_string}{suit_string}"
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self: Card, other) -> bool:
         """
         Checks whether a card is equal to another card
         """
@@ -42,14 +42,14 @@ class Card:
             and self.rank == other.rank
         )
 
-    def __hash__(self) -> int:
+    def __hash__(self: Card) -> int:
         """
         Computes a hash of a card based on its suit and rank
         """
 
         return hash((self.suit, self.rank))
 
-    def to_dict(self) -> dict:
+    def to_dict(self: Card) -> dict:
         """
         Converts a card into a dictionary that can be stringified into json
         """
@@ -57,7 +57,7 @@ class Card:
         return {"suit": self.suit.to_dict(), "rank": self.rank.to_dict()}
 
     @classmethod
-    def from_dict(cls, data: dict) -> Card:
+    def from_dict(cls: Card, data: dict) -> Card:
         """
         Creates and returns a card based on a json dictionary
         """
