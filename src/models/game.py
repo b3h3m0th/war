@@ -34,8 +34,11 @@ class Game:
             options=[
                 ("pvc", "Player vs Computer"),
                 ("pvp", "Player vs Player"),
-                ("pvcc", "Player vs Computer with instant result(cheat mode)"),
-                ("pvpc", "Player vs Player with instant result(cheat mode)"),
+                (
+                    "pvcc",
+                    "Player vs Computer with instant result (cheat mode)",
+                ),
+                ("pvpc", "Player vs Player with instant result (cheat mode)"),
             ],
             default="pvc",
         )
