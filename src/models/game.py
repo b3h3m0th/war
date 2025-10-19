@@ -24,7 +24,7 @@ class Game:
         self.rounds = rounds or []
         self.name = name or Game._get_timestamp_name()
 
-    def start(self) -> None:
+    def start(self, taken_player_names: list[str]) -> None:
         """
         Starts the game
         """
@@ -34,17 +34,21 @@ class Game:
             options=[
                 ("pvc", "Player vs Computer"),
                 ("pvp", "Player vs Player"),
+                ("pvcc", "Player vs Computer with instant result(cheat mode)"),
+                ("pvpc", "Player vs Player with instant result(cheat mode)"),
             ],
             default="pvc",
         )
 
-        if player_choice == "pvc":
-            player = Player(input("Enter your name: ").strip())
+        if player_choice == "pvc" or player_choice == "pvcc":
+            player = Player(Game._input_name(taken_player_names))
             computer = Player("Computer", True)
             self.players = [player, computer]
-        elif player_choice == "pvp":
-            player1 = Player(input("Enter name for Player 1: ").strip())
-            player2 = Player(input("Enter name for Player 2: ").strip())
+        elif player_choice == "pvp" or player_choice == "pvpc":
+            player1 = Player(Game._input_name(taken_player_names))
+            player2 = Player(
+                Game._input_name(taken_player_names + [player1.name])
+            )
             self.players = [player1, player2]
 
         self.deck.shuffle()
@@ -71,18 +75,25 @@ class Game:
                     f"{turn.player} ({turn.card})" for turn in winning_turns
                 )
                 print(f"Tie between: {tie_names}")
+
+                if len(self.deck.cards) >= 3 + len(self.players):
+                    self.deck.deal(3)
+                    print("⚔️ You are going to WAR (burned three cards)")
+                else:
+                    print("️⚔️ Not enough cards left to go to WAR")
+
             elif len(winning_turns) == 1:
                 winner = winning_turns[0]
                 print(f"{winner.player} has the highest card ({winner.card})")
 
-            keep_going = choice(
-                message="Do you want to keep playing?",
-                options=[(True, "Yes"), (False, "No, Quit")],
-                default=True,
-            )
-
-            if not keep_going:
-                break
+            if player_choice == "pvc" or player_choice == "pvp":
+                keep_going = choice(
+                    message="Do you want to keep playing?",
+                    options=[(True, "Yes"), (False, "No, Quit")],
+                    default=True,
+                )
+                if not keep_going:
+                    break
 
         print()
         self.print_results()
@@ -125,11 +136,16 @@ class Game:
             )
             print(
                 f"👔 It's a draw between: {players_str} with "
-                f"{max_score} wins each🟰"
+                f"{max_score} wins each."
             )
         else:
+<<<<<<< HEAD
             winner_str = f"""{list(winning_results.items())[0][0]}
             won {self.name} with a score of {max_score}"""
+=======
+            winner_str = f"{list(winning_results.items())[0][0]} \
+                won {self.name} with a score of {max_score}"
+>>>>>>> 7b0e3e465713e59ded19c9392d47623e8dca62a8
             print(f"🎉 {winner_str}")
 
         for player, wins in results.items():
@@ -138,7 +154,18 @@ class Game:
         print()
 
     @classmethod
-    def _get_timestamp_name(self, prefix: str = "game") -> str:
+    def _input_name(cls, taken_names: list[str]) -> Player:
+        while True:
+            name = input("Enter your name: ").strip()
+            if not name:
+                print("Name cannot be empty")
+            elif name in taken_names:
+                print("Name already in use")
+            else:
+                return name
+
+    @classmethod
+    def _get_timestamp_name(cls, prefix: str = "game") -> str:
         """
         Returns a name for a Game based on the current time.
         Format: <prefix>_YYYY-MM-DD-hh-mm-ss-ms
