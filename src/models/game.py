@@ -30,7 +30,7 @@ class Game:
         """
 
         player_choice = choice(
-            message="Choose a player count:",
+            message="Choose a gamemode:",
             options=[
                 ("pvc", "Player vs Computer"),
                 ("pvp", "Player vs Player"),
