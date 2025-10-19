@@ -5,6 +5,7 @@ from models.shell import Shell
 from models.game import Game
 from enums.matchup import Matchup
 from enums.dealmode import DealMode
+from enums.variant import Variant
 
 
 def test_shell_instantiation() -> None:
@@ -82,7 +83,11 @@ def test_do_new_creates_game_and_does_not_save(tmp_path: str) -> None:
     with (
         patch(
             "models.game.choice",
-            side_effect=[Matchup.COMPUTER, DealMode.INSTANT],
+            side_effect=[
+                Matchup.COMPUTER,
+                Variant.NO_JOKERS,
+                DealMode.INSTANT,
+            ],
         ),
         patch("models.shell.choice", return_value=False),
         patch("builtins.input", return_value="Player1"),

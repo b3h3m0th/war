@@ -7,6 +7,7 @@ class Suit(Enum):
     Hearts: str = "Hearts"
     Clubs: str = "Clubs"
     Diamonds: str = "Diamonds"
+    Wild: str = "Wild"
 
     def to_dict(self: Suit) -> dict:
         """

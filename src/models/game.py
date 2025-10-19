@@ -41,13 +41,25 @@ class Game:
             default=Matchup.COMPUTER,
         )
 
+        self.variant = choice(
+            message="Choose a game variant:",
+            options=[
+                (Variant.NO_JOKERS, "Standard 52 cards deck without jokers"),
+                (
+                    Variant.JOKERS_HIGHEST,
+                    "Standard 52 cards deck with 2 jokers as high cards",
+                ),
+            ],
+            default=Matchup.COMPUTER,
+        )
+
         dealmode_choice = choice(
             message="Choose a dealmode:",
             options=[
-                (DealMode.SEQUENTIAL, "Play round by round sequentially."),
+                (DealMode.SEQUENTIAL, "Play round by round sequentially"),
                 (
                     DealMode.INSTANT,
-                    "Simulate all rounds to be played instantly.",
+                    "Simulate all rounds to be played instantly",
                 ),
             ],
             default=DealMode.SEQUENTIAL,
@@ -65,6 +77,7 @@ class Game:
             )
             self.players = [player1, player2]
 
+        self.deck = Deck(variant=self.variant)
         self.deck.shuffle()
 
         round_counter: int = 0
