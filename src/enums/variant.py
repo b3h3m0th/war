@@ -3,10 +3,8 @@ from enum import Enum
 
 
 class Variant(Enum):
-    JokerHighest: str = "JokerHighest"
-    JokerInstantWar: str = "JokerInstantWar"
-    JokerPenalty: str = "JokerPenalty"
-    NoJoker: str = "NoJoker"
+    NO_JOKERS: str = "NO_JOKERS"
+    JOKERS_HIGHEST: str = "JOKERS_HIGHEST"
 
     def to_dict(self: Variant) -> dict:
         """

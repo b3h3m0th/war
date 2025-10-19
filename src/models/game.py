@@ -3,7 +3,10 @@ from models.deck import Deck
 from models.player import Player
 from models.round import Round
 from models.turn import Turn
+
 from enums.variant import Variant
+from enums.matchup import Matchup
+from enums.dealmode import DealMode
 
 import datetime
 from prompt_toolkit.shortcuts import choice
@@ -13,7 +16,7 @@ class Game:
     def __init__(
         self: Game,
         players: list[Player] = None,
-        variant: Variant = Variant.NoJoker,
+        variant: Variant = Variant.NO_JOKERS,
         deck: Deck = None,
         rounds: list[Round] = None,
         name: str = None,
@@ -29,26 +32,33 @@ class Game:
         Starts the game
         """
 
-        player_choice = choice(
-            message="Choose a gamemode:",
+        matchup_choice = choice(
+            message="Choose a matchup:",
             options=[
-                ("pvc", "Player vs Computer"),
-                ("pvp", "Player vs Player"),
-                (
-                    "pvcc",
-                    "Player vs Computer with instant result (cheat mode)",
-                ),
-                ("pvpc", "Player vs Player with instant result (cheat mode)"),
+                (Matchup.COMPUTER, "Player vs. Computer"),
+                (Matchup.PLAYER, "Player vs. Player"),
             ],
-            default="pvc",
+            default=Matchup.COMPUTER,
         )
 
-        if player_choice in ("pvc", "pvcc"):
+        dealmode_choice = choice(
+            message="Choose a dealmode:",
+            options=[
+                (DealMode.SEQUENTIAL, "Play round by round sequentially."),
+                (
+                    DealMode.INSTANT,
+                    "Simulate all rounds to be played instantly.",
+                ),
+            ],
+            default=DealMode.SEQUENTIAL,
+        )
+
+        if matchup_choice is Matchup.COMPUTER:
             self.players = [
                 Player(self._input_name(taken_player_names)),
                 Player("Computer", True),
             ]
-        elif player_choice in ("pvp", "pvpc"):
+        elif matchup_choice is Matchup.PLAYER:
             player1 = Player(self._input_name(taken_player_names))
             player2 = Player(
                 self._input_name(taken_player_names + [player1.name])
@@ -63,10 +73,10 @@ class Game:
             print(f"\nRound {round_counter}:")
             self._play_round()
 
-            if player_choice in ("pvc", "pvp"):
+            if dealmode_choice is DealMode.SEQUENTIAL:
                 keep_going = choice(
-                    message="Do you want to keep playing?",
-                    options=[(True, "Yes"), (False, "No, Quit")],
+                    message="Continue to next round?",
+                    options=[(True, "Yes"), (False, "No, quit")],
                     default=True,
                 )
                 if not keep_going:
