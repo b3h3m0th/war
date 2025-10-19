@@ -73,6 +73,9 @@
                                 <a class="variable" href="#Rank.Ace">Ace</a>
                         </li>
                         <li>
+                                <a class="variable" href="#Rank.Joker">Joker</a>
+                        </li>
+                        <li>
                                 <a class="function" href="#Rank.to_dict">to_dict</a>
                         </li>
                         <li>
@@ -120,21 +123,22 @@
 </span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="n">Queen</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">12</span>
 </span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="n">King</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">13</span>
 </span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    <span class="n">Ace</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">14</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="sd">        Converts a Rank into a dictionary that can be stringified into json</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Rank</span><span class="p">:</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a><span class="sd">        Returns a Rank based on a json dictionary</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">Joker</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Rank</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="sd">        Converts a Rank into a dictionary that can be stringified into json</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Rank</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Rank</span><span class="p">:</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a><span class="sd">        Returns a Rank based on a json dictionary</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
 </span></pre></div>
 
 
@@ -164,21 +168,22 @@
 </span><span id="Rank-17"><a href="#Rank-17"><span class="linenos">17</span></a>    <span class="n">Queen</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">12</span>
 </span><span id="Rank-18"><a href="#Rank-18"><span class="linenos">18</span></a>    <span class="n">King</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">13</span>
 </span><span id="Rank-19"><a href="#Rank-19"><span class="linenos">19</span></a>    <span class="n">Ace</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">14</span>
-</span><span id="Rank-20"><a href="#Rank-20"><span class="linenos">20</span></a>
-</span><span id="Rank-21"><a href="#Rank-21"><span class="linenos">21</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="Rank-22"><a href="#Rank-22"><span class="linenos">22</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Rank-23"><a href="#Rank-23"><span class="linenos">23</span></a><span class="sd">        Converts a Rank into a dictionary that can be stringified into json</span>
-</span><span id="Rank-24"><a href="#Rank-24"><span class="linenos">24</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Rank-25"><a href="#Rank-25"><span class="linenos">25</span></a>
-</span><span id="Rank-26"><a href="#Rank-26"><span class="linenos">26</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
-</span><span id="Rank-27"><a href="#Rank-27"><span class="linenos">27</span></a>
-</span><span id="Rank-28"><a href="#Rank-28"><span class="linenos">28</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Rank-29"><a href="#Rank-29"><span class="linenos">29</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Rank</span><span class="p">:</span>
-</span><span id="Rank-30"><a href="#Rank-30"><span class="linenos">30</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Rank-31"><a href="#Rank-31"><span class="linenos">31</span></a><span class="sd">        Returns a Rank based on a json dictionary</span>
-</span><span id="Rank-32"><a href="#Rank-32"><span class="linenos">32</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Rank-33"><a href="#Rank-33"><span class="linenos">33</span></a>
-</span><span id="Rank-34"><a href="#Rank-34"><span class="linenos">34</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+</span><span id="Rank-20"><a href="#Rank-20"><span class="linenos">20</span></a>    <span class="n">Joker</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span>
+</span><span id="Rank-21"><a href="#Rank-21"><span class="linenos">21</span></a>
+</span><span id="Rank-22"><a href="#Rank-22"><span class="linenos">22</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Rank</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="Rank-23"><a href="#Rank-23"><span class="linenos">23</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Rank-24"><a href="#Rank-24"><span class="linenos">24</span></a><span class="sd">        Converts a Rank into a dictionary that can be stringified into json</span>
+</span><span id="Rank-25"><a href="#Rank-25"><span class="linenos">25</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Rank-26"><a href="#Rank-26"><span class="linenos">26</span></a>
+</span><span id="Rank-27"><a href="#Rank-27"><span class="linenos">27</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
+</span><span id="Rank-28"><a href="#Rank-28"><span class="linenos">28</span></a>
+</span><span id="Rank-29"><a href="#Rank-29"><span class="linenos">29</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Rank-30"><a href="#Rank-30"><span class="linenos">30</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Rank</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Rank</span><span class="p">:</span>
+</span><span id="Rank-31"><a href="#Rank-31"><span class="linenos">31</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Rank-32"><a href="#Rank-32"><span class="linenos">32</span></a><span class="sd">        Returns a Rank based on a json dictionary</span>
+</span><span id="Rank-33"><a href="#Rank-33"><span class="linenos">33</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Rank-34"><a href="#Rank-34"><span class="linenos">34</span></a>
+</span><span id="Rank-35"><a href="#Rank-35"><span class="linenos">35</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
 </span></pre></div>
 
 
@@ -340,23 +345,35 @@
     
 
                             </div>
+                            <div id="Rank.Joker" class="classattr">
+                                <div class="attr variable">
+            <span class="name">Joker</span><span class="annotation">: int</span>        =
+<span class="default_value">&lt;<a href="#Rank.Joker">Rank.Joker</a>: 15&gt;</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Rank.Joker"></a>
+    
+    
+
+                            </div>
                             <div id="Rank.to_dict" class="classattr">
                                         <input id="Rank.to_dict-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">to_dict</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span></span><span class="return-annotation">) -> <span class="nb">dict</span>:</span></span>
+        <span class="name">to_dict</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span><span class="p">:</span> <span class="n"><a href="#Rank">Rank</a></span></span><span class="return-annotation">) -> <span class="nb">dict</span>:</span></span>
 
                 <label class="view-source-button" for="Rank.to_dict-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#Rank.to_dict"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Rank.to_dict-21"><a href="#Rank.to_dict-21"><span class="linenos">21</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="Rank.to_dict-22"><a href="#Rank.to_dict-22"><span class="linenos">22</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Rank.to_dict-23"><a href="#Rank.to_dict-23"><span class="linenos">23</span></a><span class="sd">        Converts a Rank into a dictionary that can be stringified into json</span>
-</span><span id="Rank.to_dict-24"><a href="#Rank.to_dict-24"><span class="linenos">24</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Rank.to_dict-25"><a href="#Rank.to_dict-25"><span class="linenos">25</span></a>
-</span><span id="Rank.to_dict-26"><a href="#Rank.to_dict-26"><span class="linenos">26</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Rank.to_dict-22"><a href="#Rank.to_dict-22"><span class="linenos">22</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Rank</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="Rank.to_dict-23"><a href="#Rank.to_dict-23"><span class="linenos">23</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Rank.to_dict-24"><a href="#Rank.to_dict-24"><span class="linenos">24</span></a><span class="sd">        Converts a Rank into a dictionary that can be stringified into json</span>
+</span><span id="Rank.to_dict-25"><a href="#Rank.to_dict-25"><span class="linenos">25</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Rank.to_dict-26"><a href="#Rank.to_dict-26"><span class="linenos">26</span></a>
+</span><span id="Rank.to_dict-27"><a href="#Rank.to_dict-27"><span class="linenos">27</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
 </span></pre></div>
 
 
@@ -371,19 +388,19 @@
                     <div class="decorator decorator-classmethod">@classmethod</div>
 
         <span class="def">def</span>
-        <span class="name">from_dict</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">cls</span>, </span><span class="param"><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span></span><span class="return-annotation">) -> <span class="n"><a href="#Rank">Rank</a></span>:</span></span>
+        <span class="name">from_dict</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">cls</span><span class="p">:</span> <span class="n"><a href="#Rank">Rank</a></span>, </span><span class="param"><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span></span><span class="return-annotation">) -> <span class="n"><a href="#Rank">Rank</a></span>:</span></span>
 
                 <label class="view-source-button" for="Rank.from_dict-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#Rank.from_dict"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Rank.from_dict-28"><a href="#Rank.from_dict-28"><span class="linenos">28</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Rank.from_dict-29"><a href="#Rank.from_dict-29"><span class="linenos">29</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Rank</span><span class="p">:</span>
-</span><span id="Rank.from_dict-30"><a href="#Rank.from_dict-30"><span class="linenos">30</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Rank.from_dict-31"><a href="#Rank.from_dict-31"><span class="linenos">31</span></a><span class="sd">        Returns a Rank based on a json dictionary</span>
-</span><span id="Rank.from_dict-32"><a href="#Rank.from_dict-32"><span class="linenos">32</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Rank.from_dict-33"><a href="#Rank.from_dict-33"><span class="linenos">33</span></a>
-</span><span id="Rank.from_dict-34"><a href="#Rank.from_dict-34"><span class="linenos">34</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Rank.from_dict-29"><a href="#Rank.from_dict-29"><span class="linenos">29</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Rank.from_dict-30"><a href="#Rank.from_dict-30"><span class="linenos">30</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Rank</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Rank</span><span class="p">:</span>
+</span><span id="Rank.from_dict-31"><a href="#Rank.from_dict-31"><span class="linenos">31</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Rank.from_dict-32"><a href="#Rank.from_dict-32"><span class="linenos">32</span></a><span class="sd">        Returns a Rank based on a json dictionary</span>
+</span><span id="Rank.from_dict-33"><a href="#Rank.from_dict-33"><span class="linenos">33</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Rank.from_dict-34"><a href="#Rank.from_dict-34"><span class="linenos">34</span></a>
+</span><span id="Rank.from_dict-35"><a href="#Rank.from_dict-35"><span class="linenos">35</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
 </span></pre></div>
 
 

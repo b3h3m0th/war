@@ -72,73 +72,74 @@
 
                         <label class="view-source-button" for="mod-round-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">models.turn</span><span class="w"> </span><span class="kn">import</span> <span class="n">Turn</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">models.turn</span><span class="w"> </span><span class="kn">import</span> <span class="n">Turn</span>
 </span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Round</span><span class="p">:</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a>    <span class="n">turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="sd">        Instantiates a new Round with a given list of turns.</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">turns</span> <span class="o">=</span> <span class="n">turns</span> <span class="ow">or</span> <span class="p">[]</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_winning_turns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]:</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="sd">        Returns a list of turns with the highest cards by rank.</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="sd">        Returns a list of multiple turns in case of a tie.</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="sd">        Returns an empty list if there are no turns.</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>        <span class="n">counter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>        <span class="n">max_rank</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>        <span class="n">winning_turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>        <span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">):</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>            <span class="n">current_turn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>            <span class="n">current_rank</span> <span class="o">=</span> <span class="n">current_turn</span><span class="o">.</span><span class="n">card</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">value</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>            <span class="k">if</span> <span class="n">max_rank</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">current_rank</span> <span class="o">&gt;</span> <span class="n">max_rank</span><span class="p">:</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>                <span class="n">max_rank</span> <span class="o">=</span> <span class="n">current_rank</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>                <span class="n">winning_turns</span> <span class="o">=</span> <span class="p">[</span><span class="n">current_turn</span><span class="p">]</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>            <span class="k">elif</span> <span class="n">current_rank</span> <span class="o">==</span> <span class="n">max_rank</span><span class="p">:</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>                <span class="n">winning_turns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_turn</span><span class="p">)</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>        <span class="k">return</span> <span class="n">winning_turns</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="sd">        Checks whether a Round is equal to another Round</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="sd">        Two rounds are equal if the compared turns have equal values</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Round</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">turns</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a><span class="sd">        Returns a hash based on turns</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">))</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a><span class="sd">        Converts a Round into a dictionary that can be stringified into json</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>
-</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;turns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">turn</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">]}</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Turn</span><span class="p">:</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a><span class="sd">        Creates and returns a Round based on a json dictionary</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>
-</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">([</span><span class="n">Turn</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">turn</span><span class="p">)</span> <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;turns&quot;</span><span class="p">]])</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Round</span><span class="p">:</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>    <span class="n">turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Round</span><span class="p">,</span> <span class="n">turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="sd">        Instantiates a new Round with a given list of turns.</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">turns</span> <span class="o">=</span> <span class="n">turns</span> <span class="ow">or</span> <span class="p">[]</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_winning_turns</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Round</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]:</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="sd">        Returns a list of turns with the highest cards by rank.</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="sd">        Returns a list of multiple turns in case of a tie.</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="sd">        Returns an empty list if there are no turns.</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>        <span class="n">counter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>        <span class="n">max_rank</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>        <span class="n">winning_turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>        <span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">):</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>            <span class="n">current_turn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>            <span class="n">current_rank</span> <span class="o">=</span> <span class="n">current_turn</span><span class="o">.</span><span class="n">card</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">value</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>            <span class="k">if</span> <span class="n">max_rank</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">current_rank</span> <span class="o">&gt;</span> <span class="n">max_rank</span><span class="p">:</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>                <span class="n">max_rank</span> <span class="o">=</span> <span class="n">current_rank</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>                <span class="n">winning_turns</span> <span class="o">=</span> <span class="p">[</span><span class="n">current_turn</span><span class="p">]</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>            <span class="k">elif</span> <span class="n">current_rank</span> <span class="o">==</span> <span class="n">max_rank</span><span class="p">:</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>                <span class="n">winning_turns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_turn</span><span class="p">)</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>        <span class="k">return</span> <span class="n">winning_turns</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Round</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Round</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="sd">        Checks whether a Round is equal to another Round</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="sd">        Two rounds are equal if the compared turns have equal values</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Round</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">turns</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Round</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a><span class="sd">        Returns a hash based on turns</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">))</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Round</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a><span class="sd">        Converts a Round into a dictionary that can be stringified into json</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;turns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">turn</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">]}</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Round</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Turn</span><span class="p">:</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a><span class="sd">        Creates and returns a Round based on a json dictionary</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>
+</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">([</span><span class="n">Turn</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">turn</span><span class="p">)</span> <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;turns&quot;</span><span class="p">]])</span>
 </span></pre></div>
 
 
@@ -154,70 +155,70 @@
 
     </div>
     <a class="headerlink" href="#Round"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Round-5"><a href="#Round-5"><span class="linenos"> 5</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Round</span><span class="p">:</span>
-</span><span id="Round-6"><a href="#Round-6"><span class="linenos"> 6</span></a>    <span class="n">turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span>
-</span><span id="Round-7"><a href="#Round-7"><span class="linenos"> 7</span></a>
-</span><span id="Round-8"><a href="#Round-8"><span class="linenos"> 8</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-</span><span id="Round-9"><a href="#Round-9"><span class="linenos"> 9</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Round-10"><a href="#Round-10"><span class="linenos">10</span></a><span class="sd">        Instantiates a new Round with a given list of turns.</span>
-</span><span id="Round-11"><a href="#Round-11"><span class="linenos">11</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Round-12"><a href="#Round-12"><span class="linenos">12</span></a>
-</span><span id="Round-13"><a href="#Round-13"><span class="linenos">13</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">turns</span> <span class="o">=</span> <span class="n">turns</span> <span class="ow">or</span> <span class="p">[]</span>
-</span><span id="Round-14"><a href="#Round-14"><span class="linenos">14</span></a>
-</span><span id="Round-15"><a href="#Round-15"><span class="linenos">15</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_winning_turns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]:</span>
-</span><span id="Round-16"><a href="#Round-16"><span class="linenos">16</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Round-17"><a href="#Round-17"><span class="linenos">17</span></a><span class="sd">        Returns a list of turns with the highest cards by rank.</span>
-</span><span id="Round-18"><a href="#Round-18"><span class="linenos">18</span></a><span class="sd">        Returns a list of multiple turns in case of a tie.</span>
-</span><span id="Round-19"><a href="#Round-19"><span class="linenos">19</span></a><span class="sd">        Returns an empty list if there are no turns.</span>
-</span><span id="Round-20"><a href="#Round-20"><span class="linenos">20</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Round-21"><a href="#Round-21"><span class="linenos">21</span></a>
-</span><span id="Round-22"><a href="#Round-22"><span class="linenos">22</span></a>        <span class="n">counter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="Round-23"><a href="#Round-23"><span class="linenos">23</span></a>        <span class="n">max_rank</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="Round-24"><a href="#Round-24"><span class="linenos">24</span></a>        <span class="n">winning_turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="Round-25"><a href="#Round-25"><span class="linenos">25</span></a>
-</span><span id="Round-26"><a href="#Round-26"><span class="linenos">26</span></a>        <span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">):</span>
-</span><span id="Round-27"><a href="#Round-27"><span class="linenos">27</span></a>            <span class="n">current_turn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
-</span><span id="Round-28"><a href="#Round-28"><span class="linenos">28</span></a>            <span class="n">current_rank</span> <span class="o">=</span> <span class="n">current_turn</span><span class="o">.</span><span class="n">card</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">value</span>
-</span><span id="Round-29"><a href="#Round-29"><span class="linenos">29</span></a>
-</span><span id="Round-30"><a href="#Round-30"><span class="linenos">30</span></a>            <span class="k">if</span> <span class="n">max_rank</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">current_rank</span> <span class="o">&gt;</span> <span class="n">max_rank</span><span class="p">:</span>
-</span><span id="Round-31"><a href="#Round-31"><span class="linenos">31</span></a>                <span class="n">max_rank</span> <span class="o">=</span> <span class="n">current_rank</span>
-</span><span id="Round-32"><a href="#Round-32"><span class="linenos">32</span></a>                <span class="n">winning_turns</span> <span class="o">=</span> <span class="p">[</span><span class="n">current_turn</span><span class="p">]</span>
-</span><span id="Round-33"><a href="#Round-33"><span class="linenos">33</span></a>            <span class="k">elif</span> <span class="n">current_rank</span> <span class="o">==</span> <span class="n">max_rank</span><span class="p">:</span>
-</span><span id="Round-34"><a href="#Round-34"><span class="linenos">34</span></a>                <span class="n">winning_turns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_turn</span><span class="p">)</span>
-</span><span id="Round-35"><a href="#Round-35"><span class="linenos">35</span></a>
-</span><span id="Round-36"><a href="#Round-36"><span class="linenos">36</span></a>            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="Round-37"><a href="#Round-37"><span class="linenos">37</span></a>
-</span><span id="Round-38"><a href="#Round-38"><span class="linenos">38</span></a>        <span class="k">return</span> <span class="n">winning_turns</span>
-</span><span id="Round-39"><a href="#Round-39"><span class="linenos">39</span></a>
-</span><span id="Round-40"><a href="#Round-40"><span class="linenos">40</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="Round-41"><a href="#Round-41"><span class="linenos">41</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Round-42"><a href="#Round-42"><span class="linenos">42</span></a><span class="sd">        Checks whether a Round is equal to another Round</span>
-</span><span id="Round-43"><a href="#Round-43"><span class="linenos">43</span></a><span class="sd">        Two rounds are equal if the compared turns have equal values</span>
-</span><span id="Round-44"><a href="#Round-44"><span class="linenos">44</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Round-45"><a href="#Round-45"><span class="linenos">45</span></a>
-</span><span id="Round-46"><a href="#Round-46"><span class="linenos">46</span></a>        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Round</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">turns</span>
-</span><span id="Round-47"><a href="#Round-47"><span class="linenos">47</span></a>
-</span><span id="Round-48"><a href="#Round-48"><span class="linenos">48</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span><span id="Round-49"><a href="#Round-49"><span class="linenos">49</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Round-50"><a href="#Round-50"><span class="linenos">50</span></a><span class="sd">        Returns a hash based on turns</span>
-</span><span id="Round-51"><a href="#Round-51"><span class="linenos">51</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Round-52"><a href="#Round-52"><span class="linenos">52</span></a>
-</span><span id="Round-53"><a href="#Round-53"><span class="linenos">53</span></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">))</span>
-</span><span id="Round-54"><a href="#Round-54"><span class="linenos">54</span></a>
-</span><span id="Round-55"><a href="#Round-55"><span class="linenos">55</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="Round-56"><a href="#Round-56"><span class="linenos">56</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Round-57"><a href="#Round-57"><span class="linenos">57</span></a><span class="sd">        Converts a Round into a dictionary that can be stringified into json</span>
-</span><span id="Round-58"><a href="#Round-58"><span class="linenos">58</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Round-59"><a href="#Round-59"><span class="linenos">59</span></a>
-</span><span id="Round-60"><a href="#Round-60"><span class="linenos">60</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;turns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">turn</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">]}</span>
-</span><span id="Round-61"><a href="#Round-61"><span class="linenos">61</span></a>
-</span><span id="Round-62"><a href="#Round-62"><span class="linenos">62</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Round-63"><a href="#Round-63"><span class="linenos">63</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Turn</span><span class="p">:</span>
-</span><span id="Round-64"><a href="#Round-64"><span class="linenos">64</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Round-65"><a href="#Round-65"><span class="linenos">65</span></a><span class="sd">        Creates and returns a Round based on a json dictionary</span>
-</span><span id="Round-66"><a href="#Round-66"><span class="linenos">66</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Round-67"><a href="#Round-67"><span class="linenos">67</span></a>
-</span><span id="Round-68"><a href="#Round-68"><span class="linenos">68</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">([</span><span class="n">Turn</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">turn</span><span class="p">)</span> <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;turns&quot;</span><span class="p">]])</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Round-6"><a href="#Round-6"><span class="linenos"> 6</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Round</span><span class="p">:</span>
+</span><span id="Round-7"><a href="#Round-7"><span class="linenos"> 7</span></a>    <span class="n">turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span>
+</span><span id="Round-8"><a href="#Round-8"><span class="linenos"> 8</span></a>
+</span><span id="Round-9"><a href="#Round-9"><span class="linenos"> 9</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Round</span><span class="p">,</span> <span class="n">turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Round-10"><a href="#Round-10"><span class="linenos">10</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Round-11"><a href="#Round-11"><span class="linenos">11</span></a><span class="sd">        Instantiates a new Round with a given list of turns.</span>
+</span><span id="Round-12"><a href="#Round-12"><span class="linenos">12</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Round-13"><a href="#Round-13"><span class="linenos">13</span></a>
+</span><span id="Round-14"><a href="#Round-14"><span class="linenos">14</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">turns</span> <span class="o">=</span> <span class="n">turns</span> <span class="ow">or</span> <span class="p">[]</span>
+</span><span id="Round-15"><a href="#Round-15"><span class="linenos">15</span></a>
+</span><span id="Round-16"><a href="#Round-16"><span class="linenos">16</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_winning_turns</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Round</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]:</span>
+</span><span id="Round-17"><a href="#Round-17"><span class="linenos">17</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Round-18"><a href="#Round-18"><span class="linenos">18</span></a><span class="sd">        Returns a list of turns with the highest cards by rank.</span>
+</span><span id="Round-19"><a href="#Round-19"><span class="linenos">19</span></a><span class="sd">        Returns a list of multiple turns in case of a tie.</span>
+</span><span id="Round-20"><a href="#Round-20"><span class="linenos">20</span></a><span class="sd">        Returns an empty list if there are no turns.</span>
+</span><span id="Round-21"><a href="#Round-21"><span class="linenos">21</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Round-22"><a href="#Round-22"><span class="linenos">22</span></a>
+</span><span id="Round-23"><a href="#Round-23"><span class="linenos">23</span></a>        <span class="n">counter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="Round-24"><a href="#Round-24"><span class="linenos">24</span></a>        <span class="n">max_rank</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="Round-25"><a href="#Round-25"><span class="linenos">25</span></a>        <span class="n">winning_turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="Round-26"><a href="#Round-26"><span class="linenos">26</span></a>
+</span><span id="Round-27"><a href="#Round-27"><span class="linenos">27</span></a>        <span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">):</span>
+</span><span id="Round-28"><a href="#Round-28"><span class="linenos">28</span></a>            <span class="n">current_turn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
+</span><span id="Round-29"><a href="#Round-29"><span class="linenos">29</span></a>            <span class="n">current_rank</span> <span class="o">=</span> <span class="n">current_turn</span><span class="o">.</span><span class="n">card</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">value</span>
+</span><span id="Round-30"><a href="#Round-30"><span class="linenos">30</span></a>
+</span><span id="Round-31"><a href="#Round-31"><span class="linenos">31</span></a>            <span class="k">if</span> <span class="n">max_rank</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">current_rank</span> <span class="o">&gt;</span> <span class="n">max_rank</span><span class="p">:</span>
+</span><span id="Round-32"><a href="#Round-32"><span class="linenos">32</span></a>                <span class="n">max_rank</span> <span class="o">=</span> <span class="n">current_rank</span>
+</span><span id="Round-33"><a href="#Round-33"><span class="linenos">33</span></a>                <span class="n">winning_turns</span> <span class="o">=</span> <span class="p">[</span><span class="n">current_turn</span><span class="p">]</span>
+</span><span id="Round-34"><a href="#Round-34"><span class="linenos">34</span></a>            <span class="k">elif</span> <span class="n">current_rank</span> <span class="o">==</span> <span class="n">max_rank</span><span class="p">:</span>
+</span><span id="Round-35"><a href="#Round-35"><span class="linenos">35</span></a>                <span class="n">winning_turns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_turn</span><span class="p">)</span>
+</span><span id="Round-36"><a href="#Round-36"><span class="linenos">36</span></a>
+</span><span id="Round-37"><a href="#Round-37"><span class="linenos">37</span></a>            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="Round-38"><a href="#Round-38"><span class="linenos">38</span></a>
+</span><span id="Round-39"><a href="#Round-39"><span class="linenos">39</span></a>        <span class="k">return</span> <span class="n">winning_turns</span>
+</span><span id="Round-40"><a href="#Round-40"><span class="linenos">40</span></a>
+</span><span id="Round-41"><a href="#Round-41"><span class="linenos">41</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Round</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Round</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="Round-42"><a href="#Round-42"><span class="linenos">42</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Round-43"><a href="#Round-43"><span class="linenos">43</span></a><span class="sd">        Checks whether a Round is equal to another Round</span>
+</span><span id="Round-44"><a href="#Round-44"><span class="linenos">44</span></a><span class="sd">        Two rounds are equal if the compared turns have equal values</span>
+</span><span id="Round-45"><a href="#Round-45"><span class="linenos">45</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Round-46"><a href="#Round-46"><span class="linenos">46</span></a>
+</span><span id="Round-47"><a href="#Round-47"><span class="linenos">47</span></a>        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Round</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">turns</span>
+</span><span id="Round-48"><a href="#Round-48"><span class="linenos">48</span></a>
+</span><span id="Round-49"><a href="#Round-49"><span class="linenos">49</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Round</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="Round-50"><a href="#Round-50"><span class="linenos">50</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Round-51"><a href="#Round-51"><span class="linenos">51</span></a><span class="sd">        Returns a hash based on turns</span>
+</span><span id="Round-52"><a href="#Round-52"><span class="linenos">52</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Round-53"><a href="#Round-53"><span class="linenos">53</span></a>
+</span><span id="Round-54"><a href="#Round-54"><span class="linenos">54</span></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">))</span>
+</span><span id="Round-55"><a href="#Round-55"><span class="linenos">55</span></a>
+</span><span id="Round-56"><a href="#Round-56"><span class="linenos">56</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Round</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="Round-57"><a href="#Round-57"><span class="linenos">57</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Round-58"><a href="#Round-58"><span class="linenos">58</span></a><span class="sd">        Converts a Round into a dictionary that can be stringified into json</span>
+</span><span id="Round-59"><a href="#Round-59"><span class="linenos">59</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Round-60"><a href="#Round-60"><span class="linenos">60</span></a>
+</span><span id="Round-61"><a href="#Round-61"><span class="linenos">61</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;turns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">turn</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">]}</span>
+</span><span id="Round-62"><a href="#Round-62"><span class="linenos">62</span></a>
+</span><span id="Round-63"><a href="#Round-63"><span class="linenos">63</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Round-64"><a href="#Round-64"><span class="linenos">64</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Round</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Turn</span><span class="p">:</span>
+</span><span id="Round-65"><a href="#Round-65"><span class="linenos">65</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Round-66"><a href="#Round-66"><span class="linenos">66</span></a><span class="sd">        Creates and returns a Round based on a json dictionary</span>
+</span><span id="Round-67"><a href="#Round-67"><span class="linenos">67</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Round-68"><a href="#Round-68"><span class="linenos">68</span></a>
+</span><span id="Round-69"><a href="#Round-69"><span class="linenos">69</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">([</span><span class="n">Turn</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">turn</span><span class="p">)</span> <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;turns&quot;</span><span class="p">]])</span>
 </span></pre></div>
 
 
@@ -233,12 +234,12 @@
 
     </div>
     <a class="headerlink" href="#Round.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Round.__init__-8"><a href="#Round.__init__-8"><span class="linenos"> 8</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-</span><span id="Round.__init__-9"><a href="#Round.__init__-9"><span class="linenos"> 9</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Round.__init__-10"><a href="#Round.__init__-10"><span class="linenos">10</span></a><span class="sd">        Instantiates a new Round with a given list of turns.</span>
-</span><span id="Round.__init__-11"><a href="#Round.__init__-11"><span class="linenos">11</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Round.__init__-12"><a href="#Round.__init__-12"><span class="linenos">12</span></a>
-</span><span id="Round.__init__-13"><a href="#Round.__init__-13"><span class="linenos">13</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">turns</span> <span class="o">=</span> <span class="n">turns</span> <span class="ow">or</span> <span class="p">[]</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Round.__init__-9"><a href="#Round.__init__-9"><span class="linenos"> 9</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Round</span><span class="p">,</span> <span class="n">turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Round.__init__-10"><a href="#Round.__init__-10"><span class="linenos">10</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Round.__init__-11"><a href="#Round.__init__-11"><span class="linenos">11</span></a><span class="sd">        Instantiates a new Round with a given list of turns.</span>
+</span><span id="Round.__init__-12"><a href="#Round.__init__-12"><span class="linenos">12</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Round.__init__-13"><a href="#Round.__init__-13"><span class="linenos">13</span></a>
+</span><span id="Round.__init__-14"><a href="#Round.__init__-14"><span class="linenos">14</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">turns</span> <span class="o">=</span> <span class="n">turns</span> <span class="ow">or</span> <span class="p">[]</span>
 </span></pre></div>
 
 
@@ -263,36 +264,36 @@
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">get_winning_turns</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span></span><span class="return-annotation">) -> <span class="nb">list</span><span class="p">[</span><span class="n"><a href="turn.html#Turn">models.turn.Turn</a></span><span class="p">]</span>:</span></span>
+        <span class="name">get_winning_turns</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span><span class="p">:</span> <span class="n"><a href="#Round">Round</a></span></span><span class="return-annotation">) -> <span class="nb">list</span><span class="p">[</span><span class="n"><a href="turn.html#Turn">models.turn.Turn</a></span><span class="p">]</span>:</span></span>
 
                 <label class="view-source-button" for="Round.get_winning_turns-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#Round.get_winning_turns"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Round.get_winning_turns-15"><a href="#Round.get_winning_turns-15"><span class="linenos">15</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_winning_turns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]:</span>
-</span><span id="Round.get_winning_turns-16"><a href="#Round.get_winning_turns-16"><span class="linenos">16</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Round.get_winning_turns-17"><a href="#Round.get_winning_turns-17"><span class="linenos">17</span></a><span class="sd">        Returns a list of turns with the highest cards by rank.</span>
-</span><span id="Round.get_winning_turns-18"><a href="#Round.get_winning_turns-18"><span class="linenos">18</span></a><span class="sd">        Returns a list of multiple turns in case of a tie.</span>
-</span><span id="Round.get_winning_turns-19"><a href="#Round.get_winning_turns-19"><span class="linenos">19</span></a><span class="sd">        Returns an empty list if there are no turns.</span>
-</span><span id="Round.get_winning_turns-20"><a href="#Round.get_winning_turns-20"><span class="linenos">20</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Round.get_winning_turns-21"><a href="#Round.get_winning_turns-21"><span class="linenos">21</span></a>
-</span><span id="Round.get_winning_turns-22"><a href="#Round.get_winning_turns-22"><span class="linenos">22</span></a>        <span class="n">counter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="Round.get_winning_turns-23"><a href="#Round.get_winning_turns-23"><span class="linenos">23</span></a>        <span class="n">max_rank</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="Round.get_winning_turns-24"><a href="#Round.get_winning_turns-24"><span class="linenos">24</span></a>        <span class="n">winning_turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="Round.get_winning_turns-25"><a href="#Round.get_winning_turns-25"><span class="linenos">25</span></a>
-</span><span id="Round.get_winning_turns-26"><a href="#Round.get_winning_turns-26"><span class="linenos">26</span></a>        <span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">):</span>
-</span><span id="Round.get_winning_turns-27"><a href="#Round.get_winning_turns-27"><span class="linenos">27</span></a>            <span class="n">current_turn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
-</span><span id="Round.get_winning_turns-28"><a href="#Round.get_winning_turns-28"><span class="linenos">28</span></a>            <span class="n">current_rank</span> <span class="o">=</span> <span class="n">current_turn</span><span class="o">.</span><span class="n">card</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">value</span>
-</span><span id="Round.get_winning_turns-29"><a href="#Round.get_winning_turns-29"><span class="linenos">29</span></a>
-</span><span id="Round.get_winning_turns-30"><a href="#Round.get_winning_turns-30"><span class="linenos">30</span></a>            <span class="k">if</span> <span class="n">max_rank</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">current_rank</span> <span class="o">&gt;</span> <span class="n">max_rank</span><span class="p">:</span>
-</span><span id="Round.get_winning_turns-31"><a href="#Round.get_winning_turns-31"><span class="linenos">31</span></a>                <span class="n">max_rank</span> <span class="o">=</span> <span class="n">current_rank</span>
-</span><span id="Round.get_winning_turns-32"><a href="#Round.get_winning_turns-32"><span class="linenos">32</span></a>                <span class="n">winning_turns</span> <span class="o">=</span> <span class="p">[</span><span class="n">current_turn</span><span class="p">]</span>
-</span><span id="Round.get_winning_turns-33"><a href="#Round.get_winning_turns-33"><span class="linenos">33</span></a>            <span class="k">elif</span> <span class="n">current_rank</span> <span class="o">==</span> <span class="n">max_rank</span><span class="p">:</span>
-</span><span id="Round.get_winning_turns-34"><a href="#Round.get_winning_turns-34"><span class="linenos">34</span></a>                <span class="n">winning_turns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_turn</span><span class="p">)</span>
-</span><span id="Round.get_winning_turns-35"><a href="#Round.get_winning_turns-35"><span class="linenos">35</span></a>
-</span><span id="Round.get_winning_turns-36"><a href="#Round.get_winning_turns-36"><span class="linenos">36</span></a>            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="Round.get_winning_turns-37"><a href="#Round.get_winning_turns-37"><span class="linenos">37</span></a>
-</span><span id="Round.get_winning_turns-38"><a href="#Round.get_winning_turns-38"><span class="linenos">38</span></a>        <span class="k">return</span> <span class="n">winning_turns</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Round.get_winning_turns-16"><a href="#Round.get_winning_turns-16"><span class="linenos">16</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_winning_turns</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Round</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]:</span>
+</span><span id="Round.get_winning_turns-17"><a href="#Round.get_winning_turns-17"><span class="linenos">17</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Round.get_winning_turns-18"><a href="#Round.get_winning_turns-18"><span class="linenos">18</span></a><span class="sd">        Returns a list of turns with the highest cards by rank.</span>
+</span><span id="Round.get_winning_turns-19"><a href="#Round.get_winning_turns-19"><span class="linenos">19</span></a><span class="sd">        Returns a list of multiple turns in case of a tie.</span>
+</span><span id="Round.get_winning_turns-20"><a href="#Round.get_winning_turns-20"><span class="linenos">20</span></a><span class="sd">        Returns an empty list if there are no turns.</span>
+</span><span id="Round.get_winning_turns-21"><a href="#Round.get_winning_turns-21"><span class="linenos">21</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Round.get_winning_turns-22"><a href="#Round.get_winning_turns-22"><span class="linenos">22</span></a>
+</span><span id="Round.get_winning_turns-23"><a href="#Round.get_winning_turns-23"><span class="linenos">23</span></a>        <span class="n">counter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="Round.get_winning_turns-24"><a href="#Round.get_winning_turns-24"><span class="linenos">24</span></a>        <span class="n">max_rank</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="Round.get_winning_turns-25"><a href="#Round.get_winning_turns-25"><span class="linenos">25</span></a>        <span class="n">winning_turns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Turn</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="Round.get_winning_turns-26"><a href="#Round.get_winning_turns-26"><span class="linenos">26</span></a>
+</span><span id="Round.get_winning_turns-27"><a href="#Round.get_winning_turns-27"><span class="linenos">27</span></a>        <span class="k">while</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">):</span>
+</span><span id="Round.get_winning_turns-28"><a href="#Round.get_winning_turns-28"><span class="linenos">28</span></a>            <span class="n">current_turn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
+</span><span id="Round.get_winning_turns-29"><a href="#Round.get_winning_turns-29"><span class="linenos">29</span></a>            <span class="n">current_rank</span> <span class="o">=</span> <span class="n">current_turn</span><span class="o">.</span><span class="n">card</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">value</span>
+</span><span id="Round.get_winning_turns-30"><a href="#Round.get_winning_turns-30"><span class="linenos">30</span></a>
+</span><span id="Round.get_winning_turns-31"><a href="#Round.get_winning_turns-31"><span class="linenos">31</span></a>            <span class="k">if</span> <span class="n">max_rank</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">current_rank</span> <span class="o">&gt;</span> <span class="n">max_rank</span><span class="p">:</span>
+</span><span id="Round.get_winning_turns-32"><a href="#Round.get_winning_turns-32"><span class="linenos">32</span></a>                <span class="n">max_rank</span> <span class="o">=</span> <span class="n">current_rank</span>
+</span><span id="Round.get_winning_turns-33"><a href="#Round.get_winning_turns-33"><span class="linenos">33</span></a>                <span class="n">winning_turns</span> <span class="o">=</span> <span class="p">[</span><span class="n">current_turn</span><span class="p">]</span>
+</span><span id="Round.get_winning_turns-34"><a href="#Round.get_winning_turns-34"><span class="linenos">34</span></a>            <span class="k">elif</span> <span class="n">current_rank</span> <span class="o">==</span> <span class="n">max_rank</span><span class="p">:</span>
+</span><span id="Round.get_winning_turns-35"><a href="#Round.get_winning_turns-35"><span class="linenos">35</span></a>                <span class="n">winning_turns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_turn</span><span class="p">)</span>
+</span><span id="Round.get_winning_turns-36"><a href="#Round.get_winning_turns-36"><span class="linenos">36</span></a>
+</span><span id="Round.get_winning_turns-37"><a href="#Round.get_winning_turns-37"><span class="linenos">37</span></a>            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="Round.get_winning_turns-38"><a href="#Round.get_winning_turns-38"><span class="linenos">38</span></a>
+</span><span id="Round.get_winning_turns-39"><a href="#Round.get_winning_turns-39"><span class="linenos">39</span></a>        <span class="k">return</span> <span class="n">winning_turns</span>
 </span></pre></div>
 
 
@@ -308,18 +309,18 @@ Returns an empty list if there are no turns.</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">to_dict</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span></span><span class="return-annotation">) -> <span class="nb">dict</span>:</span></span>
+        <span class="name">to_dict</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span><span class="p">:</span> <span class="n"><a href="#Round">Round</a></span></span><span class="return-annotation">) -> <span class="nb">dict</span>:</span></span>
 
                 <label class="view-source-button" for="Round.to_dict-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#Round.to_dict"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Round.to_dict-55"><a href="#Round.to_dict-55"><span class="linenos">55</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="Round.to_dict-56"><a href="#Round.to_dict-56"><span class="linenos">56</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Round.to_dict-57"><a href="#Round.to_dict-57"><span class="linenos">57</span></a><span class="sd">        Converts a Round into a dictionary that can be stringified into json</span>
-</span><span id="Round.to_dict-58"><a href="#Round.to_dict-58"><span class="linenos">58</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Round.to_dict-59"><a href="#Round.to_dict-59"><span class="linenos">59</span></a>
-</span><span id="Round.to_dict-60"><a href="#Round.to_dict-60"><span class="linenos">60</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;turns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">turn</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">]}</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Round.to_dict-56"><a href="#Round.to_dict-56"><span class="linenos">56</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Round</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="Round.to_dict-57"><a href="#Round.to_dict-57"><span class="linenos">57</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Round.to_dict-58"><a href="#Round.to_dict-58"><span class="linenos">58</span></a><span class="sd">        Converts a Round into a dictionary that can be stringified into json</span>
+</span><span id="Round.to_dict-59"><a href="#Round.to_dict-59"><span class="linenos">59</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Round.to_dict-60"><a href="#Round.to_dict-60"><span class="linenos">60</span></a>
+</span><span id="Round.to_dict-61"><a href="#Round.to_dict-61"><span class="linenos">61</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;turns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">turn</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">turns</span><span class="p">]}</span>
 </span></pre></div>
 
 
@@ -334,19 +335,19 @@ Returns an empty list if there are no turns.</p>
                     <div class="decorator decorator-classmethod">@classmethod</div>
 
         <span class="def">def</span>
-        <span class="name">from_dict</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">cls</span>, </span><span class="param"><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span></span><span class="return-annotation">) -> <span class="n"><a href="turn.html#Turn">models.turn.Turn</a></span>:</span></span>
+        <span class="name">from_dict</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">cls</span><span class="p">:</span> <span class="n"><a href="#Round">Round</a></span>, </span><span class="param"><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span></span><span class="return-annotation">) -> <span class="n"><a href="turn.html#Turn">models.turn.Turn</a></span>:</span></span>
 
                 <label class="view-source-button" for="Round.from_dict-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#Round.from_dict"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Round.from_dict-62"><a href="#Round.from_dict-62"><span class="linenos">62</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Round.from_dict-63"><a href="#Round.from_dict-63"><span class="linenos">63</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Turn</span><span class="p">:</span>
-</span><span id="Round.from_dict-64"><a href="#Round.from_dict-64"><span class="linenos">64</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Round.from_dict-65"><a href="#Round.from_dict-65"><span class="linenos">65</span></a><span class="sd">        Creates and returns a Round based on a json dictionary</span>
-</span><span id="Round.from_dict-66"><a href="#Round.from_dict-66"><span class="linenos">66</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Round.from_dict-67"><a href="#Round.from_dict-67"><span class="linenos">67</span></a>
-</span><span id="Round.from_dict-68"><a href="#Round.from_dict-68"><span class="linenos">68</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">([</span><span class="n">Turn</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">turn</span><span class="p">)</span> <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;turns&quot;</span><span class="p">]])</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Round.from_dict-63"><a href="#Round.from_dict-63"><span class="linenos">63</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Round.from_dict-64"><a href="#Round.from_dict-64"><span class="linenos">64</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Round</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Turn</span><span class="p">:</span>
+</span><span id="Round.from_dict-65"><a href="#Round.from_dict-65"><span class="linenos">65</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Round.from_dict-66"><a href="#Round.from_dict-66"><span class="linenos">66</span></a><span class="sd">        Creates and returns a Round based on a json dictionary</span>
+</span><span id="Round.from_dict-67"><a href="#Round.from_dict-67"><span class="linenos">67</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Round.from_dict-68"><a href="#Round.from_dict-68"><span class="linenos">68</span></a>
+</span><span id="Round.from_dict-69"><a href="#Round.from_dict-69"><span class="linenos">69</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">([</span><span class="n">Turn</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">turn</span><span class="p">)</span> <span class="k">for</span> <span class="n">turn</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;turns&quot;</span><span class="p">]])</span>
 </span></pre></div>
 
 

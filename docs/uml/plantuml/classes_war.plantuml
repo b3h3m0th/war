@@ -6,12 +6,17 @@ class "Card" as models.card.Card {
   from_dict(data: dict) -> Card
   to_dict() -> dict
 }
+class "DealMode" as enums.dealmode.DealMode {
+  name
+  from_dict(data: dict) -> DealMode
+  to_dict() -> dict
+}
 class "Deck" as models.deck.Deck {
   NEW_DECK_ORDER_SUITS : list
   cards : Optional[list[Card]]
   deal(amount: int) -> list[Card]
   from_dict(data: dict) -> Deck
-  get_new_deck_order_cards() -> list[Card]
+  get_new_deck_order_cards(variant: Variant) -> list[Card]
   shuffle(cards: list[Card]) -> list[Card]
   to_dict() -> dict
 }
@@ -25,6 +30,11 @@ class "Game" as models.game.Game {
   get_results() -> dict[Player, int]
   print_results(results: dict[Player, int]) -> None
   start(taken_player_names: list[str]) -> None
+  to_dict() -> dict
+}
+class "Matchup" as enums.matchup.Matchup {
+  name
+  from_dict(data: dict) -> Matchup
   to_dict() -> dict
 }
 class "Player" as models.player.Player {
@@ -45,7 +55,7 @@ class "Round" as models.round.Round {
   to_dict() -> dict
 }
 class "Serializer" as utils.serializer.Serializer {
-  load(cls, path: Path) -> object
+  load(cls: Serializer, path: Path) -> object
   save(obj: object, path: Path) -> None
 }
 class "Shell" as models.shell.Shell {
@@ -53,13 +63,13 @@ class "Shell" as models.shell.Shell {
   games_path : Path
   intro : str
   prompt : str
-  default(line) -> None
-  do_chng(arg) -> None
-  do_log(arg) -> None
-  do_menu(arg) -> None
-  do_new(arg) -> None
-  do_quit(arg) -> bool
-  do_rules(arg) -> None
+  default(line: str) -> None
+  do_chng(arg: str) -> None
+  do_log(arg: str) -> None
+  do_menu(arg: str) -> None
+  do_new(arg: str) -> None
+  do_quit(arg: str) -> bool
+  do_rules(arg: str) -> None
   get_previous_games() -> list[Game]
   print_menu() -> None
 }
@@ -79,6 +89,7 @@ class "Variant" as enums.variant.Variant {
   from_dict(data: dict) -> Variant
   to_dict() -> dict
 }
+models.deck.Deck --* models.game.Game : deck
 models.deck.Deck --* models.game.Game : deck
 models.game.Game --* models.shell.Shell : game
 enums.rank.Rank --o models.card.Card : rank

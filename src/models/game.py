@@ -3,7 +3,10 @@ from models.deck import Deck
 from models.player import Player
 from models.round import Round
 from models.turn import Turn
+
 from enums.variant import Variant
+from enums.matchup import Matchup
+from enums.dealmode import DealMode
 
 import datetime
 from prompt_toolkit.shortcuts import choice
@@ -11,9 +14,9 @@ from prompt_toolkit.shortcuts import choice
 
 class Game:
     def __init__(
-        self,
+        self: Game,
         players: list[Player] = None,
-        variant: Variant = Variant.NoJoker,
+        variant: Variant = Variant.NO_JOKERS,
         deck: Deck = None,
         rounds: list[Round] = None,
         name: str = None,
@@ -24,72 +27,69 @@ class Game:
         self.rounds = rounds or []
         self.name = name or Game._get_timestamp_name()
 
-    def start(self, taken_player_names: list[str]) -> None:
+    def start(self: Game, taken_player_names: list[str]) -> None:
         """
         Starts the game
         """
 
-        player_choice = choice(
-            message="Choose a gamemode:",
+        matchup_choice = choice(
+            message="Choose a matchup:",
             options=[
-                ("pvc", "Player vs Computer"),
-                ("pvp", "Player vs Player"),
-                ("pvcc", "Player vs Computer with instant result(cheat mode)"),
-                ("pvpc", "Player vs Player with instant result(cheat mode)"),
+                (Matchup.COMPUTER, "Player vs. Computer"),
+                (Matchup.PLAYER, "Player vs. Player"),
             ],
-            default="pvc",
+            default=Matchup.COMPUTER,
         )
 
-        if player_choice == "pvc" or player_choice == "pvcc":
-            player = Player(Game._input_name(taken_player_names))
-            computer = Player("Computer", True)
-            self.players = [player, computer]
-        elif player_choice == "pvp" or player_choice == "pvpc":
-            player1 = Player(Game._input_name(taken_player_names))
+        self.variant = choice(
+            message="Choose a game variant:",
+            options=[
+                (Variant.NO_JOKERS, "Standard 52 cards deck without jokers"),
+                (
+                    Variant.JOKERS_HIGHEST,
+                    "Standard 52 cards deck with 2 jokers as high cards",
+                ),
+            ],
+            default=Matchup.COMPUTER,
+        )
+
+        dealmode_choice = choice(
+            message="Choose a dealmode:",
+            options=[
+                (DealMode.SEQUENTIAL, "Play round by round sequentially"),
+                (
+                    DealMode.INSTANT,
+                    "Simulate all rounds to be played instantly",
+                ),
+            ],
+            default=DealMode.SEQUENTIAL,
+        )
+
+        if matchup_choice is Matchup.COMPUTER:
+            self.players = [
+                Player(self._input_name(taken_player_names)),
+                Player("Computer", True),
+            ]
+        elif matchup_choice is Matchup.PLAYER:
+            player1 = Player(self._input_name(taken_player_names))
             player2 = Player(
-                Game._input_name(taken_player_names + [player1.name])
+                self._input_name(taken_player_names + [player1.name])
             )
             self.players = [player1, player2]
 
+        self.deck = Deck(variant=self.variant)
         self.deck.shuffle()
 
         round_counter: int = 0
         while len(self.deck.cards) >= len(self.players):
             round_counter += 1
             print(f"\nRound {round_counter}:")
+            self._play_round()
 
-            current_round = Round()
-            self.rounds.append(current_round)
-
-            for player in self.players:
-                dealt_card = self.deck.deal()[0]
-                current_turn = Turn(player, dealt_card)
-                current_round.turns.append(current_turn)
-
-                print(f"{player.name}: {dealt_card}")
-
-            winning_turns = current_round.get_winning_turns()
-
-            if len(winning_turns) > 1:
-                tie_names = ", ".join(
-                    f"{turn.player} ({turn.card})" for turn in winning_turns
-                )
-                print(f"Tie between: {tie_names}")
-
-                if len(self.deck.cards) >= 3 + len(self.players):
-                    self.deck.deal(3)
-                    print("⚔️ You are going to WAR (burned three cards)")
-                else:
-                    print("️⚔️ Not enough cards left to go to WAR")
-
-            elif len(winning_turns) == 1:
-                winner = winning_turns[0]
-                print(f"{winner.player} has the highest card ({winner.card})")
-
-            if player_choice == "pvc" or player_choice == "pvp":
+            if dealmode_choice is DealMode.SEQUENTIAL:
                 keep_going = choice(
-                    message="Do you want to keep playing?",
-                    options=[(True, "Yes"), (False, "No, Quit")],
+                    message="Continue to next round?",
+                    options=[(True, "Yes"), (False, "No, quit")],
                     default=True,
                 )
                 if not keep_going:
@@ -98,7 +98,32 @@ class Game:
         print()
         self.print_results()
 
-    def get_results(self) -> dict[Player, int]:
+    def _play_round(self: Game) -> None:
+        current_round = Round()
+        self.rounds.append(current_round)
+
+        for player in self.players:
+            dealt_card = self.deck.deal()[0]
+            current_round.turns.append(Turn(player, dealt_card))
+            print(f"{player.name}: {dealt_card}")
+
+        winning_turns = current_round.get_winning_turns()
+
+        if len(winning_turns) > 1:
+            tie_names = ", ".join(
+                f"{t.player} ({t.card})" for t in winning_turns
+            )
+            print(f"Tie between: {tie_names}")
+            if len(self.deck.cards) >= 3 + len(self.players):
+                self.deck.deal(3)
+                print("⚔️ You are going to WAR (burned three cards)")
+            else:
+                print("️⚔️ Not enough cards left to go to WAR")
+        elif len(winning_turns) == 1:
+            winner = winning_turns[0]
+            print(f"{winner.player} has the highest card ({winner.card})")
+
+    def get_results(self: Game) -> dict[Player, int]:
         """
         Returns a dictionary of all players
         and their amount of won rounds
@@ -116,7 +141,7 @@ class Game:
 
         return wins_per_player
 
-    def print_results(self, results: dict[Player, int] = None) -> None:
+    def print_results(self: Game, results: dict[Player, int] = None) -> None:
         """
         Prints the result of the current game
         """
@@ -142,7 +167,7 @@ class Game:
 
             print(
                 f"🎉 {list(winning_results.items())[0][0]}"
-                f"won {self.name} with a score of {max_score}"
+                f" won {self.name} with a score of {max_score}"
             )
 
         for player, wins in results.items():
@@ -151,7 +176,7 @@ class Game:
         print()
 
     @classmethod
-    def _input_name(cls, taken_names: list[str]) -> Player:
+    def _input_name(cls: Game, taken_names: list[str]) -> str:
         while True:
             name = input("Enter your name: ").strip()
             if not name:
@@ -162,7 +187,7 @@ class Game:
                 return name
 
     @classmethod
-    def _get_timestamp_name(cls, prefix: str = "game") -> str:
+    def _get_timestamp_name(cls: Game, prefix: str = "game") -> str:
         """
         Returns a name for a Game based on the current time.
         Format: <prefix>_YYYY-MM-DD-hh-mm-ss-ms
@@ -172,7 +197,7 @@ class Game:
                             .now(datetime.timezone.utc)
                             .strftime("%Y-%m-%d-%H-%M-%S-%f"))}"
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self: Game, other: Game) -> bool:
         """
         Checks whether a Game is equal to another Game.
         Games are considered equal if their
@@ -188,7 +213,7 @@ class Game:
             and self.name == other.name
         )
 
-    def __hash__(self) -> int:
+    def __hash__(self: Game) -> int:
         """
         Returns a hash based on the game its players, rounds, deck and variant
         """
@@ -203,7 +228,7 @@ class Game:
             )
         )
 
-    def to_dict(self) -> dict:
+    def to_dict(self: Game) -> dict:
         """
         Converts a Game into a dictionary that can be stringified into json
         """
@@ -217,7 +242,7 @@ class Game:
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> Game:
+    def from_dict(cls: Game, data: dict) -> Game:
         """
         Returns a Game based on a json dictionary
         """

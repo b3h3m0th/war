@@ -15,7 +15,7 @@ player3: Player = Player("Computer", True)
 
 game1: Game = Game(
     [player1, player2],
-    Variant.NoJoker,
+    Variant.NO_JOKERS,
     Deck(),
     [
         Round(
@@ -41,7 +41,7 @@ game1: Game = Game(
 )
 game2: Game = Game(
     [player1, player2],
-    Variant.NoJoker,
+    Variant.NO_JOKERS,
     Deck(),
     [
         Round(
@@ -67,7 +67,7 @@ game2: Game = Game(
 )
 game3: Game = Game(
     [player2, player3],
-    Variant.NoJoker,
+    Variant.NO_JOKERS,
     Deck(),
     [
         Round(
