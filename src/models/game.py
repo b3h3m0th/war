@@ -58,36 +58,9 @@ class Game:
         while len(self.deck.cards) >= len(self.players):
             round_counter += 1
             print(f"\nRound {round_counter}:")
+            self._play_round()
 
-            current_round = Round()
-            self.rounds.append(current_round)
-
-            for player in self.players:
-                dealt_card = self.deck.deal()[0]
-                current_turn = Turn(player, dealt_card)
-                current_round.turns.append(current_turn)
-
-                print(f"{player.name}: {dealt_card}")
-
-            winning_turns = current_round.get_winning_turns()
-
-            if len(winning_turns) > 1:
-                tie_names = ", ".join(
-                    f"{turn.player} ({turn.card})" for turn in winning_turns
-                )
-                print(f"Tie between: {tie_names}")
-
-                if len(self.deck.cards) >= 3 + len(self.players):
-                    self.deck.deal(3)
-                    print("⚔️ You are going to WAR (burned three cards)")
-                else:
-                    print("️⚔️ Not enough cards left to go to WAR")
-
-            elif len(winning_turns) == 1:
-                winner = winning_turns[0]
-                print(f"{winner.player} has the highest card ({winner.card})")
-
-            if player_choice == "pvc" or player_choice == "pvp":
+            if player_choice in ("pvc", "pvp"):
                 keep_going = choice(
                     message="Do you want to keep playing?",
                     options=[(True, "Yes"), (False, "No, Quit")],
@@ -98,6 +71,31 @@ class Game:
 
         print()
         self.print_results()
+
+    def _play_round(self) -> None:
+        current_round = Round()
+        self.rounds.append(current_round)
+
+        for player in self.players:
+            dealt_card = self.deck.deal()[0]
+            current_round.turns.append(Turn(player, dealt_card))
+            print(f"{player.name}: {dealt_card}")
+
+        winning_turns = current_round.get_winning_turns()
+
+        if len(winning_turns) > 1:
+            tie_names = ", ".join(
+                f"{t.player} ({t.card})" for t in winning_turns
+            )
+            print(f"Tie between: {tie_names}")
+            if len(self.deck.cards) >= 3 + len(self.players):
+                self.deck.deal(3)
+                print("⚔️ You are going to WAR (burned three cards)")
+            else:
+                print("️⚔️ Not enough cards left to go to WAR")
+        elif len(winning_turns) == 1:
+            winner = winning_turns[0]
+            print(f"{winner.player} has the highest card ({winner.card})")
 
     def get_results(self: Game) -> dict[Player, int]:
         """
