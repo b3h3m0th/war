@@ -32,20 +32,16 @@ def test_do_menu(capsys) -> None:
     assert expected_output.strip() in output
 
 
-def test_starting_new_game_not_saving(
-    tmp_path,
-) -> None:  # tmp_path is a temporary empty director
-    shell: Shell = Shell()
-    shell.games_path = tmp_path  # Save game in temporary directory
+def test_starting_new_game_not_saving(tmp_path) -> None:
+    shell = Shell()
+    shell.games_path = tmp_path
 
-    # Setting return values so tests will function
     with (
         patch("models.shell.choice", return_value=False),
-        patch("models.game.choice", return_value=False),
-        patch("builtins.input", return_value="test_save"),
+        patch("models.game.choice", side_effect=["pvc", False]),
+        patch("builtins.input", return_value="test_player"),
     ):
         shell.do_new("")
 
-    assert not any(
-        tmp_path.iterdir()
-    )  # Checks that the temporary directory is still empty
+    # Assert no files were saved
+    assert not any(tmp_path.iterdir())
