@@ -144,7 +144,7 @@ class Game:
 
             print(
                 f"🎉 {list(winning_results.items())[0][0]}"
-                f"won {self.name} with a score of {max_score}"
+                f" won {self.name} with a score of {max_score}"
             )
 
         for player, wins in results.items():
