@@ -2,6 +2,10 @@
 set namespaceSeparator none
 package "enums" as enums {
 }
+package "enums.dealmode" as enums.dealmode {
+}
+package "enums.matchup" as enums.matchup {
+}
 package "enums.rank" as enums.rank {
 }
 package "enums.suit" as enums.suit {
@@ -32,7 +36,10 @@ models.card --> enums.rank
 models.card --> enums.suit
 models.deck --> enums.rank
 models.deck --> enums.suit
+models.deck --> enums.variant
 models.deck --> models.card
+models.game --> enums.dealmode
+models.game --> enums.matchup
 models.game --> enums.variant
 models.game --> models.deck
 models.game --> models.player
