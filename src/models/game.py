@@ -40,14 +40,15 @@ class Game:
             default="pvc",
         )
 
-        if player_choice == "pvc" or player_choice == "pvcc":
-            player = Player(Game._input_name(taken_player_names))
-            computer = Player("Computer", True)
-            self.players = [player, computer]
-        elif player_choice == "pvp" or player_choice == "pvpc":
-            player1 = Player(Game._input_name(taken_player_names))
+        if player_choice in ("pvc", "pvcc"):
+            self.players = [
+                Player(self._input_name(taken_player_names)),
+                Player("Computer", True),
+            ]
+        elif player_choice in ("pvp", "pvpc"):
+            player1 = Player(self._input_name(taken_player_names))
             player2 = Player(
-                Game._input_name(taken_player_names + [player1.name])
+                self._input_name(taken_player_names + [player1.name])
             )
             self.players = [player1, player2]
 
