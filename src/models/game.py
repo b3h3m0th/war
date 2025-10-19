@@ -152,7 +152,7 @@ class Game:
         print()
 
     @classmethod
-    def _input_name(cls: Game, taken_names: list[str]) -> Player:
+    def _input_name(cls: Game, taken_names: list[str]) -> str:
         while True:
             name = input("Enter your name: ").strip()
             if not name:
