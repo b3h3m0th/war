@@ -3,6 +3,7 @@ import random
 from models.card import Card
 from enums.suit import Suit
 from enums.rank import Rank
+from enums.variant import Variant
 
 
 class Deck:
@@ -13,18 +14,27 @@ class Deck:
         Suit.Hearts,
     ]
 
-    def __init__(self: Deck, cards: list[Card] = None) -> None:
+    def __init__(
+        self: Deck,
+        cards: list[Card] = None,
+        variant: Variant = Variant.NO_JOKERS,
+    ) -> None:
         """
         Instantiates a new Deck and sets its cards
         """
 
         self.cards: list[Card] = (
-            cards if cards is not None else self.get_new_deck_order_cards()
+            cards
+            if cards is not None
+            else self.get_new_deck_order_cards(variant)
         )
 
-    def get_new_deck_order_cards(self: Deck) -> list[Card]:
+    def get_new_deck_order_cards(
+        self: Deck, variant: Variant = Variant.NO_JOKERS
+    ) -> list[Card]:
         """
         Returns a list of cards in typical new deck order (NDO).
+        2 Jokers (if variant has jokers)
         Spades: Ace -> King
         Diamonds: Ace -> King
         Clubs: King -> Ace
@@ -34,11 +44,11 @@ class Deck:
         """
 
         ace_to_king = [Rank.Ace] + [
-            rank for rank in Rank if rank is not Rank.Ace
+            rank for rank in Rank if rank not in (Rank.Ace, Rank.Joker)
         ]
         king_to_ace = ace_to_king[::-1]
 
-        return [
+        cards: list[Card] = [
             Card(suit, rank)
             for suit in self.NEW_DECK_ORDER_SUITS
             for rank in (
@@ -47,6 +57,14 @@ class Deck:
                 else king_to_ace
             )
         ]
+
+        if variant is Variant.JOKERS_HIGHEST:
+            cards = [
+                Card(Suit.Wild, Rank.Joker),
+                Card(Suit.Wild, Rank.Joker),
+            ] + cards
+
+        return cards
 
     def shuffle(self: Deck, cards: list[Card] = None) -> list[Card]:
         """

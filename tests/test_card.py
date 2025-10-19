@@ -29,11 +29,14 @@ def test_picture_cards_have_correct_str() -> None:
     queen = Card(Suit.Clubs, Rank.Queen)
     king = Card(Suit.Clubs, Rank.King)
     ace = Card(Suit.Clubs, Rank.Ace)
+    joker = Card(Suit.Wild, Rank.Joker)
 
     assert str(jack) == "J♣"
     assert str(queen) == "Q♣"
     assert str(king) == "K♣"
     assert str(ace) == "A♣"
+    assert str(ace) == "A♣"
+    assert str(joker) == "Joker"
 
 
 def test_card_suites_have_correct_str() -> None:

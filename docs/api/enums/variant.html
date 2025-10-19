@@ -34,16 +34,10 @@
                     <a class="class" href="#Variant">Variant</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="variable" href="#Variant.JokerHighest">JokerHighest</a>
+                                <a class="variable" href="#Variant.NO_JOKERS">NO_JOKERS</a>
                         </li>
                         <li>
-                                <a class="variable" href="#Variant.JokerInstantWar">JokerInstantWar</a>
-                        </li>
-                        <li>
-                                <a class="variable" href="#Variant.JokerPenalty">JokerPenalty</a>
-                        </li>
-                        <li>
-                                <a class="variable" href="#Variant.NoJoker">NoJoker</a>
+                                <a class="variable" href="#Variant.JOKERS_HIGHEST">JOKERS_HIGHEST</a>
                         </li>
                         <li>
                                 <a class="function" href="#Variant.to_dict">to_dict</a>
@@ -80,25 +74,23 @@
 </span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>
 </span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
 </span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Variant</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>    <span class="n">JokerHighest</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;JokerHighest&quot;</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>    <span class="n">JokerInstantWar</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;JokerInstantWar&quot;</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>    <span class="n">JokerPenalty</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;JokerPenalty&quot;</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>    <span class="n">NoJoker</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;NoJoker&quot;</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Variant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="sd">        Converts a Variant into a dictionary that can be stringified into json</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>    <span class="n">NO_JOKERS</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;NO_JOKERS&quot;</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>    <span class="n">JOKERS_HIGHEST</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;JOKERS_HIGHEST&quot;</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Variant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="sd">        Converts a Variant into a dictionary that can be stringified into json</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
 </span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Variant</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Variant</span><span class="p">:</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="sd">        Returns a Variant based on a json dictionary</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    <span class="nd">@classmethod</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Variant</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Variant</span><span class="p">:</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="sd">        Returns a Variant based on a json dictionary</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
 </span></pre></div>
 
 
@@ -115,74 +107,48 @@
     </div>
     <a class="headerlink" href="#Variant"></a>
             <div class="pdoc-code codehilite"><pre><span></span><span id="Variant-6"><a href="#Variant-6"><span class="linenos"> 6</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Variant</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-</span><span id="Variant-7"><a href="#Variant-7"><span class="linenos"> 7</span></a>    <span class="n">JokerHighest</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;JokerHighest&quot;</span>
-</span><span id="Variant-8"><a href="#Variant-8"><span class="linenos"> 8</span></a>    <span class="n">JokerInstantWar</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;JokerInstantWar&quot;</span>
-</span><span id="Variant-9"><a href="#Variant-9"><span class="linenos"> 9</span></a>    <span class="n">JokerPenalty</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;JokerPenalty&quot;</span>
-</span><span id="Variant-10"><a href="#Variant-10"><span class="linenos">10</span></a>    <span class="n">NoJoker</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;NoJoker&quot;</span>
-</span><span id="Variant-11"><a href="#Variant-11"><span class="linenos">11</span></a>
-</span><span id="Variant-12"><a href="#Variant-12"><span class="linenos">12</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Variant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="Variant-13"><a href="#Variant-13"><span class="linenos">13</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Variant-14"><a href="#Variant-14"><span class="linenos">14</span></a><span class="sd">        Converts a Variant into a dictionary that can be stringified into json</span>
-</span><span id="Variant-15"><a href="#Variant-15"><span class="linenos">15</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Variant-7"><a href="#Variant-7"><span class="linenos"> 7</span></a>    <span class="n">NO_JOKERS</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;NO_JOKERS&quot;</span>
+</span><span id="Variant-8"><a href="#Variant-8"><span class="linenos"> 8</span></a>    <span class="n">JOKERS_HIGHEST</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;JOKERS_HIGHEST&quot;</span>
+</span><span id="Variant-9"><a href="#Variant-9"><span class="linenos"> 9</span></a>
+</span><span id="Variant-10"><a href="#Variant-10"><span class="linenos">10</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Variant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="Variant-11"><a href="#Variant-11"><span class="linenos">11</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Variant-12"><a href="#Variant-12"><span class="linenos">12</span></a><span class="sd">        Converts a Variant into a dictionary that can be stringified into json</span>
+</span><span id="Variant-13"><a href="#Variant-13"><span class="linenos">13</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Variant-14"><a href="#Variant-14"><span class="linenos">14</span></a>
+</span><span id="Variant-15"><a href="#Variant-15"><span class="linenos">15</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
 </span><span id="Variant-16"><a href="#Variant-16"><span class="linenos">16</span></a>
-</span><span id="Variant-17"><a href="#Variant-17"><span class="linenos">17</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
-</span><span id="Variant-18"><a href="#Variant-18"><span class="linenos">18</span></a>
-</span><span id="Variant-19"><a href="#Variant-19"><span class="linenos">19</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Variant-20"><a href="#Variant-20"><span class="linenos">20</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Variant</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Variant</span><span class="p">:</span>
-</span><span id="Variant-21"><a href="#Variant-21"><span class="linenos">21</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Variant-22"><a href="#Variant-22"><span class="linenos">22</span></a><span class="sd">        Returns a Variant based on a json dictionary</span>
-</span><span id="Variant-23"><a href="#Variant-23"><span class="linenos">23</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Variant-24"><a href="#Variant-24"><span class="linenos">24</span></a>
-</span><span id="Variant-25"><a href="#Variant-25"><span class="linenos">25</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+</span><span id="Variant-17"><a href="#Variant-17"><span class="linenos">17</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Variant-18"><a href="#Variant-18"><span class="linenos">18</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Variant</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Variant</span><span class="p">:</span>
+</span><span id="Variant-19"><a href="#Variant-19"><span class="linenos">19</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Variant-20"><a href="#Variant-20"><span class="linenos">20</span></a><span class="sd">        Returns a Variant based on a json dictionary</span>
+</span><span id="Variant-21"><a href="#Variant-21"><span class="linenos">21</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Variant-22"><a href="#Variant-22"><span class="linenos">22</span></a>
+</span><span id="Variant-23"><a href="#Variant-23"><span class="linenos">23</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
 </span></pre></div>
 
 
     
 
-                            <div id="Variant.JokerHighest" class="classattr">
+                            <div id="Variant.NO_JOKERS" class="classattr">
                                 <div class="attr variable">
-            <span class="name">JokerHighest</span><span class="annotation">: str</span>        =
-<span class="default_value">&lt;<a href="#Variant.JokerHighest">Variant.JokerHighest</a>: &#39;JokerHighest&#39;&gt;</span>
+            <span class="name">NO_JOKERS</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;<a href="#Variant.NO_JOKERS">Variant.NO_JOKERS</a>: &#39;NO_JOKERS&#39;&gt;</span>
 
         
     </div>
-    <a class="headerlink" href="#Variant.JokerHighest"></a>
+    <a class="headerlink" href="#Variant.NO_JOKERS"></a>
     
     
 
                             </div>
-                            <div id="Variant.JokerInstantWar" class="classattr">
+                            <div id="Variant.JOKERS_HIGHEST" class="classattr">
                                 <div class="attr variable">
-            <span class="name">JokerInstantWar</span><span class="annotation">: str</span>        =
-<span class="default_value">&lt;<a href="#Variant.JokerInstantWar">Variant.JokerInstantWar</a>: &#39;JokerInstantWar&#39;&gt;</span>
+            <span class="name">JOKERS_HIGHEST</span><span class="annotation">: str</span>        =
+<span class="default_value">&lt;<a href="#Variant.JOKERS_HIGHEST">Variant.JOKERS_HIGHEST</a>: &#39;JOKERS_HIGHEST&#39;&gt;</span>
 
         
     </div>
-    <a class="headerlink" href="#Variant.JokerInstantWar"></a>
-    
-    
-
-                            </div>
-                            <div id="Variant.JokerPenalty" class="classattr">
-                                <div class="attr variable">
-            <span class="name">JokerPenalty</span><span class="annotation">: str</span>        =
-<span class="default_value">&lt;<a href="#Variant.JokerPenalty">Variant.JokerPenalty</a>: &#39;JokerPenalty&#39;&gt;</span>
-
-        
-    </div>
-    <a class="headerlink" href="#Variant.JokerPenalty"></a>
-    
-    
-
-                            </div>
-                            <div id="Variant.NoJoker" class="classattr">
-                                <div class="attr variable">
-            <span class="name">NoJoker</span><span class="annotation">: str</span>        =
-<span class="default_value">&lt;<a href="#Variant.NoJoker">Variant.NoJoker</a>: &#39;NoJoker&#39;&gt;</span>
-
-        
-    </div>
-    <a class="headerlink" href="#Variant.NoJoker"></a>
+    <a class="headerlink" href="#Variant.JOKERS_HIGHEST"></a>
     
     
 
@@ -198,12 +164,12 @@
 
     </div>
     <a class="headerlink" href="#Variant.to_dict"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Variant.to_dict-12"><a href="#Variant.to_dict-12"><span class="linenos">12</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Variant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="Variant.to_dict-13"><a href="#Variant.to_dict-13"><span class="linenos">13</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Variant.to_dict-14"><a href="#Variant.to_dict-14"><span class="linenos">14</span></a><span class="sd">        Converts a Variant into a dictionary that can be stringified into json</span>
-</span><span id="Variant.to_dict-15"><a href="#Variant.to_dict-15"><span class="linenos">15</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Variant.to_dict-16"><a href="#Variant.to_dict-16"><span class="linenos">16</span></a>
-</span><span id="Variant.to_dict-17"><a href="#Variant.to_dict-17"><span class="linenos">17</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Variant.to_dict-10"><a href="#Variant.to_dict-10"><span class="linenos">10</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Variant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="Variant.to_dict-11"><a href="#Variant.to_dict-11"><span class="linenos">11</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Variant.to_dict-12"><a href="#Variant.to_dict-12"><span class="linenos">12</span></a><span class="sd">        Converts a Variant into a dictionary that can be stringified into json</span>
+</span><span id="Variant.to_dict-13"><a href="#Variant.to_dict-13"><span class="linenos">13</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Variant.to_dict-14"><a href="#Variant.to_dict-14"><span class="linenos">14</span></a>
+</span><span id="Variant.to_dict-15"><a href="#Variant.to_dict-15"><span class="linenos">15</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
 </span></pre></div>
 
 
@@ -224,13 +190,13 @@
 
     </div>
     <a class="headerlink" href="#Variant.from_dict"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Variant.from_dict-19"><a href="#Variant.from_dict-19"><span class="linenos">19</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Variant.from_dict-20"><a href="#Variant.from_dict-20"><span class="linenos">20</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Variant</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Variant</span><span class="p">:</span>
-</span><span id="Variant.from_dict-21"><a href="#Variant.from_dict-21"><span class="linenos">21</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Variant.from_dict-22"><a href="#Variant.from_dict-22"><span class="linenos">22</span></a><span class="sd">        Returns a Variant based on a json dictionary</span>
-</span><span id="Variant.from_dict-23"><a href="#Variant.from_dict-23"><span class="linenos">23</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Variant.from_dict-24"><a href="#Variant.from_dict-24"><span class="linenos">24</span></a>
-</span><span id="Variant.from_dict-25"><a href="#Variant.from_dict-25"><span class="linenos">25</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Variant.from_dict-17"><a href="#Variant.from_dict-17"><span class="linenos">17</span></a>    <span class="nd">@classmethod</span>
+</span><span id="Variant.from_dict-18"><a href="#Variant.from_dict-18"><span class="linenos">18</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Variant</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Variant</span><span class="p">:</span>
+</span><span id="Variant.from_dict-19"><a href="#Variant.from_dict-19"><span class="linenos">19</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Variant.from_dict-20"><a href="#Variant.from_dict-20"><span class="linenos">20</span></a><span class="sd">        Returns a Variant based on a json dictionary</span>
+</span><span id="Variant.from_dict-21"><a href="#Variant.from_dict-21"><span class="linenos">21</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Variant.from_dict-22"><a href="#Variant.from_dict-22"><span class="linenos">22</span></a>
+</span><span id="Variant.from_dict-23"><a href="#Variant.from_dict-23"><span class="linenos">23</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
 </span></pre></div>
 
 

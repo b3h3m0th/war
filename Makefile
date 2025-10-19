@@ -40,3 +40,4 @@ clean:
 	rm -rf src/utils/__pycache__ 
 	rm -rf src/scripts/__pycache__ 
 	rm -rf tests/__pycache__ 
+	rm -rf data/games

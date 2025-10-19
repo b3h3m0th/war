@@ -16,6 +16,7 @@ class Rank(Enum):
     Queen: int = 12
     King: int = 13
     Ace: int = 14
+    Joker: int = 15
 
     def to_dict(self: Rank) -> dict:
         """

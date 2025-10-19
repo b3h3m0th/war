@@ -9,11 +9,17 @@ SUIT_STRINGS = {
     Suit.Diamonds: "♦",
 }
 
-RANK_STRINGS = {Rank.Ace: "A", Rank.King: "K", Rank.Queen: "Q", Rank.Jack: "J"}
+RANK_STRINGS = {
+    Rank.Ace: "A",
+    Rank.King: "K",
+    Rank.Queen: "Q",
+    Rank.Jack: "J",
+    Rank.Joker: "Joker",
+}
 
 
 class Card:
-    def __init__(self: Card, suit: Suit, rank: Rank) -> None:
+    def __init__(self: Card, suit: Suit | None, rank: Rank) -> None:
         """
         Instantiates a new Card with a given suite and rank
         """
@@ -26,7 +32,7 @@ class Card:
         Displays a card as a string with the according symbol of its suit
         """
 
-        suit_string = SUIT_STRINGS.get(self.suit)
+        suit_string = SUIT_STRINGS.get(self.suit, "")
         rank_string = RANK_STRINGS.get(self.rank, str(self.rank.value))
 
         return f"{rank_string}{suit_string}"
