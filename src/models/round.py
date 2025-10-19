@@ -4,7 +4,7 @@ from models.turn import Turn
 class Round:
     turns: list[Turn]
 
-    def __init__(self, turns=None):
+    def __init__(self, turns: list[Turn] = None):
         """
         Instantiates a new Round with a given list of turns.
         """

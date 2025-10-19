@@ -181,10 +181,11 @@ class Game:
 
         return (
             isinstance(other, Game)
-            and self.players == other
+            and self.players == other.players
             and self.rounds == other.rounds
             and self.deck == other.deck
             and self.variant == other.variant
+            and self.name == other.name
         )
 
     def __hash__(self) -> int:
@@ -193,7 +194,13 @@ class Game:
         """
 
         return hash(
-            (tuple(self.players), tuple(self.rounds), self.deck, self.variant)
+            (
+                tuple(self.players),
+                tuple(self.rounds),
+                self.deck,
+                self.variant,
+                self.name,
+            )
         )
 
     def to_dict(self) -> dict:
