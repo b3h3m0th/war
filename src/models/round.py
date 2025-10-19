@@ -5,7 +5,7 @@ from models.turn import Turn
 class Round:
     turns: list[Turn]
 
-    def __init__(self: Turn, turns: list[Turn] = None) -> None:
+    def __init__(self: Round, turns: list[Turn] = None) -> None:
         """
         Instantiates a new Round with a given list of turns.
         """

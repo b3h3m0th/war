@@ -122,6 +122,11 @@ class Game:
         """
 
         results = results or self.get_results()
+
+        if not results:
+            print("No results to display")
+            return
+
         max_score = max(results.values())
         winning_results = {k: v for k, v in results.items() if v == max_score}
 
@@ -134,9 +139,11 @@ class Game:
                 f"{max_score} wins each."
             )
         else:
-            winner_str = f"{list(winning_results.items())[0][0]} \
-                won {self.name} with a score of {max_score}"
-            print(f"🎉 {winner_str}")
+
+            print(
+                f"🎉 {list(winning_results.items())[0][0]}"
+                f"won {self.name} with a score of {max_score}"
+            )
 
         for player, wins in results.items():
             print(f"{player} wins: {wins}")
@@ -174,10 +181,11 @@ class Game:
 
         return (
             isinstance(other, Game)
-            and self.players == other
+            and self.players == other.players
             and self.rounds == other.rounds
             and self.deck == other.deck
             and self.variant == other.variant
+            and self.name == other.name
         )
 
     def __hash__(self: Game) -> int:
@@ -186,7 +194,13 @@ class Game:
         """
 
         return hash(
-            (tuple(self.players), tuple(self.rounds), self.deck, self.variant)
+            (
+                tuple(self.players),
+                tuple(self.rounds),
+                self.deck,
+                self.variant,
+                self.name,
+            )
         )
 
     def to_dict(self: Game) -> dict:
