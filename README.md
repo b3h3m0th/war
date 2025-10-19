@@ -39,8 +39,6 @@ make install
 make war
 ```
 
----
-
 ## Testing
 
 ```bash
