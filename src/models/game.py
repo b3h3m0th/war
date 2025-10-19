@@ -139,13 +139,8 @@ class Game:
                 f"{max_score} wins each."
             )
         else:
-<<<<<<< HEAD
-            winner_str = f"""{list(winning_results.items())[0][0]}
-            won {self.name} with a score of {max_score}"""
-=======
             winner_str = f"{list(winning_results.items())[0][0]} \
                 won {self.name} with a score of {max_score}"
->>>>>>> 7b0e3e465713e59ded19c9392d47623e8dca62a8
             print(f"🎉 {winner_str}")
 
         for player, wins in results.items():
