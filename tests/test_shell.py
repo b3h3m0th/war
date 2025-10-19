@@ -1,11 +1,9 @@
 import json
 from unittest.mock import patch
-from models.game import Game
-from models.shell import Shell
-
 from pytest import CaptureFixture
-from models.shell import Shell
+
 from models.game import Game
+from models.shell import Shell
 from enums.matchup import Matchup
 from enums.dealmode import DealMode
 from enums.variant import Variant
@@ -120,7 +118,7 @@ def test_quit_game() -> None:
     assert shell.do_quit("") is True
 
 
-def test_get_previous_games(tmp_path) -> None:
+def test_get_previous_games(tmp_path: str) -> None:
     game_data = {
         "players": [
             {"name": "Bill", "isNpc": False},
