@@ -1,4 +1,6 @@
 from unittest.mock import patch
+
+from pytest import CaptureFixture
 from models.shell import Shell
 from models.game import Game
 
@@ -9,13 +11,13 @@ def test_shell_instantiation() -> None:
     assert shell is not None
 
 
-def test_shell_instantiation_prints_menu(capsys):
+def test_shell_instantiation_prints_menu(capsys: CaptureFixture[str]) -> None:
     Shell()
     captured = capsys.readouterr()
     assert "WAR - Menu" in captured.out
 
 
-def test_do_rules_prints_rules(capsys):
+def test_do_rules_prints_rules(capsys: CaptureFixture[str]) -> None:
     shell = Shell()
     shell.do_rules("")
     captured = capsys.readouterr()
@@ -23,7 +25,7 @@ def test_do_rules_prints_rules(capsys):
     assert "Welcome to our version of Casino War!" in captured.out
 
 
-def test_do_menu_prints_menu(capsys):
+def test_do_menu_prints_menu(capsys: CaptureFixture[str]) -> None:
     shell = Shell()
     shell.do_menu("")
     captured = capsys.readouterr()
@@ -31,7 +33,7 @@ def test_do_menu_prints_menu(capsys):
     assert "WAR - Menu" in captured.out
 
 
-def test_do_menu(capsys) -> None:
+def test_do_menu(capsys: CaptureFixture[str]) -> None:
     shell: Shell = Shell()
     shell.do_menu("")
     captured = capsys.readouterr()
@@ -55,7 +57,7 @@ def test_do_menu(capsys) -> None:
     assert expected_output.strip() in output
 
 
-def test_do_quit_returns_true_and_prints(capsys):
+def test_do_quit_returns_true_and_prints(capsys: CaptureFixture[str]) -> None:
     shell = Shell()
     result = shell.do_quit("")
     captured = capsys.readouterr()
@@ -64,14 +66,14 @@ def test_do_quit_returns_true_and_prints(capsys):
     assert result is True
 
 
-def test_default_prints_unknown(capsys):
+def test_default_prints_unknown(capsys: CaptureFixture[str]) -> None:
     shell = Shell()
     shell.default("foobar")
     captured = capsys.readouterr()
     assert 'Unknown option: "foobar"' in captured.out
 
 
-def test_do_new_creates_game_and_does_not_save(tmp_path):
+def test_do_new_creates_game_and_does_not_save(tmp_path: str) -> None:
     shell = Shell()
     shell.games_path = tmp_path
 
@@ -87,7 +89,7 @@ def test_do_new_creates_game_and_does_not_save(tmp_path):
     assert not any(tmp_path.iterdir())
 
 
-def test_do_log_calls_print_results(tmp_path):
+def test_do_log_calls_print_results(tmp_path: str) -> None:
     game = Game()
 
     with patch.object(Shell, "get_previous_games", return_value=[game]):
