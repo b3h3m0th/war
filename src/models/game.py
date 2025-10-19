@@ -11,7 +11,7 @@ from prompt_toolkit.shortcuts import choice
 
 class Game:
     def __init__(
-        self,
+        self: Game,
         players: list[Player] = None,
         variant: Variant = Variant.NoJoker,
         deck: Deck = None,
@@ -24,47 +24,35 @@ class Game:
         self.rounds = rounds or []
         self.name = name or Game._get_timestamp_name()
 
-    def start(self) -> None:
+    def start(self: Game, taken_player_names: list[str]) -> None:
         """
         Starts the game
         """
-
-        variant_choice = choice(
-            message="Choose gamemode:",
-            options=[
-                (Variant.NoJoker, "Default game with no Joker"),
-                (
-                    Variant.JokerPenalty,
-                    "Getting a Joker instantly loses you the round",
-                ),
-                (Variant.JokerInstantWar, "Getting a Joker grants war(draw)"),
-                (
-                    Variant.JokerHighest,
-                    "Getting a Joker instantly wins you the round",
-                ),
-            ],
-            default=Variant.NoJoker,
-        )
-        variant = variant_choice
 
         player_choice = choice(
             message="Choose a player count:",
             options=[
                 ("pvc", "Player vs Computer"),
                 ("pvp", "Player vs Player"),
-                ("pvcc", "Player vs Computer with instant result(cheat mode)"),
-                ("pvpc", "Player vs Player with instant result(cheat mode)"),
+                (
+                    "pvcc",
+                    "Player vs Computer with instant result (cheat mode)",
+                ),
+                ("pvpc", "Player vs Player with instant result (cheat mode)"),
             ],
             default="pvc",
         )
 
-        if player_choice == "pvc" or player_choice == "pvcc":
-            player = Player(input("Enter your name: ").strip())
-            computer = Player("Computer", True)
-            self.players = [player, computer]
-        elif player_choice == "pvp" or player_choice == "pvpc":
-            player1 = Player(input("Enter name for Player 1: ").strip())
-            player2 = Player(input("Enter name for Player 2: ").strip())
+        if player_choice in ("pvc", "pvcc"):
+            self.players = [
+                Player(self._input_name(taken_player_names)),
+                Player("Computer", True),
+            ]
+        elif player_choice in ("pvp", "pvpc"):
+            player1 = Player(self._input_name(taken_player_names))
+            player2 = Player(
+                self._input_name(taken_player_names + [player1.name])
+            )
             self.players = [player1, player2]
 
         self.deck.shuffle()
@@ -73,29 +61,9 @@ class Game:
         while len(self.deck.cards) >= len(self.players):
             round_counter += 1
             print(f"\nRound {round_counter}:")
+            self._play_round()
 
-            current_round = Round()
-            self.rounds.append(current_round)
-
-            for player in self.players:
-                dealt_card = self.deck.deal()[0]
-                current_turn = Turn(player, dealt_card)
-                current_round.turns.append(current_turn)
-
-                print(f"{player.name}: {dealt_card}")
-
-            winning_turns = current_round.get_winning_turns()
-
-            if len(winning_turns) > 1:
-                tie_names = ", ".join(
-                    f"{turn.player} ({turn.card})" for turn in winning_turns
-                )
-                print(f"Tie between: {tie_names}")
-            elif len(winning_turns) == 1:
-                winner = winning_turns[0]
-                print(f"{winner.player} has the highest card ({winner.card})")
-
-            if player_choice == "pvc" or player_choice == "pvp":
+            if player_choice in ("pvc", "pvp"):
                 keep_going = choice(
                     message="Do you want to keep playing?",
                     options=[(True, "Yes"), (False, "No, Quit")],
@@ -107,60 +75,96 @@ class Game:
         print()
         self.print_results()
 
-    def print_results(self):
+    def _play_round(self: Game) -> None:
+        current_round = Round()
+        self.rounds.append(current_round)
+
+        for player in self.players:
+            dealt_card = self.deck.deal()[0]
+            current_round.turns.append(Turn(player, dealt_card))
+            print(f"{player.name}: {dealt_card}")
+
+        winning_turns = current_round.get_winning_turns()
+
+        if len(winning_turns) > 1:
+            tie_names = ", ".join(
+                f"{t.player} ({t.card})" for t in winning_turns
+            )
+            print(f"Tie between: {tie_names}")
+            if len(self.deck.cards) >= 3 + len(self.players):
+                self.deck.deal(3)
+                print("⚔️ You are going to WAR (burned three cards)")
+            else:
+                print("️⚔️ Not enough cards left to go to WAR")
+        elif len(winning_turns) == 1:
+            winner = winning_turns[0]
+            print(f"{winner.player} has the highest card ({winner.card})")
+
+    def get_results(self: Game) -> dict[Player, int]:
         """
-        Shows the result of the current game
+        Returns a dictionary of all players
+        and their amount of won rounds
         """
 
         wins_per_player: dict[Player, int] = {}
-        ties: int = 0
 
-        for played_round in self.rounds:
-            turn_wins = played_round.get_winning_turns()
-            if len(turn_wins) == 1:
-                win = turn_wins[0]
+        for round in self.rounds:
+            winning_turns = round.get_winning_turns()
+            if len(winning_turns) == 1:
+                win = winning_turns[0]
                 wins_per_player[win.player] = (
                     wins_per_player.get(win.player, 0) + 1
                 )
-            else:
-                ties += 1
-        print("Results:")
-        for key, value in wins_per_player.items():
-            print(f"{key} wins: {value}")
 
-        print(f"Ties: {ties}")
+        return wins_per_player
 
-        winning_score = 0
-        for player, wins in wins_per_player.items():
-            if wins > winning_score:
-                winning_score = wins
+    def print_results(self: Game, results: dict[Player, int] = None) -> None:
+        """
+        Prints the result of the current game
+        """
 
-        winning_player = []
-        for player, wins in wins_per_player.items():
-            if wins == winning_score:
-                winning_player.append(player)
+        results = results or self.get_results()
 
-        if len(winning_player) > 1:
-            equlas_emoji = "🟰" * 36
-            print(equlas_emoji)
-            players_str = ", ".join(str(player) for player in winning_player)
-            print(
-                f"It's a draw between: {players_str} with "
-                f"{winning_score} wins each! 🟰"
+        if not results:
+            print("No results to display")
+            return
+
+        max_score = max(results.values())
+        winning_results = {k: v for k, v in results.items() if v == max_score}
+
+        if len(winning_results) > 1:
+            players_str = ", ".join(
+                str(player) for player in winning_results.keys()
             )
-            print(equlas_emoji)
-        elif winning_player:
-            winner = winning_player[0]
-            confetti = "🎊🎉" * 18
-            print(confetti)
-            centered_msg = (
-                f"{winner} wins this game with a score of {winning_score}"
-            ).center(len(confetti))
-            print(f"🎊🎉🎊 {centered_msg} 🎊🎉🎊")
-            print(confetti)
+            print(
+                f"👔 It's a draw between: {players_str} with "
+                f"{max_score} wins each."
+            )
+        else:
+
+            print(
+                f"🎉 {list(winning_results.items())[0][0]}"
+                f" won {self.name} with a score of {max_score}"
+            )
+
+        for player, wins in results.items():
+            print(f"{player} wins: {wins}")
+
+        print()
 
     @classmethod
-    def _get_timestamp_name(self, prefix: str = "game") -> str:
+    def _input_name(cls: Game, taken_names: list[str]) -> str:
+        while True:
+            name = input("Enter your name: ").strip()
+            if not name:
+                print("Name cannot be empty")
+            elif name in taken_names:
+                print("Name already in use")
+            else:
+                return name
+
+    @classmethod
+    def _get_timestamp_name(cls: Game, prefix: str = "game") -> str:
         """
         Returns a name for a Game based on the current time.
         Format: <prefix>_YYYY-MM-DD-hh-mm-ss-ms
@@ -170,7 +174,7 @@ class Game:
                             .now(datetime.timezone.utc)
                             .strftime("%Y-%m-%d-%H-%M-%S-%f"))}"
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self: Game, other: Game) -> bool:
         """
         Checks whether a Game is equal to another Game.
         Games are considered equal if their
@@ -179,22 +183,29 @@ class Game:
 
         return (
             isinstance(other, Game)
-            and self.players == other
+            and self.players == other.players
             and self.rounds == other.rounds
             and self.deck == other.deck
             and self.variant == other.variant
+            and self.name == other.name
         )
 
-    def __hash__(self) -> int:
+    def __hash__(self: Game) -> int:
         """
         Returns a hash based on the game its players, rounds, deck and variant
         """
 
         return hash(
-            (tuple(self.players), tuple(self.rounds), self.deck, self.variant)
+            (
+                tuple(self.players),
+                tuple(self.rounds),
+                self.deck,
+                self.variant,
+                self.name,
+            )
         )
 
-    def to_dict(self) -> dict:
+    def to_dict(self: Game) -> dict:
         """
         Converts a Game into a dictionary that can be stringified into json
         """
@@ -208,7 +219,7 @@ class Game:
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> Game:
+    def from_dict(cls: Game, data: dict) -> Game:
         """
         Returns a Game based on a json dictionary
         """

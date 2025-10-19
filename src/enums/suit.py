@@ -8,7 +8,7 @@ class Suit(Enum):
     Clubs: str = "Clubs"
     Diamonds: str = "Diamonds"
 
-    def to_dict(self) -> dict:
+    def to_dict(self: Suit) -> dict:
         """
         Converts a Suit into a dictionary that can be stringified into json
         """
@@ -16,7 +16,7 @@ class Suit(Enum):
         return {"value": self.value}
 
     @classmethod
-    def from_dict(cls, data: dict) -> Suit:
+    def from_dict(cls: Suit, data: dict) -> Suit:
         """
         Returns a Suit based on a json dictionary
         """

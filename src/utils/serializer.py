@@ -1,3 +1,4 @@
+from __future__ import annotations
 import json
 from pathlib import Path
 
@@ -12,6 +13,6 @@ class Serializer:
             json.dump(obj.to_dict(), f, indent=2)
 
     @staticmethod
-    def load(cls, path: Path) -> object:
+    def load(cls: Serializer, path: Path) -> object:
         with open(path, "r") as f:
             return cls.from_dict(json.load(f))

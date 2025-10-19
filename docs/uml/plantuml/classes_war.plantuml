@@ -22,8 +22,9 @@ class "Game" as models.game.Game {
   rounds : list
   variant
   from_dict(data: dict) -> Game
-  print_results()
-  start() -> None
+  get_results() -> dict[Player, int]
+  print_results(results: dict[Player, int]) -> None
+  start(taken_player_names: list[str]) -> None
   to_dict() -> dict
 }
 class "Player" as models.player.Player {
@@ -44,7 +45,7 @@ class "Round" as models.round.Round {
   to_dict() -> dict
 }
 class "Serializer" as utils.serializer.Serializer {
-  load(cls, path: Path) -> object
+  load(cls: Serializer, path: Path) -> object
   save(obj: object, path: Path) -> None
 }
 class "Shell" as models.shell.Shell {
@@ -52,12 +53,14 @@ class "Shell" as models.shell.Shell {
   games_path : Path
   intro : str
   prompt : str
-  default(line)
-  do_log(arg) -> None
-  do_menu(arg) -> None
-  do_new(arg) -> None
-  do_quit(arg) -> bool
-  do_rules(arg) -> None
+  default(line: str) -> None
+  do_chng(arg: str) -> None
+  do_log(arg: str) -> None
+  do_menu(arg: str) -> None
+  do_new(arg: str) -> None
+  do_quit(arg: str) -> bool
+  do_rules(arg: str) -> None
+  get_previous_games() -> list[Game]
   print_menu() -> None
 }
 class "Suit" as enums.suit.Suit {

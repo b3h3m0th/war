@@ -13,7 +13,7 @@ class Deck:
         Suit.Hearts,
     ]
 
-    def __init__(self, cards: list[Card] = None) -> None:
+    def __init__(self: Deck, cards: list[Card] = None) -> None:
         """
         Instantiates a new Deck and sets its cards
         """
@@ -22,7 +22,7 @@ class Deck:
             cards if cards is not None else self.get_new_deck_order_cards()
         )
 
-    def get_new_deck_order_cards(self) -> list[Card]:
+    def get_new_deck_order_cards(self: Deck) -> list[Card]:
         """
         Returns a list of cards in typical new deck order (NDO).
         Spades: Ace -> King
@@ -48,7 +48,7 @@ class Deck:
             )
         ]
 
-    def shuffle(self, cards: list[Card] = None) -> list[Card]:
+    def shuffle(self: Deck, cards: list[Card] = None) -> list[Card]:
         """
         Shuffles the cards of a deck based on the Fisher Yates algorithm
         """
@@ -62,7 +62,7 @@ class Deck:
 
         return cards
 
-    def deal(self, amount: int = 1) -> list[Card]:
+    def deal(self: Deck, amount: int = 1) -> list[Card]:
         """
         Returns the last card from the deck list
         or the first card assuming the cards are on a face down pile.
@@ -73,21 +73,21 @@ class Deck:
 
         return dealt
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self: Deck, other: Deck) -> bool:
         """
         Checks whether a Deck is equal to another Deck
         """
 
         return isinstance(other, Deck) and self.cards == other.cards
 
-    def __hash__(self) -> int:
+    def __hash__(self: Deck) -> int:
         """
         Computes a hash of a Deck based on its cards
         """
 
         return hash(tuple(self.cards))
 
-    def to_dict(self) -> dict:
+    def to_dict(self: Deck) -> dict:
         """
         Converts a Deck into a dictionary that can be stringified into json
         """
@@ -95,7 +95,7 @@ class Deck:
         return {"cards": [card.to_dict() for card in self.cards]}
 
     @classmethod
-    def from_dict(cls, data: dict) -> Deck:
+    def from_dict(cls: Deck, data: dict) -> Deck:
         """
         Creates and returns a Deck based on a json dictionary
         """

@@ -64,7 +64,7 @@ def test_initial_round_hashes_are_equal() -> None:
     assert hash(round1) == hash(round2)
 
 
-def test_different_rounds_not_equal():
+def test_different_rounds_not_equal() -> None:
     round1 = Round()
     round2 = Round([Turn(Player("John", False), Card(Suit.Clubs, Rank.Two))])
 
