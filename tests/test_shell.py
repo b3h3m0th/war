@@ -22,6 +22,7 @@ def test_do_menu(capsys) -> None:
 │  (menu)  Shows the menu          │
 │  (new)   Start new game          │
 │  (log)   Game history            │
+│  (chng)  Change player name      │
 │  (help)  List commands           │
 │  (quit)  Quit                    │
 │                                  │
