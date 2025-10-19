@@ -75,7 +75,7 @@ class Game:
         print()
         self.print_results()
 
-    def _play_round(self) -> None:
+    def _play_round(self: Game) -> None:
         current_round = Round()
         self.rounds.append(current_round)
 
