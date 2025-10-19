@@ -19,7 +19,7 @@ class Turn:
 
         return f"{self.player}: {self.card}"
 
-    def __eq__(self: Turn, other) -> bool:
+    def __eq__(self: Turn, other: Turn) -> bool:
         """
         Checks whether a Turn is equal to another Turn
         Turns are considered equal if their player and card are equal

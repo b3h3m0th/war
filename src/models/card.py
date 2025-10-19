@@ -13,7 +13,7 @@ RANK_STRINGS = {Rank.Ace: "A", Rank.King: "K", Rank.Queen: "Q", Rank.Jack: "J"}
 
 
 class Card:
-    def __init__(self, suit: Suit, rank: Rank) -> None:
+    def __init__(self: Card, suit: Suit, rank: Rank) -> None:
         """
         Instantiates a new Card with a given suite and rank
         """

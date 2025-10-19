@@ -24,7 +24,7 @@ class Player:
 
         return {"name": self.name, "isNpc": self.isNpc}
 
-    def __eq__(self: Player, other) -> bool:
+    def __eq__(self: Player, other: Player) -> bool:
         return (
             isinstance(other, Player)
             and self.name == other.name

@@ -169,7 +169,7 @@ class Shell(Cmd):
             'or use "menu" to get the initial start screen menu.'
         )
 
-    def get_previous_games(self) -> list[Game]:
+    def get_previous_games(self: Shell) -> list[Game]:
         return [
             Serializer.load(Game, file)
             for file in self.games_path.glob("*.json")

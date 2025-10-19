@@ -5,7 +5,7 @@ from models.turn import Turn
 class Round:
     turns: list[Turn]
 
-    def __init__(self: Turn, turns: list[Turn] = None):
+    def __init__(self: Turn, turns: list[Turn] = None) -> None:
         """
         Instantiates a new Round with a given list of turns.
         """
@@ -37,7 +37,7 @@ class Round:
 
         return winning_turns
 
-    def __eq__(self: Round, other) -> bool:
+    def __eq__(self: Round, other: Round) -> bool:
         """
         Checks whether a Round is equal to another Round
         Two rounds are equal if the compared turns have equal values
