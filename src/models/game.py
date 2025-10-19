@@ -11,7 +11,7 @@ from prompt_toolkit.shortcuts import choice
 
 class Game:
     def __init__(
-        self,
+        self: Game,
         players: list[Player] = None,
         variant: Variant = Variant.NoJoker,
         deck: Deck = None,
@@ -24,7 +24,7 @@ class Game:
         self.rounds = rounds or []
         self.name = name or Game._get_timestamp_name()
 
-    def start(self, taken_player_names: list[str]) -> None:
+    def start(self: Game, taken_player_names: list[str]) -> None:
         """
         Starts the game
         """
@@ -98,7 +98,7 @@ class Game:
         print()
         self.print_results()
 
-    def get_results(self) -> dict[Player, int]:
+    def get_results(self: Game) -> dict[Player, int]:
         """
         Returns a dictionary of all players
         and their amount of won rounds
@@ -116,7 +116,7 @@ class Game:
 
         return wins_per_player
 
-    def print_results(self, results: dict[Player, int] = None) -> None:
+    def print_results(self: Game, results: dict[Player, int] = None) -> None:
         """
         Prints the result of the current game
         """
@@ -151,7 +151,7 @@ class Game:
         print()
 
     @classmethod
-    def _input_name(cls, taken_names: list[str]) -> Player:
+    def _input_name(cls: Game, taken_names: list[str]) -> Player:
         while True:
             name = input("Enter your name: ").strip()
             if not name:
@@ -162,7 +162,7 @@ class Game:
                 return name
 
     @classmethod
-    def _get_timestamp_name(cls, prefix: str = "game") -> str:
+    def _get_timestamp_name(cls: Game, prefix: str = "game") -> str:
         """
         Returns a name for a Game based on the current time.
         Format: <prefix>_YYYY-MM-DD-hh-mm-ss-ms
@@ -172,7 +172,7 @@ class Game:
                             .now(datetime.timezone.utc)
                             .strftime("%Y-%m-%d-%H-%M-%S-%f"))}"
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self: Game, other: Game) -> bool:
         """
         Checks whether a Game is equal to another Game.
         Games are considered equal if their
@@ -188,7 +188,7 @@ class Game:
             and self.name == other.name
         )
 
-    def __hash__(self) -> int:
+    def __hash__(self: Game) -> int:
         """
         Returns a hash based on the game its players, rounds, deck and variant
         """
@@ -203,7 +203,7 @@ class Game:
             )
         )
 
-    def to_dict(self) -> dict:
+    def to_dict(self: Game) -> dict:
         """
         Converts a Game into a dictionary that can be stringified into json
         """
@@ -217,7 +217,7 @@ class Game:
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> Game:
+    def from_dict(cls: Game, data: dict) -> Game:
         """
         Returns a Game based on a json dictionary
         """

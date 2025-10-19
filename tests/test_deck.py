@@ -83,23 +83,23 @@ def test_initial_deck_hashes_are_equal() -> None:
     deck1 = Deck()
     deck2 = Deck()
 
-    assert deck1.__hash__() == deck2.__hash__()
+    assert hash(deck1) == hash(deck2)
 
 
-def test_different_decks_not_equal():
+def test_different_decks_not_equal() -> None:
     deck1 = Deck()
     deck2 = Deck()
     deck2.deal()
     assert deck1 != deck2
 
 
-def test_equality_with_non_deck():
+def test_equality_with_non_deck() -> None:
     deck = Deck()
     card = Card(Suit.Clubs, Rank.Ace)
     assert deck != card
 
 
-def test_deck_custom_card_list_are_equal():
+def test_deck_custom_card_list_are_equal() -> None:
     cards = [Card(Suit.Spades, Rank.Ace), Card(Suit.Hearts, Rank.King)]
     deck1 = Deck(cards)
     deck2 = Deck(cards.copy())
@@ -130,7 +130,7 @@ def test_deal_multiple() -> None:
     assert dealt[2] == Card(Suit.Hearts, Rank.Ace)
 
 
-def test_shuffle():
+def test_shuffle() -> None:
     deck = Deck()
     cards_before = deck.cards.copy()
 

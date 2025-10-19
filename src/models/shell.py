@@ -1,3 +1,4 @@
+from __future__ import annotations
 from cmd import Cmd
 from models.game import Game
 from models.player import Player
@@ -15,7 +16,7 @@ class Shell(Cmd):
     game: Game
     games_path: Path = Path("./data/games")
 
-    def __init__(self) -> None:
+    def __init__(self: Shell) -> None:
         """
         When instantiated calls the constructor of
         super class Cmd. Prints the menu for the current game.
@@ -24,7 +25,7 @@ class Shell(Cmd):
         super().__init__()
         self.intro = self.print_menu()
 
-    def print_menu(self) -> None:
+    def print_menu(self: Shell) -> None:
         """
         Prints the menu on game launch
         """
@@ -44,7 +45,7 @@ class Shell(Cmd):
         print("│                                  │")
         print("└──────────────────────────────────┘")
 
-    def do_rules(self, arg) -> None:
+    def do_rules(self: Shell, arg: str) -> None:
         """
         Shows the rules of the game.
         """
@@ -77,14 +78,14 @@ class Shell(Cmd):
             " - Choose variant or game rules (not yet implemented)\n"
         )
 
-    def do_menu(self, arg) -> None:
+    def do_menu(self: Shell, arg: str) -> None:
         """
         Shows the menu if the user wants the menu again
         """
 
         self.print_menu()
 
-    def do_new(self, arg) -> None:
+    def do_new(self: Shell, arg: str) -> None:
         """
         Start a new game
         """
@@ -98,7 +99,7 @@ class Shell(Cmd):
 
         self.game.start(taken_player_names)
 
-        save_game = choice(
+        save_game: bool = choice(
             message="Do you want to save this game",
             options=[(True, "Yes"), (False, "No")],
             default=False,
@@ -109,11 +110,11 @@ class Shell(Cmd):
                 self.game, self.games_path / f"{self.game.name}.json"
             )
 
-    def do_log(self, arg) -> None:
+    def do_log(self: Shell, arg: str) -> None:
         for game in self.get_previous_games():
             game.print_results()
 
-    def do_chng(self, arg) -> None:
+    def do_chng(self: Shell, arg: str) -> None:
         """
         Change a players name
         """
@@ -149,7 +150,7 @@ class Shell(Cmd):
 
         print(f'Updated player "{selected_player.name}" to "{new_name}" ')
 
-    def do_quit(self, arg) -> bool:
+    def do_quit(self: Shell, arg: str) -> bool:
         """
         Quit the game
         """
@@ -157,7 +158,7 @@ class Shell(Cmd):
         print("Thank you for playing war")
         return True
 
-    def default(self, line) -> None:
+    def default(self: Shell, line: str) -> None:
         """
         Default case for unknown command
         """
@@ -168,7 +169,7 @@ class Shell(Cmd):
             'or use "menu" to get the initial start screen menu.'
         )
 
-    def get_previous_games(self) -> list[Game]:
+    def get_previous_games(self: Shell) -> list[Game]:
         return [
             Serializer.load(Game, file)
             for file in self.games_path.glob("*.json")
