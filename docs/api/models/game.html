@@ -103,7 +103,7 @@
 </span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a>
 </span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Game</span><span class="p">:</span>
 </span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a>        <span class="bp">self</span><span class="p">,</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a>        <span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span>
 </span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>        <span class="n">players</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Player</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a>        <span class="n">variant</span><span class="p">:</span> <span class="n">Variant</span> <span class="o">=</span> <span class="n">Variant</span><span class="o">.</span><span class="n">NoJoker</span><span class="p">,</span>
 </span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>        <span class="n">deck</span><span class="p">:</span> <span class="n">Deck</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -116,7 +116,7 @@
 </span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rounds</span> <span class="o">=</span> <span class="n">rounds</span> <span class="ow">or</span> <span class="p">[]</span>
 </span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span> <span class="ow">or</span> <span class="n">Game</span><span class="o">.</span><span class="n">_get_timestamp_name</span><span class="p">()</span>
 </span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>
-</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taken_player_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">taken_player_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a><span class="sd">        Starts the game</span>
 </span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a><span class="sd">        &quot;&quot;&quot;</span>
@@ -190,7 +190,7 @@
 </span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>        <span class="nb">print</span><span class="p">()</span>
 </span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">print_results</span><span class="p">()</span>
 </span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Player</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Player</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 </span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a><span class="sd">        Returns a dictionary of all players</span>
 </span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a><span class="sd">        and their amount of won rounds</span>
@@ -208,7 +208,7 @@
 </span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>
 </span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>        <span class="k">return</span> <span class="n">wins_per_player</span>
 </span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Player</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_results</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Player</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a><span class="sd">        Prints the result of the current game</span>
 </span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a><span class="sd">        &quot;&quot;&quot;</span>
@@ -243,7 +243,7 @@
 </span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a>        <span class="nb">print</span><span class="p">()</span>
 </span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a>
 </span><span id="L-153"><a href="#L-153"><span class="linenos">153</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-154"><a href="#L-154"><span class="linenos">154</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_input_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">taken_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Player</span><span class="p">:</span>
+</span><span id="L-154"><a href="#L-154"><span class="linenos">154</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_input_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">taken_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Player</span><span class="p">:</span>
 </span><span id="L-155"><a href="#L-155"><span class="linenos">155</span></a>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 </span><span id="L-156"><a href="#L-156"><span class="linenos">156</span></a>            <span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter your name: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 </span><span id="L-157"><a href="#L-157"><span class="linenos">157</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
@@ -254,7 +254,7 @@
 </span><span id="L-162"><a href="#L-162"><span class="linenos">162</span></a>                <span class="k">return</span> <span class="n">name</span>
 </span><span id="L-163"><a href="#L-163"><span class="linenos">163</span></a>
 </span><span id="L-164"><a href="#L-164"><span class="linenos">164</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-165"><a href="#L-165"><span class="linenos">165</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_get_timestamp_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;game&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="L-165"><a href="#L-165"><span class="linenos">165</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_get_timestamp_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;game&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 </span><span id="L-166"><a href="#L-166"><span class="linenos">166</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-167"><a href="#L-167"><span class="linenos">167</span></a><span class="sd">        Returns a name for a Game based on the current time.</span>
 </span><span id="L-168"><a href="#L-168"><span class="linenos">168</span></a><span class="sd">        Format: &lt;prefix&gt;_YYYY-MM-DD-hh-mm-ss-ms</span>
@@ -264,7 +264,7 @@
 </span><span id="L-172"><a href="#L-172"><span class="linenos">172</span></a><span class="w">                            </span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
 </span><span id="L-173"><a href="#L-173"><span class="linenos">173</span></a><span class="w">                            </span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">-%H-%M-%S-</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
 </span><span id="L-174"><a href="#L-174"><span class="linenos">174</span></a>
-</span><span id="L-175"><a href="#L-175"><span class="linenos">175</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="L-175"><a href="#L-175"><span class="linenos">175</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Game</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="L-176"><a href="#L-176"><span class="linenos">176</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-177"><a href="#L-177"><span class="linenos">177</span></a><span class="sd">        Checks whether a Game is equal to another Game.</span>
 </span><span id="L-178"><a href="#L-178"><span class="linenos">178</span></a><span class="sd">        Games are considered equal if their</span>
@@ -280,7 +280,7 @@
 </span><span id="L-188"><a href="#L-188"><span class="linenos">188</span></a>            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span>
 </span><span id="L-189"><a href="#L-189"><span class="linenos">189</span></a>        <span class="p">)</span>
 </span><span id="L-190"><a href="#L-190"><span class="linenos">190</span></a>
-</span><span id="L-191"><a href="#L-191"><span class="linenos">191</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="L-191"><a href="#L-191"><span class="linenos">191</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="L-192"><a href="#L-192"><span class="linenos">192</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-193"><a href="#L-193"><span class="linenos">193</span></a><span class="sd">        Returns a hash based on the game its players, rounds, deck and variant</span>
 </span><span id="L-194"><a href="#L-194"><span class="linenos">194</span></a><span class="sd">        &quot;&quot;&quot;</span>
@@ -295,7 +295,7 @@
 </span><span id="L-203"><a href="#L-203"><span class="linenos">203</span></a>            <span class="p">)</span>
 </span><span id="L-204"><a href="#L-204"><span class="linenos">204</span></a>        <span class="p">)</span>
 </span><span id="L-205"><a href="#L-205"><span class="linenos">205</span></a>
-</span><span id="L-206"><a href="#L-206"><span class="linenos">206</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="L-206"><a href="#L-206"><span class="linenos">206</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 </span><span id="L-207"><a href="#L-207"><span class="linenos">207</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-208"><a href="#L-208"><span class="linenos">208</span></a><span class="sd">        Converts a Game into a dictionary that can be stringified into json</span>
 </span><span id="L-209"><a href="#L-209"><span class="linenos">209</span></a><span class="sd">        &quot;&quot;&quot;</span>
@@ -309,7 +309,7 @@
 </span><span id="L-217"><a href="#L-217"><span class="linenos">217</span></a>        <span class="p">}</span>
 </span><span id="L-218"><a href="#L-218"><span class="linenos">218</span></a>
 </span><span id="L-219"><a href="#L-219"><span class="linenos">219</span></a>    <span class="nd">@classmethod</span>
-</span><span id="L-220"><a href="#L-220"><span class="linenos">220</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Game</span><span class="p">:</span>
+</span><span id="L-220"><a href="#L-220"><span class="linenos">220</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Game</span><span class="p">:</span>
 </span><span id="L-221"><a href="#L-221"><span class="linenos">221</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-222"><a href="#L-222"><span class="linenos">222</span></a><span class="sd">        Returns a Game based on a json dictionary</span>
 </span><span id="L-223"><a href="#L-223"><span class="linenos">223</span></a><span class="sd">        &quot;&quot;&quot;</span>
@@ -338,7 +338,7 @@
     <a class="headerlink" href="#Game"></a>
             <div class="pdoc-code codehilite"><pre><span></span><span id="Game-13"><a href="#Game-13"><span class="linenos"> 13</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Game</span><span class="p">:</span>
 </span><span id="Game-14"><a href="#Game-14"><span class="linenos"> 14</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span id="Game-15"><a href="#Game-15"><span class="linenos"> 15</span></a>        <span class="bp">self</span><span class="p">,</span>
+</span><span id="Game-15"><a href="#Game-15"><span class="linenos"> 15</span></a>        <span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span>
 </span><span id="Game-16"><a href="#Game-16"><span class="linenos"> 16</span></a>        <span class="n">players</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Player</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="Game-17"><a href="#Game-17"><span class="linenos"> 17</span></a>        <span class="n">variant</span><span class="p">:</span> <span class="n">Variant</span> <span class="o">=</span> <span class="n">Variant</span><span class="o">.</span><span class="n">NoJoker</span><span class="p">,</span>
 </span><span id="Game-18"><a href="#Game-18"><span class="linenos"> 18</span></a>        <span class="n">deck</span><span class="p">:</span> <span class="n">Deck</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -351,7 +351,7 @@
 </span><span id="Game-25"><a href="#Game-25"><span class="linenos"> 25</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rounds</span> <span class="o">=</span> <span class="n">rounds</span> <span class="ow">or</span> <span class="p">[]</span>
 </span><span id="Game-26"><a href="#Game-26"><span class="linenos"> 26</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span> <span class="ow">or</span> <span class="n">Game</span><span class="o">.</span><span class="n">_get_timestamp_name</span><span class="p">()</span>
 </span><span id="Game-27"><a href="#Game-27"><span class="linenos"> 27</span></a>
-</span><span id="Game-28"><a href="#Game-28"><span class="linenos"> 28</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taken_player_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Game-28"><a href="#Game-28"><span class="linenos"> 28</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">taken_player_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="Game-29"><a href="#Game-29"><span class="linenos"> 29</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Game-30"><a href="#Game-30"><span class="linenos"> 30</span></a><span class="sd">        Starts the game</span>
 </span><span id="Game-31"><a href="#Game-31"><span class="linenos"> 31</span></a><span class="sd">        &quot;&quot;&quot;</span>
@@ -425,7 +425,7 @@
 </span><span id="Game-99"><a href="#Game-99"><span class="linenos"> 99</span></a>        <span class="nb">print</span><span class="p">()</span>
 </span><span id="Game-100"><a href="#Game-100"><span class="linenos">100</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">print_results</span><span class="p">()</span>
 </span><span id="Game-101"><a href="#Game-101"><span class="linenos">101</span></a>
-</span><span id="Game-102"><a href="#Game-102"><span class="linenos">102</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Player</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+</span><span id="Game-102"><a href="#Game-102"><span class="linenos">102</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Player</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 </span><span id="Game-103"><a href="#Game-103"><span class="linenos">103</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Game-104"><a href="#Game-104"><span class="linenos">104</span></a><span class="sd">        Returns a dictionary of all players</span>
 </span><span id="Game-105"><a href="#Game-105"><span class="linenos">105</span></a><span class="sd">        and their amount of won rounds</span>
@@ -443,7 +443,7 @@
 </span><span id="Game-117"><a href="#Game-117"><span class="linenos">117</span></a>
 </span><span id="Game-118"><a href="#Game-118"><span class="linenos">118</span></a>        <span class="k">return</span> <span class="n">wins_per_player</span>
 </span><span id="Game-119"><a href="#Game-119"><span class="linenos">119</span></a>
-</span><span id="Game-120"><a href="#Game-120"><span class="linenos">120</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Player</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Game-120"><a href="#Game-120"><span class="linenos">120</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_results</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Player</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="Game-121"><a href="#Game-121"><span class="linenos">121</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Game-122"><a href="#Game-122"><span class="linenos">122</span></a><span class="sd">        Prints the result of the current game</span>
 </span><span id="Game-123"><a href="#Game-123"><span class="linenos">123</span></a><span class="sd">        &quot;&quot;&quot;</span>
@@ -478,7 +478,7 @@
 </span><span id="Game-152"><a href="#Game-152"><span class="linenos">152</span></a>        <span class="nb">print</span><span class="p">()</span>
 </span><span id="Game-153"><a href="#Game-153"><span class="linenos">153</span></a>
 </span><span id="Game-154"><a href="#Game-154"><span class="linenos">154</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Game-155"><a href="#Game-155"><span class="linenos">155</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_input_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">taken_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Player</span><span class="p">:</span>
+</span><span id="Game-155"><a href="#Game-155"><span class="linenos">155</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_input_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">taken_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Player</span><span class="p">:</span>
 </span><span id="Game-156"><a href="#Game-156"><span class="linenos">156</span></a>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 </span><span id="Game-157"><a href="#Game-157"><span class="linenos">157</span></a>            <span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter your name: &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 </span><span id="Game-158"><a href="#Game-158"><span class="linenos">158</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
@@ -489,7 +489,7 @@
 </span><span id="Game-163"><a href="#Game-163"><span class="linenos">163</span></a>                <span class="k">return</span> <span class="n">name</span>
 </span><span id="Game-164"><a href="#Game-164"><span class="linenos">164</span></a>
 </span><span id="Game-165"><a href="#Game-165"><span class="linenos">165</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Game-166"><a href="#Game-166"><span class="linenos">166</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_get_timestamp_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;game&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="Game-166"><a href="#Game-166"><span class="linenos">166</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_get_timestamp_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;game&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 </span><span id="Game-167"><a href="#Game-167"><span class="linenos">167</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Game-168"><a href="#Game-168"><span class="linenos">168</span></a><span class="sd">        Returns a name for a Game based on the current time.</span>
 </span><span id="Game-169"><a href="#Game-169"><span class="linenos">169</span></a><span class="sd">        Format: &lt;prefix&gt;_YYYY-MM-DD-hh-mm-ss-ms</span>
@@ -499,7 +499,7 @@
 </span><span id="Game-173"><a href="#Game-173"><span class="linenos">173</span></a><span class="w">                            </span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
 </span><span id="Game-174"><a href="#Game-174"><span class="linenos">174</span></a><span class="w">                            </span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">-%H-%M-%S-</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
 </span><span id="Game-175"><a href="#Game-175"><span class="linenos">175</span></a>
-</span><span id="Game-176"><a href="#Game-176"><span class="linenos">176</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="Game-176"><a href="#Game-176"><span class="linenos">176</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Game</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 </span><span id="Game-177"><a href="#Game-177"><span class="linenos">177</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Game-178"><a href="#Game-178"><span class="linenos">178</span></a><span class="sd">        Checks whether a Game is equal to another Game.</span>
 </span><span id="Game-179"><a href="#Game-179"><span class="linenos">179</span></a><span class="sd">        Games are considered equal if their</span>
@@ -515,7 +515,7 @@
 </span><span id="Game-189"><a href="#Game-189"><span class="linenos">189</span></a>            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span>
 </span><span id="Game-190"><a href="#Game-190"><span class="linenos">190</span></a>        <span class="p">)</span>
 </span><span id="Game-191"><a href="#Game-191"><span class="linenos">191</span></a>
-</span><span id="Game-192"><a href="#Game-192"><span class="linenos">192</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="Game-192"><a href="#Game-192"><span class="linenos">192</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span id="Game-193"><a href="#Game-193"><span class="linenos">193</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Game-194"><a href="#Game-194"><span class="linenos">194</span></a><span class="sd">        Returns a hash based on the game its players, rounds, deck and variant</span>
 </span><span id="Game-195"><a href="#Game-195"><span class="linenos">195</span></a><span class="sd">        &quot;&quot;&quot;</span>
@@ -530,7 +530,7 @@
 </span><span id="Game-204"><a href="#Game-204"><span class="linenos">204</span></a>            <span class="p">)</span>
 </span><span id="Game-205"><a href="#Game-205"><span class="linenos">205</span></a>        <span class="p">)</span>
 </span><span id="Game-206"><a href="#Game-206"><span class="linenos">206</span></a>
-</span><span id="Game-207"><a href="#Game-207"><span class="linenos">207</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span id="Game-207"><a href="#Game-207"><span class="linenos">207</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 </span><span id="Game-208"><a href="#Game-208"><span class="linenos">208</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Game-209"><a href="#Game-209"><span class="linenos">209</span></a><span class="sd">        Converts a Game into a dictionary that can be stringified into json</span>
 </span><span id="Game-210"><a href="#Game-210"><span class="linenos">210</span></a><span class="sd">        &quot;&quot;&quot;</span>
@@ -544,7 +544,7 @@
 </span><span id="Game-218"><a href="#Game-218"><span class="linenos">218</span></a>        <span class="p">}</span>
 </span><span id="Game-219"><a href="#Game-219"><span class="linenos">219</span></a>
 </span><span id="Game-220"><a href="#Game-220"><span class="linenos">220</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Game-221"><a href="#Game-221"><span class="linenos">221</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Game</span><span class="p">:</span>
+</span><span id="Game-221"><a href="#Game-221"><span class="linenos">221</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Game</span><span class="p">:</span>
 </span><span id="Game-222"><a href="#Game-222"><span class="linenos">222</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Game-223"><a href="#Game-223"><span class="linenos">223</span></a><span class="sd">        Returns a Game based on a json dictionary</span>
 </span><span id="Game-224"><a href="#Game-224"><span class="linenos">224</span></a><span class="sd">        &quot;&quot;&quot;</span>
@@ -572,7 +572,7 @@
     </div>
     <a class="headerlink" href="#Game.__init__"></a>
             <div class="pdoc-code codehilite"><pre><span></span><span id="Game.__init__-14"><a href="#Game.__init__-14"><span class="linenos">14</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span id="Game.__init__-15"><a href="#Game.__init__-15"><span class="linenos">15</span></a>        <span class="bp">self</span><span class="p">,</span>
+</span><span id="Game.__init__-15"><a href="#Game.__init__-15"><span class="linenos">15</span></a>        <span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span>
 </span><span id="Game.__init__-16"><a href="#Game.__init__-16"><span class="linenos">16</span></a>        <span class="n">players</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Player</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="Game.__init__-17"><a href="#Game.__init__-17"><span class="linenos">17</span></a>        <span class="n">variant</span><span class="p">:</span> <span class="n">Variant</span> <span class="o">=</span> <span class="n">Variant</span><span class="o">.</span><span class="n">NoJoker</span><span class="p">,</span>
 </span><span id="Game.__init__-18"><a href="#Game.__init__-18"><span class="linenos">18</span></a>        <span class="n">deck</span><span class="p">:</span> <span class="n">Deck</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -650,13 +650,13 @@
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">start</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">taken_player_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+        <span class="name">start</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span><span class="p">:</span> <span class="n"><a href="#Game">Game</a></span>, </span><span class="param"><span class="n">taken_player_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
 
                 <label class="view-source-button" for="Game.start-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#Game.start"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Game.start-28"><a href="#Game.start-28"><span class="linenos"> 28</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taken_player_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Game.start-28"><a href="#Game.start-28"><span class="linenos"> 28</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">taken_player_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="Game.start-29"><a href="#Game.start-29"><span class="linenos"> 29</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Game.start-30"><a href="#Game.start-30"><span class="linenos"> 30</span></a><span class="sd">        Starts the game</span>
 </span><span id="Game.start-31"><a href="#Game.start-31"><span class="linenos"> 31</span></a><span class="sd">        &quot;&quot;&quot;</span>
@@ -742,13 +742,13 @@
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">get_results</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span></span><span class="return-annotation">) -> <span class="nb">dict</span><span class="p">[</span><span class="n"><a href="player.html#Player">models.player.Player</a></span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>:</span></span>
+        <span class="name">get_results</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span><span class="p">:</span> <span class="n"><a href="#Game">Game</a></span></span><span class="return-annotation">) -> <span class="nb">dict</span><span class="p">[</span><span class="n"><a href="player.html#Player">models.player.Player</a></span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>:</span></span>
 
                 <label class="view-source-button" for="Game.get_results-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#Game.get_results"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Game.get_results-102"><a href="#Game.get_results-102"><span class="linenos">102</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Player</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Game.get_results-102"><a href="#Game.get_results-102"><span class="linenos">102</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Player</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 </span><span id="Game.get_results-103"><a href="#Game.get_results-103"><span class="linenos">103</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Game.get_results-104"><a href="#Game.get_results-104"><span class="linenos">104</span></a><span class="sd">        Returns a dictionary of all players</span>
 </span><span id="Game.get_results-105"><a href="#Game.get_results-105"><span class="linenos">105</span></a><span class="sd">        and their amount of won rounds</span>
@@ -779,13 +779,13 @@ and their amount of won rounds</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">print_results</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n"><a href="player.html#Player">models.player.Player</a></span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+        <span class="name">print_results</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span><span class="p">:</span> <span class="n"><a href="#Game">Game</a></span>,</span><span class="param">	<span class="n">results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n"><a href="player.html#Player">models.player.Player</a></span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
 
                 <label class="view-source-button" for="Game.print_results-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#Game.print_results"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Game.print_results-120"><a href="#Game.print_results-120"><span class="linenos">120</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Player</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Game.print_results-120"><a href="#Game.print_results-120"><span class="linenos">120</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_results</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Player</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="Game.print_results-121"><a href="#Game.print_results-121"><span class="linenos">121</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Game.print_results-122"><a href="#Game.print_results-122"><span class="linenos">122</span></a><span class="sd">        Prints the result of the current game</span>
 </span><span id="Game.print_results-123"><a href="#Game.print_results-123"><span class="linenos">123</span></a><span class="sd">        &quot;&quot;&quot;</span>
@@ -831,13 +831,13 @@ and their amount of won rounds</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">to_dict</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span></span><span class="return-annotation">) -> <span class="nb">dict</span>:</span></span>
+        <span class="name">to_dict</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span><span class="p">:</span> <span class="n"><a href="#Game">Game</a></span></span><span class="return-annotation">) -> <span class="nb">dict</span>:</span></span>
 
                 <label class="view-source-button" for="Game.to_dict-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#Game.to_dict"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Game.to_dict-207"><a href="#Game.to_dict-207"><span class="linenos">207</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Game.to_dict-207"><a href="#Game.to_dict-207"><span class="linenos">207</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Game</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 </span><span id="Game.to_dict-208"><a href="#Game.to_dict-208"><span class="linenos">208</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Game.to_dict-209"><a href="#Game.to_dict-209"><span class="linenos">209</span></a><span class="sd">        Converts a Game into a dictionary that can be stringified into json</span>
 </span><span id="Game.to_dict-210"><a href="#Game.to_dict-210"><span class="linenos">210</span></a><span class="sd">        &quot;&quot;&quot;</span>
@@ -863,14 +863,14 @@ and their amount of won rounds</p>
                     <div class="decorator decorator-classmethod">@classmethod</div>
 
         <span class="def">def</span>
-        <span class="name">from_dict</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">cls</span>, </span><span class="param"><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span></span><span class="return-annotation">) -> <span class="n"><a href="#Game">Game</a></span>:</span></span>
+        <span class="name">from_dict</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">cls</span><span class="p">:</span> <span class="n"><a href="#Game">Game</a></span>, </span><span class="param"><span class="n">data</span><span class="p">:</span> <span class="nb">dict</span></span><span class="return-annotation">) -> <span class="n"><a href="#Game">Game</a></span>:</span></span>
 
                 <label class="view-source-button" for="Game.from_dict-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#Game.from_dict"></a>
             <div class="pdoc-code codehilite"><pre><span></span><span id="Game.from_dict-220"><a href="#Game.from_dict-220"><span class="linenos">220</span></a>    <span class="nd">@classmethod</span>
-</span><span id="Game.from_dict-221"><a href="#Game.from_dict-221"><span class="linenos">221</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Game</span><span class="p">:</span>
+</span><span id="Game.from_dict-221"><a href="#Game.from_dict-221"><span class="linenos">221</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">:</span> <span class="n">Game</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Game</span><span class="p">:</span>
 </span><span id="Game.from_dict-222"><a href="#Game.from_dict-222"><span class="linenos">222</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Game.from_dict-223"><a href="#Game.from_dict-223"><span class="linenos">223</span></a><span class="sd">        Returns a Game based on a json dictionary</span>
 </span><span id="Game.from_dict-224"><a href="#Game.from_dict-224"><span class="linenos">224</span></a><span class="sd">        &quot;&quot;&quot;</span>
