@@ -106,6 +106,7 @@ def test_do_rules(capsys: CaptureFixture[str]) -> None:
     output = capsys.readouterr().out
     start = output.find("Welcome to our version of Casino War!")
     output = output[start:]
+
     assert "Welcome to our version of Casino War!" in output
     assert "At the start, you choose which game variant you" in output
     assert "In the basic War game, each player is dealt a card" in output
